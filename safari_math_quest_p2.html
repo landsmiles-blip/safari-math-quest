@@ -1,0 +1,2244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>🦁 Safari Math Quest · Primary 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --fd:'Fredoka One',cursive; --fb:'Nunito',sans-serif;
+  --gold:#ffd60a; --text:#fff;
+  --g:#52b788; --gd:#2d6a4f;
+  --y:#ffd60a; --yd:#f48c06;
+  --b:#48cae4; --bd:#0096c7;
+  --pk:#ff6b9d; --pkd:#c9184a;
+  --pu:#a78bfa; --pud:#7c3aed;
+  --o:#ff9f1c; --od:#f77f00;
+  --tl:#06d6a0; --tld:#028a60;
+  --r:clamp(14px,3vw,24px);
+}
+html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);background:#0096c7}
+
+/* ── THAI TROPICAL BACKGROUND ── */
+#bg{position:fixed;inset:0;z-index:0;
+  background:linear-gradient(180deg,#023e8a 0%,#0096c7 20%,#48cae4 42%,#90e0ef 60%,#74c69d 70%,#52b788 80%,#2d6a4f 92%,#1b4332 100%);
+  overflow:hidden}
+
+/* Cheerful tropical sun with felt rays and cute smiling face */
+.sun-wrap{position:absolute;top:2%;right:clamp(20px,6vw,85px);
+  width:clamp(96px,16vw,136px);height:clamp(96px,16vw,136px);z-index:1;
+  filter:drop-shadow(0 0 36px rgba(255,214,10,.82))}
+.sun-svg{width:100%;height:100%;display:block;animation:bob 4s infinite ease-in-out alternate}
+
+/* Fluffy felt clouds */
+.cloud{position:absolute;background:rgba(255,255,255,.82);border-radius:60px;
+  filter:drop-shadow(0 6px 14px rgba(0,70,120,.12));pointer-events:none;z-index:0}
+.cloud::before{content:'';position:absolute;background:rgba(255,255,255,.88);
+  border-radius:50%;width:58%;height:180%;top:-44%;left:16%}
+.cloud::after{content:'';position:absolute;background:rgba(255,255,255,.82);
+  border-radius:50%;width:44%;height:140%;top:-28%;right:10%}
+
+/* Sparkle stars */
+.star{position:absolute;background:#ffd60a;border-radius:50%;animation:twk var(--d,3s) var(--dl,0s) infinite alternate ease-in-out}
+@keyframes twk{0%{opacity:.2;transform:scale(.7)}100%{opacity:1;transform:scale(1.4)}}
+
+/* Tropical layered ground */
+.ground{position:absolute;bottom:0;left:0;right:0;height:22%;
+  background:linear-gradient(180deg,#52b788 0%,#2d6a4f 55%,#1b4332 100%);z-index:2}
+
+/* Palm tree silhouettes */
+.tree{position:absolute;bottom:0}
+
+/* Animals */
+.animal{position:absolute;z-index:3;user-select:none;font-size:clamp(1.8rem,4.5vw,3.2rem);
+  animation:bob var(--d,4s) infinite ease-in-out alternate;filter:drop-shadow(0 4px 10px rgba(0,0,0,.3))}
+@keyframes bob{0%{transform:translateY(0) rotate(-3deg)}100%{transform:translateY(-14px) rotate(3deg)}}
+
+/* ── NAME MODAL ── */
+#name-modal{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;
+  background:rgba(2,48,71,.88);backdrop-filter:blur(18px);padding:16px}
+#name-modal.hide{display:none}
+.nm-card{background:linear-gradient(135deg,rgba(14,52,45,.96),rgba(27,67,50,.92));
+  border:2px solid rgba(82,183,136,.6);border-radius:var(--r);padding:clamp(22px,4vw,40px);
+  text-align:center;width:100%;max-width:440px;
+  box-shadow:0 24px 64px rgba(0,0,0,.45),0 0 80px rgba(82,183,136,.25)}
+.nm-lion{font-size:clamp(3.5rem,12vw,5.5rem);display:block;animation:bob 2.5s infinite ease-in-out alternate;margin-bottom:12px}
+.nm-card h2{font-family:var(--fd);color:var(--gold);font-size:clamp(1.4rem,5vw,2rem);margin-bottom:8px;text-shadow:0 0 20px rgba(251,191,36,.5)}
+.nm-card p{color:rgba(255,255,255,.8);font-size:clamp(.85rem,2.5vw,1rem);font-weight:700;margin-bottom:20px}
+#nm-input{width:100%;padding:clamp(12px,3vw,16px) 20px;border-radius:100px;
+  border:3px solid rgba(82,183,136,.6);background:rgba(255,255,255,.14);
+  color:#fff;font-family:var(--fd);font-size:clamp(1.1rem,4vw,1.5rem);text-align:center;
+  outline:none;transition:border-color .2s;margin-bottom:16px}
+#nm-input::placeholder{color:rgba(255,255,255,.45);font-family:var(--fb)}
+#nm-input:focus{border-color:var(--gold)}
+
+/* ── BUTTONS ── */
+.btn{font-family:var(--fd);letter-spacing:.3px;border:none;border-radius:100px;
+  cursor:pointer;position:relative;top:0;
+  transition:top .1s,box-shadow .1s,filter .1s;
+  text-shadow:0 2px 4px rgba(0,0,0,.25);font-size:clamp(.9rem,2.8vw,1.15rem);
+  padding:clamp(10px,2.2vw,14px) clamp(16px,4vw,26px);color:#fff}
+.btn:active{top:4px;filter:brightness(.9)}
+.btn.full{width:100%;display:block}
+.bg{background:#2ec4b6;box-shadow:0 5px 0 #0f766e,0 8px 18px rgba(46,196,182,.35)}
+.by{background:#ffd166;box-shadow:0 5px 0 #f48c06,0 8px 18px rgba(255,209,102,.35);color:#78350f}
+.bb{background:#00b4d8;box-shadow:0 5px 0 #0077b6,0 8px 18px rgba(0,180,216,.35);color:#fff}
+.bpk{background:#ff70a6;box-shadow:0 5px 0 #c9184a,0 8px 18px rgba(255,112,166,.35)}
+.bpu{background:#8338ec;box-shadow:0 5px 0 #5a189a,0 8px 18px rgba(131,56,236,.35)}
+.bo{background:#ff9f1c;box-shadow:0 5px 0 #e85d04,0 8px 18px rgba(255,159,28,.35)}
+.bg:active{box-shadow:0 1px 0 #0f766e}.by:active{box-shadow:0 1px 0 #f48c06}
+.bb:active{box-shadow:0 1px 0 #0077b6}.bpk:active{box-shadow:0 1px 0 #c9184a}
+.bpu:active{box-shadow:0 1px 0 #5a189a}.bo:active{box-shadow:0 1px 0 #e85d04}
+.btn-gold{background:linear-gradient(135deg,#ffd166,#ff9f1c);box-shadow:0 5px 0 #d97706,0 0 0 0 rgba(255,209,102,.6);
+  color:#78350f;animation:gp 1.4s infinite;font-size:clamp(.95rem,3.2vw,1.25rem)}
+@keyframes gp{0%,100%{box-shadow:0 5px 0 #d97706,0 0 0 0 rgba(255,209,102,.6)}50%{box-shadow:0 5px 0 #d97706,0 0 0 14px rgba(255,209,102,0)}}
+
+/* ── APP SHELL ── */
+#app{position:relative;z-index:10;width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;
+  padding:clamp(4px,1vw,8px);gap:clamp(4px,1vw,7px);overflow:hidden}
+
+/* ── TOPBAR ── */
+#topbar{width:100%;max-width:900px;display:flex;align-items:center;justify-content:space-between;
+  padding:7px 14px;background:rgba(10,45,40,.68);backdrop-filter:blur(16px);
+  border-radius:100px;border:1.5px solid rgba(82,183,136,.38);flex-shrink:0}
+.brand{display:flex;align-items:center;gap:8px}
+.brand .li{font-size:1.5rem;animation:bob 3s infinite ease-in-out alternate}
+.brand h1{font-family:var(--fd);color:var(--gold);font-size:clamp(.9rem,3vw,1.25rem);
+  text-shadow:0 0 14px rgba(255,214,10,.6)}
+.topright{display:flex;align-items:center;gap:8px}
+.stamp{background:linear-gradient(135deg,#2ec4b6,#0f766e);border-radius:100px;
+  padding:4px 12px;font-size:.74rem;font-weight:900;color:#fff;
+  box-shadow:0 2px 8px rgba(46,196,182,.4);display:none}
+.stamp.on{display:flex;align-items:center;gap:4px}
+.ppill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.14);
+  border:1.5px solid rgba(255,255,255,.25);border-radius:100px;padding:4px 11px 4px 6px;
+  cursor:pointer;color:#fff;font-family:var(--fb);font-weight:800;font-size:.85rem;
+  transition:background .2s,transform .15s}
+.ppill:hover{background:rgba(255,255,255,.24);transform:scale(1.04)}
+.ppill .pnm{color:var(--gold);max-width:88px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ── MAIN ── */
+#main{width:100%;max-width:900px;flex:1;min-height:0;display:flex;flex-direction:column}
+.screen{display:none;flex-direction:column;height:100%}
+.screen.active{display:flex}
+
+/* ── CARD STYLES ── */
+.glass{background:rgba(255,255,255,.14);backdrop-filter:blur(18px);
+  border:1.5px solid rgba(255,255,255,.28);border-radius:var(--r);
+  box-shadow:0 8px 32px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.2)}
+.card{background:rgba(12,54,48,.84);backdrop-filter:blur(20px);
+  border:1.5px solid rgba(82,183,136,.5);border-radius:var(--r);
+  box-shadow:0 10px 32px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.15)}
+
+/* ── SCREEN: START ── */
+#sc-start{flex:1;align-items:center;justify-content:center;gap:clamp(10px,2.2vw,18px)}
+.hero{text-align:center;color:#fff}
+.hero .crown{font-size:clamp(2.2rem,6.5vw,3.6rem);display:block;animation:bob 2.5s infinite ease-in-out alternate;filter:drop-shadow(0 4px 12px rgba(255,214,10,.6))}
+.hero h2{font-family:var(--fd);font-size:clamp(1.5rem,5.5vw,2.7rem);color:var(--gold);
+  text-shadow:0 0 32px rgba(251,191,36,.95),0 3px 0 rgba(0,0,0,.35);line-height:1.15;letter-spacing:.5px}
+.hero p{font-size:clamp(.85rem,2.4vw,1.1rem);color:rgba(255,255,255,.9);margin-top:5px;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.3)}
+.mode-grid{width:100%;max-width:780px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2.6vw,22px)}
+.mcard{padding:clamp(16px,2.8vw,26px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;border-radius:clamp(16px,3vw,26px)}
+.mcard .mi{font-size:clamp(2rem,5.2vw,3rem);filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
+.mcard .mt{font-family:var(--fd);color:var(--gold);font-size:clamp(1.05rem,3vw,1.35rem);letter-spacing:.4px}
+.mcard .md{color:rgba(255,255,255,.82);font-size:clamp(.78rem,2vw,.96rem);font-weight:700;line-height:1.35}
+.mcard .ml{font-size:clamp(.7rem,1.8vw,.82rem);color:rgba(255,255,255,.55);font-weight:800;margin-top:3px}
+
+/* ── SCREEN: TRAINING ── */
+#sc-train{flex:1;gap:clamp(8px,2vw,13px)}
+.tbar{display:flex;align-items:center;gap:10px;flex-shrink:0;
+  background:rgba(10,45,40,.68);backdrop-filter:blur(14px);
+  border-radius:100px;border:1.5px solid rgba(82,183,136,.38);
+  padding:5px 12px;width:100%}
+.bk{background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.24);
+  border-radius:100px;padding:5px 13px;color:#fff;font-weight:800;font-size:.85rem;
+  cursor:pointer;transition:background .2s}
+.bk:hover{background:rgba(255,255,255,.24)}
+.tbar-title{font-family:var(--fd);color:var(--gold);font-size:clamp(.88rem,2.6vw,1.15rem);
+  text-shadow:0 0 10px rgba(251,191,36,.5)}
+.camps{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:clamp(8px,2vw,14px);flex:1;min-height:0;align-content:start}
+.camp{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:5px;padding:clamp(12px,2.5vw,20px);cursor:pointer;
+  transition:transform .2s}
+.camp:hover{transform:scale(1.05)}
+.camp:active{transform:scale(.97)}
+.camp .ci{font-size:clamp(1.7rem,4.5vw,2.4rem)}
+.camp .cn{font-family:var(--fd);color:var(--gold);font-size:clamp(.82rem,2.3vw,1rem)}
+.camp .cd{color:rgba(255,255,255,.65);font-size:clamp(.68rem,1.8vw,.8rem);font-weight:700}
+.camp .cs{font-size:1.1rem;margin-top:2px}
+
+/* Training practice area */
+#t-prac{flex:1;min-height:0;display:none;flex-direction:column;gap:clamp(8px,2vw,12px)}
+#t-prac.visible{display:flex}
+
+/* ── SCREEN: EXAM ── */
+#sc-exam{gap:clamp(7px,1.8vw,12px);flex:1}
+.prow{display:flex;align-items:center;gap:10px;flex-shrink:0;
+  background:rgba(10,45,40,.68);backdrop-filter:blur(14px);
+  border-radius:100px;border:1.5px solid rgba(82,183,136,.38);
+  padding:5px 14px;width:100%}
+.qlbl{font-family:var(--fd);color:var(--gold);font-size:clamp(.82rem,2.3vw,1.05rem);
+  white-space:nowrap;text-shadow:0 0 12px rgba(251,191,36,.7)}
+.ptrack{flex:1;height:clamp(9px,1.8vw,14px);background:rgba(0,0,0,.35);border-radius:100px;
+  overflow:hidden;border:1.5px solid rgba(255,255,255,.15)}
+.pfill{height:100%;background:linear-gradient(90deg,#22c55e,#86efac);border-radius:100px;
+  transition:width .5s cubic-bezier(.4,0,.2,1);box-shadow:0 0 10px rgba(34,197,94,.7)}
+.slbl{font-family:var(--fd);color:var(--gold);font-size:clamp(.82rem,2.3vw,1.05rem);white-space:nowrap}
+
+/* ── QUESTION CARD ── */
+#qcard,#t-qcard{padding:clamp(10px,2vw,18px);display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-start;text-align:center;
+  gap:clamp(6px,1.4vw,10px);flex:1;min-height:0;overflow:visible}
+.zbadge{font-family:var(--fd);font-size:clamp(.68rem,1.8vw,.85rem);
+  padding:4px 13px;border-radius:100px;background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.28);color:var(--gold);letter-spacing:.5px;flex-shrink:0;margin-top:2px}
+#q-prompt,#t-prompt{font-size:clamp(.88rem,2.4vw,1.12rem);color:rgba(255,255,255,.94);
+  font-weight:800;flex-shrink:0;max-width:100%}
+
+/* ── THE DISPLAY BOX ── */
+#q-disp,#t-disp{width:100%;background:rgba(0,0,0,.28);border:1.5px solid rgba(255,255,255,.2);
+  border-radius:clamp(10px,2.5vw,18px);
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(6px,1.8vw,14px) clamp(10px,2.5vw,18px);
+  overflow:visible;text-align:center;flex:1;min-height:min(22vh,125px);max-height:min(34vh,190px)}
+
+/* ── DISPLAY TYPE CLASSES ── */
+.dw{font-family:var(--fd);font-size:clamp(.95rem,3vw,1.9rem);color:#fff;
+  white-space:normal;word-break:break-word;overflow-wrap:break-word;line-height:1.35;
+  text-shadow:0 2px 6px rgba(0,0,0,.3)}
+.dn{font-family:var(--fd);font-size:clamp(2.4rem,7.5vw,4.4rem);color:#fff;
+  text-shadow:0 2px 8px rgba(0,0,0,.3)}
+.ds{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:clamp(4px,1.2vw,8px)}
+.chip{font-family:var(--fd);font-size:clamp(.95rem,3.2vw,1.75rem);color:#fff;
+  background:rgba(255,255,255,.15);border-radius:10px;
+  padding:clamp(4px,1vw,8px) clamp(8px,2vw,14px)}
+.chip.miss{color:#fbbf24;border:2px dashed #fbbf24;background:rgba(251,191,36,.1);
+  animation:cpulse 1s infinite alternate}
+@keyframes cpulse{0%{opacity:.6}100%{opacity:1}}
+.csep{font-family:var(--fd);font-size:clamp(.9rem,2.5vw,1.5rem);color:rgba(255,255,255,.45)}
+
+/* Place value highlight */
+.dpv{display:flex;align-items:flex-end;justify-content:center;gap:clamp(4px,1.2vw,12px);flex-wrap:nowrap}
+.pvd{display:flex;flex-direction:column;align-items:center;font-family:var(--fd);
+  font-size:clamp(2.2rem,6.5vw,4rem);color:#fff;padding:0 clamp(2px,.5vw,6px)}
+.pvd.hl{color:#fbbf24;text-shadow:0 0 20px rgba(251,191,36,.85)}
+.pvd small{font-size:clamp(.55rem,1.3vw,.75rem);color:rgba(255,255,255,.5);
+  font-family:var(--fb);font-weight:800;text-transform:uppercase}
+
+/* Vertical math (Column Addition / Subtraction Hundreds Tens Ones) */
+.dv{display:inline-flex;flex-direction:column;align-items:flex-end;
+  font-family:'Courier New',monospace;font-size:clamp(1.15rem,3.2vw,1.85rem);line-height:1.15;
+  color:#fff;gap:2px;text-align:right;padding:4px 14px;letter-spacing:2px}
+.vr{white-space:nowrap;line-height:1.15}
+.vop{border-bottom:2.5px solid rgba(255,255,255,.8);padding-bottom:2px;margin-bottom:2px;
+  display:flex;align-items:center;gap:10px;justify-content:flex-end;line-height:1.15}
+.vsym{color:#fbbf24}
+.vans{color:#fbbf24;line-height:1.15}
+
+/* Comparison display (Greedy Gator) */
+.dcmp{display:flex;align-items:center;justify-content:center;gap:clamp(10px,3vw,22px);flex-wrap:wrap}
+.cnum{font-family:var(--fd);font-size:clamp(1.6rem,5vw,3.2rem);color:#fff}
+.cslot{font-family:var(--fd);font-size:clamp(1.6rem,5vw,3.2rem);color:#fbbf24;
+  background:rgba(251,191,36,.15);border:2px dashed rgba(251,191,36,.5);
+  border-radius:12px;padding:2px 20px}
+
+/* Brackets / Magic Window */
+.dbr{font-family:var(--fd);font-size:clamp(1.3rem,4vw,2.6rem);color:#fff;line-height:1.4}
+.brin{color:#f472b6}.brsym{color:#fbbf24}
+
+/* Story problem */
+.dst-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:100%}
+.dst{font-size:clamp(.88rem,2.4vw,1.2rem);color:#fff;line-height:1.6;font-weight:700;text-align:center;max-width:95%}
+.dst strong{color:#ffd60a;background:rgba(255,214,10,.2);border:1.5px solid rgba(255,214,10,.5);border-radius:8px;padding:1px 8px;display:inline-block;margin:0 2px}
+.story-eq{font-family:var(--fd);font-size:clamp(1.1rem,3.2vw,1.6rem);color:#ffd60a;
+  background:rgba(0,0,0,.35);border:2px dashed rgba(255,214,10,.6);border-radius:12px;
+  padding:4px 18px;margin-top:6px;display:inline-block;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+
+/* ── ANSWER BUTTONS ── */
+#answers{display:grid;grid-template-columns:1fr 1fr;gap:clamp(7px,1.8vw,12px);
+  width:100%;flex-shrink:0}
+#answers.tri{grid-template-columns:1fr 1fr 1fr}
+.abtn{font-family:var(--fd);font-size:clamp(.98rem,3.2vw,1.42rem);
+  padding:clamp(12px,2.4vw,18px) 8px;border-radius:clamp(12px,2.5vw,20px);
+  border:none;cursor:pointer;color:#1c1917;background:#fff;
+  box-shadow:0 5px 0 #cbd5e1,0 8px 18px rgba(0,0,0,.18);
+  transition:top .1s,box-shadow .1s,background .15s,transform .15s;
+  position:relative;top:0;white-space:normal;word-break:break-word;
+  line-height:1.2;text-align:center}
+.abtn:active{top:4px;box-shadow:0 1px 0 #cbd5e1}
+.abtn:hover{background:#fffbeb;transform:scale(1.02)}
+.abtn.ok{background:#dcfce7;box-shadow:0 5px 0 #16a34a;color:#14532d}
+.abtn.no{background:#fee2e2;box-shadow:0 5px 0 #dc2626;color:#991b1b}
+.abtn:disabled{cursor:not-allowed}
+.abtn.sm{font-size:clamp(.72rem,2.1vw,1rem);padding:clamp(10px,2vw,15px) 6px}
+
+/* Exam toolbar */
+.ebar{display:flex;justify-content:center;gap:10px;flex-shrink:0}
+.tbtn{background:rgba(10,45,40,.6);border:1.5px solid rgba(82,183,136,.4);
+  border-radius:100px;color:#fff;cursor:pointer;padding:7px 16px;
+  font-weight:800;font-size:clamp(.72rem,2.2vw,.9rem);display:flex;align-items:center;gap:5px;
+  transition:background .2s,transform .15s}
+.tbtn:hover{background:rgba(255,255,255,.2);transform:scale(1.04)}
+
+/* ── SCREEN: RESULTS ── */
+#sc-res{flex:1;min-height:0;align-items:center;justify-content:center;
+  gap:clamp(5px,1.2vh,10px);overflow:hidden;padding:2px}
+.res-hdr{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.rtrophy{font-size:clamp(1.8rem,5vw,2.8rem);animation:bob 2s infinite ease-in-out alternate}
+.tpill{font-family:var(--fd);font-size:clamp(.9rem,2.8vw,1.3rem);padding:5px 20px;
+  border-radius:100px;letter-spacing:.4px}
+.tg{background:linear-gradient(135deg,#ffd166,#ff9f1c);color:#78350f;box-shadow:0 0 25px rgba(255,209,102,.6)}
+.ts{background:linear-gradient(135deg,#e2e8f0,#94a3b8);color:#1e293b}
+.tb{background:linear-gradient(135deg,#d97706,#92400e);color:#fff}
+.rscore{font-family:var(--fd);font-size:clamp(1.4rem,4.5vw,2.4rem);color:#fff;
+  text-shadow:0 0 20px rgba(255,255,255,.5)}
+.rmsg{color:rgba(255,255,255,.94);font-size:clamp(.78rem,2vw,.94rem);font-weight:800;text-align:center;max-width:440px}
+
+/* Near-miss card */
+.nmcard{width:100%;max-width:440px;padding:clamp(12px,2.5vw,18px);text-align:center;color:#fff;display:flex;flex-direction:column;gap:8px}
+.nm-btns{display:flex;flex-direction:row;justify-content:center;gap:8px;flex-wrap:wrap;width:100%;margin-top:4px}
+.nm-btns .btn{flex:1;min-width:130px;padding:9px 12px;font-size:clamp(.78rem,2vw,.92rem)}
+
+/* Certificate wrapper - A4 Landscape Proportion (1200 x 848) */
+.certsec-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%}
+.certwrap{width:100%;max-width:min(92vw,580px);aspect-ratio:1200/848;max-height:min(46vh,380px);border-radius:var(--r);
+  overflow:hidden;box-shadow:0 12px 36px rgba(0,0,0,.5);border:2px solid rgba(255,214,10,.7);
+  display:flex;align-items:center;justify-content:center;background:#091e3a}
+#cv-cert{width:100%;height:100%;max-width:100%;max-height:100%;display:block;object-fit:contain}
+.cert-btns{display:flex;flex-direction:row;justify-content:center;flex-wrap:wrap;gap:8px;width:100%;max-width:520px}
+.cert-btns .btn{flex:1;min-width:110px;padding:8px 12px;font-size:clamp(.75rem,2vw,.9rem)}
+
+/* ── FEEDBACK OVERLAY ── */
+#fb{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;
+  pointer-events:none;opacity:0;transition:opacity .15s}
+#fb.show{opacity:1}
+#fb-ic{font-size:clamp(5rem,20vw,10rem);animation:fbpop .35s cubic-bezier(.34,1.56,.64,1)}
+@keyframes fbpop{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}
+
+/* ── SCRATCHPAD ── */
+#sp-modal{display:none;position:fixed;inset:0;z-index:800;
+  background:rgba(0,0,0,.6);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;padding:12px}
+#sp-modal.open{display:flex}
+.sp-panel{background:#1e1b4b;border:2px solid rgba(255,255,255,.18);border-radius:var(--r);
+  width:100%;max-width:700px;height:min(92vh,560px);
+  display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.6)}
+.sp-hdr{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;background:rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.1)}
+.sp-hdr h3{font-family:var(--fd);color:var(--gold);font-size:1.05rem}
+.sp-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sc{width:26px;height:26px;border-radius:50%;border:3px solid transparent;cursor:pointer;transition:transform .15s,border-color .15s}
+.sc.on,.sc:hover{border-color:#fff;transform:scale(1.25)}
+.sa{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2);
+  color:#fff;padding:5px 12px;border-radius:100px;font-size:.78rem;font-weight:800;cursor:pointer;transition:all .2s}
+.sa:hover{background:rgba(255,255,255,.25)}
+.sa.on{background:rgba(255,214,10,.35)!important;border-color:var(--gold)!important;color:#fff!important;box-shadow:0 0 12px rgba(255,214,10,.4)}
+#cv-scratch{flex:1;width:100%;background:#fff;cursor:crosshair;touch-action:none}
+
+/* ── CONFETTI ── */
+.conf{position:fixed;pointer-events:none;z-index:900;
+  animation:cfall var(--cd,3s) var(--cld,0s) linear forwards}
+@keyframes cfall{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+/* ── HINT BOX (training) ── */
+.hint-box{padding:10px 14px;color:#fff;font-size:clamp(.78rem,2.2vw,.95rem);
+  font-weight:700;text-align:center;border-radius:clamp(10px,2.5vw,16px);flex-shrink:0}
+
+/* ── CAMP COMPLETE CARD ── */
+.cc-done{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:12px;flex:1;color:#fff}
+.cc-done .big-em{font-size:clamp(3rem,10vw,5rem);animation:bob 2s infinite ease-in-out alternate}
+.cc-done h3{font-family:var(--fd);color:var(--gold);font-size:clamp(1.2rem,4vw,1.8rem)}
+.cc-done p{font-size:clamp(.85rem,2.5vw,1rem);font-weight:700;opacity:.85}
+
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<!-- NAME MODAL -->
+<div id="name-modal" class="hide">
+  <div class="nm-card">
+    <span class="nm-lion">🦁</span>
+    <h2>Welcome, Explorer!</h2>
+    <p>Type your name to begin your<br>Primary 2 Safari Math adventure!</p>
+    <input type="text" id="nm-input" placeholder="Your name here..." maxlength="20">
+    <button class="btn bg full" onclick="submitName()" style="font-size:clamp(1rem,3.5vw,1.3rem)">🚀 Let's Go!</button>
+  </div>
+</div>
+
+<!-- THAI TROPICAL SCENE -->
+<div id="bg">
+  <div class="sun-wrap">
+    <svg class="sun-svg" viewBox="0 0 120 120">
+      <g fill="#ffd166">
+        <polygon points="60,2 67,18 53,18"/>
+        <polygon points="60,118 67,102 53,102"/>
+        <polygon points="2,60 18,67 18,53"/>
+        <polygon points="118,60 102,67 102,53"/>
+        <polygon points="19,19 34,26 26,34"/>
+        <polygon points="101,101 86,94 94,86"/>
+        <polygon points="19,101 26,86 34,94"/>
+        <polygon points="101,19 94,34 86,26"/>
+      </g>
+      <circle cx="60" cy="60" r="42" fill="url(#sunGrad)"/>
+      <ellipse cx="44" cy="68" rx="6" ry="4" fill="#ff70a6" opacity="0.65"/>
+      <ellipse cx="76" cy="68" rx="6" ry="4" fill="#ff70a6" opacity="0.65"/>
+      <circle cx="48" cy="56" r="3.5" fill="#2d3748"/>
+      <circle cx="72" cy="56" r="3.5" fill="#2d3748"/>
+      <circle cx="49" cy="54.8" r="1.2" fill="#fff"/>
+      <circle cx="73" cy="54.8" r="1.2" fill="#fff"/>
+      <path d="M 52 66 Q 60 74 68 66" stroke="#2d3748" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+      <defs>
+        <radialGradient id="sunGrad" cx="38%" cy="35%">
+          <stop offset="0%" stop-color="#fffde7"/>
+          <stop offset="65%" stop-color="#ffd166"/>
+          <stop offset="100%" stop-color="#f48c06"/>
+        </radialGradient>
+      </defs>
+    </svg>
+  </div>
+  <!-- Fluffy felt clouds positioned in upper sky margins -->
+  <div class="cloud" style="top:3.5%;left:3%;width:clamp(75px,13vw,120px);height:clamp(26px,4.2vw,44px);opacity:0.85"></div>
+  <div class="cloud" style="top:5%;right:clamp(150px,22vw,250px);width:clamp(65px,11vw,105px);height:clamp(24px,3.8vw,40px);opacity:0.8"></div>
+  <div class="cloud" style="top:12%;left:2%;width:clamp(55px,9vw,85px);height:clamp(20px,3.4vw,34px);opacity:0.75"></div>
+  <div class="cloud" style="top:16%;right:2%;width:clamp(60px,10vw,90px);height:clamp(22px,3.6vw,36px);opacity:0.75"></div>
+  <!-- Sparkle stars -->
+  <div class="star" style="width:8px;height:8px;top:28%;left:18%;--d:2.8s;--dl:.4s"></div>
+  <div class="star" style="width:6px;height:6px;top:23%;right:22%;--d:3.5s;--dl:1s"></div>
+  <div class="star" style="width:10px;height:10px;top:36%;left:8%;--d:4s;--dl:.2s"></div>
+  <div class="star" style="width:7px;height:7px;top:33%;right:8%;--d:3.2s;--dl:.8s"></div>
+  <!-- Tropical ground with palm trees -->
+  <div class="ground">
+    <svg class="tree" style="left:2%;width:clamp(55px,11vw,110px)" viewBox="0 0 80 160">
+      <rect x="36" y="70" width="8" height="90" rx="4" fill="#5c3d1a"/>
+      <ellipse cx="40" cy="60" rx="36" ry="11" fill="#2d6a4f" transform="rotate(-35 40 60)"/>
+      <ellipse cx="40" cy="60" rx="36" ry="11" fill="#2d6a4f" transform="rotate(35 40 60)"/>
+      <ellipse cx="40" cy="52" rx="32" ry="10" fill="#52b788" transform="rotate(-60 40 52)"/>
+      <ellipse cx="40" cy="52" rx="32" ry="10" fill="#52b788" transform="rotate(60 40 52)"/>
+      <ellipse cx="40" cy="45" rx="26" ry="9" fill="#74c69d"/>
+    </svg>
+    <svg class="tree" style="right:3%;width:clamp(72px,14vw,140px)" viewBox="0 0 80 160">
+      <rect x="36" y="65" width="8" height="95" rx="4" fill="#5c3d1a"/>
+      <ellipse cx="40" cy="55" rx="38" ry="12" fill="#1b4332" transform="rotate(-40 40 55)"/>
+      <ellipse cx="40" cy="55" rx="38" ry="12" fill="#1b4332" transform="rotate(40 40 55)"/>
+      <ellipse cx="40" cy="46" rx="34" ry="11" fill="#2d6a4f" transform="rotate(-65 40 46)"/>
+      <ellipse cx="40" cy="46" rx="34" ry="11" fill="#2d6a4f" transform="rotate(65 40 46)"/>
+      <ellipse cx="40" cy="38" rx="28" ry="9" fill="#52b788"/>
+    </svg>
+    <svg class="tree" style="left:35%;width:clamp(36px,7vw,75px)" viewBox="0 0 80 160">
+      <rect x="36" y="75" width="8" height="85" rx="4" fill="#5c3d1a"/>
+      <ellipse cx="40" cy="66" rx="30" ry="9" fill="#2d6a4f" transform="rotate(-30 40 66)"/>
+      <ellipse cx="40" cy="66" rx="30" ry="9" fill="#2d6a4f" transform="rotate(30 40 66)"/>
+      <ellipse cx="40" cy="58" rx="24" ry="8" fill="#52b788"/>
+    </svg>
+    <svg class="tree" style="right:28%;width:clamp(44px,9vw,88px)" viewBox="0 0 80 120">
+      <rect x="36" y="65" width="8" height="55" rx="4" fill="#5c3d1a"/>
+      <ellipse cx="40" cy="52" rx="34" ry="26" fill="#2d6a4f"/>
+      <ellipse cx="22" cy="62" rx="20" ry="16" fill="#52b788"/>
+      <ellipse cx="58" cy="58" rx="22" ry="18" fill="#52b788"/>
+      <ellipse cx="40" cy="42" rx="26" ry="18" fill="#74c69d"/>
+    </svg>
+  </div>
+  <!-- Thai Animals -->
+  <div class="animal" style="top:24%;left:3%;--d:3.8s">🐘</div>
+  <div class="animal" style="top:30%;right:6%;--d:4.2s">🦋</div>
+  <div class="animal" style="top:36%;left:14%;--d:5s;font-size:1.4rem">🌸</div>
+  <div class="animal" style="top:26%;right:18%;--d:3.8s;font-size:1.2rem">✨</div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <nav id="topbar">
+    <div class="brand"><span class="li">🦁</span><h1>Safari Math Quest · P2</h1></div>
+    <div class="topright">
+      <div class="stamp" id="stamp">🎫 Passport Stamped</div>
+      <button class="ppill" onclick="changeName()">
+        <span style="font-size:1.15rem">🧭</span>
+        <span class="pnm" id="disp-name">Explorer</span>
+        <span style="font-size:.7rem;opacity:.6">✏️</span>
+      </button>
+    </div>
+  </nav>
+
+  <div id="main">
+
+    <!-- START -->
+    <section class="screen active" id="sc-start">
+      <div class="hero">
+        <span class="crown">👑</span>
+        <h2>Safari Math Quest</h2>
+        <p>MEP Prathomsuksa 2 · 15 Savanna Challenges</p>
+      </div>
+      <div class="mode-grid">
+        <div class="glass card mcard">
+          <div class="mi">🏕️</div>
+          <div class="mt">Training Grounds</div>
+          <div class="md">5 practice camps · hints · unlimited retries</div>
+          <button class="btn bpu full" style="margin-top:6px;font-size:clamp(1.02rem,3vw,1.25rem);padding:clamp(12px,2.5vw,16px) 20px" onclick="goTrain()">Enter Training 🧭</button>
+          <div class="ml">Complete 5 camps → unlock Exam Mode</div>
+        </div>
+        <div class="glass card mcard">
+          <div class="mi">⚔️</div>
+          <div class="mt">Exam Challenge</div>
+          <div class="md">15 graded questions · earn your Gold Certificate!</div>
+          <button class="btn bg full" style="margin-top:6px;font-size:clamp(1.02rem,3vw,1.25rem);padding:clamp(12px,2.5vw,16px) 20px" id="btn-exam" onclick="startExam()">Start Safari Exam 🏆</button>
+          <div class="ml" id="exam-lock">🔒 Complete all 5 Training Camps first</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAINING -->
+    <section class="screen" id="sc-train">
+      <div id="camp-hub" style="display:flex;flex-direction:column;flex:1;min-height:0;gap:clamp(8px,2vw,13px)">
+        <div class="tbar" id="t-hub-bar">
+          <button class="bk" onclick="goHome()">🏠 Home</button>
+          <span class="tbar-title">🏕️ Training Arena (P2)</span>
+        </div>
+        <div class="camps" id="camp-grid">
+          <div class="glass card camp" onclick="startCamp(0)">
+            <div class="ci">🧭</div>
+            <div class="cn">Words & Digits</div>
+            <div class="cd">Numerals up to 999 & place value</div>
+            <div class="cs" id="cs0">⬜</div>
+          </div>
+          <div class="glass card camp" onclick="startCamp(1)">
+            <div class="ci">🐊</div>
+            <div class="cn">Greedy Gator</div>
+            <div class="cd">Greater/Less than & Biggest/Smallest</div>
+            <div class="cs" id="cs1">⬜</div>
+          </div>
+          <div class="glass card camp" onclick="startCamp(2)">
+            <div class="ci">🦘</div>
+            <div class="cn">Patterns & Odd/Even</div>
+            <div class="cd">Number lines & ending digit rules</div>
+            <div class="cs" id="cs2">⬜</div>
+          </div>
+          <div class="glass card camp" onclick="startCamp(3)">
+            <div class="ci">⛰️</div>
+            <div class="cn">Knock-Knock Canyon</div>
+            <div class="cd">Column addition, borrowing & combined operations</div>
+            <div class="cs" id="cs3">⬜</div>
+          </div>
+          <div class="glass card camp" onclick="startCamp(4)">
+            <div class="ci">🐒</div>
+            <div class="cn">Multiplication Grove</div>
+            <div class="cd">1-digit animal groups & single-digit multiplication</div>
+            <div class="cs" id="cs4">⬜</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Training Practice -->
+      <div id="t-prac">
+        <div class="tbar" id="t-lesson-bar">
+          <button class="bk" onclick="backCamps()">← Camps</button>
+          <span class="tbar-title" id="t-ctitle">Camp Practice</span>
+          <span style="margin-left:auto;font-family:var(--fd);color:var(--gold);font-size:clamp(.85rem,2.2vw,1.05rem);text-shadow:0 0 10px rgba(251,191,36,.6)" id="t-prog">Q1/3</span>
+        </div>
+        <div id="t-main" style="display:flex;flex-direction:column;flex:1;min-height:0;gap:8px">
+          <div class="glass card" id="t-qcard">
+            <div class="zbadge" id="t-zbadge">Zone A 🧭</div>
+            <div id="t-prompt" style="font-size:clamp(.88rem,2.4vw,1.15rem);color:rgba(255,255,255,.95);font-weight:800;flex-shrink:0"></div>
+            <div id="t-disp"></div>
+          </div>
+          <div id="t-ans" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(6px,1.5vw,10px);width:100%;flex-shrink:0"></div>
+          <div class="glass hint-box by hidden" id="t-hint" style="color:#78350f">
+            <span id="t-hlbl" style="font-weight:900">💡 Lesson Guide:</span> <span id="t-htext"></span>
+          </div>
+          <div class="ebar">
+            <button class="tbtn" onclick="tAudio()">🔊 Hear Question</button>
+            <button class="tbtn" onclick="openSP()">✏️ Scratchpad</button>
+          </div>
+        </div>
+        <div class="glass card cc-done hidden" id="t-done">
+          <div class="big-em">🌟</div>
+          <h3 id="t-done-title">Camp Complete!</h3>
+          <p id="t-done-score">You scored 3 out of 3!</p>
+          <div style="display:flex;gap:10px;width:100%;max-width:320px;flex-direction:column" id="t-done-btns"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXAM -->
+    <section class="screen" id="sc-exam">
+      <div class="prow">
+        <span class="qlbl" id="q-lbl">Q 1 / 15</span>
+        <div class="ptrack"><div class="pfill" id="pfill" style="width:0%"></div></div>
+        <span class="slbl" id="s-lbl">⭐ 0</span>
+      </div>
+      <div class="glass card" id="qcard">
+        <div class="zbadge" id="zbadge">Zone A 🧭</div>
+        <div id="q-prompt"></div>
+        <div id="q-disp"></div>
+      </div>
+      <div id="answers"></div>
+      <div class="ebar">
+        <button class="tbtn" onclick="eAudio()">🔊 Hear Question</button>
+        <button class="tbtn" onclick="openSP()">✏️ Scratchpad</button>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="screen" id="sc-res">
+      <div class="res-hdr">
+        <span class="rtrophy" id="r-trophy">🏆</span>
+        <div class="tpill tg" id="r-tier">👑 Gold Master!</div>
+        <div class="rscore" id="r-score">15 / 15</div>
+      </div>
+      <div class="rmsg" id="r-msg"></div>
+
+      <!-- VIEW A: Near-miss Silver Challenge -->
+      <div class="glass card nmcard hidden" id="nearmiss">
+        <div style="font-size:clamp(1.5rem,4vw,2.2rem)">👑✨</div>
+        <div style="font-family:var(--fd);color:var(--gold);font-size:clamp(1rem,3vw,1.35rem)">Awaken the Golden Lion!</div>
+        <p style="font-weight:800;font-size:clamp(.8rem,2.2vw,.95rem);color:rgba(255,255,255,.9)" id="nm-desc">You're SO close to Gold! Retry your missed questions now:</p>
+        <button class="btn btn-gold full" id="btn-awaken">✨ AWAKEN THE GOLDEN LION (Retry Missed) ✨</button>
+        <div class="nm-btns">
+          <button class="btn bb" onclick="toggleSilverCert(true)">📜 View Silver Certificate</button>
+          <button class="btn bo" onclick="goHome()">🏠 Base Camp</button>
+        </div>
+      </div>
+
+      <!-- VIEW B: Certificate Section -->
+      <div class="certsec-wrap hidden" id="certsec">
+        <div class="certwrap"><canvas id="cv-cert"></canvas></div>
+        <div class="cert-btns">
+          <button class="btn bb" id="btn-dl" onclick="dlCert()">💾 Save Certificate</button>
+          <button class="btn bpu hidden" id="btn-cert-back" onclick="toggleSilverCert(false)">← Back to Retry</button>
+          <button class="btn bo" onclick="goHome()">🏠 Base Camp</button>
+          <button class="btn bg" onclick="startExam()">🔄 New Exam</button>
+        </div>
+      </div>
+
+      <!-- VIEW C: Bronze Remediation Card -->
+      <div class="glass card nmcard hidden" id="bronzecard">
+        <div style="font-size:2.8rem">🐘🏕️</div>
+        <div style="font-family:var(--fd);color:var(--gold);font-size:clamp(1rem,3vw,1.35rem)">Training Arena Unlocked!</div>
+        <p style="font-weight:700;font-size:clamp(.8rem,2.2vw,.95rem);color:rgba(255,255,255,.9)">Every great explorer trains first. Heading to Training Camp to practice and master these skills!</p>
+        <button class="btn bg full" style="margin-top:6px" onclick="goTrain()">🏕️ Enter Training Arena Now</button>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- SCRATCHPAD -->
+<div id="sp-modal">
+  <div class="sp-panel">
+    <div class="sp-hdr">
+      <h3>✏️ Scratchpad (Show Your Work)</h3>
+      <div class="sp-tools">
+        <button class="sc on" style="background:#1e3a8a" data-c="#1e3a8a" onclick="setSC(this)"></button>
+        <button class="sc" style="background:#dc2626" data-c="#dc2626" onclick="setSC(this)"></button>
+        <button class="sc" style="background:#16a34a" data-c="#16a34a" onclick="setSC(this)"></button>
+        <button class="sc" style="background:#7c3aed" data-c="#7c3aed" onclick="setSC(this)"></button>
+        <button class="sa" id="btn-eraser" onclick="setEraser(this)">🧹 Eraser</button>
+        <button class="sa" onclick="clrSP()">🗑 Clear All</button>
+        <button class="sa" onclick="closeSP()">✕ Close</button>
+      </div>
+    </div>
+    <canvas id="cv-scratch"></canvas>
+  </div>
+</div>
+
+<!-- FEEDBACK -->
+<div id="fb"><span id="fb-ic">✅</span></div>
+
+<script>
+/* ============================================================ STAR FIELD */
+(function(){
+  const bg=document.getElementById('bg');
+  for(let i=0;i<65;i++){
+    const s=document.createElement('div');s.className='star';
+    const sz=Math.random()*3+1;
+    s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*62}%;left:${Math.random()*100}%;--d:${(Math.random()*4+2).toFixed(1)}s;--dl:${(Math.random()*4).toFixed(1)}s;opacity:${(Math.random()*.7+.2).toFixed(2)}`;
+    bg.appendChild(s);
+  }
+})();
+
+/* ============================================================ MATH ENGINE (P2) */
+const ME=(function(){
+  const ri=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+  const sh=a=>[...a].sort(()=>Math.random()-.5);
+  const fmt=n=>n.toLocaleString();
+
+  function numToWordsP2(n){
+    if(n===0)return 'Zero';
+    const ones=['','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
+    const tens=['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
+    function helper(num){
+      if(num<20)return ones[num];
+      if(num<100){const rem=num%10;return tens[Math.floor(num/10)]+(rem?'-'+ones[rem]:'');}
+      const h=Math.floor(num/100),rem=num%100;
+      return ones[h]+' hundred'+(rem?' and '+helper(rem):'');
+    }
+    const str=helper(n);
+    return str.charAt(0).toUpperCase()+str.slice(1);
+  }
+
+  // 1. Q1: Number to Words (up to 999)
+  function qNTW(id, isClass=false, diff=1){
+    let n;
+    if(diff>1){
+      const toughTypes=[
+        ()=>ri(1,9)*100+ri(1,9),       // e.g. 709 (zero in tens)
+        ()=>ri(8,9)*100+ri(70,99),     // high 800-999
+        ()=>ri(1,9)*100+ri(11,19)      // teen tens e.g. 415
+      ];
+      n=toughTypes[ri(0,toughTypes.length-1)]();
+    }else{
+      n=Math.random()<0.35 
+        ? ri(1,9)*100+ri(1,9)
+        : ri(1,9)*100+ri(10,99);
+    }
+    const correct=numToWordsP2(n);
+    const w1=numToWordsP2(n>=200?n-100:n+100);
+    const w2=numToWordsP2(n+(n%10>5?-3:3));
+    const w3=numToWordsP2(n<=980?n+10:n-10);
+    
+    // In Mode 1 (Class Practice), read the number as it is: "Eight hundred and thirty-three"!
+    // In Mode 2 (Exam Quiz), read digit by digit so as not to give away the spelling answer directly!
+    const audioText=isClass 
+      ? `Welcome to our numbers lesson! Look at the number ${n}. Read the hundreds first, then the tens and ones. How is it written in English words?`
+      : `Look at the number on your screen: ${n.toString().split('').map(d=>d==='0'?'zero':d).join(', ')}. How do you write this in English words?`;
+
+    return{
+      id,zone:'A',cat:'Safari Words & Digits 🧭',catIdx:0,
+      displayType:'number',
+      prompt:isClass ? `Class Lesson: Look at ${n}. What is this number written in words?` : 'What is this number written in words?',
+      html:`<span class="dn">${n}</span>`,
+      audio:audioText,
+      opts:sh([correct,w1,w2,w3]),
+      ans:correct,
+      hint:isClass ? `Teaching Guide: Break the number down: ${Math.floor(n/100)} hundreds (${Math.floor(n/100)} hundred) and remainder ${n%100}. Select the matching words below!` : `The number starts with ${Math.floor(n/100)} hundred.`
+    };
+  }
+
+  // 2. Q2: Words to numeral (up to 999)
+  function qWTN(id, isClass=false, diff=1){
+    let n;
+    if(diff>1){
+      n=ri(diff>2?5:2,9)*100+(Math.random()<0.5?ri(1,9):ri(11,99));
+    }else{
+      n=ri(1,9)*100+(Math.random()<0.4?ri(1,9):ri(10,99));
+    }
+    const words=numToWordsP2(n);
+    const wr1=(n>=200?n-100:n+100).toString();
+    const wr2=(n+(n%10>4?-1:2)).toString();
+    const wr3=(n<=980?n+10:n-10).toString();
+    const audioText=isClass
+      ? `In our number words lesson: find the numeral for ${words}. Remember, the first word tells the hundreds digit!`
+      : `Listen carefully: ${words}. Choose the correct numeral.`;
+    return{
+      id,zone:'A',cat:'Safari Words & Digits 🧭',catIdx:0,
+      displayType:'word',
+      prompt:isClass ? `Class Lesson: Read the words "${words}". Which numeral matches these words?` : 'Which numeral matches these words?',
+      html:`<span class="dw">${words}</span>`,
+      audio:audioText,
+      opts:sh([n.toString(),wr1,wr2,wr3]),
+      ans:n.toString(),
+      hint:isClass ? `Teaching Guide: "${words}" has ${Math.floor(n/100)} hundreds, ${Math.floor((n%100)/10)} tens, and ${n%10} ones. Combine the digits into the numeral!` : 'Break the words down: find the hundreds digit first!'
+    };
+  }
+
+  // 3. Q3: Digit value in 3-digit number
+  function qPVI(id, isClass=false, diff=1){
+    const n=diff>1?ri(300,999):ri(100,999);
+    const ds=n.toString().split('');
+    const hlR=ri(0,2); // 0: ones, 1: tens, 2: hundreds
+    const dVal=parseInt(ds[ds.length-1-hlR],10);
+    const correctVal=(dVal*Math.pow(10,hlR)).toString();
+    const PL=['ones','tens','hundreds'];
+    const wr=[];
+    for(let p=0;p<=2;p++){
+      if(p!==hlR)wr.push((dVal*Math.pow(10,p)).toString());
+    }
+    const extraVal=dVal===0?1:(dVal<9?(dVal+1)*Math.pow(10,hlR):(dVal-1)*Math.pow(10,hlR));
+    wr.push(extraVal.toString());
+    const finalWr=sh(wr).slice(0,3);
+    let html='<div class="dpv">';
+    ds.forEach((d,i)=>{
+      const rIdx=ds.length-1-i;
+      const hl=rIdx===hlR;
+      html+=`<div class="pvd${hl?' hl':''}"><span>${d}</span><small>${PL[rIdx]}</small></div>`;
+    });
+    html+='</div>';
+    
+    // In Mode 1 (Class), teach digit value directly
+    const nSpoken=numToWordsP2(n);
+    const audioText=isClass
+      ? `In our digit value lesson: in the number ${nSpoken}, the gold digit ${dVal} is in the ${PL[hlR]} place. What is the digit value of ${dVal}?`
+      : `In the number ${n}, what is the digit value of the highlighted digit in gold?`;
+
+    return{
+      id,zone:'A',cat:'Safari Words & Digits 🧭',catIdx:0,
+      displayType:'pv',
+      prompt:isClass ? `Class Lesson: In ${nSpoken}, what is the digit value of the gold digit ${dVal}?` : `In the number ${n}, what is the digit value of the highlighted digit in gold?`,
+      html,
+      audio:audioText,
+      opts:sh([correctVal,...finalWr]),
+      ans:correctVal,
+      hint:isClass ? `Teaching Guide: The digit ${dVal} is in the ${PL[hlR]} place, so its digit value is ${correctVal}!` : `The golden digit is in the ${PL[hlR]} place.`
+    };
+  }
+
+  // 4. Q4: Place Finder (Hundreds, Tens, Ones)
+  function qPLC(id, isClass=false, diff=1){
+    const n=diff>1?ri(350,999):ri(100,999);
+    const ds=n.toString().split('');
+    const places=['hundreds','tens','ones'];
+    const targetPlace=places[ri(0,2)];
+    let correctDigit='';
+    if(targetPlace==='hundreds')correctDigit=ds[0];
+    else if(targetPlace==='tens')correctDigit=ds[1];
+    else correctDigit=ds[2];
+    const allDigits=[...new Set(ds)];
+    while(allDigits.length<3){
+      allDigits.push(ri(1,9).toString());
+    }
+    const nSpoken=numToWordsP2(n);
+    const audioText=isClass
+      ? `In our place value lesson: in the number ${nSpoken}, the first digit is hundreds, second is tens, and third is ones. Which digit is in the ${targetPlace} place?`
+      : `In the number ${n}, which digit is in the ${targetPlace} place?`;
+    return{
+      id,zone:'A',cat:'Safari Words & Digits 🧭',catIdx:0,
+      displayType:'pv',
+      prompt:isClass ? `Class Lesson: In ${nSpoken}, which digit is in the ${targetPlace} place?` : `In the number ${n}, which digit is in the ${targetPlace} place?`,
+      html:`<div class="dn">${n}</div>`,
+      audio:audioText,
+      opts:sh(allDigits.slice(0,3)),
+      ans:correctDigit,
+      hint:isClass ? `Teaching Guide: In ${n}, hundreds is ${ds[0]}, tens is ${ds[1]}, and ones is ${ds[2]}. So the ${targetPlace} digit is ${correctDigit}!` : 'First digit is hundreds, second digit is tens, third digit is ones.'
+    };
+  }
+
+  // 5. Q5: Greatest / Smallest Safari Lion number
+  function qMAX(id, isClass=false, diff=1){
+    const isGreatest=Math.random()<0.5;
+    let n1,n2,n3;
+    if(diff>1){
+      const h=ri(3,9)*100;
+      n1=h+ri(2,8)*10+ri(1,9);
+      n2=h+ri(2,8)*10+ri(1,9);
+      n3=h+ri(2,8)*10+ri(1,9);
+      while(n2===n1)n2=h+ri(1,9)*10+ri(1,9);
+      while(n3===n1||n3===n2)n3=h+ri(1,9)*10+ri(1,9);
+    }else{
+      const d1=ri(2,8),d2=ri(2,8),d3=ri(2,8);
+      n1=d1*100+d2*10+d3;
+      n2=d2*100+d3*10+d1;
+      n3=d3*100+d1*10+d2;
+    }
+    const nums=[n1,n2,n3];
+    const ansNum=isGreatest?Math.max(...nums):Math.min(...nums);
+    const word=isGreatest?'GREATEST (biggest)':'SMALLEST (least)';
+    const lionCards=nums.map(n=>`<span class="chip">🦁 ${n}</span>`).join(' &nbsp; ');
+    const audioText=isClass
+      ? `In our comparing numbers lesson: look at the three lion numbers: ${nums.map(numToWordsP2).join(', ')}. Compare the hundreds digit first to find the ${isGreatest?'greatest':'smallest'} number!`
+      : `Look at the three safari lion numbers. Which is the ${isGreatest?'biggest':'smallest'} number?`;
+    return{
+      id,zone:'A',cat:'Safari Words & Digits 🧭',catIdx:1,
+      displayType:'sequence',
+      prompt:isClass ? `Class Lesson: Look at these three safari lions. Circle the ${word} number:` : `Look at these three safari lions. Circle the ${word} number:`,
+      html:`<div class="ds">${lionCards}</div>`,
+      audio:audioText,
+      opts:sh(nums.map(String)),
+      ans:ansNum.toString(),
+      hint:isClass ? `Teaching Guide: Compare hundreds digits first! The highest hundreds is greatest, lowest hundreds is smallest.` : 'Compare the hundreds digit first! If hundreds are equal, check tens, then ones.'
+    };
+  }
+
+  // 6. Q6: Greedy Gator comparison (> or <)
+  function qGTR(id, isClass=false, diff=1){
+    let a,b;
+    if(diff>1){
+      const base=ri(2,9)*100;
+      a=base+ri(1,8)*10+ri(0,9);
+      b=base+ri(1,8)*10+ri(0,9);
+      while(b===a)b=base+ri(1,9)*10+ri(0,9);
+    }else{
+      const base=ri(1,8)*100;
+      const t=ri(1,8);
+      a=base+t*10;
+      b=base+t;
+    }
+    if(Math.random()<0.5)[a,b]=[b,a];
+    const ans=a>b?'>':'<';
+    const audioText=isClass
+      ? `In our alligator comparison lesson: comparing ${numToWordsP2(a)} and ${numToWordsP2(b)}. The Greedy Gator always opens its wide mouth toward the bigger number!`
+      : `The Greedy Gator eats the bigger number. Which sign is correct?`;
+    return{
+      id,zone:'B',cat:"Greedy Gator's Den 🐊",catIdx:1,
+      displayType:'compare',
+      prompt:isClass ? `Class Lesson: The Greedy Gator 🐊 opens its mouth toward the BIGGER number! Write > or < :` : 'The Greedy Gator 🐊 opens its mouth to eat the BIGGER number! Write > or < :',
+      html:`<div class="dcmp"><span class="cnum">${a}</span><span class="cslot">?</span><span class="cnum">${b}</span></div>`,
+      audio:audioText,
+      opts:sh(['>','<']),
+      ans,
+      hint:isClass ? `Teaching Guide: Compare the numbers: the Gator's open jaws (< or >) always face the bigger number!` : (a>b?`${a} is bigger than ${b}, so the Gator mouth opens towards ${a}!`:`${b} is bigger than ${a}!`)
+    };
+  }
+
+  // 7. Q7: Kippy Kangaroo Ascending Number Line
+  function qSEQ_UP(id, isClass=false, diff=1){
+    const steps=diff>1?[10,20,50,100]:[2,5,10,20];
+    const step=steps[ri(0,steps.length-1)];
+    const maxStart=Math.floor((900-4*step)/step);
+    const minStart=Math.max(1,Math.floor(100/step));
+    const start=ri(minStart,Math.max(minStart,maxStart))*step;
+    const seq=[start,start+step,start+2*step,start+3*step];
+    const ans=start+4*step;
+    const chips=seq.map(n=>`<span class="chip">${n}</span>`).join('<span class="csep"> , </span>')
+      +'<span class="csep"> , </span><span class="chip miss">?</span>';
+    const optWr1=ans+step<=999?ans+step:ans-2*step;
+    const optWr2=ans-step>=0?ans-step:ans+2*step;
+    const optWr3=ans+2*step<=999?ans+2*step:ans-3*step;
+    const audioText=isClass
+      ? `In our number patterns lesson: Kippy Kangaroo is counting forward by ${step}: ${seq.join(', ')}. Add ${step} to ${seq[3]} to find the next number!`
+      : `Kippy is jumping forward by ${step}. What number comes next?`;
+    return{
+      id,zone:'B',cat:"Kippy's Jumps 🦘",catIdx:2,
+      displayType:'sequence',
+      prompt:isClass ? `Class Lesson: Help Kippy Kangaroo 🦘 jump forward by adding ${step} each time! What number comes next?` : 'Help Kippy the Kangaroo 🦘 jump forward! What is the missing number?',
+      html:`<div class="ds">${chips}</div>`,
+      audio:audioText,
+      opts:sh([ans.toString(),optWr1.toString(),optWr2.toString(),optWr3.toString()]),
+      ans:ans.toString(),
+      hint:isClass ? `Teaching Guide: Each jump adds ${step}. Calculate ${seq[3]} + ${step} to find the next number!` : `Kippy is adding ${step} on every jump! Next is ${seq[3]} + ${step}.`
+    };
+  }
+
+  // 8. Q8: Kippy Kangaroo Descending Number Line
+  function qSEQ_DN(id, isClass=false, diff=1){
+    const steps=diff>1?[10,20,50,100]:[2,5,10,20];
+    const step=steps[ri(0,steps.length-1)];
+    const minMult=5;
+    const maxMult=Math.min(Math.floor(950/step),19);
+    const start=ri(minMult+1,Math.max(minMult+1,maxMult))*step;
+    const seq=[start,start-step,start-2*step,start-3*step];
+    const ans=start-4*step;
+    const chips=seq.map(n=>`<span class="chip">${n}</span>`).join('<span class="csep"> , </span>')
+      +'<span class="csep"> , </span><span class="chip miss">?</span>';
+    const optWr1=ans+step<=999?ans+step:ans-2*step;
+    const optWr2=ans-step>=0?ans-step:ans+2*step;
+    const optWr3=ans-2*step>=0?ans-2*step:ans+3*step;
+    const audioText=isClass
+      ? `In our countdown lesson: Kippy Kangaroo is counting backwards by ${step}: ${seq.join(', ')}. Subtract ${step} from ${seq[3]} to find the next number!`
+      : `Kippy is jumping backwards by ${step}. What number comes next?`;
+    return{
+      id,zone:'B',cat:"Kippy's Jumps 🦘",catIdx:2,
+      displayType:'sequence',
+      prompt:isClass ? `Class Lesson: Help Kippy Kangaroo 🦘 count backwards by subtracting ${step} each time! What number comes next?` : 'Help Kippy the Kangaroo 🦘 jump backwards! What is the missing number?',
+      html:`<div class="ds">${chips}</div>`,
+      audio:audioText,
+      opts:sh([ans.toString(),optWr1.toString(),optWr2.toString(),optWr3.toString()]),
+      ans:ans.toString(),
+      hint:isClass ? `Teaching Guide: Each step subtracts ${step}. Calculate ${seq[3]} − ${step} to find the next number!` : `Kippy is counting down by ${step}. Subtract ${step} from ${seq[3]}.`
+    };
+  }
+
+  // 9. Q9: Odd or Even Detective 🐘
+  function qODD_EVN(id, isClass=false, diff=1){
+    const findEven=Math.random()<0.5;
+    const evens=[0,2,4,6,8],odds=[1,3,5,7,9];
+    function makeNum(isEven){
+      const last=isEven?evens[ri(0,4)]:odds[ri(0,4)];
+      if(diff>1){
+        const prefixD=isEven?odds[ri(0,4)]:evens[ri(1,4)];
+        return prefixD*100+prefixD*10+last;
+      }
+      return ri(10,95)*10+last;
+    }
+    let correctNum=makeNum(findEven);
+    let wrong1=makeNum(!findEven);
+    let wrong2=makeNum(!findEven);
+    while(wrong2===wrong1)wrong2=makeNum(!findEven);
+    const nums=[correctNum,wrong1,wrong2];
+    const targetLabel=findEven?'EVEN number (ends in 0, 2, 4, 6, or 8)':'ODD number (ends in 1, 3, 5, 7, or 9)';
+    const audioText=isClass
+      ? `In our odd and even lesson: remember the golden rule! Even numbers end in 0, 2, 4, 6, or 8. Odd numbers end in 1, 3, 5, 7, or 9. Find the ${findEven?'even':'odd'} number!`
+      : `Look at the last ones digit of each number. Which one is ${findEven?'even':'odd'}?`;
+    return{
+      id,zone:'B',cat:"Kippy's Jumps 🦘",catIdx:2,
+      displayType:'sequence',
+      prompt:isClass ? `Class Lesson: Elephant Detective 🐘: Circle the ${targetLabel}:` : `Elephant Detective 🐘: Circle the ${targetLabel}:`,
+      html:`<div class="ds">${nums.map(n=>`<span class="chip">🐘 ${n}</span>`).join(' &nbsp; ')}</div>`,
+      audio:audioText,
+      opts:sh(nums.map(String)),
+      ans:correctNum.toString(),
+      hint:isClass ? `Teaching Guide: Look at the last digit! Even numbers end in 0, 2, 4, 6, 8. Odd numbers end in 1, 3, 5, 7, 9. Check the ending digit of each choice!` : (findEven?'Even numbers always end in 0, 2, 4, 6, or 8!':'Odd numbers always end in 1, 3, 5, 7, or 9!')
+    };
+  }
+
+  // 10. Q10: Odd or Even Ending Rule
+  function qEVN_RULE(id, isClass=false, diff=1){
+    const n=diff>1?ri(35,99)*10+ri(0,9):ri(12,98)*10+ri(0,9);
+    const lastDigit=n%10;
+    const isEven=[0,2,4,6,8].includes(lastDigit);
+    const correct=isEven?'Even':'Odd';
+    const audioText=isClass
+      ? `In our odd and even lesson: look at ${numToWordsP2(n)}. It ends in ${lastDigit}. Numbers ending in ${isEven?'0, 2, 4, 6, or 8 are even':'1, 3, 5, 7, or 9 are odd'}!`
+      : `Look at the number ${n}. Does it end in an even or odd digit?`;
+    return{
+      id,zone:'B',cat:"Kippy's Jumps 🦘",catIdx:2,
+      displayType:'number',
+      prompt:isClass ? `Class Lesson: Look at ${n}. Its last digit is ${lastDigit}. Is it ODD or EVEN?` : `Look at the number ${n}. Its last digit is ${lastDigit}. Is it ODD or EVEN?`,
+      html:`<div class="dn">${n}</div>`,
+      audio:audioText,
+      opts:sh(['Even','Odd']),
+      ans:correct,
+      hint:isClass ? `Teaching Guide: Look at the last digit: ${lastDigit}. 0, 2, 4, 6, 8 means Even; 1, 3, 5, 7, 9 means Odd!` : `The number ends in ${lastDigit}. ${isEven?'0, 2, 4, 6, 8 are Even.':'1, 3, 5, 7, 9 are Odd.'}`
+    };
+  }
+
+  // 11. BOSS CHALLENGE 1: qODD_EVN_TRICK (Deceptive reverse-digit trick)
+  function qODD_EVN_TRICK(id, isClass=false, diff=1){
+    const findEven=Math.random()<0.5;
+    let correctNum, wrong1, wrong2;
+    if(findEven){
+      const oddPrefixes=[77,99,55,33,79,97,57];
+      const evenPrefixes=[88,66,44,86,68,48];
+      const evens=[2,4,6,8];const odds=[1,3,5,7,9];
+      const op=oddPrefixes[ri(0,oddPrefixes.length-1)];
+      correctNum=op*10+evens[ri(0,evens.length-1)]; // e.g. 998 (starts with 99, but ends with 8 -> EVEN!)
+      const ep1=evenPrefixes[ri(0,evenPrefixes.length-1)];
+      wrong1=ep1*10+odds[ri(0,odds.length-1)]; // e.g. 887 (starts with 88, but ends with 7 -> ODD!)
+      let ep2=evenPrefixes[ri(0,evenPrefixes.length-1)];
+      while(ep2===ep1)ep2=evenPrefixes[ri(0,evenPrefixes.length-1)];
+      wrong2=ep2*10+odds[ri(0,odds.length-1)];
+    }else{
+      const evenPrefixes=[88,66,44,86,68,48];
+      const oddPrefixes=[77,99,55,33,79,97];
+      const odds=[1,3,5,7,9];const evens=[2,4,6,8];
+      const ep=evenPrefixes[ri(0,evenPrefixes.length-1)];
+      correctNum=ep*10+odds[ri(0,odds.length-1)]; // e.g. 883 (starts with 88, but ends with 3 -> ODD!)
+      const op1=oddPrefixes[ri(0,oddPrefixes.length-1)];
+      wrong1=op1*10+evens[ri(0,evens.length-1)]; // e.g. 994 (starts with 99, but ends with 4 -> EVEN!)
+      let op2=oddPrefixes[ri(0,oddPrefixes.length-1)];
+      while(op2===op1)op2=oddPrefixes[ri(0,oddPrefixes.length-1)];
+      wrong2=op2*10+evens[ri(0,evens.length-1)];
+    }
+    const nums=[correctNum,wrong1,wrong2];
+    const targetLabel=findEven?'EVEN number (look at the ONES digit!)':'ODD number (look at the ONES digit!)';
+    const audioText=isClass
+      ? `Grand Explorer Challenge Lesson! Do not be fooled by the first digits! Check ONLY the last ones digit: ${nums.map(numToWordsP2).join(', ')}. Which is ${findEven?'even':'odd'}?`
+      : `Grand Explorer Challenge! Look carefully at the ones digit. Which number is ${findEven?'even':'odd'}?`;
+
+    return{
+      id,zone:'B',cat:"Kippy's Jumps 🦘",catIdx:2,
+      isBossChallenge:true,
+      displayType:'sequence',
+      prompt:`🦁⚡ Grand Explorer Challenge: Circle the ${targetLabel}:`,
+      html:`<div class="ds">${nums.map(n=>`<span class="chip">🦁 ${n}</span>`).join(' &nbsp; ')}</div>`,
+      audio:audioText,
+      opts:sh(nums.map(String)),
+      ans:correctNum.toString(),
+      hint:isClass ? `Teaching Guide: Trap warning! Do not be distracted by the hundreds or tens digits — check ONLY the very last digit!` : `Trap warning! Look ONLY at the final digit!`
+    };
+  }
+
+  // 12. Q12: 3-Digit Column Addition without carrying
+  function qADD_NO_CARRY(id, isClass=false, diff=1){
+    const h1=ri(1,4),h2=ri(1,3);
+    const t1=ri(0,4),t2=ri(0,4);
+    const o1=ri(0,4),o2=ri(0,4);
+    const a=h1*100+t1*10+o1;
+    const b=h2*100+t2*10+o2;
+    const ans=a+b;
+    const optWr3=ans+100<=999?ans+100:ans-100;
+    const audioText=isClass
+      ? `In our column addition lesson: add ${a} plus ${b}. First add ones (${o1}+${o2}), then tens (${t1}+${t2}), then hundreds (${h1}+${h2})!`
+      : `Add ${a} plus ${b}. Start by adding the ones column first.`;
+    return{
+      id,zone:'C',cat:'Knock-Knock Canyon ⛰️',catIdx:3,
+      displayType:'vertical',
+      prompt:isClass ? 'Class Lesson: Add the column numbers step-by-step (Ones, Tens, Hundreds):' : 'Add the column numbers (Hundreds, Tens, Ones):',
+      html:`<div class="dv"><div class="vr">${a}</div><div class="vop"><span class="vsym">+</span><span>${b}</span></div><div class="vr vans">?</div></div>`,
+      audio:audioText,
+      opts:sh([ans.toString(),(ans+10).toString(),(ans-10).toString(),optWr3.toString()]),
+      ans:ans.toString(),
+      hint:isClass ? `Teaching Guide: Add columns from right to left: ones first (${o1}+${o2}), then tens (${t1}+${t2}), then hundreds (${h1}+${h2})!` : `Add ones: ${o1} + ${o2}. Add tens: ${t1} + ${t2}. Add hundreds: ${h1} + ${h2}.`
+    };
+  }
+
+  // 13. Q13: 3-Digit Column Addition with carrying
+  function qADD_CARRY(id, isClass=false, diff=1){
+    const a=diff>1?ri(250,490):ri(150,420);
+    const b=diff>1?ri(250,490):ri(150,420);
+    const ans=a+b;
+    const optWr3=ans+100<=999?ans+100:ans-100;
+    const audioText=isClass
+      ? `In our addition with carrying lesson: add ${a} plus ${b}. When the sum in any column is 10 or more, carry 1 over to the next column!`
+      : `Add ${a} plus ${b}. If a column reaches 10 or more, carry to the next neighbor!`;
+    return{
+      id,zone:'C',cat:'Knock-Knock Canyon ⛰️',catIdx:3,
+      displayType:'vertical',
+      prompt:isClass ? 'Class Lesson: Add these column numbers (remember to carry 1 to the neighbor!):' : 'Add these column numbers (remember to carry!):',
+      html:`<div class="dv"><div class="vr">${a}</div><div class="vop"><span class="vsym">+</span><span>${b}</span></div><div class="vr vans">?</div></div>`,
+      audio:audioText,
+      opts:sh([ans.toString(),(ans+10).toString(),(ans-10).toString(),optWr3.toString()]),
+      ans:ans.toString(),
+      hint:isClass ? `Teaching Guide: When the ones or tens sum reaches 10 or more, write the ones digit and carry 1 over to the next left column!` : 'Use your scratchpad! When the sum is 10 or more, carry 1 over to the next column.'
+    };
+  }
+
+  // 14. Q14: 3-Digit Subtraction with borrowing (Knock-knock, Neighbor!)
+  function qSUB_BORROW(id, isClass=false, diff=1){
+    const h1=ri(4,8),h2=ri(1,h1-1);
+    const t1=ri(2,7),t2=ri(1,t1-1);
+    const o1=ri(1,4),o2=ri(6,9);
+    const a=h1*100+t1*10+o1;
+    const b=h2*100+t2*10+o2;
+    const ans=a-b;
+    const audioText=isClass
+      ? `In our subtraction lesson: subtract ${b} from ${a}. When the top digit is smaller than the bottom digit, knock-knock on the neighbor and borrow 1 ten!`
+      : `Subtract ${b} from ${a}. In the ones column, knock-knock on the tens neighbor to borrow!`;
+    return{
+      id,zone:'C',cat:'Knock-Knock Canyon ⛰️',catIdx:3,
+      displayType:'vertical',
+      prompt:isClass ? 'Class Lesson: Subtract with borrowing (Knock-knock, Neighbor! ✊):' : 'Subtract with borrowing (Knock-knock, Neighbor! ✊):',
+      html:`<div class="dv"><div class="vr">${a}</div><div class="vop"><span class="vsym">−</span><span>${b}</span></div><div class="vr vans">?</div></div>`,
+      audio:audioText,
+      opts:sh([ans.toString(),(ans+10).toString(),(ans-10).toString(),(ans+20).toString()]),
+      ans:ans.toString(),
+      hint:isClass ? `Teaching Guide: Since ${o1} < ${o2}, knock on tens to borrow 1 ten! ${o1} becomes ${o1+10}. Calculate (${o1+10} − ${o2}) for the ones column!` : `${o1} is smaller than ${o2}! Knock-knock, neighbor ✊! Borrow 1 ten to make ${o1+10}.`
+    };
+  }
+
+  // 15. BOSS CHALLENGE 2: qSUB_ZERO (Subtraction across ZERO with double borrowing!)
+  function qSUB_ZERO(id, isClass=false, diff=1){
+    const h1=ri(5,9);
+    const o1=ri(1,5);
+    const a=h1*100+o1; // e.g. 604
+    const h2=ri(2,h1-2);
+    const t2=ri(3,8);
+    const o2=ri(6,9);
+    const b=h2*100+t2*10+o2; // e.g. 238
+    const ans=a-b;
+
+    const optWr1=ans+10<=999?ans+10:ans-10;
+    const optWr2=ans-10>=0?ans-10:ans+20;
+    const optMistake=(h1-1-h2)*100+(10-t2)*10+(o1+10-o2);
+    const optWr3=optMistake!==ans&&optMistake>0?optMistake:(ans+100<=999?ans+100:ans-20);
+
+    const audioText=isClass
+      ? `Boss Challenge Lesson! Subtract across zero: ${a} minus ${b}. The tens column is zero, so knock-knock on the hundreds neighbor to borrow first!`
+      : `Grand Explorer Challenge! Think carefully and use your scratchpad: subtract ${b} from ${a}.`;
+
+    return{
+      id,zone:'C',cat:'Knock-Knock Canyon ⛰️',catIdx:3,
+      isBossChallenge:true,
+      displayType:'vertical',
+      prompt:'🦁⚡ Grand Explorer Challenge: Subtract across ZERO (Knock-knock through 0!):',
+      html:`<div class="dv"><div class="vr">${a}</div><div class="vop"><span class="vsym">−</span><span>${b}</span></div><div class="vr vans">?</div></div>`,
+      audio:audioText,
+      opts:sh([ans.toString(),optWr1.toString(),optWr2.toString(),optWr3.toString()]),
+      ans:ans.toString(),
+      hint:`Tens has 0, so knock on hundreds (${h1} becomes ${h1-1}), tens becomes 9, and ones becomes ${o1+10}!`
+    };
+  }
+
+  // 16. Q16: Combined Operations (Addition & Subtraction only)
+  function qCOMB(id, isClass=false, diff=1){
+    const form=ri(1,3);
+    let a,b,c,ans,exprHtml,spokenExpr,hintText;
+    if(diff>1){
+      if(form===1){
+        a=ri(15,45)*10+ri(0,9);
+        b=ri(10,35)*10+ri(0,9);
+        const sumAB=a+b;
+        c=ri(10,Math.floor(sumAB/10)-2)*10+ri(0,9);
+        ans=sumAB-c;
+        exprHtml=`( ${a} + ${b} ) − ${c}`;
+        spokenExpr=`open brackets ${numToWordsP2(a)} plus ${numToWordsP2(b)} close brackets, minus ${numToWordsP2(c)}`;
+        hintText=`Calculate inside brackets first: ${a} + ${b} = ${sumAB}. Then subtract ${c}: ${sumAB} − ${c} = ${ans}.`;
+      }else if(form===2){
+        a=ri(35,75)*10+ri(0,9);
+        b=ri(10,Math.floor(a/10)-5)*10+ri(0,9);
+        const diffAB=a-b;
+        c=ri(10,Math.floor((950-diffAB)/10))*10+ri(0,9);
+        ans=diffAB+c;
+        exprHtml=`( ${a} − ${b} ) + ${c}`;
+        spokenExpr=`open brackets ${numToWordsP2(a)} minus ${numToWordsP2(b)} close brackets, plus ${numToWordsP2(c)}`;
+        hintText=`Calculate inside brackets first: ${a} − ${b} = ${diffAB}. Then add ${c}: ${diffAB} + ${c} = ${ans}.`;
+      }else{
+        b=ri(30,60)*10+ri(0,9);
+        c=ri(10,Math.floor(b/10)-5)*10+ri(0,9);
+        const diffBC=b-c;
+        a=ri(10,Math.floor((950-diffBC)/10))*10+ri(0,9);
+        ans=a+diffBC;
+        exprHtml=`${a} + ( ${b} − ${c} )`;
+        spokenExpr=`${numToWordsP2(a)} plus open brackets ${numToWordsP2(b)} minus ${numToWordsP2(c)} close brackets`;
+        hintText=`Calculate inside brackets first: ${b} − ${c} = ${diffBC}. Then add ${a}: ${a} + ${diffBC} = ${ans}.`;
+      }
+    }else{
+      if(form===1){
+        a=ri(20,50);b=ri(15,40);
+        const sumAB=a+b;
+        c=ri(10,sumAB-5);
+        ans=sumAB-c;
+        exprHtml=`( ${a} + ${b} ) − ${c}`;
+        spokenExpr=`open brackets ${a} plus ${b} close brackets, minus ${c}`;
+        hintText=`First solve inside brackets: ${a} + ${b} = ${sumAB}. Next subtract ${c}: ${sumAB} − ${c} = ${ans}.`;
+      }else if(form===2){
+        a=ri(40,85);b=ri(15,a-10);
+        const diffAB=a-b;
+        c=ri(10,80-diffAB);
+        ans=diffAB+c;
+        exprHtml=`( ${a} − ${b} ) + ${c}`;
+        spokenExpr=`open brackets ${a} minus ${b} close brackets, plus ${c}`;
+        hintText=`First solve inside brackets: ${a} − ${b} = ${diffAB}. Next add ${c}: ${diffAB} + ${c} = ${ans}.`;
+      }else{
+        b=ri(35,70);c=ri(10,b-5);
+        const diffBC=b-c;
+        a=ri(15,90-diffBC);
+        ans=a+diffBC;
+        exprHtml=`${a} + ( ${b} − ${c} )`;
+        spokenExpr=`${a} plus open brackets ${b} minus ${c} close brackets`;
+        hintText=`First solve inside brackets: ${b} − ${c} = ${diffBC}. Next add ${a}: ${a} + ${diffBC} = ${ans}.`;
+      }
+    }
+
+    const wr1=ans+10<=999?ans+10:ans-10;
+    const wr2=ans-10>=0?ans-10:ans+20;
+    const wr3=ans+(diff>1?100:20)<=999?ans+(diff>1?100:20):Math.max(0,ans-30);
+    const audioText=isClass
+      ? `In our combined operations lesson: always calculate inside the brackets first! What is ${spokenExpr}?`
+      : `Solve the combined operation: ${spokenExpr}.`;
+
+    return{
+      id,zone:'C',cat:'Knock-Knock Canyon ⛰️',catIdx:3,
+      displayType:'bracket',
+      prompt:isClass ? 'Class Lesson: Combined Operations (Addition & Subtraction — brackets first!):' : 'Combined Operations (Addition & Subtraction — brackets first!):',
+      html:`<div class="dbr"><span class="brin">${exprHtml}</span> = <span class="brsym">?</span></div>`,
+      audio:audioText,
+      opts:sh([ans.toString(),wr1.toString(),wr2.toString(),wr3.toString()]),
+      ans:ans.toString(),
+      hint:isClass ? `Teaching Guide: ${hintText}` : hintText
+    };
+  }
+
+  // 17. BOSS CHALLENGE 3: qCOMB_HARD (Multi-step 3-Digit Combined Operations)
+  function qCOMB_HARD(id, isClass=false, diff=1){
+    const isForm1=Math.random()<0.5;
+    let exprHtml, spokenExpr, ans, hintText;
+    if(isForm1){
+      const a=ri(50,85)*10+ri(1,5);
+      const b=ri(20,Math.floor(a/10)-15)*10+ri(6,9);
+      const diffAB=a-b;
+      const c=ri(15,Math.floor((960-diffAB)/10))*10+ri(6,9);
+      ans=diffAB+c;
+      exprHtml=`( ${a} − ${b} ) + ${c}`;
+      spokenExpr=`open brackets ${numToWordsP2(a)} minus ${numToWordsP2(b)} close brackets, plus ${numToWordsP2(c)}`;
+      hintText=`Step 1 inside brackets: ${a} − ${b} = ${diffAB}. Step 2: ${diffAB} + ${c} = ${ans}.`;
+    }else{
+      const b=ri(15,35)*10+ri(5,9);
+      const c=ri(12,30)*10+ri(5,9);
+      const sumBC=b+c;
+      const a=ri(Math.floor(sumBC/10)+12,95)*10+ri(1,5);
+      ans=a-sumBC;
+      exprHtml=`${a} − ( ${b} + ${c} )`;
+      spokenExpr=`${numToWordsP2(a)} minus open brackets ${numToWordsP2(b)} plus ${numToWordsP2(c)} close brackets`;
+      hintText=`Step 1 inside brackets: ${b} + ${c} = ${sumBC}. Step 2: ${a} − ${sumBC} = ${ans}.`;
+    }
+    const wr1=ans+10<=999?ans+10:ans-10;
+    const wr2=ans-10>=0?ans-10:ans+20;
+    const wr3=ans+100<=999?ans+100:Math.max(10,ans-100);
+
+    const audioText=isClass
+      ? `Grand Explorer Challenge Lesson! Always calculate inside the brackets first using your scratchpad. Solve ${spokenExpr}.`
+      : `Grand Explorer Challenge! Solve the combined operation with your scratchpad: ${spokenExpr}.`;
+
+    return{
+      id,zone:'C',cat:'Knock-Knock Canyon ⛰️',catIdx:3,
+      isBossChallenge:true,
+      displayType:'bracket',
+      prompt:'🦁⚡ Grand Explorer Challenge: Multi-step Combined Math (brackets first!):',
+      html:`<div class="dbr"><span class="brin">${exprHtml}</span> = <span class="brsym">?</span></div>`,
+      audio:audioText,
+      opts:sh([ans.toString(),wr1.toString(),wr2.toString(),wr3.toString()]),
+      ans:ans.toString(),
+      hint:hintText
+    };
+  }
+
+  // 18. Q18: Safari Group Story Multiplication (1-digit x 1-digit only)
+  function qMUL_GRP(id, isClass=false, diff=1){
+    const groups=[
+      {g:3,per:4,item:'playful monkeys 🐒',place:'trees'},
+      {g:4,per:5,item:'baby elephants 🐘',place:'water ponds'},
+      {g:5,per:3,item:'golden hornbills 🦜',place:'nests'},
+      {g:4,per:4,item:'striped zebras 🦓',place:'grasslands'},
+      {g:6,per:2,item:'cute koalas 🐨',place:'branches'},
+      {g:7,per:3,item:'tall giraffes 🦒',place:'tall acacias'},
+      {g:6,per:4,item:'spotted leopards 🐆',place:'rocky dens'},
+      {g:8,per:3,item:'colorful peacocks 🦚',place:'forest clearings'},
+      {g:9,per:2,item:'swift cheetahs 🐆',place:'open fields'},
+      {g:5,per:6,item:'safari jeeps 🚙',place:'trail camps'}
+    ];
+    const choice=groups[ri(0,groups.length-1)];
+    const total=choice.g*choice.per;
+    const audioText=isClass
+      ? `In our safari groups multiplication lesson: there are ${choice.g} ${choice.place}, each with ${choice.per} ${choice.item}. Multiply ${choice.g} times ${choice.per}!`
+      : `There are ${choice.g} ${choice.place}. Each has ${choice.per} ${choice.item}. How many in total?`;
+    return{
+      id,zone:'D',cat:'Magic Window Grove 🐒',catIdx:4,
+      displayType:'story',
+      prompt:isClass ? 'Class Lesson: Count the equal groups, multiply, and find the total:' : 'Count the safari groups, multiply, and find the total:',
+      html:`<div class="dst-wrap"><div class="dst">There are <strong>${choice.g}</strong> safari ${choice.place}. Each has <strong>${choice.per}</strong> ${choice.item}. How many in total?</div><div class="story-eq">${choice.g} × ${choice.per} = ?</div></div>`,
+      audio:audioText,
+      opts:sh([total.toString(),(total+choice.per).toString(),(total-choice.per).toString(),(total+choice.g).toString()]),
+      ans:total.toString(),
+      hint:isClass ? `Teaching Guide: ${choice.g} equal groups of ${choice.per} items. Calculate ${choice.g} × ${choice.per} to find the total!` : `Multiply: ${choice.g} groups × ${choice.per} in each group = ?`
+    };
+  }
+
+  // 19. Q19: 1-Digit by 1-Digit Safari Multiplication Fact
+  function qMUL_FACT(id, isClass=false, diff=1){
+    let a,b;
+    if(diff>1){
+      const toughA=[6,7,8,9];
+      const toughB=[4,6,7,8,9];
+      a=toughA[ri(0,toughA.length-1)];
+      b=toughB[ri(0,toughB.length-1)];
+    }else{
+      a=ri(2,5);
+      b=ri(3,9);
+    }
+    const ans=a*b;
+    const wr1=ans+a<=81?ans+a:ans-a;
+    const wr2=ans-b>=0?ans-b:ans+b;
+    const wr3=(a+1)*b<=81&&(a+1)*b!==ans?(a+1)*b:(a-1)*b;
+    const audioText=isClass
+      ? `In our multiplication facts lesson: what is ${a} times ${b}? That is ${a} groups of ${b}!`
+      : `Multiply ${a} times ${b}. What is the product?`;
+
+    return{
+      id,zone:'D',cat:'Magic Window Grove 🐒',catIdx:4,
+      displayType:'bracket',
+      prompt:isClass ? 'Class Lesson: Multiply the single-digit safari numbers (1-digit × 1-digit):' : 'Multiply the single-digit safari numbers (1-digit × 1-digit):',
+      html:`<div class="dbr"><span class="brin">${a}</span> <span class="brsym">×</span> <span class="brin">${b}</span> = <span class="brsym">?</span></div>`,
+      audio:audioText,
+      opts:sh([ans.toString(),wr1.toString(),wr2.toString(),wr3.toString()]),
+      ans:ans.toString(),
+      hint:isClass ? `Teaching Guide: Single-digit multiplication: ${a} × ${b} means ${a} groups of ${b}. Calculate the product!` : `${a} groups of ${b} = ?`
+    };
+  }
+
+  function campQs(i, diff=1){
+    const pools=[
+      [qNTW, qWTN, qPVI, qPLC, qMAX],
+      [qGTR, qMAX, qGTR, qMAX],
+      [qSEQ_UP, qSEQ_DN, qODD_EVN, qEVN_RULE, qODD_EVN_TRICK],
+      [qADD_NO_CARRY, qADD_CARRY, qSUB_BORROW, qSUB_ZERO, qCOMB, qCOMB_HARD],
+      [qMUL_GRP, qMUL_FACT, qMUL_GRP, qMUL_FACT]
+    ];
+    return sh(pools[i]).slice(0,3).map((fn,j)=>fn(j+1,true,diff));
+  }
+
+  return{
+    exam(diff=1){
+      const cat0 = [
+        qNTW(1, false, diff),
+        qWTN(2, false, diff),
+        (Math.random() < 0.5 ? qPVI(3, false, diff) : qPLC(3, false, diff))
+      ].map(q => { q.catIdx = 0; return q; });
+
+      const cat1 = [
+        qGTR(4, false, diff),
+        qMAX(5, false, diff),
+        qGTR(6, false, diff)
+      ].map(q => { q.catIdx = 1; return q; });
+
+      const cat2 = [
+        qSEQ_UP(7, false, diff),
+        qSEQ_DN(8, false, diff),
+        qODD_EVN_TRICK(9, false, diff) // Boss Challenge 1
+      ].map(q => { q.catIdx = 2; return q; });
+
+      const cat3 = [
+        (diff > 1 ? qADD_CARRY(10, false, diff) : qADD_NO_CARRY(10, false, diff)),
+        qSUB_ZERO(11, false, diff),    // Boss Challenge 2
+        qCOMB_HARD(12, false, diff)    // Boss Challenge 3
+      ].map(q => { q.catIdx = 3; return q; });
+
+      const cat4 = [
+        qMUL_GRP(13, false, diff),
+        qMUL_FACT(14, false, diff),
+        (Math.random() < 0.5 ? qMUL_FACT(15, false, diff) : qMUL_GRP(15, false, diff))
+      ].map(q => { q.catIdx = 4; return q; });
+
+      const raw = [...cat0, ...cat1, ...cat2, ...cat3, ...cat4];
+      return sh(raw).map((q, idx) => { q.id = idx + 1; return q; });
+    },
+    campQs,
+    ok(q,a){return q.ans===a;}
+  };
+})();
+
+/* ============================================================ COGNITIVE API */
+const CA=(function(){
+  let ac=null,st=null,spCtx=null,drw=false,lx=0,ly=0,sc='#1e3a8a',isErasing=false;
+  function gac(){if(!ac){const C=window.AudioContext||window.webkitAudioContext;if(C)ac=new C();}if(ac&&ac.state==='suspended')ac.resume();return ac;}
+  function findFemaleVoice(vs){
+    if(!vs||!vs.length)return null;
+    const pool=vs.filter(v=>v.lang&&v.lang.toLowerCase().startsWith('en'));
+    const list=pool.length?pool:vs;
+    const femaleNames=['zira','jenny','aria','samantha','victoria','karen','fiona','moira','tessa','veena','female','woman','girl','catherine','susan','linda','hazel','stephanie','ava','allison','serena','sangeeta'];
+    let chosen=list.find(v=>{
+      const nm=v.name.toLowerCase();
+      return femaleNames.some(fn=>nm.includes(fn))||(nm.includes('google')&&nm.includes('female'));
+    });
+    if(chosen)return chosen;
+    const maleNames=['david','mark','guy','george','james','male','richard','sean','stefan','paul','brian'];
+    chosen=list.find(v=>{
+      const nm=v.name.toLowerCase();
+      return !maleNames.some(mn=>nm.includes(mn));
+    });
+    return chosen||list[0];
+  }
+  function spk(t,immediate=false){
+    if(!('speechSynthesis' in window))return;
+    window.speechSynthesis.cancel();
+    if(st){clearTimeout(st);st=null;}
+    const u=new SpeechSynthesisUtterance(t);
+    u.lang='en-US';u.rate=0.88;u.pitch=1.18;
+    const voices=window.speechSynthesis.getVoices();
+    const v=findFemaleVoice(voices);
+    if(v)u.voice=v;
+    if(immediate){window.speechSynthesis.speak(u);}
+    else{st=setTimeout(()=>{window.speechSynthesis.speak(u);},260);}
+  }
+  function tone(freq,type,dur,vol=0.18,delay=0){
+    const a=gac();if(!a)return;
+    const o=a.createOscillator(),g=a.createGain();
+    o.type=type;o.frequency.setValueAtTime(freq,a.currentTime+delay);
+    g.gain.setValueAtTime(vol,a.currentTime+delay);
+    g.gain.exponentialRampToValueAtTime(0.001,a.currentTime+delay+dur);
+    o.connect(g);g.connect(a.destination);
+    o.start(a.currentTime+delay);o.stop(a.currentTime+delay+dur);
+  }
+  function ok(){tone(523,'sine',.15,.22);tone(659,'sine',.15,.22,.1);tone(784,'sine',.28,.25,.2);}
+  function er(){tone(320,'sawtooth',.14,.18);tone(220,'sawtooth',.28,.2,.12);}
+  function fan(){[523,659,784,1046].forEach((f,i)=>tone(f,'triangle',.35,.2,i*.12));}
+  function isp(id){
+    const cv=document.getElementById(id);if(!cv)return;
+    spCtx=cv.getContext('2d');
+    const r=cv.getBoundingClientRect();
+    cv.width=r.width*window.devicePixelRatio||800;
+    cv.height=r.height*window.devicePixelRatio||500;
+    spCtx.scale(window.devicePixelRatio||1,window.devicePixelRatio||1);
+    spCtx.lineCap='round';spCtx.lineJoin='round';
+    function gp(e){
+      const rc=cv.getBoundingClientRect();
+      const clientX=e.touches?e.touches[0].clientX:e.clientX;
+      const clientY=e.touches?e.touches[0].clientY:e.clientY;
+      return{x:clientX-rc.left,y:clientY-rc.top};
+    }
+    function sd(e){drw=true;const p=gp(e);lx=p.x;ly=p.y;}
+    function dd(e){
+      if(!drw||!spCtx)return;e.preventDefault();
+      const p=gp(e);
+      spCtx.beginPath();
+      if(isErasing){
+        spCtx.globalCompositeOperation='destination-out';
+        spCtx.lineWidth=26;
+      }else{
+        spCtx.globalCompositeOperation='source-over';
+        spCtx.strokeStyle=sc;
+        spCtx.lineWidth=3.5;
+      }
+      spCtx.moveTo(lx,ly);spCtx.lineTo(p.x,p.y);spCtx.stroke();
+      lx=p.x;ly=p.y;
+    }
+    function ed(){drw=false;if(spCtx)spCtx.globalCompositeOperation='source-over';}
+    cv.addEventListener('mousedown',sd);cv.addEventListener('mousemove',dd);
+    window.addEventListener('mouseup',ed);
+    cv.addEventListener('touchstart',sd,{passive:false});
+    cv.addEventListener('touchmove',dd,{passive:false});
+    window.addEventListener('touchend',ed);
+  }
+  function clr(){const cv=document.getElementById('cv-scratch');if(cv&&spCtx){spCtx.clearRect(0,0,cv.width,cv.height);}}
+  return{spk,ok,er,fan,isp,clr,setC:c=>{sc=c;isErasing=false;},setEraser:e=>{isErasing=e;},gac};
+})();
+
+/* ============================================================ CERTIFICATE (P2) */
+const ART={
+  draw(id,name,score,catScores){
+    const cv=document.getElementById(id);if(!cv)return;
+    // Standard A4 Landscape Proportions: 1200 x 848 (Ratio ~1.415, perfectly matching A4 sqrt(2) ~ 1.414)
+    const W=1200,H=848,dpr=window.devicePixelRatio||1;
+    cv.width=W*dpr;cv.height=H*dpr;cv.style.width=W+'px';cv.style.height=H+'px';
+    const c=cv.getContext('2d');c.scale(dpr,dpr);
+    if(!c.roundRect){c.roundRect=function(x,y,w,h,r=0){
+      if(typeof r==='number')r=[r,r,r,r];
+      c.beginPath();
+      c.moveTo(x+r[0],y);c.lineTo(x+w-r[1],y);c.quadraticCurveTo(x+w,y,x+w,y+r[1]);
+      c.lineTo(x+w,y+h-r[2]);c.quadraticCurveTo(x+w,y+h,x+w-r[2],y+h);
+      c.lineTo(x+r[3],y+h);c.quadraticCurveTo(x,y+h,x,y+h-r[3]);
+      c.lineTo(x,y+r[0]);c.quadraticCurveTo(x,y,x+r[0],y);c.closePath();
+    };}
+
+    // Category scores resolution (5 categories, max 3 stars each = 15 total)
+    let cs=catScores;
+    if(!cs||!Array.isArray(cs)||cs.length!==5){
+      cs=[0,0,0,0,0];
+      let rem=Math.min(score,15);
+      for(let i=0;i<5;i++){const take=Math.min(3,rem);cs[i]=take;rem-=take;}
+    }
+
+    // ── 1. Cosmic Aurora & Safari Twilight Backdrop ──
+    const bg=c.createLinearGradient(0,0,W,H);
+    bg.addColorStop(0,'#030a16');
+    bg.addColorStop(0.24,'#07192f');
+    bg.addColorStop(0.5,'#0b2331');
+    bg.addColorStop(0.78,'#082e25');
+    bg.addColorStop(1,'#041518');
+    c.fillStyle=bg;c.fillRect(0,0,W,H);
+
+    // Luminous Milky Way river across the canvas
+    c.save();
+    c.beginPath();
+    c.moveTo(-40,H*0.85);
+    c.bezierCurveTo(W*0.3,H*0.62,W*0.7,H*0.35,W+40,H*0.08);
+    c.lineWidth=180;
+    const mwGrad=c.createLinearGradient(0,H*0.85,W,H*0.08);
+    mwGrad.addColorStop(0,'rgba(46,196,182,0.18)');
+    mwGrad.addColorStop(0.35,'rgba(72,202,228,0.22)');
+    mwGrad.addColorStop(0.7,'rgba(167,139,250,0.24)');
+    mwGrad.addColorStop(1,'rgba(255,214,10,0.2)');
+    c.strokeStyle=mwGrad;
+    c.stroke();
+    c.restore();
+
+    // Vibrant cosmic nebulae
+    const nb=(x,y,r,col)=>{
+      const g=c.createRadialGradient(x,y,0,x,y,r);
+      g.addColorStop(0,col);g.addColorStop(1,'transparent');
+      c.fillStyle=g;c.fillRect(0,0,W,H);
+    };
+    nb(160,140,320,'rgba(72,202,228,0.3)');
+    nb(1040,160,340,'rgba(167,139,250,0.28)');
+    nb(600,420,380,'rgba(255,214,10,0.16)');
+    nb(260,680,300,'rgba(46,196,182,0.24)');
+    nb(960,680,300,'rgba(244,114,182,0.2)');
+
+    // Starfield (280 twinkling stardust particles)
+    for(let i=0;i<280;i++){
+      const sx=(Math.sin(i*997.3)*0.5+0.5)*W;
+      const sy=(Math.cos(i*733.1)*0.5+0.5)*H;
+      const sr=(i%7===0)?2.4:(i%3===0)?1.6:0.9;
+      const sa=(i%5===0)?0.95:0.48;
+      const sc=(i%6===0)?'#ffd60a':(i%4===0)?'#90e0ef':(i%5===0)?'#e9d5ff':'#ffffff';
+      c.fillStyle=sc;c.globalAlpha=sa;
+      c.beginPath();c.arc(sx,sy,sr,0,Math.PI*2);c.fill();
+    }
+    c.globalAlpha=1.0;
+
+    // Constellations
+    const drawConstel=pts=>{
+      c.strokeStyle='rgba(144,224,239,0.25)';c.lineWidth=1.3;
+      pts.forEach((p,i)=>{
+        if(i>0){c.beginPath();c.moveTo(pts[i-1][0],pts[i-1][1]);c.lineTo(p[0],p[1]);c.stroke();}
+        c.fillStyle='#ffd60a';c.beginPath();c.arc(p[0],p[1],2.5,0,Math.PI*2);c.fill();
+      });
+    };
+    drawConstel([[90,85],[170,135],[270,95],[370,145],[300,210]]);
+    drawConstel([[W-90,85],[W-170,145],[W-280,110],[W-380,160]]);
+
+    // 8-point sparkling diamond stars
+    const sp8=(x,y,r,col)=>{
+      c.save();c.translate(x,y);c.fillStyle=col;c.beginPath();
+      for(let i=0;i<16;i++){
+        const rr=i%2===0?r:r*0.32,a=i*Math.PI/8;
+        i===0?c.moveTo(Math.cos(a)*rr,Math.sin(a)*rr):c.lineTo(Math.cos(a)*rr,Math.sin(a)*rr);
+      }
+      c.closePath();c.fill();c.restore();
+    };
+    sp8(110,110,18,'#ffd60a');
+    sp8(W-110,110,18,'#ffd60a');
+    sp8(150,380,14,'#a78bfa');
+    sp8(W-150,380,14,'#38bdf8');
+    sp8(240,710,15,'#34d399');
+    sp8(W-250,700,16,'#fbbf24');
+
+    // ── 2. Grand Ornate Golden Museum Frame ──
+    const FR=22;
+    c.strokeStyle='#ffd60a';c.lineWidth=3.5;
+    c.beginPath();c.roundRect(FR,FR,W-FR*2,H-FR*2,20);c.stroke();
+    c.strokeStyle='rgba(255,214,10,0.45)';c.lineWidth=1.8;
+    c.beginPath();c.roundRect(FR+10,FR+10,W-FR*2-20,H-FR*2-20,14);c.stroke();
+
+    // Corner baroque knots & gems
+    const drawCorner=(cx,cy)=>{
+      c.save();c.translate(cx,cy);
+      c.strokeStyle='#ffd60a';c.lineWidth=2.2;
+      c.beginPath();
+      c.moveTo(0,-22);c.lineTo(22,0);c.lineTo(0,22);c.lineTo(-22,0);
+      c.closePath();c.stroke();
+      const gg=c.createRadialGradient(0,0,0,0,0,10);
+      gg.addColorStop(0,'#ffd60a');gg.addColorStop(1,'#f59e0b');
+      c.fillStyle=gg;c.beginPath();c.arc(0,0,7.5,0,Math.PI*2);c.fill();
+      c.strokeStyle='rgba(255,214,10,0.65)';c.lineWidth=1.6;
+      c.beginPath();c.arc(0,0,29,0,Math.PI*2);c.stroke();
+      c.restore();
+    };
+    drawCorner(FR+16,FR+16);drawCorner(W-FR-16,FR+16);
+    drawCorner(FR+16,H-FR-16);drawCorner(W-FR-16,H-FR-16);
+
+    // Beaded gold edge dots
+    for(let x=FR+42;x<=W-FR-42;x+=26){
+      c.fillStyle='rgba(255,214,10,0.55)';
+      c.beginPath();c.arc(x,FR+5,2,0,Math.PI*2);c.fill();
+      c.beginPath();c.arc(x,H-FR-5,2,0,Math.PI*2);c.fill();
+    }
+    for(let y=FR+42;y<=H-FR-42;y+=26){
+      c.fillStyle='rgba(255,214,10,0.55)';
+      c.beginPath();c.arc(FR+5,y,2,0,Math.PI*2);c.fill();
+      c.beginPath();c.arc(W-FR-5,y,2,0,Math.PI*2);c.fill();
+    }
+
+    // ── 3. Mascot Emblem: Smiling Royal Lion Crest ──
+    const lx=W/2,ly=82;
+    c.save();
+    c.save();c.translate(lx,ly);
+    c.fillStyle='rgba(255,214,10,0.2)';
+    for(let i=0;i<16;i++){c.rotate(Math.PI/8);c.fillRect(-2.5,-52,5,104);}
+    c.restore();
+
+    // Lion Mane
+    const maneGrad=c.createRadialGradient(lx,ly,12,lx,ly,45);
+    maneGrad.addColorStop(0,'#f59e0b');
+    maneGrad.addColorStop(0.7,'#d97706');
+    maneGrad.addColorStop(1,'#b45309');
+    c.fillStyle=maneGrad;
+    c.beginPath();c.arc(lx,ly,39,0,Math.PI*2);c.fill();
+    for(let i=0;i<12;i++){
+      const a=(i*Math.PI)/6;
+      c.beginPath();c.arc(lx+Math.cos(a)*34,ly+Math.sin(a)*34,10.5,0,Math.PI*2);c.fill();
+    }
+
+    // Lion Ears
+    c.fillStyle='#f59e0b';
+    c.beginPath();c.arc(lx-23,ly-24,11,0,Math.PI*2);c.fill();
+    c.beginPath();c.arc(lx+23,ly-24,11,0,Math.PI*2);c.fill();
+    c.fillStyle='#fb7185';
+    c.beginPath();c.arc(lx-23,ly-24,5.5,0,Math.PI*2);c.fill();
+    c.beginPath();c.arc(lx+23,ly-24,5.5,0,Math.PI*2);c.fill();
+
+    // Lion Face
+    const faceGrad=c.createRadialGradient(lx,ly+3,5,lx,ly+3,25);
+    faceGrad.addColorStop(0,'#fef08a');
+    faceGrad.addColorStop(1,'#fde047');
+    c.fillStyle=faceGrad;
+    c.beginPath();c.arc(lx,ly+3,24,0,Math.PI*2);c.fill();
+
+    // Cute Cheeks
+    c.fillStyle='rgba(251,113,133,0.78)';
+    c.beginPath();c.arc(lx-13,ly+9,5.5,0,Math.PI*2);c.fill();
+    c.beginPath();c.arc(lx+13,ly+9,5.5,0,Math.PI*2);c.fill();
+
+    // Cute Eyes
+    c.fillStyle='#1e293b';
+    c.beginPath();c.arc(lx-9,ly+1,4,0,Math.PI*2);c.fill();
+    c.beginPath();c.arc(lx+9,ly+1,4,0,Math.PI*2);c.fill();
+    c.fillStyle='#ffffff';
+    c.beginPath();c.arc(lx-7.8,ly-0.8,1.5,0,Math.PI*2);c.fill();
+    c.beginPath();c.arc(lx+10.2,ly-0.8,1.5,0,Math.PI*2);c.fill();
+
+    // Nose
+    c.fillStyle='#92400e';
+    c.beginPath();
+    c.moveTo(lx-3.8,ly+6.5);c.lineTo(lx+3.8,ly+6.5);c.lineTo(lx,ly+11);
+    c.closePath();c.fill();
+
+    // Cheerful Smile
+    c.strokeStyle='#1e293b';c.lineWidth=2.2;c.lineCap='round';
+    c.beginPath();c.arc(lx-4,ly+11.5,4.5,0.1,Math.PI*0.9);c.stroke();
+    c.beginPath();c.arc(lx+4,ly+11.5,4.5,0.1,Math.PI*0.9);c.stroke();
+
+    // Royal Crown
+    c.fillStyle='#ffd60a';c.strokeStyle='#b45309';c.lineWidth=1.5;
+    c.beginPath();
+    c.moveTo(lx-17,ly-20);
+    c.lineTo(lx-19,ly-34);
+    c.lineTo(lx-9,ly-27);
+    c.lineTo(lx,ly-38);
+    c.lineTo(lx+9,ly-27);
+    c.lineTo(lx+19,ly-34);
+    c.lineTo(lx+17,ly-20);
+    c.closePath();c.fill();c.stroke();
+
+    // Crown jewels
+    c.fillStyle='#ef4444';c.beginPath();c.arc(lx,ly-27,2.8,0,Math.PI*2);c.fill();
+    c.fillStyle='#10b981';c.beginPath();c.arc(lx-11,ly-23,2.2,0,Math.PI*2);c.fill();
+    c.fillStyle='#3b82f6';c.beginPath();c.arc(lx+11,ly-23,2.2,0,Math.PI*2);c.fill();
+    c.restore();
+
+    // ── 4. Calligraphy Ribbon & Academy Title ──
+    const ribW=680,ribH=38,ribX=(W-ribW)/2,ribY=134;
+    c.save();
+    const ribGrad=c.createLinearGradient(ribX,ribY,ribX+ribW,ribY);
+    ribGrad.addColorStop(0,'rgba(180,83,9,0)');
+    ribGrad.addColorStop(0.18,'rgba(217,119,6,0.9)');
+    ribGrad.addColorStop(0.5,'rgba(255,214,10,0.98)');
+    ribGrad.addColorStop(0.82,'rgba(217,119,6,0.9)');
+    ribGrad.addColorStop(1,'rgba(180,83,9,0)');
+    c.fillStyle=ribGrad;
+    c.beginPath();c.roundRect(ribX+24,ribY,ribW-48,ribH,8);c.fill();
+    c.restore();
+
+    c.textAlign='center';
+    c.shadowColor='rgba(0,0,0,0.65)';c.shadowBlur=7;
+    c.font='900 17.5px Nunito,sans-serif';
+    c.fillStyle='#78350f';
+    c.fillText('✦  ROYAL SAFARI MATHEMATICS ACADEMY  ✦',W/2,159);
+
+    // Calligraphic Subtitle
+    c.font='bold 27px Fredoka One,cursive';
+    c.fillStyle='#ffd60a';
+    c.shadowColor='rgba(255,214,10,0.75)';c.shadowBlur=18;
+    c.fillText('★  CERTIFICATE OF MATHEMATICAL MASTERY  ★',W/2,203);
+
+    c.shadowBlur=0;
+    c.font='italic 17.5px Nunito,sans-serif';
+    c.fillStyle='rgba(224,242,254,0.92)';
+    c.fillText('This highest royal honor is presented with great joy and pride to:',W/2,240);
+
+    // ── 5. Student's Name in 3D Gold Extrusion & Sparkles ──
+    const studentName=(name||'Safari Champion').trim();
+    c.textAlign='center';
+    c.font='900 66px Fredoka One,cursive';
+    const nameY=316;
+
+    c.fillStyle='rgba(0,0,0,0.65)';c.fillText(studentName,W/2+6,nameY+7);
+    c.fillStyle='#92400e';c.fillText(studentName,W/2+3.5,nameY+4.5);
+    c.fillStyle='#d97706';c.fillText(studentName,W/2+1.8,nameY+2.2);
+    const nameGrad=c.createLinearGradient(0,nameY-48,0,nameY+12);
+    nameGrad.addColorStop(0,'#ffffff');
+    nameGrad.addColorStop(0.3,'#fffde7');
+    nameGrad.addColorStop(0.7,'#ffd60a');
+    nameGrad.addColorStop(1,'#f59e0b');
+    c.fillStyle=nameGrad;
+    c.shadowColor='rgba(255,214,10,0.85)';c.shadowBlur=26;
+    c.fillText(studentName,W/2,nameY);
+    c.shadowBlur=0;
+
+    const nMetrics=c.measureText(studentName);
+    const nwHalf=Math.min(nMetrics.width/2+36,490);
+    sp8(W/2-nwHalf,nameY-20,16,'#ffd60a');
+    sp8(W/2+nwHalf,nameY-20,16,'#ffd60a');
+
+    // Citation
+    c.font='700 18px Nunito,sans-serif';
+    c.fillStyle='rgba(255,255,255,0.94)';
+    c.shadowColor='rgba(0,0,0,0.55)';c.shadowBlur=5;
+    c.fillText('for conquering the Prathomsuksa 2 Final Safari Exam with exceptional courage & wisdom!',W/2,366);
+
+    // ── 6. Final Score & Distinction Crystal Capsule (Auto-sizing to prevent overflow) ──
+    const tierLabel=score===15?'Grand Champion Master 👑':score>=13?'Royal Distinction ⭐':score>=11?'Honors Explorer 🌟':'Safari Scout 🧭';
+    const scTxt=`🏆 Score: ${score} / 15 Marks   ·   ${tierLabel}`;
+    c.font='bold 23px Fredoka One,cursive';
+    const scTw=c.measureText(scTxt).width;
+    const capW=Math.max(scTw+68,480);
+    const capH=50;
+    const capX=(W-capW)/2;
+    const capY=398;
+
+    const scGrad=c.createLinearGradient(capX,capY,capX+capW,capY+capH);
+    scGrad.addColorStop(0,'rgba(15,118,110,0.88)');
+    scGrad.addColorStop(0.5,'rgba(46,196,182,0.96)');
+    scGrad.addColorStop(1,'rgba(15,118,110,0.88)');
+    c.fillStyle=scGrad;
+    c.beginPath();c.roundRect(capX,capY,capW,capH,25);c.fill();
+    c.strokeStyle='#ffd60a';c.lineWidth=2.4;c.stroke();
+    c.fillStyle='#ffffff';
+    c.shadowColor='rgba(0,0,0,.45)';c.shadowBlur=7;
+    c.fillText(scTxt,W/2,capY+33);
+
+    // ── Helper: Crisp Vector Star ──
+    function drawVectorStar(cx,cy,rOuter,rInner,isFilled){
+      c.save();
+      c.beginPath();
+      for(let i=0;i<10;i++){
+        const r=i%2===0?rOuter:rInner;
+        const a=(i*Math.PI)/5-Math.PI/2;
+        i===0?c.moveTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r):c.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);
+      }
+      c.closePath();
+      if(isFilled){
+        const sg=c.createRadialGradient(cx,cy-2,2,cx,cy,rOuter);
+        sg.addColorStop(0,'#ffffff');
+        sg.addColorStop(0.3,'#fffde7');
+        sg.addColorStop(0.7,'#ffd60a');
+        sg.addColorStop(1,'#f59e0b');
+        c.fillStyle=sg;
+        c.shadowColor='rgba(255,214,10,0.9)';
+        c.shadowBlur=10;
+        c.fill();
+        c.strokeStyle='#92400e';
+        c.lineWidth=1.3;
+        c.stroke();
+      }else{
+        c.fillStyle='rgba(255,255,255,0.08)';
+        c.fill();
+        c.strokeStyle='rgba(255,255,255,0.32)';
+        c.lineWidth=1.3;
+        c.stroke();
+      }
+      c.restore();
+    }
+
+    // ── 7. Five Realm Gemstone Medallions with Category-Accurate Stars ──
+    const realms=[
+      {em:'🧭',name:'Words & Digits',col1:'#1e3a8a',col2:'#3b82f6',border:'#60a5fa'},
+      {em:'🐊',name:'Greedy Gator',col1:'#064e3b',col2:'#10b981',border:'#34d399'},
+      {em:'🦘',name:'Patterns & Odd/Even',col1:'#581c87',col2:'#a855f7',border:'#c084fc'},
+      {em:'⛰️',name:'Knock-Knock Math',col1:'#134e4a',col2:'#14b8a6',border:'#2dd4bf'},
+      {em:'🐒',name:'Magic Window Grove',col1:'#78350f',col2:'#f59e0b',border:'#fde047'},
+    ];
+
+    const rW=194,rH=82,rGap=16;
+    const rStartX=(W-(realms.length*rW+(realms.length-1)*rGap))/2;
+    const rY=482;
+
+    realms.forEach((realm,idx)=>{
+      const rx=rStartX+idx*(rW+rGap);
+      const cGrad=c.createLinearGradient(rx,rY,rx,rY+rH);
+      cGrad.addColorStop(0,realm.col2);cGrad.addColorStop(1,realm.col1);
+      c.fillStyle=cGrad;
+      c.beginPath();c.roundRect(rx,rY,rW,rH,14);c.fill();
+      c.strokeStyle=realm.border;c.lineWidth=1.8;c.stroke();
+      c.fillStyle='rgba(255,255,255,0.22)';
+      c.beginPath();c.roundRect(rx+2,rY+2,rW-4,rH*0.42,[12,12,0,0]);c.fill();
+      
+      c.font='bold 14px Nunito,sans-serif';
+      c.fillStyle='#ffffff';
+      c.shadowBlur=5;c.shadowColor='rgba(0,0,0,0.65)';
+      c.fillText(`${realm.em} ${realm.name}`,rx+rW/2,rY+26);
+
+      // Render accurate vector stars for this category (cs[idx] out of 3)
+      const earned=cs[idx]||0;
+      const starCx=rx+rW/2;
+      const starCy=rY+57;
+      drawVectorStar(starCx-32,starCy,11.5,5.2,earned>=1);
+      drawVectorStar(starCx,starCy,11.5,5.2,earned>=2);
+      drawVectorStar(starCx+32,starCy,11.5,5.2,earned>=3);
+    });
+
+    // ── 8. Official Master Signature & Royal Authority (Lower Left) ──
+    const sigX=88,sigY=636;
+    c.textAlign='left';
+    c.font='700 15px Nunito,sans-serif';
+    c.fillStyle='rgba(224,242,254,0.85)';
+    c.fillText('Head Safari Master & Royal Examiner:',sigX,sigY);
+    c.save();
+    c.strokeStyle='#ffd60a';c.lineWidth=2.5;c.lineCap='round';
+    c.beginPath();
+    c.moveTo(sigX,sigY+24);
+    c.bezierCurveTo(sigX+55,sigY+8,sigX+110,sigY+40,sigX+160,sigY+16);
+    c.bezierCurveTo(sigX+195,sigY+2,sigX+215,sigY+32,sigX+270,sigY+18);
+    c.stroke();
+    c.restore();
+    c.font='900 18px Nunito,sans-serif';
+    c.fillStyle='#ffd60a';
+    c.fillText('🦁 Ranger Leo & Safari Guild',sigX,sigY+50);
+    const now=new Date();
+    const dateStr=`${now.getDate()} ${now.toLocaleString('default',{month:'short'})} ${now.getFullYear()} · Thai Rath Witthaya 75 MEP P2`;
+    c.font='700 13.5px Nunito,sans-serif';
+    c.fillStyle='rgba(180,220,255,0.72)';
+    c.fillText(dateStr,sigX,sigY+71);
+
+    // ── 9. Grand 32-Point Gold Medallion with Ribbon Tails (Lower Right) ──
+    const mx=W-136,my=H-108;
+    c.save();
+    c.fillStyle='#b45309';
+    c.beginPath();
+    c.moveTo(mx-18,my+22);c.lineTo(mx-34,my+80);c.lineTo(mx-18,my+68);c.lineTo(mx-4,my+80);c.lineTo(mx-7,my+22);
+    c.closePath();c.fill();
+    c.fillStyle='#d97706';
+    c.beginPath();
+    c.moveTo(mx+7,my+22);c.lineTo(mx+4,my+80);c.lineTo(mx+18,my+68);c.lineTo(mx+34,my+80);c.lineTo(mx+18,my+22);
+    c.closePath();c.fill();
+
+    c.translate(mx,my);
+    c.fillStyle='#f59e0b';
+    c.beginPath();
+    for(let i=0;i<32;i++){
+      const a=(i*Math.PI)/16-Math.PI/2;
+      const r=i%2===0?52:42;
+      i===0?c.moveTo(Math.cos(a)*r,Math.sin(a)*r):c.lineTo(Math.cos(a)*r,Math.sin(a)*r);
+    }
+    c.closePath();c.fill();
+
+    const medGrad=c.createRadialGradient(0,0,0,0,0,40);
+    medGrad.addColorStop(0,'#ffffff');
+    medGrad.addColorStop(0.3,'#fffde7');
+    medGrad.addColorStop(0.7,'#ffd60a');
+    medGrad.addColorStop(1,'#d97706');
+    c.fillStyle=medGrad;
+    c.beginPath();c.arc(0,0,40,0,Math.PI*2);c.fill();
+    c.strokeStyle='#92400e';c.lineWidth=1.8;c.stroke();
+    c.strokeStyle='#b45309';c.lineWidth=1.2;
+    c.beginPath();c.arc(0,0,33,0,Math.PI*2);c.stroke();
+
+    c.textAlign='center';
+    c.fillStyle='#78350f';
+    c.font='900 11px Nunito,sans-serif';
+    c.fillText('MEP P2',0,-13);
+    c.font='900 15px Fredoka One,cursive';
+    c.fillText('GOLD',0,3);
+    c.font='800 9.5px Nunito,sans-serif';
+    c.fillText('EXCELLENCE',0,16);
+    c.font='12px sans-serif';
+    c.fillText('👑',0,-24);
+    c.restore();
+  },
+  dl(id){
+    const cv=document.getElementById(id);if(!cv)return;
+    const a=document.createElement('a');
+    a.download=`Safari-Math-P2-Master-${(G.name||'Champion').replace(/\s+/g,'_')}.png`;
+    a.href=cv.toDataURL('image/png');
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+  }
+};
+
+/* ============================================================ GAME STATE (P2) */
+const G={
+  name:localStorage.getItem('smq_p2_n')||'',
+  stamped:localStorage.getItem('smq_p2_stamp')==='1',
+  camps:JSON.parse(localStorage.getItem('smq_p2_camps')||'[]'),
+  plays:parseInt(localStorage.getItem('smq_p2_plays')||'1',10),
+  score:0,qi:0,qs:[],missed:[],cQ:null,
+  catScores:[0,0,0,0,0],
+  tCamp:-1,tQs:[],tQi:0,tScore:0,cTQ:null,
+  inExam:false,
+};
+
+/* ============================================================ NAME */
+function initApp(){
+  if('speechSynthesis' in window){
+    window.speechSynthesis.onvoiceschanged=()=>{try{window.speechSynthesis.getVoices();}catch(e){}};
+    try{window.speechSynthesis.getVoices();}catch(e){}
+  }
+  const modal=document.getElementById('name-modal');
+  if(!G.name){
+    modal.classList.remove('hide');
+    const inp=document.getElementById('nm-input');
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter')submitName();});
+    setTimeout(()=>inp.focus(),150);
+  }else{
+    modal.classList.add('hide');
+    setName(G.name);refreshPassport();
+  }
+}
+function submitName(){
+  const v=document.getElementById('nm-input').value.trim();
+  if(!v){document.getElementById('nm-input').focus();return;}
+  G.name=v;localStorage.setItem('smq_p2_n',v);
+  document.getElementById('name-modal').classList.add('hide');
+  setName(v);refreshPassport();
+}
+function changeName(){
+  if(G.inExam)return;
+  const inp=document.getElementById('nm-input');
+  inp.value=G.name||'';
+  document.getElementById('name-modal').classList.remove('hide');
+  setTimeout(()=>inp.focus(),120);
+}
+function setName(n){document.getElementById('disp-name').textContent=n;}
+function refreshPassport(){
+  document.getElementById('stamp').classList.toggle('on',G.stamped);
+  const done=G.camps.length;
+  document.getElementById('exam-lock').textContent=G.stamped
+    ?'✅ All Camps Complete — Ready!'
+    :`🔒 Complete all 5 Training Camps (${done}/5 done)`;
+}
+function stamp(){
+  if(!G.stamped && G.camps.length>=5){
+    G.stamped=true;localStorage.setItem('smq_p2_stamp','1');refreshPassport();
+  }
+}
+
+/* ============================================================ NAVIGATION */
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function goHome(){if(G.inExam)return;show('sc-start');}
+function goTrain(){if(G.inExam)return;show('sc-train');refreshCamps();}
+
+/* ============================================================ TRAINING */
+const CINFO=[
+  {name:'🧭 Safari Words & Digits',zone:'A'},
+  {name:"🐊 Greedy Gator's Den",zone:'B'},
+  {name:"🦘 Kippy's Jumps & Odd/Even",zone:'B'},
+  {name:'⛰️ Knock-Knock & Combined Math',zone:'C'},
+  {name:'🐒 Multiplication Grove (1-Digit)',zone:'D'},
+];
+function refreshCamps(){
+  const hub=document.getElementById('camp-hub');
+  if(hub) hub.classList.remove('hidden');
+  document.getElementById('camp-grid').classList.remove('hidden');
+  document.getElementById('t-prac').classList.remove('visible');
+  CINFO.forEach((_,i)=>{const el=document.getElementById(`cs${i}`);if(el)el.textContent=G.camps.includes(i)?'✅':'⬜';});
+}
+function backCamps(){refreshCamps();}
+function startCamp(i){
+  G.tCamp=i;
+  const diff=Math.min(G.plays||1, 5);
+  G.tQs=ME.campQs(i, diff);
+  G.tQi=0;G.tScore=0;
+  const hub=document.getElementById('camp-hub');
+  if(hub) hub.classList.add('hidden');
+  document.getElementById('camp-grid').classList.add('hidden');
+  document.getElementById('t-prac').classList.add('visible');
+  document.getElementById('t-main').classList.remove('hidden');
+  document.getElementById('t-done').classList.add('hidden');
+  document.getElementById('t-ctitle').textContent=`🎓 ${CINFO[i].name}`;
+  renderTQ();
+}
+function renderTQ(){
+  if(G.tQi>=G.tQs.length){
+    if(!G.camps.includes(G.tCamp))G.camps.push(G.tCamp);
+    localStorage.setItem('smq_p2_camps',JSON.stringify(G.camps));
+    stamp();
+    document.getElementById('t-main').classList.add('hidden');
+    const done=document.getElementById('t-done');
+    done.classList.remove('hidden');
+    document.getElementById('t-done-score').textContent=`Class Completed! You scored ${G.tScore} out of ${G.tQs.length}!`;
+    const btns=document.getElementById('t-done-btns');
+    btns.innerHTML='';
+    const nextI=G.tCamp<4?G.tCamp+1:-1;
+    if(nextI>=0){
+      const nb=document.createElement('button');
+      nb.className='btn bpu full';
+      nb.textContent=`Next Lesson: ${CINFO[nextI].name} →`;
+      nb.onclick=()=>startCamp(nextI);
+      btns.appendChild(nb);
+    }
+    const bb=document.createElement('button');
+    bb.className='btn bg full';
+    bb.textContent='← Back to Training Arena';
+    bb.onclick=backCamps;
+    btns.appendChild(bb);
+    return;
+  }
+  const q=G.tQs[G.tQi];G.cTQ=q;
+  document.getElementById('t-prog').textContent=`Lesson Q${G.tQi+1}/${G.tQs.length}`;
+  document.getElementById('t-zbadge').textContent=`📚 Class Lesson & Practice • ${q.cat}`;
+  document.getElementById('t-prompt').textContent=q.prompt;
+  document.getElementById('t-htext').textContent=q.hint;
+  document.getElementById('t-hint').classList.remove('hidden'); // Prominent classroom guide
+  document.getElementById('t-disp').innerHTML=q.html;
+  const ta=document.getElementById('t-ans');ta.innerHTML='';
+  ta.style.gridTemplateColumns=q.tri?'1fr 1fr 1fr':'1fr 1fr';
+  q.opts.forEach(opt=>{
+    const b=document.createElement('button');
+    const long=q.opts.some(o=>o.length>18);
+    b.className='abtn'+(long?' sm':'');b.textContent=opt;b.dataset.v=opt;
+    b.onclick=()=>handleTQ(opt,b,q);ta.appendChild(b);
+  });
+  CA.spk(q.audio);
+}
+let tBusy=false;
+function handleTQ(sel,btn,q){
+  if(tBusy)return;tBusy=true;
+  const ok=ME.ok(q,sel);
+  document.querySelectorAll('#t-ans .abtn').forEach(b=>{b.disabled=true;if(b.dataset.v===q.ans)b.classList.add('ok');});
+  if(!ok){btn.classList.add('no');CA.er();flash('❌');document.getElementById('t-htext').textContent=q.hint;document.getElementById('t-hint').classList.remove('hidden');}
+  else{G.tScore++;CA.ok();flash('✅');}
+  setTimeout(()=>{tBusy=false;G.tQi++;renderTQ();},ok?750:2000);
+}
+function tAudio(){if(G.cTQ)CA.spk(G.cTQ.audio,true);}
+function eAudio(){if(G.cQ)CA.spk(G.cQ.audio,true);}
+
+/* ============================================================ EXAM */
+function onExamPopState(){
+  if(G.inExam){
+    try{history.pushState({inExam:true},'',location.href);}catch(e){}
+    flash('🔒');
+  }
+}
+function startExam(){
+  if(G.camps.length < 5){
+    flash('🔒');
+    alert(`Complete all 5 Training Camps first! (${G.camps.length}/5 completed)\nHeading to Training Arena now...`);
+    goTrain();
+    return;
+  }
+  const ac=CA.gac();if(ac&&ac.state==='suspended')ac.resume();
+  G.inExam=true;
+  const tr=document.querySelector('#topbar .topright');if(tr)tr.style.display='none';
+  window.onbeforeunload=e=>{
+    if(G.inExam){
+      e.preventDefault();
+      return (e.returnValue='Safari Exam in progress! Exit is locked until all 15 questions are completed.');
+    }
+  };
+  try{history.pushState({inExam:true},'',location.href);}catch(e){}
+  window.addEventListener('popstate',onExamPopState);
+
+  const currentDiff=Math.min(G.plays||1, 5);
+  G.qs=ME.exam(currentDiff);
+  G.qi=0;G.score=0;G.missed=[];
+  G.catScores=[0,0,0,0,0];
+
+  // Increment play count for progressive challenge
+  G.plays=(G.plays||1)+1;
+  localStorage.setItem('smq_p2_plays',G.plays.toString());
+
+  show('sc-exam');renderEQ();
+}
+
+function renderEQ(){
+  if(G.qi>=G.qs.length){finishExam();return;}
+  const q=G.qs[G.qi];G.cQ=q;
+  const tiers=['Tier 1 (Scout)','Tier 2 (Explorer)','Tier 3 (Adventurer)','Tier 4 (Ranger)','Tier 5 (Master Champion)'];
+  const curTier=tiers[Math.min((G.plays||2)-2, tiers.length-1)]||'Tier 1 (Scout)';
+  document.getElementById('q-lbl').textContent=`Q ${G.qi+1} / 15`;
+  document.getElementById('pfill').style.width=`${(G.qi/15)*100}%`;
+  document.getElementById('s-lbl').textContent=`⭐ ${G.score}`;
+  if(q.isBossChallenge){
+    document.getElementById('zbadge').textContent=`🦁⚡ Boss Challenge • ${q.cat}`;
+    document.getElementById('zbadge').style.background='linear-gradient(135deg,#b45309,#ef4444)';
+  }else{
+    document.getElementById('zbadge').textContent=`${q.cat} · ${curTier}`;
+    document.getElementById('zbadge').style.background='';
+  }
+  document.getElementById('q-prompt').textContent=q.prompt;
+  document.getElementById('q-disp').innerHTML=q.html;
+  const ans=document.getElementById('answers');
+  ans.innerHTML='';
+  ans.style.gridTemplateColumns=q.tri?'1fr 1fr 1fr':'1fr 1fr';
+  q.opts.forEach(opt=>{
+    const b=document.createElement('button');
+    const long=q.opts.some(o=>o.length>18);
+    b.className='abtn'+(long?' sm':'');b.textContent=opt;b.dataset.v=opt;
+    b.onclick=()=>handleEQ(opt,b,q);ans.appendChild(b);
+  });
+  CA.spk(q.audio);
+}
+let eBusy=false;
+function handleEQ(sel,btn,q){
+  if(eBusy)return;eBusy=true;
+  const ok=ME.ok(q,sel);
+  document.querySelectorAll('#answers .abtn').forEach(b=>{b.disabled=true;if(b.dataset.v===q.ans)b.classList.add('ok');});
+  if(!ok){G.missed.push(G.qi);btn.classList.add('no');CA.er();flash('❌');}
+  else{
+    G.score++;
+    if(typeof q.catIdx==='number'&&q.catIdx>=0&&q.catIdx<5){
+      G.catScores[q.catIdx]++;
+    }
+    CA.ok();flash('✅');
+  }
+  setTimeout(()=>{eBusy=false;G.qi++;renderEQ();},850);
+}
+
+/* ============================================================ RESULTS */
+function finishExam(){
+  G.inExam=false;
+  window.onbeforeunload=null;
+  window.removeEventListener('popstate',onExamPopState);
+  const tr=document.querySelector('#topbar .topright');if(tr)tr.style.display='flex';
+  show('sc-res');
+  const s=G.score;
+  document.getElementById('r-score').textContent=`${s} / 15`;
+  document.getElementById('r-trophy').textContent=s>=14?'🏆':s>=11?'🥈':'🥉';
+  const tp=document.getElementById('r-tier');
+  const msg=document.getElementById('r-msg');
+  const nm=document.getElementById('nearmiss');
+  const cs=document.getElementById('certsec');
+  const bc=document.getElementById('bronzecard');
+  const btnCertBack=document.getElementById('btn-cert-back');
+  
+  nm.classList.add('hidden');
+  cs.classList.add('hidden');
+  bc.classList.add('hidden');
+  if(btnCertBack) btnCertBack.classList.add('hidden');
+
+  if(s>=14){
+    tp.className='tpill tg';tp.textContent='👑 GOLD MASTER!';
+    msg.textContent=`Incredible, ${G.name}! You are a true Thai Safari Math Champion!`;
+    CA.fan();confetti();
+    cs.classList.remove('hidden');
+    setTimeout(()=>ART.draw('cv-cert',G.name,s,G.catScores),150);
+  }else if(s>=11){
+    tp.className='tpill ts';tp.textContent='🥈 Silver Ranger!';
+    msg.textContent=`Great job, ${G.name}! You're just ${15-s} question${15-s>1?'s':''} away from Gold!`;
+    nm.classList.remove('hidden');
+    document.getElementById('nm-desc').textContent=`You missed only ${15-s} question${15-s>1?'s':''}. Retry missed questions now to claim your Gold Lion Crown!`;
+    document.getElementById('btn-awaken').onclick=retryMissed;
+    setTimeout(()=>ART.draw('cv-cert',G.name,s,G.catScores),150);
+  }else{
+    tp.className='tpill tb';tp.textContent='🥉 Keep Practicing!';
+    msg.textContent=`Every great explorer begins in Training Camp! Heading to the Training Arena now... 🐘`;
+    bc.classList.remove('hidden');
+    setTimeout(()=>{ goTrain(); },3500);
+  }
+}
+
+function toggleSilverCert(showCert){
+  const nm=document.getElementById('nearmiss');
+  const cs=document.getElementById('certsec');
+  const btnBack=document.getElementById('btn-cert-back');
+  if(showCert){
+    nm.classList.add('hidden');
+    cs.classList.remove('hidden');
+    if(btnBack) btnBack.classList.remove('hidden');
+    ART.draw('cv-cert',G.name,G.score,G.catScores);
+  }else{
+    cs.classList.add('hidden');
+    nm.classList.remove('hidden');
+  }
+}
+function retryMissed(){
+  const mq=G.missed.map(i=>G.qs[i]);if(!mq.length)return;
+  G.inExam=true;
+  const tr=document.querySelector('#topbar .topright');if(tr)tr.style.display='none';
+  window.onbeforeunload=e=>{
+    if(G.inExam){
+      e.preventDefault();
+      return (e.returnValue='Safari Exam in progress! Exit is locked until all 15 questions are completed.');
+    }
+  };
+  G.qs=mq;G.qi=0;G.missed=[];G.score=15-mq.length;
+  show('sc-exam');renderEQ();
+}
+function dlCert(){ART.dl('cv-cert');}
+
+/* ============================================================ SCRATCHPAD */
+function openSP(){document.getElementById('sp-modal').classList.add('open');const c=document.getElementById('cv-scratch');if(c.width<100)CA.isp('cv-scratch');}
+function closeSP(){document.getElementById('sp-modal').classList.remove('open');}
+function clrSP(){CA.clr();}
+function setSC(btn){
+  document.querySelectorAll('.sc').forEach(b=>b.classList.remove('on'));
+  const eb=document.getElementById('btn-eraser');if(eb)eb.classList.remove('on');
+  btn.classList.add('on');
+  CA.setEraser(false);
+  CA.setC(btn.dataset.c);
+}
+function setEraser(btn){
+  document.querySelectorAll('.sc').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  CA.setEraser(true);
+}
+
+/* ============================================================ FEEDBACK */
+function flash(ic){const o=document.getElementById('fb');document.getElementById('fb-ic').textContent=ic;o.classList.add('show');setTimeout(()=>o.classList.remove('show'),500);}
+
+/* ============================================================ CONFETTI */
+function confetti(){
+  const cs=['#fbbf24','#f472b6','#34d399','#60a5fa','#a78bfa','#fb923c','#2dd4bf'];
+  for(let i=0;i<130;i++){const el=document.createElement('div');el.className='conf';const sz=Math.random()*10+5;el.style.cssText=`left:${Math.random()*100}vw;top:-10px;width:${sz}px;height:${sz}px;background:${cs[Math.floor(Math.random()*cs.length)]};border-radius:${Math.random()>.5?'50%':'3px'};--cd:${(Math.random()*3+2).toFixed(1)}s;--cld:${(Math.random()*1.5).toFixed(1)}s;`;document.body.appendChild(el);el.addEventListener('animationend',()=>el.remove());}
+}
+
+/* ============================================================ INIT */
+document.addEventListener('DOMContentLoaded',()=>{CA.isp('cv-scratch');initApp();});
+</script>
+</body>
+</html>

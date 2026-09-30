@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Safari Math Quest</title>
+  <!-- Google Fonts for Playful & Readable Safari Adventure Theme -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700;800&family=JetBrains+Mono:wght@700;800&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       MAIN APP CONTAINER (#app-container)
+       ======================================================================== -->
+  <div id="app-container" class="app-container">
+
+    <!-- Top Branding / Navigation Bar -->
+    <header class="app-header">
+            <div class="brand">
+        <span class="brand-icon" aria-hidden="true">??</span>
+        <div class="brand-text">
+          <h1>Safari Math Quest</h1>
+          <span class="brand-tagline">Kawaii Edition</span>
+        </div>
+      </div>
+      <button id="btn-profile" class="profile-btn">
+        <span id="display-player-name">Explorer</span> ??
+      </button>
+    </header>
+
+    <!-- ======================================================================
+         1. START SCREEN (#screen-start)
+         ====================================================================== -->
+    <section id="screen-start" class="screen">
+      <div class="screen-card card-start">
+        
+        <!-- Safari Hero Illustration & Intro -->
+        <div class="safari-hero">
+          <div class="hero-badge-wrap">
+            <div class="hero-badge" aria-hidden="true">🦁</div>
+            <div class="hero-sparkles" aria-hidden="true">✨</div>
+          </div>
+          <h2 class="hero-title">The Great Savanna Math Quest</h2>
+          <p class="hero-desc">
+            Trek across the wild savanna, solve 15 mathematical challenges, and earn your official Explorer Certificate!
+          </p>
+        </div>
+
+        <!-- Explorer Name Input & Mode Choice -->
+        <div class="explorer-card">
+          <label for="player-name-input" class="input-label">
+            <span class="label-icon">🧭</span> Name of Young Explorer:
+          </label>
+          <div class="input-wrapper">
+            <input 
+              type="text" 
+              id="player-name-input" 
+              class="tactile-input" 
+              placeholder="Enter your explorer name..." 
+              maxlength="24"
+              autocomplete="name"
+              spellcheck="false"
+            />
+          </div>
+
+          <div class="start-actions">
+            <!-- Start Exam Expedition Button -->
+            <button id="btn-start-exam" class="tactile-btn btn-primary btn-hero" type="button">
+              <span class="btn-icon">🦁</span>
+              <span class="btn-label">Embark on Exam Quest</span>
+              <span class="btn-subtext">15 Graded Safari Challenges</span>
+            </button>
+
+            <!-- Training Camp Button -->
+            <button id="btn-start-training" class="tactile-btn btn-secondary btn-hero" type="button">
+              <span class="btn-icon">🎯</span>
+              <span class="btn-label">Training Camp Drills</span>
+              <span class="btn-subtext">Free Practice &amp; Instant Hints</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quest Features / Field Guide Highlights -->
+        <div class="quest-features-grid">
+          <div class="feature-item">
+            <span class="feature-icon">📐</span>
+            <h4>Savanna Curriculum</h4>
+            <p>Place values, big operations, fractions, and savanna logic puzzles.</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔊</span>
+            <h4>Cognitive Voice</h4>
+            <p>Friendly spoken audio prompts calibrated for young explorers.</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">✏️</span>
+            <h4>Chalkboard Scratchpad</h4>
+            <p>Built-in drawing canvas for working out step-by-step arithmetic.</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🏆</span>
+            <h4>Silver &amp; Gold Honors</h4>
+            <p>Earn Silver Ranger or awaken the legendary Golden Cheetah award.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         2. TRAINING SCREEN (#screen-training)
+         ====================================================================== -->
+    <section id="screen-training" class="screen hidden">
+      <div class="screen-card card-training">
+        
+        <!-- Training HUD Bar -->
+        <div class="hud-bar">
+          <button id="btn-training-back" class="tactile-btn btn-sm btn-ghost" type="button">
+            <span>🏕️ Base Camp</span>
+          </button>
+          <div class="hud-title-group">
+            <span class="hud-mode-pill">🎯 TRAINING CAMP</span>
+            <span class="hud-subtitle">Practice Drills &amp; Scratchpad</span>
+          </div>
+          <div class="hud-actions">
+            <button id="btn-training-scratchpad" class="tactile-btn btn-sm btn-safari-amber" type="button">
+              <span>✏️ Scratchpad</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Training Drill Question Area -->
+        <div class="training-question-card">
+          <!-- Training Category Badge Placeholder -->
+          <div id="training-category-badge" class="category-badge">
+            <span>🐾 Practice Drill: Place Value</span>
+          </div>
+
+          <!-- Training Visual Prompt Placeholder -->
+          <div id="training-visual-prompt" class="visual-prompt">
+            What is the place value of the highlighted digit in this savanna animal census?
+          </div>
+
+          <!-- Training Visual Display Placeholder -->
+          <div id="training-visual-display" class="visual-display">
+            4<span class="highlight-digit">7</span>,215
+          </div>
+
+          <!-- Training Multiple-Choice Options Placeholder -->
+          <div id="training-options-container" class="options-container">
+            <button class="tactile-btn option-btn" data-option="70,000" type="button">
+              <span class="opt-badge">A</span>
+              <span class="opt-text">70,000 (Ten Thousands)</span>
+            </button>
+            <button class="tactile-btn option-btn" data-option="7,000" type="button">
+              <span class="opt-badge">B</span>
+              <span class="opt-text">7,000 (Thousands)</span>
+            </button>
+            <button class="tactile-btn option-btn" data-option="700" type="button">
+              <span class="opt-badge">C</span>
+              <span class="opt-text">700 (Hundreds)</span>
+            </button>
+            <button class="tactile-btn option-btn" data-option="70" type="button">
+              <span class="opt-badge">D</span>
+              <span class="opt-text">70 (Tens)</span>
+            </button>
+          </div>
+
+          <!-- Training Feedback / Hint Box -->
+          <div id="training-feedback-container" class="training-feedback-box hidden">
+            <div class="feedback-icon">💡</div>
+            <div class="feedback-content">
+              <strong id="training-feedback-title">Ranger Tip:</strong>
+              <span id="training-feedback-text">Count the place value columns from right to left!</span>
+            </div>
+          </div>
+
+          <!-- Training Action Controls -->
+          <div class="training-controls">
+            <button id="btn-training-audio" class="tactile-btn btn-sm btn-safari-green" type="button">
+              <span>🔊 Read Aloud</span>
+            </button>
+            <button id="btn-training-next" class="tactile-btn btn-primary" type="button">
+              <span>Next Practice Drill ➔</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. EXAM SCREEN (#screen-exam)
+         ====================================================================== -->
+    <section id="screen-exam" class="screen hidden">
+      <div class="screen-card card-exam">
+        
+        <!-- Exam HUD & Progress Tracker -->
+        <div class="exam-hud">
+          <button id="btn-exam-quit" class="tactile-btn btn-sm btn-ghost" title="Return to Base Camp" type="button">
+            <span>🏕️ Exit</span>
+          </button>
+
+          <div class="exam-progress-container">
+            <div class="progress-labels">
+              <span class="progress-quest-title">Safari Challenge</span>
+              <span class="progress-counter">
+                <span id="exam-q-current">1</span> of <span id="exam-q-total">15</span>
+              </span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="15">
+              <div id="exam-progress-bar" class="progress-fill" style="width: 6.67%;"></div>
+            </div>
+          </div>
+
+          <div class="exam-hud-tools">
+            <button id="btn-audio-prompt" class="tactile-btn btn-sm btn-safari-green" title="Listen to question" type="button">
+              <span>🔊 Read Aloud</span>
+            </button>
+            <button id="btn-toggle-scratchpad" class="tactile-btn btn-sm btn-safari-amber" title="Open Drawing Scratchpad" type="button">
+              <span>✏️ Scratchpad</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Question Workspace Card -->
+        <div class="exam-workspace">
+          <!-- Category Pill -->
+          <div id="exam-category-badge" class="category-badge">
+            <span>🦁 Place Value &amp; Number Sense</span>
+          </div>
+
+          <!-- CONTRACT.md: #exam-visual-prompt -->
+          <div id="exam-visual-prompt" class="visual-prompt">
+            What is 45,208 written out in words?
+          </div>
+
+          <!-- CONTRACT.md: #exam-visual-display -->
+          <div id="exam-visual-display" class="visual-display">
+            45,208
+          </div>
+
+          <!-- CONTRACT.md: #exam-options-container -->
+          <div id="exam-options-container" class="options-container">
+            <!-- Math question option placeholders (Dynamically replaced by Math Engine) -->
+            <button class="tactile-btn option-btn" data-option="A" type="button">
+              <span class="opt-badge">A</span>
+              <span class="opt-text">Forty-five thousand, two hundred eight</span>
+            </button>
+            <button class="tactile-btn option-btn" data-option="B" type="button">
+              <span class="opt-badge">B</span>
+              <span class="opt-text">Forty-five thousand, twenty-eight</span>
+            </button>
+            <button class="tactile-btn option-btn" data-option="C" type="button">
+              <span class="opt-badge">C</span>
+              <span class="opt-text">Four thousand, five hundred twenty-eight</span>
+            </button>
+            <button class="tactile-btn option-btn" data-option="D" type="button">
+              <span class="opt-badge">D</span>
+              <span class="opt-text">Forty-five thousand, two hundred eighty</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Bottom helper hint -->
+        <div class="exam-footer">
+          <div class="exam-hint-tag">
+            <span>💡 Tip: Click Scratchpad anytime to calculate your steps on screen!</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. RESULTS SCREEN (#screen-results)
+         ====================================================================== -->
+    <section id="screen-results" class="screen hidden">
+      <div class="screen-card card-results">
+        
+        <!-- Results Hero / Badge Aura -->
+        <div class="results-hero">
+          <div class="results-trophy-aura">
+            <div id="results-badge-icon" class="trophy-badge" aria-hidden="true">🏆</div>
+          </div>
+          <h2 id="results-headline" class="results-headline">Expedition Complete!</h2>
+          <p class="results-subheading">
+            Well done, Explorer <span id="results-player-name" class="highlight-name">Adventurer</span>! Here are your official savanna results:
+          </p>
+        </div>
+
+        <!-- Score & Tier Card -->
+        <div class="results-score-card">
+          <div class="score-display-box">
+            <div class="score-circle">
+              <span id="results-score-num" class="score-num">13</span>
+              <span class="score-denom">/ 15</span>
+            </div>
+            <div class="score-details">
+              <div id="results-tier-badge" class="tier-badge tier-silver">
+                <span class="tier-icon">🥈</span>
+                <span id="results-tier-name">Silver Ranger Honors</span>
+              </div>
+              <p id="results-tier-desc" class="tier-description">
+                Outstanding mathematical reasoning and savanna mastery!
+              </p>
+            </div>
+          </div>
+
+          <!-- Category Mastery Breakdown -->
+          <div class="category-breakdown">
+            <h4 class="breakdown-title">Expedition Mastery Breakdown</h4>
+            <div id="results-category-list" class="category-grid">
+              <div class="category-stat-row">
+                <span class="cat-name">Numbers &amp; Place Value</span>
+                <div class="cat-bar-track"><div class="cat-bar-fill" style="width: 100%;"></div></div>
+                <span class="cat-score">3 / 3</span>
+              </div>
+              <div class="category-stat-row">
+                <span class="cat-name">Four Operations</span>
+                <div class="cat-bar-track"><div class="cat-bar-fill" style="width: 80%;"></div></div>
+                <span class="cat-score">4 / 5</span>
+              </div>
+              <div class="category-stat-row">
+                <span class="cat-name">Fractions &amp; Decimals</span>
+                <div class="cat-bar-track"><div class="cat-bar-fill" style="width: 100%;"></div></div>
+                <span class="cat-score">3 / 3</span>
+              </div>
+              <div class="category-stat-row">
+                <span class="cat-name">Geometry &amp; Safari Logic</span>
+                <div class="cat-bar-track"><div class="cat-bar-fill" style="width: 75%;"></div></div>
+                <span class="cat-score">3 / 4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Silver Near-Miss Awaken Section -->
+        <div id="results-silver-section" class="silver-upgrade-card">
+          <div class="silver-upgrade-content">
+            <div class="upgrade-icon">⚡</div>
+            <div class="upgrade-text">
+              <h3>Awaken the Golden Cheetah!</h3>
+              <p>
+                You achieved Silver rank with near-miss questions! Awaken the golden challenge to retry the questions you missed and upgrade your certificate to legendary Gold!
+              </p>
+            </div>
+          </div>
+          <!-- CONTRACT.md: #btn-awaken-gold -->
+          <button id="btn-awaken-gold" class="tactile-btn btn-gold-pulse" type="button">
+            <span class="btn-sparkle" aria-hidden="true">✨</span>
+            <span class="btn-text">Awaken the Golden Cheetah (Retry Missed)</span>
+            <span class="btn-sparkle" aria-hidden="true">✨</span>
+          </button>
+        </div>
+
+        <!-- Official Certificate Generative Art Section -->
+        <div class="certificate-section">
+          <div class="certificate-header">
+            <span class="cert-ribbon" aria-hidden="true">📜</span>
+            <h3>Official Savanna Expedition Certificate</h3>
+            <p class="cert-subtitle">Generative art certificate issued by the Safari Math Council</p>
+          </div>
+
+          <div class="certificate-canvas-wrapper">
+            <!-- CONTRACT.md: #canvas-certificate -->
+            <canvas id="canvas-certificate" width="800" height="560"></canvas>
+          </div>
+
+          <div class="results-actions">
+            <button id="btn-download-cert" class="tactile-btn btn-primary btn-large" type="button">
+              <span>📜 Download Certificate</span>
+            </button>
+            <button id="btn-restart-exam" class="tactile-btn btn-secondary btn-large" type="button">
+              <span>🔄 New Expedition</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. SCRATCHPAD OVERLAY MODAL & CANVAS (#canvas-scratchpad)
+         ====================================================================== -->
+    <div id="scratchpad-overlay" class="scratchpad-overlay hidden" role="dialog" aria-modal="true" aria-label="Digital Scratchpad">
+      <div class="scratchpad-window">
+        
+        <!-- Scratchpad Header & Drawing Tools -->
+        <div class="scratchpad-header">
+          <div class="scratchpad-title">
+            <span class="title-icon">✏️</span>
+            <h3>Field Scratchpad &amp; Chalkboard</h3>
+          </div>
+          
+          <div class="scratchpad-tools">
+            <!-- Color Swatches -->
+            <div class="color-palette" title="Brush Color">
+              <button class="color-btn active" data-color="#24160d" style="background-color: #24160d;" title="Charcoal" type="button"></button>
+              <button class="color-btn" data-color="#0284c7" style="background-color: #0284c7;" title="Savanna Blue" type="button"></button>
+              <button class="color-btn" data-color="#16a34a" style="background-color: #16a34a;" title="Jungle Green" type="button"></button>
+              <button class="color-btn" data-color="#dc2626" style="background-color: #dc2626;" title="Crimson" type="button"></button>
+            </div>
+
+            <!-- Pen & Eraser Tool Selection -->
+            <button id="btn-scratchpad-pen" class="tactile-btn btn-xs active" title="Pen Tool" type="button">
+              <span>✏️ Pen</span>
+            </button>
+            <button id="btn-scratchpad-eraser" class="tactile-btn btn-xs btn-ghost" title="Eraser Tool" type="button">
+              <span>🧹 Eraser</span>
+            </button>
+
+            <!-- Clear Canvas Button -->
+            <button id="btn-clear-scratchpad" class="tactile-btn btn-xs btn-danger" title="Clear Canvas" type="button">
+              <span>🗑️ Clear</span>
+            </button>
+
+            <!-- Close Overlay Button -->
+            <button id="btn-close-scratchpad" class="tactile-btn btn-xs btn-ghost" title="Close Scratchpad" type="button">
+              <span>✕ Close</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Canvas Drawing Surface -->
+        <div class="scratchpad-canvas-container">
+          <!-- CONTRACT.md: #canvas-scratchpad -->
+          <canvas id="canvas-scratchpad" width="760" height="420"></canvas>
+        </div>
+
+        <!-- Scratchpad Footer Tip -->
+        <div class="scratchpad-footer">
+          <span>🐾 Drawings stay active until you press Clear. Touch or mouse to sketch.</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- App Global Footer -->
+    <footer class="app-footer">
+      <p>🐾 Safari Math Quest • Standardized Cognitive Expedition Framework</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
+
