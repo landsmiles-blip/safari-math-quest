@@ -364,6 +364,13 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
 #cv-scratch{width:100%;height:320px;background:#020a14;border-radius:12px;border:1.5px solid rgba(255,255,255,.2);touch-action:none;cursor:crosshair}
 .sp-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 
+
+/* ── EXAM LOCKDOWN MODAL & OVERLAY ── */
+#lockdown-overlay{position:fixed;inset:0;background:rgba(6,9,25,0.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:999999;display:flex;align-items:center;justify-content:center;padding:20px}
+#lockdown-overlay.hidden{display:none !important}
+.lockdown-card{background:linear-gradient(135deg,rgba(30,41,59,0.96),rgba(15,23,42,0.98));border:3px solid #ff0055;box-shadow:0 0 45px rgba(255,0,85,0.55);border-radius:24px;max-width:520px;width:92%;padding:32px 24px;text-align:center;animation:cardPulse 2s infinite alternate}
+@keyframes cardPulse{0%{box-shadow:0 0 30px rgba(255,0,85,0.4)}100%{box-shadow:0 0 55px rgba(255,0,85,0.75)}}
+
 /* Hidden Utility */
 .hidden{display:none!important}
 </style>
@@ -791,6 +798,19 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
   </div>
 </div>
 
+<!-- ── EXAM LOCKDOWN MODAL ── -->
+<div id="lockdown-overlay" class="hidden">
+  <div class="lockdown-card">
+    <div style="font-size:3.5rem;margin-bottom:12px">🔒⚠️</div>
+    <h2 style="font-family:var(--fd);color:#ffd166;font-size:clamp(1.3rem,3.5vw,1.75rem);margin-bottom:12px;letter-spacing:1px">EXAM LOCKDOWN ACTIVE</h2>
+    <p style="font-size:clamp(.92rem,2.2vw,1.05rem);color:#f8fafc;font-weight:700;line-height:1.55;margin-bottom:22px">
+      Safari Science Exam is currently in progress!<br>
+      Exiting fullscreen, switching tabs, or leaving the examination window is strictly prohibited until all 15 questions are completed.
+    </p>
+    <button class="btn bg" onclick="resumeExamLockdown()" style="font-size:1.15rem;padding:12px 28px;box-shadow:0 6px 20px rgba(0,245,212,0.4)">Return to Fullscreen Exam ➔</button>
+  </div>
+</div>
+
 <script>
 /* ============================================================ AUDIO SYNTHESIZER & SPEECH */
 const CA = (function(){
@@ -884,11 +904,11 @@ const SE = (function(){
   const sh = a => [...a].sort(() => Math.random() - 0.5);
 
   /* SVG DIAGRAM GENERATORS (HIGH-FIDELITY, LARGE, GEEK-SCIENCE LAB GRAPHICS) */
-  /* RULE: All functions accept (isExam = false). If isExam === true: */
-  /* 1. Never emit <div class="disp-pill">...</div> */
-  /* 2. Never show spoiler words/answers inside the SVG graphics */
+  /* ZERO-CLUE & ZERO-SPOILER RULE: All functions accept (isExam = false). If isExam === true: */
+  /* 1. NEVER emit <div class="disp-pill">...</div> */
+  /* 2. NEVER show spoiler words, category labels, or answer hints inside the SVG graphics */
   const SVG = {
-    // Both Bread AND Rice clearly shown together (Large, rich culinary science illustration)
+    // Both Bread AND Rice clearly shown together
     carbsBreadAndRice: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
@@ -919,10 +939,9 @@ const SE = (function(){
             <g transform="translate(100, 40) rotate(14)">
               <ellipse cx="14" cy="18" rx="13" ry="18" fill="url(#breadInside)" stroke="#b45309" stroke-width="2"/>
             </g>
-            <text x="72" y="108" font-size="12" font-weight="900" fill="#fde68a" text-anchor="middle" font-family="var(--fd)">CRUSTY BREAD 🍞</text>
+            ${isExam ? '' : '<text x="72" y="108" font-size="12" font-weight="900" fill="#fde68a" text-anchor="middle" font-family="var(--fd)">CRUSTY BREAD 🍞</text>'}
           </g>
 
-          <!-- Central Energy Fusion Plus Symbol -->
           <g transform="translate(230, 54)">
             <circle cx="0" cy="0" r="16" fill="rgba(255,209,102,0.18)" stroke="#ffd166" stroke-width="2"/>
             <text x="0" y="7" font-size="24" font-weight="bold" fill="#ffd166" text-anchor="middle" font-family="var(--fd)">+</text>
@@ -942,45 +961,37 @@ const SE = (function(){
             <rect x="52" y="86" width="40" height="7" rx="3" fill="#0369a1"/>
             <line x1="24" y1="28" x2="135" y2="48" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
             <line x1="20" y1="36" x2="132" y2="54" stroke="#d97706" stroke-width="3" stroke-linecap="round"/>
-            <text x="72" y="108" font-size="12" font-weight="900" fill="#fde68a" text-anchor="middle" font-family="var(--fd)">STEAMING RICE 🍚</text>
+            ${isExam ? '' : '<text x="72" y="108" font-size="12" font-weight="900" fill="#fde68a" text-anchor="middle" font-family="var(--fd)">STEAMING RICE 🍚</text>'}
           </g>
         </svg>
       </div>
       ${isExam ? '' : '<div class="disp-pill">⚡ CARBOHYDRATE · PRIMARY FUEL FOR BODY ENERGY</div>'}
     `,
 
-    // Starchy Energy Foods: Golden Potatoes, Corn Cob & Pasta
+    // Starchy Energy Foods: Golden Potatoes & Corn Cob
     foodPotatoesCorn: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
-          <!-- Golden Baked Potato (Left) -->
           <g transform="translate(60, 16)">
             <ellipse cx="50" cy="50" rx="44" ry="28" fill="#ca8a04" stroke="#a16207" stroke-width="2"/>
             <circle cx="35" cy="44" r="2.5" fill="#713f12"/>
             <circle cx="65" cy="56" r="2.5" fill="#713f12"/>
-            <circle cx="52" cy="38" r="2" fill="#713f12"/>
             <ellipse cx="50" cy="48" rx="20" ry="8" fill="#fef08a" opacity="0.6"/>
-            <text x="50" y="98" font-size="12" font-weight="900" fill="#fef08a" text-anchor="middle" font-family="var(--fd)">POTATO 🥔</text>
+            ${isExam ? '' : '<text x="50" y="98" font-size="12" font-weight="900" fill="#fef08a" text-anchor="middle" font-family="var(--fd)">POTATO 🥔</text>'}
           </g>
-
-          <!-- Plus sign -->
           <g transform="translate(195, 54)">
             <circle cx="0" cy="0" r="14" fill="rgba(255,209,102,0.18)" stroke="#ffd166" stroke-width="2"/>
             <text x="0" y="6" font-size="20" font-weight="bold" fill="#ffd166" text-anchor="middle" font-family="var(--fd)">+</text>
           </g>
-
-          <!-- Golden Sweet Corn Cob (Right) -->
           <g transform="translate(240, 16)">
             <g transform="rotate(-15 60 50)">
               <rect x="25" y="32" width="70" height="28" rx="14" fill="#facc15" stroke="#eab308" stroke-width="2"/>
               <line x1="45" y1="32" x2="45" y2="60" stroke="#ca8a04" stroke-width="1.5"/>
               <line x1="65" y1="32" x2="65" y2="60" stroke="#ca8a04" stroke-width="1.5"/>
-              <line x1="80" y1="32" x2="80" y2="60" stroke="#ca8a04" stroke-width="1.5"/>
-              <!-- Green Corn Husk -->
               <path d="M 20 46 Q 35 24 60 26 Q 30 38 20 46 Z" fill="#22c55e" stroke="#15803d" stroke-width="1.5"/>
               <path d="M 20 46 Q 35 68 60 66 Q 30 54 20 46 Z" fill="#16a34a" stroke="#15803d" stroke-width="1.5"/>
             </g>
-            <text x="60" y="98" font-size="12" font-weight="900" fill="#fde047" text-anchor="middle" font-family="var(--fd)">SWEET CORN 🌽</text>
+            ${isExam ? '' : '<text x="60" y="98" font-size="12" font-weight="900" fill="#fde047" text-anchor="middle" font-family="var(--fd)">SWEET CORN 🌽</text>'}
           </g>
         </svg>
       </div>
@@ -991,29 +1002,24 @@ const SE = (function(){
     proteinFoods: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
-          <!-- Steak on platter -->
           <g transform="translate(60, 15)">
             <ellipse cx="60" cy="50" rx="54" ry="32" fill="#dc2626" stroke="#991b1b" stroke-width="2.5"/>
             <circle cx="48" cy="45" r="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
             <ellipse cx="78" cy="52" rx="22" ry="12" fill="#b91c1c" opacity="0.6"/>
             <line x1="30" y1="40" x2="90" y2="48" stroke="#7f1d1d" stroke-width="2.5" stroke-linecap="round"/>
             <line x1="35" y1="52" x2="85" y2="60" stroke="#7f1d1d" stroke-width="2.5" stroke-linecap="round"/>
-            <text x="60" y="98" font-size="12" font-weight="900" fill="#fca5a5" text-anchor="middle" font-family="var(--fd)">BEEF STEAK 🥩</text>
+            ${isExam ? '' : '<text x="60" y="98" font-size="12" font-weight="900" fill="#fca5a5" text-anchor="middle" font-family="var(--fd)">BEEF STEAK 🥩</text>'}
           </g>
-
           <g transform="translate(230, 54)">
             <circle cx="0" cy="0" r="16" fill="rgba(0,245,212,0.18)" stroke="#00f5d4" stroke-width="2"/>
             <text x="0" y="7" font-size="24" font-weight="bold" fill="#00f5d4" text-anchor="middle" font-family="var(--fd)">+</text>
           </g>
-
-          <!-- Fresh Salmon Fillet -->
           <g transform="translate(270, 15)">
             <ellipse cx="65" cy="50" rx="56" ry="24" fill="#38bdf8" stroke="#0284c7" stroke-width="2.5"/>
             <polygon points="118,50 142,32 142,68" fill="#0284c7" stroke="#0369a1" stroke-width="2"/>
             <path d="M 60 26 Q 72 16 78 26 Z" fill="#0284c7"/>
             <circle cx="36" cy="46" r="4.5" fill="#0f172a"/>
-            <circle cx="37" cy="44.5" r="1.5" fill="#fff"/>
-            <text x="65" y="98" font-size="12" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">SALMON & FISH 🐟</text>
+            ${isExam ? '' : '<text x="65" y="98" font-size="12" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">SALMON & FISH 🐟</text>'}
           </g>
         </svg>
       </div>
@@ -1024,26 +1030,21 @@ const SE = (function(){
     eggsAndMilk: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
-          <!-- Two Farm Eggs (Left) -->
           <g transform="translate(70, 18)">
             <ellipse cx="40" cy="54" rx="24" ry="30" fill="#fed7aa" stroke="#ea580c" stroke-width="2" transform="rotate(-15 40 54)"/>
             <ellipse cx="70" cy="58" rx="20" ry="26" fill="#fde68a" stroke="#d97706" stroke-width="2" transform="rotate(18 70 58)"/>
-            <text x="55" y="102" font-size="12" font-weight="900" fill="#fed7aa" text-anchor="middle" font-family="var(--fd)">FARM EGGS 🥚</text>
+            ${isExam ? '' : '<text x="55" y="102" font-size="12" font-weight="900" fill="#fed7aa" text-anchor="middle" font-family="var(--fd)">FARM EGGS 🥚</text>'}
           </g>
-
           <g transform="translate(205, 54)">
             <circle cx="0" cy="0" r="14" fill="rgba(0,245,212,0.18)" stroke="#00f5d4" stroke-width="2"/>
             <text x="0" y="6" font-size="20" font-weight="bold" fill="#00f5d4" text-anchor="middle" font-family="var(--fd)">+</text>
           </g>
-
-          <!-- Fresh Milk Bottle / Glass (Right) -->
           <g transform="translate(250, 12)">
             <rect x="35" y="32" width="50" height="58" rx="6" fill="#ffffff" stroke="#38bdf8" stroke-width="2.5"/>
             <path d="M 45 32 L 50 16 L 70 16 L 75 32 Z" fill="#bae6fd" stroke="#0284c7" stroke-width="2"/>
             <rect x="52" y="10" width="16" height="8" rx="2" fill="#0284c7"/>
-            <!-- Milk Wave -->
             <path d="M 36 55 Q 48 50 60 55 Q 72 60 84 55 L 84 88 L 36 88 Z" fill="#e0f2fe"/>
-            <text x="60" y="108" font-size="12" font-weight="900" fill="#bae6fd" text-anchor="middle" font-family="var(--fd)">FRESH MILK 🥛</text>
+            ${isExam ? '' : '<text x="60" y="108" font-size="12" font-weight="900" fill="#bae6fd" text-anchor="middle" font-family="var(--fd)">FRESH MILK 🥛</text>'}
           </g>
         </svg>
       </div>
@@ -1054,20 +1055,16 @@ const SE = (function(){
     vitaminFoods: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
-          <!-- Big Ruby Apple -->
           <g transform="translate(90, 15)">
             <circle cx="50" cy="50" r="36" fill="#ef4444" stroke="#991b1b" stroke-width="2.5"/>
             <path d="M 50 16 Q 58 4 64 8" stroke="#78350f" stroke-width="4" fill="none" stroke-linecap="round"/>
             <ellipse cx="64" cy="18" rx="10" ry="5" fill="#22c55e" stroke="#15803d" stroke-width="1.5" transform="rotate(-20 64 18)"/>
-            <text x="50" y="100" font-size="12" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">FRESH APPLE 🍎</text>
+            ${isExam ? '' : '<text x="50" y="100" font-size="12" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">FRESH APPLE 🍎</text>'}
           </g>
-
           <g transform="translate(230, 54)">
             <circle cx="0" cy="0" r="16" fill="rgba(16,185,129,0.2)" stroke="#10b981" stroke-width="2"/>
             <text x="0" y="7" font-size="24" font-weight="bold" fill="#10b981" text-anchor="middle" font-family="var(--fd)">+</text>
           </g>
-
-          <!-- Crisp Orange Carrot -->
           <g transform="translate(275, 12)">
             <g transform="rotate(32 60 50)">
               <polygon points="60,20 74,75 46,75" fill="#f97316" stroke="#c2410c" stroke-width="2.5"/>
@@ -1075,7 +1072,7 @@ const SE = (function(){
               <line x1="55" y1="55" x2="65" y2="55" stroke="#c2410c" stroke-width="2" stroke-linecap="round"/>
               <path d="M 60 20 Q 55 2 50 0 M 60 20 Q 60 0 62 -4 M 60 20 Q 65 2 72 2" stroke="#22c55e" stroke-width="3.5" fill="none" stroke-linecap="round"/>
             </g>
-            <text x="60" y="102" font-size="12" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">CRUNCHY CARROT 🥕</text>
+            ${isExam ? '' : '<text x="60" y="102" font-size="12" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">CRUNCHY CARROT 🥕</text>'}
           </g>
         </svg>
       </div>
@@ -1086,29 +1083,24 @@ const SE = (function(){
     fruitsOrangesBroccoli: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
-          <!-- Juicy Orange (Left) -->
           <g transform="translate(70, 16)">
             <circle cx="50" cy="50" r="36" fill="#f97316" stroke="#ea580c" stroke-width="2"/>
             <circle cx="50" cy="50" r="30" fill="#fb923c"/>
             <circle cx="50" cy="50" r="6" fill="#ffedd5"/>
-            <!-- Orange Segments -->
             <line x1="50" y1="20" x2="50" y2="80" stroke="#ffedd5" stroke-width="2"/>
             <line x1="20" y1="50" x2="80" y2="50" stroke="#ffedd5" stroke-width="2"/>
-            <text x="50" y="100" font-size="12" font-weight="900" fill="#fdba74" text-anchor="middle" font-family="var(--fd)">ORANGE 🍊</text>
+            ${isExam ? '' : '<text x="50" y="100" font-size="12" font-weight="900" fill="#fdba74" text-anchor="middle" font-family="var(--fd)">ORANGE 🍊</text>'}
           </g>
-
           <g transform="translate(205, 54)">
             <circle cx="0" cy="0" r="14" fill="rgba(16,185,129,0.2)" stroke="#10b981" stroke-width="2"/>
             <text x="0" y="6" font-size="20" font-weight="bold" fill="#10b981" text-anchor="middle" font-family="var(--fd)">+</text>
           </g>
-
-          <!-- Green Broccoli Floret (Right) -->
           <g transform="translate(255, 14)">
             <path d="M 48 55 L 42 85 L 58 85 L 52 55 Z" fill="#86efac" stroke="#16a34a" stroke-width="2"/>
             <circle cx="34" cy="45" r="16" fill="#22c55e" stroke="#15803d" stroke-width="1.8"/>
             <circle cx="66" cy="45" r="16" fill="#22c55e" stroke="#15803d" stroke-width="1.8"/>
             <circle cx="50" cy="32" r="18" fill="#16a34a" stroke="#15803d" stroke-width="1.8"/>
-            <text x="50" y="104" font-size="12" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">BROCCOLI 🥦</text>
+            ${isExam ? '' : '<text x="50" y="104" font-size="12" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">BROCCOLI 🥦</text>'}
           </g>
         </svg>
       </div>
@@ -1123,10 +1115,9 @@ const SE = (function(){
             <polygon points="25,25 35,92 65,92 75,25" fill="#38bdf8" opacity="0.35" stroke="#0284c7" stroke-width="2.5"/>
             <polygon points="28,45 35,90 65,90 72,45" fill="#0284c7" opacity="0.75"/>
             <ellipse cx="50" cy="45" rx="22" ry="6" fill="#7dd3fc"/>
-            <!-- Droplets -->
             <circle cx="15" cy="40" r="4" fill="#38bdf8"/>
             <circle cx="85" cy="50" r="5" fill="#38bdf8"/>
-            <text x="50" y="112" font-size="13" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">CLEAN WATER 💧</text>
+            ${isExam ? '' : '<text x="50" y="112" font-size="13" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">CLEAN WATER 💧</text>'}
           </g>
         </svg>
       </div>
@@ -1137,17 +1128,15 @@ const SE = (function(){
     cleanAirBreathe: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
-          <!-- Green Tree -->
           <g transform="translate(120, 12)">
             <rect x="34" y="55" width="12" height="35" rx="3" fill="#78350f"/>
             <polygon points="40,15 15,48 65,48" fill="#15803d" stroke="#166534" stroke-width="2"/>
             <polygon points="40,32 18,62 62,62" fill="#16a34a" stroke="#166534" stroke-width="2"/>
           </g>
-          <!-- Oxygen breeze swirls -->
           <g transform="translate(210, 20)">
             <path d="M 0 30 Q 30 15 60 30 Q 90 45 120 30" stroke="#38bdf8" stroke-width="3" fill="none" stroke-linecap="round"/>
             <path d="M 15 50 Q 45 35 75 50 Q 105 65 135 50" stroke="#00f5d4" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-            <text x="70" y="85" font-size="13" font-weight="900" fill="#a7f3d0" text-anchor="middle" font-family="var(--fd)">FRESH AIR & OXYGEN 🌬️</text>
+            ${isExam ? '' : '<text x="70" y="85" font-size="13" font-weight="900" fill="#a7f3d0" text-anchor="middle" font-family="var(--fd)">FRESH AIR & OXYGEN 🌬️</text>'}
           </g>
         </svg>
       </div>
@@ -1159,7 +1148,6 @@ const SE = (function(){
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
           <ellipse cx="230" cy="120" rx="210" ry="24" fill="#065f46" stroke="#10b981" stroke-width="1.8"/>
-          <!-- Detailed Cute Cow (Left) -->
           <g transform="translate(70, 10)">
             <path d="M 28 65 Q 12 70 16 85" stroke="#475569" stroke-width="3" fill="none"/>
             <circle cx="16" cy="85" r="4.5" fill="#1e293b"/>
@@ -1180,17 +1168,11 @@ const SE = (function(){
             <ellipse cx="98" cy="38" rx="8" ry="4.5" fill="#fbcfe8" stroke="#334155" stroke-width="1.8" transform="rotate(-20 98 38)"/>
             <ellipse cx="138" cy="38" rx="8" ry="4.5" fill="#fbcfe8" stroke="#334155" stroke-width="1.8" transform="rotate(20 138 38)"/>
             <circle cx="112" cy="44" r="3.8" fill="#1e293b"/>
-            <circle cx="113" cy="42.5" r="1.4" fill="#fff"/>
             <circle cx="128" cy="44" r="3.8" fill="#1e293b"/>
-            <circle cx="129" cy="42.5" r="1.4" fill="#fff"/>
             <ellipse cx="120" cy="58" rx="16" ry="10" fill="#fbcfe8" stroke="#f472b6" stroke-width="2"/>
-            <circle cx="115" cy="58" r="2.2" fill="#be185d"/>
-            <circle cx="125" cy="58" r="2.2" fill="#be185d"/>
             <path d="M 122 62 Q 135 68 145 64 M 122 62 Q 138 74 148 76" stroke="#22c55e" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <text x="75" y="125" font-size="13" font-weight="900" fill="#6ee7b7" text-anchor="middle" font-family="var(--fd)">COW 🐮</text>
+            ${isExam ? '' : '<text x="75" y="125" font-size="13" font-weight="900" fill="#6ee7b7" text-anchor="middle" font-family="var(--fd)">COW 🐮</text>'}
           </g>
-
-          <!-- Lush Field Grass (Right) -->
           <g transform="translate(280, 20)">
             <g stroke="#22c55e" stroke-width="4.5" stroke-linecap="round" fill="none">
               <path d="M 20 85 Q 10 40 18 10"/>
@@ -1203,7 +1185,7 @@ const SE = (function(){
             <circle cx="18" cy="10" r="4.5" fill="#fde047"/>
             <circle cx="52" cy="14" r="4.5" fill="#fde047"/>
             <circle cx="85" cy="24" r="4.5" fill="#fde047"/>
-            <text x="50" y="115" font-size="13" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">LUSH GRASS 🌿</text>
+            ${isExam ? '' : '<text x="50" y="115" font-size="13" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">LUSH GRASS 🌿</text>'}
           </g>
         </svg>
       </div>
@@ -1214,87 +1196,73 @@ const SE = (function(){
     elephantHerbivore: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
-          <!-- Elephant (Left) -->
           <g transform="translate(80, 12)">
             <ellipse cx="65" cy="62" rx="48" ry="36" fill="#94a3b8" stroke="#64748b" stroke-width="2.5"/>
             <circle cx="108" cy="46" r="24" fill="#94a3b8" stroke="#64748b" stroke-width="2.5"/>
-            <!-- Big Flapping Ear -->
             <ellipse cx="90" cy="46" rx="16" ry="24" fill="#cbd5e1" stroke="#64748b" stroke-width="2"/>
-            <!-- Long Curved Trunk curling up holding leaves -->
             <path d="M 124 50 Q 140 65 135 85 Q 125 95 118 85" stroke="#94a3b8" stroke-width="12" fill="none" stroke-linecap="round"/>
             <circle cx="114" cy="42" r="3.5" fill="#0f172a"/>
-            <text x="65" y="118" font-size="13" font-weight="900" fill="#cbd5e1" text-anchor="middle" font-family="var(--fd)">ELEPHANT 🐘</text>
+            ${isExam ? '' : '<text x="65" y="118" font-size="13" font-weight="900" fill="#cbd5e1" text-anchor="middle" font-family="var(--fd)">ELEPHANT 🐘</text>'}
           </g>
-          <!-- Acacia Leaves & Bananas (Right) -->
           <g transform="translate(260, 20)">
             <path d="M 20 60 Q 50 30 80 40 M 20 60 Q 40 70 70 65" stroke="#22c55e" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <circle cx="40" cy="35" r="6" fill="#16a34a"/>
-            <circle cx="65" cy="38" r="6" fill="#16a34a"/>
             <text x="50" y="85" font-size="28" text-anchor="middle">🍌🍌</text>
-            <text x="50" y="112" font-size="13" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">LEAVES & FRUIT 🌿</text>
+            ${isExam ? '' : '<text x="50" y="112" font-size="13" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">LEAVES & FRUIT 🌿</text>'}
           </g>
         </svg>
       </div>
       ${isExam ? '' : '<div class="disp-pill">🐘 HERBIVORE · EATS PLANTS, LEAVES & SWEET BANANAS</div>'}
     `,
 
-    // Fluffy Bunny Rabbit Nibbling Clover & Carrots
+    // Fluffy Bunny Rabbit
     rabbitHerbivore: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
           <g transform="translate(90, 14)">
             <ellipse cx="50" cy="65" rx="34" ry="26" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
             <circle cx="72" cy="45" r="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
-            <!-- Tall Ears -->
             <ellipse cx="64" cy="18" rx="6" ry="18" fill="#fed7aa" stroke="#cbd5e1" stroke-width="1.8"/>
             <ellipse cx="78" cy="18" rx="6" ry="18" fill="#fed7aa" stroke="#cbd5e1" stroke-width="1.8"/>
             <circle cx="76" cy="42" r="3" fill="#0f172a"/>
-            <text x="50" y="112" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle" font-family="var(--fd)">RABBIT 🐰</text>
+            ${isExam ? '' : '<text x="50" y="112" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle" font-family="var(--fd)">RABBIT 🐰</text>'}
           </g>
           <g transform="translate(250, 20)">
             <text x="50" y="65" font-size="46" text-anchor="middle">🥕🍀</text>
-            <text x="50" y="108" font-size="13" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">CARROT & CLOVER 🥕</text>
+            ${isExam ? '' : '<text x="50" y="108" font-size="13" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">CARROT & CLOVER 🥕</text>'}
           </g>
         </svg>
       </div>
       ${isExam ? '' : '<div class="disp-pill">🐰 HERBIVORE · EATS PLANTS, GREENS & VEGETABLES</div>'}
     `,
 
-    // Lion Mascot Enjoying Steak Platter
+    // Lion Mascot with Steak Platter
     lionEatingMeat: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
           <g transform="translate(65, 12)">
             <circle cx="65" cy="54" r="46" fill="#f59e0b" stroke="#b45309" stroke-width="2.5"/>
-            <circle cx="28" cy="38" r="14" fill="#d97706"/>
-            <circle cx="102" cy="38" r="14" fill="#d97706"/>
-            <circle cx="28" cy="70" r="14" fill="#d97706"/>
-            <circle cx="102" cy="70" r="14" fill="#d97706"/>
+            <circle cx="28" cy="38" r="14" fill="#d97706"/><circle cx="102" cy="38" r="14" fill="#d97706"/>
+            <circle cx="28" cy="70" r="14" fill="#d97706"/><circle cx="102" cy="70" r="14" fill="#d97706"/>
             <circle cx="65" cy="16" r="14" fill="#d97706"/>
-            <circle cx="36" cy="26" r="9" fill="#f59e0b"/><circle cx="36" cy="26" r="5" fill="#fde047"/>
-            <circle cx="94" cy="26" r="9" fill="#f59e0b"/><circle cx="94" cy="26" r="5" fill="#fde047"/>
+            <circle cx="36" cy="26" r="9" fill="#f59e0b"/><circle cx="94" cy="26" r="9" fill="#f59e0b"/>
             <circle cx="65" cy="56" r="32" fill="#fde047"/>
-            <circle cx="44" cy="64" r="6" fill="#fb7185" opacity="0.6"/>
-            <circle cx="86" cy="64" r="6" fill="#fb7185" opacity="0.6"/>
+            <circle cx="44" cy="64" r="6" fill="#fb7185" opacity="0.6"/><circle cx="86" cy="64" r="6" fill="#fb7185" opacity="0.6"/>
             <circle cx="52" cy="52" r="11" fill="rgba(0,245,212,0.3)" stroke="#00f5d4" stroke-width="2.2"/>
             <circle cx="78" cy="52" r="11" fill="rgba(0,245,212,0.3)" stroke="#00f5d4" stroke-width="2.2"/>
             <line x1="63" y1="52" x2="67" y2="52" stroke="#00f5d4" stroke-width="2.2"/>
-            <circle cx="52" cy="52" r="4" fill="#1e293b"/><circle cx="54" cy="50" r="1.5" fill="#ffffff"/>
-            <circle cx="78" cy="52" r="4" fill="#1e293b"/><circle cx="80" cy="50" r="1.5" fill="#ffffff"/>
+            <circle cx="52" cy="52" r="4" fill="#1e293b"/><circle cx="78" cy="52" r="4" fill="#1e293b"/>
             <polygon points="65,62 61,66 69,66" fill="#78350f"/>
             <path d="M 58 70 Q 65 76 72 70" stroke="#78350f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <text x="65" y="118" font-size="13" font-weight="900" fill="#fde047" text-anchor="middle" font-family="var(--fd)">LION 🦁</text>
+            ${isExam ? '' : '<text x="65" y="118" font-size="13" font-weight="900" fill="#fde047" text-anchor="middle" font-family="var(--fd)">LION 🦁</text>'}
           </g>
-
           <g transform="translate(255, 14)">
             <ellipse cx="75" cy="66" rx="72" ry="26" fill="#475569" stroke="#94a3b8" stroke-width="2.5"/>
-            <ellipse cx="75" cy="64" rx="66" ry="22" fill="#334155"/>
             <ellipse cx="72" cy="56" rx="52" ry="28" fill="#dc2626" stroke="#991b1b" stroke-width="2.5"/>
             <ellipse cx="76" cy="54" rx="42" ry="20" fill="#b91c1c"/>
             <ellipse cx="50" cy="52" rx="10" ry="7" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
             <line x1="45" y1="46" x2="105" y2="56" stroke="#7f1d1d" stroke-width="3" stroke-linecap="round"/>
             <line x1="52" y1="58" x2="98" y2="66" stroke="#7f1d1d" stroke-width="3" stroke-linecap="round"/>
-            <text x="75" y="116" font-size="13" font-weight="900" fill="#fca5a5" text-anchor="middle" font-family="var(--fd)">PRIME STEAK 🥩</text>
+            ${isExam ? '' : '<text x="75" y="116" font-size="13" font-weight="900" fill="#fca5a5" text-anchor="middle" font-family="var(--fd)">PRIME STEAK 🥩</text>'}
           </g>
         </svg>
       </div>
@@ -1305,20 +1273,18 @@ const SE = (function(){
     eagleCarnivore: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
-          <!-- Eagle (Left) -->
           <g transform="translate(90, 16)">
             <path d="M 20 40 Q 50 10 80 40 L 70 65 L 30 65 Z" fill="#78350f" stroke="#451a03" stroke-width="2"/>
             <circle cx="50" cy="30" r="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.8"/>
             <polygon points="62,30 76,34 62,38" fill="#f59e0b"/>
             <circle cx="54" cy="28" r="3" fill="#0f172a"/>
-            <text x="50" y="104" font-size="13" font-weight="900" fill="#fde68a" text-anchor="middle" font-family="var(--fd)">EAGLE 🦅</text>
+            ${isExam ? '' : '<text x="50" y="104" font-size="13" font-weight="900" fill="#fde68a" text-anchor="middle" font-family="var(--fd)">EAGLE 🦅</text>'}
           </g>
-          <!-- River Fish Prey (Right) -->
           <g transform="translate(250, 16)">
             <ellipse cx="50" cy="50" rx="42" ry="18" fill="#38bdf8" stroke="#0284c7" stroke-width="2"/>
             <polygon points="86,50 105,36 105,64" fill="#0284c7"/>
             <circle cx="30" cy="46" r="3.5" fill="#0f172a"/>
-            <text x="50" y="104" font-size="13" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">RIVER FISH 🐟</text>
+            ${isExam ? '' : '<text x="50" y="104" font-size="13" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">RIVER FISH 🐟</text>'}
           </g>
         </svg>
       </div>
@@ -1329,84 +1295,70 @@ const SE = (function(){
     bearOmnivore: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
-          <!-- Brown Bear (Left) -->
           <g transform="translate(75, 12)">
             <ellipse cx="60" cy="62" rx="42" ry="32" fill="#78350f" stroke="#451a03" stroke-width="2.5"/>
             <circle cx="85" cy="42" r="22" fill="#78350f" stroke="#451a03" stroke-width="2.5"/>
-            <circle cx="72" cy="24" r="8" fill="#451a03"/>
-            <circle cx="96" cy="24" r="8" fill="#451a03"/>
+            <circle cx="72" cy="24" r="8" fill="#451a03"/><circle cx="96" cy="24" r="8" fill="#451a03"/>
             <ellipse cx="94" cy="46" rx="10" ry="7" fill="#d97706"/>
             <circle cx="96" cy="44" r="3" fill="#1e293b"/>
-            <circle cx="85" cy="38" r="3" fill="#1e293b"/>
-            <text x="60" y="118" font-size="13" font-weight="900" fill="#fde68a" text-anchor="middle" font-family="var(--fd)">BROWN BEAR 🐻</text>
+            ${isExam ? '' : '<text x="60" y="118" font-size="13" font-weight="900" fill="#fde68a" text-anchor="middle" font-family="var(--fd)">BROWN BEAR 🐻</text>'}
           </g>
-          <!-- Fish + Berries (Right) -->
           <g transform="translate(255, 16)">
             <ellipse cx="40" cy="42" rx="30" ry="14" fill="#38bdf8" stroke="#0284c7" stroke-width="1.8"/>
             <polygon points="66,42 80,32 80,52" fill="#0284c7"/>
-            <circle cx="26" cy="40" r="2.5" fill="#0f172a"/>
-            <!-- Wild Berries -->
             <circle cx="45" cy="72" r="10" fill="#a855f7" stroke="#7e22ce" stroke-width="1.5"/>
             <circle cx="62" cy="74" r="9" fill="#9333ea" stroke="#7e22ce" stroke-width="1.5"/>
-            <circle cx="53" cy="62" r="8" fill="#c084fc"/>
-            <text x="50" y="112" font-size="13" font-weight="900" fill="#d8b4fe" text-anchor="middle" font-family="var(--fd)">FISH & BERRIES 🐟🫐</text>
+            ${isExam ? '' : '<text x="50" y="112" font-size="13" font-weight="900" fill="#d8b4fe" text-anchor="middle" font-family="var(--fd)">FISH & BERRIES 🐟🫐</text>'}
           </g>
         </svg>
       </div>
       ${isExam ? '' : '<div class="disp-pill">🐻 OMNIVORE · EATS BOTH PLANTS & MEAT</div>'}
     `,
 
-    // Happy Pig in Pen (Corn + Earthworms)
+    // Happy Pig in Pen
     pigOmnivore: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
           <g transform="translate(80, 14)">
             <ellipse cx="55" cy="62" rx="38" ry="28" fill="#fbcfe8" stroke="#f472b6" stroke-width="2.5"/>
             <circle cx="82" cy="50" r="18" fill="#fbcfe8" stroke="#f472b6" stroke-width="2"/>
-            <polygon points="70,36 78,24 84,36" fill="#f472b6"/>
             <ellipse cx="88" cy="54" rx="8" ry="5" fill="#f472b6"/>
-            <circle cx="86" cy="54" r="1.5" fill="#831843"/>
-            <circle cx="90" cy="54" r="1.5" fill="#831843"/>
             <circle cx="80" cy="46" r="2.5" fill="#0f172a"/>
-            <text x="55" y="112" font-size="13" font-weight="900" fill="#fbcfe8" text-anchor="middle" font-family="var(--fd)">PIG 🐷</text>
+            ${isExam ? '' : '<text x="55" y="112" font-size="13" font-weight="900" fill="#fbcfe8" text-anchor="middle" font-family="var(--fd)">PIG 🐷</text>'}
           </g>
           <g transform="translate(255, 18)">
             <text x="50" y="52" font-size="34" text-anchor="middle">🌽🪱</text>
-            <text x="50" y="104" font-size="13" font-weight="900" fill="#fef08a" text-anchor="middle" font-family="var(--fd)">CORN & WORMS 🌽</text>
+            ${isExam ? '' : '<text x="50" y="104" font-size="13" font-weight="900" fill="#fef08a" text-anchor="middle" font-family="var(--fd)">CORN & WORMS 🌽</text>'}
           </g>
         </svg>
       </div>
       ${isExam ? '' : '<div class="disp-pill">🐷 OMNIVORE · EATS BOTH PLANTS & MEAT</div>'}
     `,
 
-    // Teeth Comparison: Flat Molars (Plants) vs Sharp Canines (Meat)
+    // Teeth Comparison
     teethComparison: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
-          <!-- Flat Teeth / Herbivore -->
           <g transform="translate(70, 16)">
             <rect x="10" y="30" width="30" height="40" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
             <rect x="44" y="30" width="30" height="40" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
             <line x1="10" y1="42" x2="74" y2="42" stroke="#cbd5e1" stroke-width="2"/>
-            <text x="42" y="96" font-size="12" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">FLAT MOLARS (PLANTS)</text>
+            <text x="42" y="96" font-size="12" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Flat Molars' : 'FLAT MOLARS (PLANTS)'}</text>
           </g>
-
           <g transform="translate(215, 54)">
             <text x="0" y="8" font-size="20" font-weight="bold" fill="#ffd166" text-anchor="middle">VS</text>
           </g>
-
-          <!-- Sharp Canine Fangs / Carnivore -->
           <g transform="translate(265, 16)">
             <polygon points="20,30 40,75 50,30" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
             <polygon points="54,30 68,75 78,30" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
-            <text x="50" y="96" font-size="12" font-weight="900" fill="#fca5a5" text-anchor="middle" font-family="var(--fd)">SHARP CANINES (MEAT)</text>
+            <text x="50" y="96" font-size="12" font-weight="900" fill="#fca5a5" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Sharp Canines' : 'SHARP CANINES (MEAT)'}</text>
           </g>
         </svg>
       </div>
       ${isExam ? '' : '<div class="disp-pill">🦷 TEETH ADAPTATION · FLAT (HERBIVORE) VS SHARP (CARNIVORE)</div>'}
     `,
 
-    // Chicken Life Cycle (Exam vs Lab: Exam Mode HIDES names and displays Stage 1 ➔ Stage 2 ➔ Stage 3 ➔ Stage 4)
+    // Chicken Life Cycle (Exam Mode: ZERO names, ONLY neutral Stage 1 ➔ Stage 2 ➔ Stage 3 ➔ Stage 4)
     chickenCycle4: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 480 135">
@@ -1460,7 +1412,7 @@ const SE = (function(){
       ${isExam ? '' : '<div class="disp-pill">🐓 CHICKEN 4-STAGE LIFE CYCLE</div>'}
     `,
 
-    // Butterfly Metamorphosis
+    // Butterfly Metamorphosis (Exam Mode: ZERO names, ONLY neutral Stage 1 ➔ Stage 2 ➔ Stage 3 ➔ Stage 4)
     butterflyCycle4: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 480 135">
@@ -1469,7 +1421,6 @@ const SE = (function(){
             <ellipse cx="30" cy="46" rx="26" ry="14" fill="#16a34a" stroke="#15803d" stroke-width="2" transform="rotate(-15 30 46)"/>
             <circle cx="24" cy="42" r="3.5" fill="#fef08a" stroke="#ca8a04" stroke-width="1"/>
             <circle cx="32" cy="45" r="3.5" fill="#fef08a" stroke="#ca8a04" stroke-width="1"/>
-            <circle cx="28" cy="49" r="3.5" fill="#fef08a" stroke="#ca8a04" stroke-width="1"/>
             <text x="30" y="82" font-size="12" font-weight="900" fill="#6ee7b7" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 1' : '1. Egg'}</text>
           </g>
           <text x="115" y="60" font-size="20" fill="#ffd166" font-weight="bold" text-anchor="middle">➔</text>
@@ -1491,8 +1442,6 @@ const SE = (function(){
             <line x1="10" y1="20" x2="50" y2="20" stroke="#78350f" stroke-width="3.5" stroke-linecap="round"/>
             <line x1="30" y1="20" x2="30" y2="28" stroke="#ca8a04" stroke-width="2"/>
             <path d="M 30 28 Q 44 42 34 62 Q 30 68 26 62 Q 16 42 30 28 Z" fill="#10b981" stroke="#047857" stroke-width="2"/>
-            <circle cx="28" cy="40" r="1.8" fill="#ffd166"/>
-            <circle cx="32" cy="48" r="1.8" fill="#ffd166"/>
             <text x="30" y="87" font-size="12" font-weight="900" fill="#6ee7b7" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 3' : '3. Pupa'}</text>
           </g>
           <text x="325" y="60" font-size="20" fill="#ffd166" font-weight="bold" text-anchor="middle">➔</text>
@@ -1502,8 +1451,6 @@ const SE = (function(){
             <path d="M 32 44 Q 10 18 14 38 Q 8 58 32 48 Z" fill="#f97316" stroke="#c2410c" stroke-width="1.8"/>
             <path d="M 38 44 Q 60 18 56 38 Q 62 58 38 48 Z" fill="#f97316" stroke="#c2410c" stroke-width="1.8"/>
             <ellipse cx="35" cy="45" rx="3.5" ry="16" fill="#1e293b"/>
-            <path d="M 34 32 Q 28 22 24 24" stroke="#1e293b" stroke-width="1.5" fill="none"/>
-            <path d="M 36 32 Q 42 22 46 24" stroke="#1e293b" stroke-width="1.5" fill="none"/>
             <text x="35" y="87" font-size="12" font-weight="900" fill="#f472b6" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 4' : '4. Butterfly'}</text>
           </g>
         </svg>
@@ -1511,7 +1458,7 @@ const SE = (function(){
       ${isExam ? '' : '<div class="disp-pill">🦋 BUTTERFLY 4-STAGE METAMORPHOSIS</div>'}
     `,
 
-    // Frog Life Cycle
+    // Frog Life Cycle (Exam Mode: ZERO names, ONLY neutral Stage 1 ➔ Stage 2 ➔ Stage 3 ➔ Stage 4)
     frogCycle4: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 480 135">
@@ -1522,8 +1469,6 @@ const SE = (function(){
             <circle cx="22" cy="42" r="2" fill="#0f172a"/>
             <circle cx="34" cy="40" r="4.5" fill="#f8fafc" stroke="#0284c7" stroke-width="1"/>
             <circle cx="34" cy="40" r="2" fill="#0f172a"/>
-            <circle cx="28" cy="50" r="4.5" fill="#f8fafc" stroke="#0284c7" stroke-width="1"/>
-            <circle cx="28" cy="50" r="2" fill="#0f172a"/>
             <text x="30" y="82" font-size="12" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 1' : '1. Egg'}</text>
           </g>
           <text x="115" y="60" font-size="20" fill="#ffd166" font-weight="bold" text-anchor="middle">➔</text>
@@ -1534,7 +1479,6 @@ const SE = (function(){
             <path d="M 22 46 Q 44 42 60 46" stroke="#0284c7" stroke-width="2.5" fill="none"/>
             <ellipse cx="20" cy="46" rx="14" ry="11" fill="#0284c7" stroke="#0369a1" stroke-width="2"/>
             <circle cx="16" cy="42" r="2.5" fill="#0f172a"/>
-            <circle cx="17" cy="41" r="0.8" fill="#ffffff"/>
             <path d="M 24 38 Q 28 32 32 36 M 24 40 Q 30 38 34 42" stroke="#ef4444" stroke-width="1.8" fill="none"/>
             <text x="35" y="82" font-size="12" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 2' : '2. Tadpole'}</text>
           </g>
@@ -1556,9 +1500,9 @@ const SE = (function(){
             <ellipse cx="38" cy="62" rx="30" ry="12" fill="#059669" stroke="#047857" stroke-width="2"/>
             <ellipse cx="38" cy="45" rx="18" ry="14" fill="#22c55e" stroke="#15803d" stroke-width="2"/>
             <circle cx="28" cy="32" r="6" fill="#22c55e" stroke="#15803d" stroke-width="1.8"/>
-            <circle cx="28" cy="32" r="3" fill="#0f172a"/><circle cx="29" cy="30.5" r="1" fill="#fff"/>
+            <circle cx="28" cy="32" r="3" fill="#0f172a"/>
             <circle cx="48" cy="32" r="6" fill="#22c55e" stroke="#15803d" stroke-width="1.8"/>
-            <circle cx="48" cy="32" r="3" fill="#0f172a"/><circle cx="49" cy="30.5" r="1" fill="#fff"/>
+            <circle cx="48" cy="32" r="3" fill="#0f172a"/>
             <path d="M 28 46 Q 38 54 48 46" stroke="#15803d" stroke-width="2" fill="none" stroke-linecap="round"/>
             <text x="38" y="87" font-size="12" font-weight="900" fill="#6ee7b7" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 4' : '4. Adult Frog'}</text>
           </g>
@@ -1567,11 +1511,11 @@ const SE = (function(){
       ${isExam ? '' : '<div class="disp-pill">🐸 FROG 4-STAGE LIFE CYCLE</div>'}
     `,
 
-    // Flowering Plant 4 Stages (Seed ➔ Sprout ➔ Seedling ➔ Adult Flowering Plant)
+    // Flowering Plant 4 Stages (Exam Mode: ZERO names, ONLY neutral Stage 1 ➔ Stage 2 ➔ Stage 3 ➔ Stage 4)
     plantCycle4: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 480 135">
-          <!-- Stage 1: Seed in dark rich soil -->
+          <!-- Stage 1 -->
           <g transform="translate(25, 20)">
             <ellipse cx="30" cy="62" rx="28" ry="12" fill="#78350f"/>
             <ellipse cx="30" cy="46" rx="14" ry="10" fill="#d97706" stroke="#92400e" stroke-width="2" transform="rotate(-15 30 46)"/>
@@ -1579,7 +1523,7 @@ const SE = (function(){
           </g>
           <text x="115" y="60" font-size="20" fill="#ffd166" font-weight="bold" text-anchor="middle">➔</text>
 
-          <!-- Stage 2: Sprout emerging with tiny root & shoot -->
+          <!-- Stage 2 -->
           <g transform="translate(130, 20)">
             <ellipse cx="30" cy="62" rx="28" ry="12" fill="#78350f"/>
             <path d="M 30 50 Q 25 35 20 28 M 30 50 Q 35 35 42 26" stroke="#22c55e" stroke-width="3" fill="none" stroke-linecap="round"/>
@@ -1589,7 +1533,7 @@ const SE = (function(){
           </g>
           <text x="220" y="60" font-size="20" fill="#ffd166" font-weight="bold" text-anchor="middle">➔</text>
 
-          <!-- Stage 3: Young Seedling with leaves & stem -->
+          <!-- Stage 3 -->
           <g transform="translate(235, 18)">
             <line x1="30" y1="65" x2="30" y2="20" stroke="#16a34a" stroke-width="3.5" stroke-linecap="round"/>
             <ellipse cx="18" cy="38" rx="14" ry="7" fill="#22c55e" stroke="#15803d" stroke-width="1.5" transform="rotate(-25 18 38)"/>
@@ -1598,12 +1542,11 @@ const SE = (function(){
           </g>
           <text x="325" y="60" font-size="20" fill="#ffd166" font-weight="bold" text-anchor="middle">➔</text>
 
-          <!-- Stage 4: Adult Flowering Plant with Blossom -->
+          <!-- Stage 4 -->
           <g transform="translate(340, 14)">
             <line x1="35" y1="70" x2="35" y2="25" stroke="#15803d" stroke-width="4" stroke-linecap="round"/>
             <ellipse cx="20" cy="46" rx="14" ry="7" fill="#22c55e" transform="rotate(-20 20 46)"/>
             <ellipse cx="50" cy="40" rx="14" ry="7" fill="#22c55e" transform="rotate(20 50 40)"/>
-            <!-- Colorful Flower Petals -->
             <circle cx="28" cy="20" r="7" fill="#ec4899"/>
             <circle cx="42" cy="20" r="7" fill="#ec4899"/>
             <circle cx="35" cy="12" r="7" fill="#ec4899"/>
@@ -1616,92 +1559,39 @@ const SE = (function(){
       ${isExam ? '' : '<div class="disp-pill">🌱 PLANT 4-STAGE LIFE CYCLE · SEED TO FLOWER</div>'}
     `,
 
-    // Mosquito Life Cycle (Egg in water ➔ Wriggler larva ➔ Tumbler pupa ➔ Adult Mosquito)
-    mosquitoCycle4: (isExam = false) => `
-      <div class="disp-spotlight">
-        <svg viewBox="0 0 480 135">
-          <!-- Stage 1: Floating Egg Raft -->
-          <g transform="translate(25, 20)">
-            <line x1="5" y1="45" x2="55" y2="45" stroke="#38bdf8" stroke-width="2.5"/>
-            <rect x="18" y="38" width="24" height="14" rx="3" fill="#334155" stroke="#1e293b" stroke-width="1.5"/>
-            <text x="30" y="84" font-size="12" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 1' : '1. Egg'}</text>
-          </g>
-          <text x="115" y="60" font-size="20" fill="#ffd166" font-weight="bold" text-anchor="middle">➔</text>
-
-          <!-- Stage 2: Wriggler Larva swimming upside down -->
-          <g transform="translate(130, 20)">
-            <line x1="5" y1="25" x2="55" y2="25" stroke="#38bdf8" stroke-width="2.5"/>
-            <path d="M 30 25 L 30 40 Q 25 55 35 65" stroke="#64748b" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <circle cx="35" cy="65" r="4" fill="#334155"/>
-            <text x="30" y="84" font-size="12" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 2' : '2. Wriggler'}</text>
-          </g>
-          <text x="220" y="60" font-size="20" fill="#ffd166" font-weight="bold" text-anchor="middle">➔</text>
-
-          <!-- Stage 3: Tumbler Pupa comma shaped -->
-          <g transform="translate(235, 18)">
-            <line x1="5" y1="27" x2="55" y2="27" stroke="#38bdf8" stroke-width="2.5"/>
-            <circle cx="28" cy="38" r="10" fill="#475569"/>
-            <path d="M 28 48 Q 38 52 32 60" stroke="#475569" stroke-width="3.5" fill="none"/>
-            <text x="30" y="84" font-size="12" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 3' : '3. Tumbler'}</text>
-          </g>
-          <text x="325" y="60" font-size="20" fill="#ffd166" font-weight="bold" text-anchor="middle">➔</text>
-
-          <!-- Stage 4: Adult Flying Mosquito -->
-          <g transform="translate(340, 16)">
-            <ellipse cx="35" cy="45" rx="4" ry="16" fill="#1e293b"/>
-            <line x1="35" y1="30" x2="35" y2="18" stroke="#0f172a" stroke-width="1.8"/>
-            <ellipse cx="22" cy="40" rx="14" ry="5" fill="#bae6fd" opacity="0.7" transform="rotate(-30 22 40)"/>
-            <ellipse cx="48" cy="40" rx="14" ry="5" fill="#bae6fd" opacity="0.7" transform="rotate(30 48 40)"/>
-            <text x="35" y="88" font-size="12" font-weight="900" fill="#fca5a5" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 4' : '4. Mosquito'}</text>
-          </g>
-        </svg>
-      </div>
-      ${isExam ? '' : '<div class="disp-pill">🦟 MOSQUITO 4-STAGE LIFE CYCLE · WATER HABITAT</div>'}
-    `,
-
-    // Human Growth 5 Stages (Baby ➔ Child ➔ Adolescent ➔ Adult ➔ Senior)
+    // Human Growth 5 Stages (Exam Mode: ZERO names, ONLY neutral Stage 1..5)
     humanCycle5: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 480 135">
-          <!-- Stage 1: Baby -->
           <g transform="translate(20, 20)">
             <circle cx="25" cy="35" r="14" fill="#fed7aa"/>
             <ellipse cx="25" cy="56" rx="16" ry="12" fill="#bae6fd"/>
             <text x="25" y="84" font-size="11" font-weight="900" fill="#fde68a" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 1' : '1. Baby'}</text>
           </g>
           <text x="85" y="55" font-size="16" fill="#ffd166" font-weight="bold">➔</text>
-
-          <!-- Stage 2: Child -->
           <g transform="translate(100, 16)">
             <circle cx="25" cy="30" r="13" fill="#fed7aa"/>
             <rect x="15" y="44" width="20" height="25" rx="4" fill="#4ade80"/>
             <text x="25" y="88" font-size="11" font-weight="900" fill="#86efac" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 2' : '2. Child'}</text>
           </g>
           <text x="175" y="55" font-size="16" fill="#ffd166" font-weight="bold">➔</text>
-
-          <!-- Stage 3: Adolescent -->
           <g transform="translate(190, 14)">
             <circle cx="25" cy="26" r="13" fill="#fed7aa"/>
             <rect x="14" y="40" width="22" height="34" rx="4" fill="#a855f7"/>
             <text x="25" y="90" font-size="11" font-weight="900" fill="#d8b4fe" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 3' : '3. Teen'}</text>
           </g>
           <text x="268" y="55" font-size="16" fill="#ffd166" font-weight="bold">➔</text>
-
-          <!-- Stage 4: Adult -->
           <g transform="translate(285, 10)">
             <circle cx="25" cy="24" r="14" fill="#fed7aa"/>
             <rect x="13" y="38" width="24" height="42" rx="4" fill="#0284c7"/>
             <text x="25" y="94" font-size="11" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 4' : '4. Adult'}</text>
           </g>
           <text x="365" y="55" font-size="16" fill="#ffd166" font-weight="bold">➔</text>
-
-          <!-- Stage 5: Senior -->
           <g transform="translate(385, 12)">
             <circle cx="25" cy="25" r="14" fill="#e2e8f0"/>
             <circle cx="21" cy="24" r="3.5" fill="none" stroke="#64748b"/>
             <circle cx="29" cy="24" r="3.5" fill="none" stroke="#64748b"/>
             <rect x="13" y="40" width="24" height="38" rx="4" fill="#64748b"/>
-            <line x1="39" y1="45" x2="42" y2="78" stroke="#ca8a04" stroke-width="2.5"/>
             <text x="25" y="94" font-size="11" font-weight="900" fill="#cbd5e1" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Stage 5' : '5. Senior'}</text>
           </g>
         </svg>
@@ -1733,7 +1623,6 @@ const SE = (function(){
             <ellipse cx="40" cy="20" rx="35" ry="6" fill="#38bdf8" opacity="0.9"/>
           </g>
 
-          <!-- Copper Skillet Pan -->
           <g transform="translate(110, 18)">
             <path d="M 180 50 L 260 30" stroke="#78350f" stroke-width="12" stroke-linecap="round"/>
             <ellipse cx="110" cy="54" rx="95" ry="34" fill="url(#panCopper)" stroke="#7c2d12" stroke-width="3"/>
@@ -1746,12 +1635,12 @@ const SE = (function(){
               <rect x="125" y="44" width="20" height="10" rx="3" fill="#451a03" stroke="#271003" stroke-width="1.2"/>
               <path d="M 80 32 Q 74 18 84 8 Q 94 -2 86 -10" stroke="rgba(255,255,255,0.75)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
               <path d="M 110 28 Q 118 14 110 4 Q 102 -6 112 -12" stroke="rgba(255,255,255,0.75)" stroke-width="3" fill="none" stroke-linecap="round"/>
-              <text x="110" y="98" font-size="12" font-weight="900" fill="#fde047" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Chocolate in Pan 🍫' : 'MELTED LIQUID CHOCOLATE 🍫💧'}</text>
+              ${isExam ? '' : '<text x="110" y="98" font-size="12" font-weight="900" fill="#fde047" text-anchor="middle" font-family="var(--fd)">MELTED LIQUID CHOCOLATE 🍫💧</text>'}
             ` : `
               <rect x="68" y="36" width="84" height="30" rx="5" fill="#451a03" stroke="#271003" stroke-width="2"/>
               <line x1="96" y1="36" x2="96" y2="66" stroke="#78350f" stroke-width="1.8"/>
               <line x1="124" y1="36" x2="124" y2="66" stroke="#78350f" stroke-width="1.8"/>
-              <text x="110" y="98" font-size="12" font-weight="900" fill="#93c5fd" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Chocolate in Pan 🍫' : 'SOLID CHOCOLATE BAR 🍫'}</text>
+              ${isExam ? '' : '<text x="110" y="98" font-size="12" font-weight="900" fill="#93c5fd" text-anchor="middle" font-family="var(--fd)">SOLID CHOCOLATE BAR 🍫</text>'}
             `}
           </g>
         </svg>
@@ -1759,48 +1648,39 @@ const SE = (function(){
       ${isExam ? '' : '<div class="disp-pill">🔥 THERMAL ENERGY · HEAT CAUSES MELTING (SOLID ➔ LIQUID)</div>'}
     `,
 
-    // Ice Cubes Melting in Warm Sunshine (Solid ➔ Liquid, Reversible)
+    // Ice Cubes Melting in Warm Sunshine
     iceMelting: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
-          <!-- Warm Smiling Sun (Left) -->
           <g transform="translate(90, 18)">
             <circle cx="35" cy="35" r="22" fill="#facc15" stroke="#eab308" stroke-width="2"/>
             <line x1="35" y1="5" x2="35" y2="0" stroke="#facc15" stroke-width="3" stroke-linecap="round"/>
             <line x1="35" y1="65" x2="35" y2="70" stroke="#facc15" stroke-width="3" stroke-linecap="round"/>
             <line x1="5" y1="35" x2="0" y2="35" stroke="#facc15" stroke-width="3" stroke-linecap="round"/>
             <line x1="65" y1="35" x2="70" y2="35" stroke="#facc15" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="28" cy="32" r="2" fill="#854d0e"/><circle cx="42" cy="32" r="2" fill="#854d0e"/>
-            <path d="M 28 42 Q 35 48 42 42" stroke="#854d0e" stroke-width="2" fill="none"/>
           </g>
-
-          <!-- Arrow -->
           <g transform="translate(195, 54)">
             <text x="0" y="8" font-size="24" fill="#ffd166" font-weight="bold" text-anchor="middle">➔</text>
           </g>
-
-          <!-- Melting Ice Cubes into Water Puddle (Right) -->
           <g transform="translate(250, 18)">
             <ellipse cx="60" cy="65" rx="55" ry="16" fill="#38bdf8" opacity="0.6"/>
-            <!-- Ice cube 1 -->
             <rect x="35" y="32" width="28" height="28" rx="4" fill="#e0f2fe" stroke="#38bdf8" stroke-width="2" transform="rotate(12 49 46)"/>
-            <!-- Ice cube 2 -->
             <rect x="58" y="38" width="24" height="24" rx="4" fill="#e0f2fe" stroke="#38bdf8" stroke-width="2" transform="rotate(-15 70 50)"/>
-            <text x="60" y="102" font-size="12" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">MELTING ICE 🧊💧</text>
+            ${isExam ? '' : '<text x="60" y="102" font-size="12" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">MELTING ICE 🧊💧</text>'}
           </g>
         </svg>
       </div>
       ${isExam ? '' : '<div class="disp-pill">☀️ HEAT MELTS SOLID ICE INTO LIQUID WATER · REVERSIBLE</div>'}
     `,
 
-    // Water States: Freezing (Liquid Water ➔ Solid Ice Cubes)
+    // Water States: Freezing
     waterStates: (mode = 'freezing', isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
           <g transform="translate(100, 30)">
             <circle cx="30" cy="30" r="22" fill="#38bdf8" opacity="0.4"/>
             <text x="30" y="38" font-size="34" text-anchor="middle">💧</text>
-            <text x="30" y="75" font-size="12" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">WATER</text>
+            ${isExam ? '' : '<text x="30" y="75" font-size="12" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">WATER</text>'}
           </g>
           <g transform="translate(230, 60)">
             <text x="0" y="6" font-size="24" fill="#00f5d4" font-weight="bold" text-anchor="middle">➔ ❄️ ➔</text>
@@ -1808,26 +1688,23 @@ const SE = (function(){
           <g transform="translate(300, 30)">
             <rect x="10" y="10" width="40" height="40" rx="8" fill="#e0f2fe" stroke="#38bdf8" stroke-width="2"/>
             <text x="30" y="38" font-size="30" text-anchor="middle">🧊</text>
-            <text x="30" y="75" font-size="12" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">ICE</text>
+            ${isExam ? '' : '<text x="30" y="75" font-size="12" font-weight="900" fill="#7dd3fc" text-anchor="middle" font-family="var(--fd)">ICE</text>'}
           </g>
         </svg>
       </div>
       ${isExam ? '' : '<div class="disp-pill">❄️ COOLING CAUSES FREEZING (LIQUID ➔ SOLID) · REVERSIBLE</div>'}
     `,
 
-    // Boiling Kettle with Rising Steam (Liquid ➔ Gas Evaporation)
+    // Boiling Kettle with Rising Steam
     waterBoiling: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
           <g transform="translate(180, 16)">
-            <!-- Tea Kettle -->
             <ellipse cx="50" cy="62" rx="42" ry="28" fill="#475569" stroke="#94a3b8" stroke-width="2.5"/>
             <path d="M 25 35 Q 50 15 75 35" stroke="#94a3b8" stroke-width="5" fill="none"/>
             <path d="M 85 52 L 105 38" stroke="#94a3b8" stroke-width="8" stroke-linecap="round"/>
-            <!-- Steam Vapor Clouds -->
             <path d="M 110 34 Q 120 18 135 22 Q 150 10 160 20" stroke="rgba(255,255,255,0.75)" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <path d="M 115 25 Q 128 8 140 12" stroke="rgba(255,255,255,0.75)" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <text x="50" y="112" font-size="13" font-weight="900" fill="#cbd5e1" text-anchor="middle" font-family="var(--fd)">BOILING KETTLE 🫖💨</text>
+            ${isExam ? '' : '<text x="50" y="112" font-size="13" font-weight="900" fill="#cbd5e1" text-anchor="middle" font-family="var(--fd)">BOILING KETTLE 🫖💨</text>'}
           </g>
         </svg>
       </div>
@@ -1840,17 +1717,16 @@ const SE = (function(){
         <svg viewBox="0 0 460 135">
           <g transform="translate(140, 18)">
             <ellipse cx="90" cy="56" rx="80" ry="28" fill="#334155" stroke="#64748b" stroke-width="2.5"/>
-            <!-- Melting Yellow Butter Pool -->
             <ellipse cx="90" cy="56" rx="55" ry="18" fill="#facc15" opacity="0.8"/>
             <rect x="75" y="44" width="30" height="20" rx="3" fill="#fde047" stroke="#eab308" stroke-width="1.5"/>
-            <text x="90" y="104" font-size="13" font-weight="900" fill="#fef08a" text-anchor="middle" font-family="var(--fd)">BUTTER IN WARM PAN 🧈🔥</text>
+            ${isExam ? '' : '<text x="90" y="104" font-size="13" font-weight="900" fill="#fef08a" text-anchor="middle" font-family="var(--fd)">BUTTER IN WARM PAN 🧈🔥</text>'}
           </g>
         </svg>
       </div>
       ${isExam ? '' : '<div class="disp-pill">🔥 HEAT MELTS SOLID BUTTER INTO LIQUID · REVERSIBLE</div>'}
     `,
 
-    // Frying Egg (Irreversible Chemical Change)
+    // Frying Egg (Exam Mode: ZERO words)
     friedEgg: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
@@ -1859,31 +1735,29 @@ const SE = (function(){
             <path d="M 40 50 Q 55 25 90 28 Q 130 22 155 45 Q 165 72 135 76 Q 80 82 50 68 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
             <circle cx="100" cy="50" r="18" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
             <circle cx="94" cy="45" r="4.5" fill="#ffffff" opacity="0.7"/>
-            <text x="100" y="100" font-size="12" font-weight="900" fill="#fde68a" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Cooking an Egg in Skillet 🍳' : 'COOKED FRIED EGG 🍳'}</text>
+            ${isExam ? '' : '<text x="100" y="100" font-size="12" font-weight="900" fill="#fde68a" text-anchor="middle" font-family="var(--fd)">COOKED FRIED EGG 🍳</text>'}
           </g>
         </svg>
       </div>
       ${isExam ? '' : '<div class="disp-pill">🍳 COOKING AN EGG · PERMANENT CHEMICAL CHANGE (IRREVERSIBLE)</div>'}
     `,
 
-    // Baking Bread Dough in Oven (Irreversible Chemical Change)
+    // Baking Bread Dough in Oven (Exam Mode: ZERO words)
     breadBaking: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
           <g transform="translate(150, 14)">
-            <!-- Hot Oven Window -->
             <rect x="15" y="15" width="130" height="70" rx="8" fill="#1e293b" stroke="#f97316" stroke-width="3"/>
-            <!-- Loaf baking inside -->
             <ellipse cx="80" cy="55" rx="45" ry="24" fill="#d97706" stroke="#78350f" stroke-width="2"/>
             <path d="M 50 48 Q 80 30 110 48" stroke="#fef08a" stroke-width="2" fill="none"/>
-            <text x="80" y="104" font-size="12" font-weight="900" fill="#fed7aa" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Baking Bread in Oven 🍞🔥' : 'BAKED BREAD LOAF 🍞'}</text>
+            ${isExam ? '' : '<text x="80" y="104" font-size="12" font-weight="900" fill="#fed7aa" text-anchor="middle" font-family="var(--fd)">BAKED BREAD LOAF 🍞</text>'}
           </g>
         </svg>
       </div>
       ${isExam ? '' : '<div class="disp-pill">🍞 BAKING BREAD · PERMANENT CHEMICAL CHANGE (IRREVERSIBLE)</div>'}
     `,
 
-    // Push vs Pull Forces
+    // Push vs Pull Forces (Exam Mode: ZERO words, ONLY arrow)
     cartPushPull: (action = 'push', isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
@@ -1893,11 +1767,11 @@ const SE = (function(){
             ${action === 'push' ? `
               <path d="M 100 45 L 170 45" stroke="#ffd166" stroke-width="5" stroke-linecap="round"/>
               <polygon points="182,45 165,36 165,54" fill="#ffd166"/>
-              <text x="135" y="74" font-size="12" font-weight="900" fill="#ffd166" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Forward ➔' : 'PUSH AWAY ➔'}</text>
+              ${isExam ? '' : '<text x="135" y="74" font-size="12" font-weight="900" fill="#ffd166" text-anchor="middle" font-family="var(--fd)">PUSH AWAY ➔</text>'}
             ` : `
               <path d="M 170 45 L 100 45" stroke="#00f5d4" stroke-width="5" stroke-linecap="round"/>
               <polygon points="88,45 105,36 105,54" fill="#00f5d4"/>
-              <text x="135" y="74" font-size="12" font-weight="900" fill="#00f5d4" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Toward ⬅️' : 'PULL TOWARD ⬅️'}</text>
+              ${isExam ? '' : '<text x="135" y="74" font-size="12" font-weight="900" fill="#00f5d4" text-anchor="middle" font-family="var(--fd)">PULL TOWARD ⬅️</text>'}
             `}
           </g>
         </svg>
@@ -1905,22 +1779,19 @@ const SE = (function(){
       ${isExam ? '' : `<div class="disp-pill">${action === 'push' ? '👉 PUSH MOVES OBJECT AWAY FROM BODY' : '👈 PULL MOVES OBJECT TOWARD BODY'}</div>`}
     `,
 
-    // Apple Falling Due to Gravity
+    // Apple Falling Due to Gravity (Exam Mode: ZERO words)
     appleGravity: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
-          <!-- Tree Branch -->
           <path d="M 80 20 Q 180 35 240 20" stroke="#78350f" stroke-width="6" fill="none" stroke-linecap="round"/>
           <ellipse cx="140" cy="20" rx="14" ry="6" fill="#16a34a"/>
-          <!-- Falling Apple -->
           <g transform="translate(210, 20)">
             <circle cx="20" cy="40" r="18" fill="#ef4444" stroke="#991b1b" stroke-width="2"/>
             <path d="M 20 22 Q 24 16 26 18" stroke="#78350f" stroke-width="2" fill="none"/>
             <ellipse cx="26" cy="18" rx="5" ry="3" fill="#22c55e"/>
-            <!-- Motion Trajectory Downward -->
             <line x1="20" y1="64" x2="20" y2="85" stroke="#ffd166" stroke-width="3" stroke-dasharray="4 3"/>
             <polygon points="20,95 15,82 25,82" fill="#ffd166"/>
-            <text x="20" y="112" font-size="12" font-weight="900" fill="#ffd166" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Falling Down ⬇️' : 'GRAVITY PULLS DOWN ⬇️'}</text>
+            ${isExam ? '' : '<text x="20" y="112" font-size="12" font-weight="900" fill="#ffd166" text-anchor="middle" font-family="var(--fd)">GRAVITY PULLS DOWN ⬇️</text>'}
           </g>
         </svg>
       </div>
@@ -1928,7 +1799,6 @@ const SE = (function(){
     `,
 
     // Ramp Experiment: Down from high left to flat floor on right.
-    // Rough towel flat on the floor at the bottom of the ramp!
     rampFriction: (hasRoughTowel = true, isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 480 135">
@@ -1950,15 +1820,14 @@ const SE = (function(){
             <rect x="0" y="0" width="46" height="70" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
             <line x1="0" y1="22" x2="46" y2="22" stroke="#38bdf8" stroke-width="1.8"/>
             <line x1="0" y1="46" x2="46" y2="46" stroke="#38bdf8" stroke-width="1.8"/>
-            <text x="23" y="16" font-size="9" font-weight="bold" fill="#ffd166" text-anchor="middle">LAB BOOKS</text>
+            <text x="23" y="16" font-size="9" font-weight="bold" fill="#ffd166" text-anchor="middle">BLOCK</text>
           </g>
 
-          <!-- Inclined Ramp Board: Slopes DOWN from High Left (x=70, y=35) to Low Floor Right (x=200, y=105) -->
+          <!-- Inclined Ramp Board: Slopes DOWN from High Left to Low Floor Right -->
           <polygon points="70,35 200,105 196,108 66,38" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>
           <line x1="70" y1="35" x2="200" y2="105" stroke="#00f5d4" stroke-width="4" stroke-linecap="round"/>
-          <text x="110" y="42" font-size="10" font-weight="bold" fill="#ffd166">Incline Ramp ↘️</text>
 
-          <!-- Toy Car rolling DOWN the incline towards the right -->
+          <!-- Toy Car rolling DOWN the incline -->
           <g transform="translate(130, 68) rotate(28)">
             <rect x="-18" y="-10" width="36" height="18" rx="5" fill="#ef4444" stroke="#ffffff" stroke-width="1.8"/>
             <rect x="-10" y="-8" width="18" height="9" rx="3" fill="#38bdf8" stroke="#ffffff" stroke-width="1"/>
@@ -1966,31 +1835,29 @@ const SE = (function(){
             <circle cx="10" cy="10" r="5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.5"/>
           </g>
 
-          <!-- Flat Floor Zone at the Bottom of the Ramp (x=200 to x=450) -->
+          <!-- Flat Floor Zone at the Bottom of the Ramp -->
           ${hasRoughTowel ? `
             <g transform="translate(210, 94)">
               <rect x="0" y="0" width="190" height="11" rx="2" fill="url(#towelPattern)" stroke="#78350f" stroke-width="1.5"/>
               <line x1="0" y1="2" x2="0" y2="9" stroke="#fde68a" stroke-width="2"/>
               <line x1="190" y1="2" x2="190" y2="9" stroke="#fde68a" stroke-width="2"/>
               <path d="M 10 3 Q 15 1 20 3 Q 25 5 30 3 Q 35 1 40 3 M 60 3 Q 65 1 70 3 Q 75 5 80 3 M 110 3 Q 115 1 120 3 Q 125 5 130 3 M 150 3 Q 155 1 160 3 Q 165 5 170 3" stroke="#fde68a" stroke-width="1.5" fill="none"/>
-              <text x="95" y="24" font-size="11" font-weight="900" fill="#f59e0b" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Rough Rug on Floor 🛑' : 'ROUGH TOWEL ON FLOOR = SLOWS DOWN! 🛑'}</text>
+              ${isExam ? '' : '<text x="95" y="24" font-size="11" font-weight="900" fill="#f59e0b" text-anchor="middle" font-family="var(--fd)">ROUGH TOWEL ON FLOOR = SLOWS DOWN! 🛑</text>'}
             </g>
             <g transform="translate(320, 92)">
               <rect x="-14" y="-8" width="28" height="14" rx="4" fill="#ef4444" stroke="#ffffff" stroke-width="1.5"/>
               <circle cx="-8" cy="8" r="4" fill="#0f172a" stroke="#ffffff" stroke-width="1"/>
               <circle cx="8" cy="8" r="4" fill="#0f172a" stroke="#ffffff" stroke-width="1"/>
-              <text x="18" y="2" font-size="12">💥</text>
             </g>
           ` : `
             <g transform="translate(210, 96)">
               <line x1="0" y1="9" x2="220" y2="9" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
-              <text x="110" y="24" font-size="11" font-weight="900" fill="#38bdf8" text-anchor="middle" font-family="var(--fd)">${isExam ? 'Smooth Tile Floor 💨' : 'SMOOTH TILE FLOOR = FASTER! 💨'}</text>
+              ${isExam ? '' : '<text x="110" y="24" font-size="11" font-weight="900" fill="#38bdf8" text-anchor="middle" font-family="var(--fd)">SMOOTH TILE FLOOR = FASTER! 💨</text>'}
             </g>
             <g transform="translate(380, 92)">
               <rect x="-14" y="-8" width="28" height="14" rx="4" fill="#ef4444" stroke="#ffffff" stroke-width="1.5"/>
               <circle cx="-8" cy="8" r="4" fill="#0f172a" stroke="#ffffff" stroke-width="1"/>
               <circle cx="8" cy="8" r="4" fill="#0f172a" stroke="#ffffff" stroke-width="1"/>
-              <text x="18" y="4" font-size="12">💨</text>
             </g>
           `}
         </svg>
@@ -1998,7 +1865,7 @@ const SE = (function(){
       ${isExam ? '' : '<div class="disp-pill">🚗 FRICTION RUBS AGAINST TIRES ON THE FLOOR AND SLOWS MOTION</div>'}
     `,
 
-    // Magnets Attract (Opposite Poles N & S)
+    // Magnets Attract (Exam Mode: ZERO words)
     magnetsAttract: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 480 135">
@@ -2020,14 +1887,14 @@ const SE = (function(){
             <text x="98" y="32" font-size="22" font-weight="900" fill="#ffffff" text-anchor="middle" font-family="var(--fd)">N</text>
           </g>
 
-          <!-- Electromagnetic Energy Flux Arcs -->
+          <!-- Magnetic Field Lines -->
           <g transform="translate(175, 20)">
             <path d="M 0 20 Q 65 -5 130 20" stroke="#00f5d4" stroke-width="2.5" fill="none" stroke-dasharray="6 4"/>
             <path d="M 0 38 Q 65 24 130 38" stroke="#a855f7" stroke-width="3" fill="none"/>
             <path d="M 0 58 Q 65 72 130 58" stroke="#a855f7" stroke-width="3" fill="none"/>
             <circle cx="65" cy="48" r="18" fill="rgba(0,245,212,0.2)" stroke="#00f5d4" stroke-width="1.8"/>
-            <text x="65" y="55" font-size="26" text-anchor="middle">⚡💥⚡</text>
-            <text x="65" y="86" font-size="11" font-weight="900" fill="#00f5d4" text-anchor="middle" font-family="var(--fd)">${isExam ? '[N] & [S] Poles 🧲' : 'PULL TOGETHER ➔ ⬅️'}</text>
+            <text x="65" y="55" font-size="26" text-anchor="middle">⚡</text>
+            ${isExam ? '' : '<text x="65" y="86" font-size="11" font-weight="900" fill="#00f5d4" text-anchor="middle" font-family="var(--fd)">PULL TOGETHER ➔ ⬅️</text>'}
           </g>
 
           <!-- Magnet 2: [S] - [N] -->
@@ -2043,7 +1910,7 @@ const SE = (function(){
       ${isExam ? '' : '<div class="disp-pill">🧲 OPPOSITE POLES (NORTH & SOUTH) ATTRACT (PULL TOGETHER)</div>'}
     `,
 
-    // Magnets Repel (Like Poles N & N)
+    // Magnets Repel (Exam Mode: ZERO words)
     magnetsRepel: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 480 135">
@@ -2065,12 +1932,12 @@ const SE = (function(){
             <text x="98" y="32" font-size="22" font-weight="900" fill="#ffffff" text-anchor="middle" font-family="var(--fd)">N</text>
           </g>
 
-          <!-- Repulsion Deflection Barrier -->
+          <!-- Repulsion Barrier -->
           <g transform="translate(175, 20)">
             <path d="M 40 10 Q 55 48 40 86" stroke="#ef4444" stroke-width="4" fill="none" stroke-linecap="round"/>
             <path d="M 90 10 Q 75 48 90 86" stroke="#ef4444" stroke-width="4" fill="none" stroke-linecap="round"/>
             <text x="65" y="54" font-size="28" text-anchor="middle">🚫</text>
-            <text x="65" y="86" font-size="11" font-weight="900" fill="#ef4444" text-anchor="middle" font-family="var(--fd)">${isExam ? '[N] & [N] Poles 🧲' : 'PUSH AWAY ⬅️ ➔'}</text>
+            ${isExam ? '' : '<text x="65" y="86" font-size="11" font-weight="900" fill="#ef4444" text-anchor="middle" font-family="var(--fd)">PUSH AWAY ⬅️ ➔</text>'}
           </g>
 
           <!-- Magnet 2: [N] - [S] (North facing North) -->
@@ -2086,11 +1953,10 @@ const SE = (function(){
       ${isExam ? '' : '<div class="disp-pill">🧲 LIKE POLES (NORTH & NORTH) REPEL (PUSH AWAY)</div>'}
     `,
 
-    // Magnetic Materials (Attracts Iron/Steel, Ignores Plastic/Wood)
+    // Magnetic Materials (Exam Mode: ZERO words)
     magneticMaterials: (isExam = false) => `
       <div class="disp-spotlight">
         <svg viewBox="0 0 460 135">
-          <!-- Horseshoe Magnet (Left) -->
           <g transform="translate(80, 20)">
             <path d="M 20 70 L 20 40 Q 20 15 50 15 Q 80 15 80 40 L 80 70" stroke="#ef4444" stroke-width="16" fill="none" stroke-linecap="square"/>
             <rect x="12" y="56" width="16" height="16" fill="#38bdf8"/>
@@ -2098,19 +1964,14 @@ const SE = (function(){
             <text x="20" y="68" font-size="10" font-weight="900" fill="#fff" text-anchor="middle">S</text>
             <text x="80" y="68" font-size="10" font-weight="900" fill="#fff" text-anchor="middle">N</text>
           </g>
-
           <g transform="translate(195, 54)">
-            <text x="0" y="6" font-size="22" fill="#ffd166" font-weight="bold" text-anchor="middle">🧲⚡</text>
+            <text x="0" y="6" font-size="22" fill="#ffd166" font-weight="bold" text-anchor="middle">⚡</text>
           </g>
-
-          <!-- Attracted Paperclips & Iron Nail (Right) -->
           <g transform="translate(245, 20)">
-            <!-- Iron Nail -->
             <polygon points="30,30 34,25 38,30" fill="#94a3b8"/>
             <line x1="34" y1="30" x2="34" y2="75" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
-            <!-- Steel Paperclip -->
             <path d="M 60 35 L 60 70 Q 60 80 70 80 Q 80 80 80 70 L 80 45 Q 80 38 72 38 Q 66 38 66 45 L 66 65" stroke="#38bdf8" stroke-width="2.5" fill="none"/>
-            <text x="55" y="104" font-size="12" font-weight="900" fill="#38bdf8" text-anchor="middle" font-family="var(--fd)">STEEL CLIP & NAIL 📎</text>
+            ${isExam ? '' : '<text x="55" y="104" font-size="12" font-weight="900" fill="#38bdf8" text-anchor="middle" font-family="var(--fd)">STEEL CLIP & NAIL 📎</text>'}
           </g>
         </svg>
       </div>
@@ -2119,7 +1980,6 @@ const SE = (function(){
   };
 
   /* DYNAMIC POOLS FOR PROFESSOR PIP'S 5 DISCOVERY LABS */
-  /* Every replay rotates varied real-world curriculum scenarios and lessons! */
   function getLabRound(labIdx, stepIdx, visitCount = 0){
     const v = visitCount;
     if(labIdx === 0){ // Living Needs Lab 🥗
@@ -2326,14 +2186,15 @@ const SE = (function(){
             success: "Splendid! The caterpillar transforms inside the resting pupa (chrysalis)!"
           },
           {
-            prompt: "Where does a mosquito lay its raft of eggs during Stage 1 of its life cycle?",
-            audio: "Where does a mosquito lay its eggs during Stage 1 of its life cycle?",
-            disp: SVG.mosquitoCycle4(false),
+            prompt: "What hatches from a butterfly's egg on a green leaf?",
+            audio: "What hatches from a butterfly's egg on a green leaf?",
+            disp: SVG.butterflyCycle4(false),
             choices: sh([
-              { text: "💧 In still standing water", correct: true },
-              { text: "🏜️ In dry desert sand", correct: false }
+              { text: "2. Caterpillar (larva)", correct: true },
+              { text: "3. Pupa", correct: false },
+              { text: "4. Butterfly", correct: false }
             ]),
-            success: "Spot on! Mosquitoes breed and lay eggs in still water, where wrigglers swim!"
+            success: "Super! A tiny caterpillar hatches from the egg and eats green leaves to grow!"
           }
         ];
         return scens[v % scens.length];
@@ -2537,7 +2398,7 @@ const SE = (function(){
     "Forces & Magnets Lab 🧲"
   ];
 
-  /* 40 EXAM CHALLENGES (8 PER CATEGORY, ZERO ANSWER SPOILERS, 100% EXAM COMPLIANT) */
+  /* 40 EXAM CHALLENGES (8 PER CATEGORY, ZERO CLUES, 100% EXAM COMPLIANT) */
   /* Every play draws 3 distinct random questions from each of the 5 categories (15 total) */
   function examQs(diff = 1){
     // Cat 0: Living Needs (8 curriculum questions)
@@ -2676,7 +2537,7 @@ const SE = (function(){
       }
     ];
 
-    // Cat 2: Life Cycles (8 curriculum questions — Stage 1..4 hidden answers)
+    // Cat 2: Life Cycles (8 curriculum questions — 100% taught in Discovery Lab 2, ZERO clue words)
     const cat2Bank = [
       {
         cat: "Life Cycles 🦋", catIdx: 2,
@@ -2701,7 +2562,7 @@ const SE = (function(){
       {
         cat: "Life Cycles 🦋", catIdx: 2,
         prompt: "In a frog's life cycle, which stage breathes with gills and swims in water?",
-        audio: "In a frog's life cycle, which stage breathes with gills and swims in water?",
+        audio: "In a frog's life cycle, which stage breathes with gills in water?",
         html: SVG.frogCycle4(true),
         opts: sh(["Tadpole", "Adult Frog", "Caterpillar", "Chick"]),
         ans: "Tadpole"
@@ -2724,11 +2585,11 @@ const SE = (function(){
       },
       {
         cat: "Life Cycles 🦋", catIdx: 2,
-        prompt: "Where does a mother mosquito lay her eggs in Stage 1 of its life cycle?",
-        audio: "Where does a mother mosquito lay her eggs?",
-        html: SVG.mosquitoCycle4(true),
-        opts: sh(["In still water", "In dry sand", "High in tree branches"]),
-        ans: "In still water"
+        prompt: "What emerges from a chicken egg in Stage 2 of its life cycle?",
+        audio: "What emerges from a chicken egg in Stage 2 of its life cycle?",
+        html: SVG.chickenCycle4(true),
+        opts: sh(["Hatchling", "Adult Hen", "Tadpole", "Caterpillar"]),
+        ans: "Hatchling"
       },
       {
         cat: "Life Cycles 🦋", catIdx: 2,
@@ -3279,6 +3140,7 @@ function submitName(){
 }
 
 function changeName(){
+  if(G.inExam) return;
   const inp = document.getElementById('nm-input');
   inp.value = G.name;
   document.getElementById('name-modal').classList.remove('hide');
@@ -3301,7 +3163,7 @@ function refreshPassport(){
 }
 
 function goHome(){
-  if(G.inExam && !confirm('Safari Science Exam in progress! Do you want to quit?')) return;
+  if(G.inExam) return;
   G.inExam = false;
   show('sc-start');
   refreshPassport();
@@ -3426,11 +3288,73 @@ function tAudio(){
 }
 
 /* ============================================================ MODE 2: EXAM CHALLENGE */
+function enterExamLockdown(){
+  const el = document.documentElement;
+  try {
+    if (el.requestFullscreen) { el.requestFullscreen().catch(() => {}); }
+    else if (el.webkitRequestFullscreen) { el.webkitRequestFullscreen(); }
+    else if (el.msRequestFullscreen) { el.msRequestFullscreen(); }
+  } catch(e) {}
+  try {
+    history.pushState({ inExam: true }, '', window.location.href);
+  } catch(e) {}
+}
+
+function resumeExamLockdown(){
+  const ov = document.getElementById('lockdown-overlay');
+  if(ov) ov.classList.add('hidden');
+  const el = document.documentElement;
+  try {
+    if (el.requestFullscreen) { el.requestFullscreen().catch(() => {}); }
+    else if (el.webkitRequestFullscreen) { el.webkitRequestFullscreen(); }
+    else if (el.msRequestFullscreen) { el.msRequestFullscreen(); }
+  } catch(e) {}
+}
+
+function checkLockdownState(){
+  if(!G.inExam) return;
+  const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+  const ov = document.getElementById('lockdown-overlay');
+  if(ov){
+    if(!isFs) ov.classList.remove('hidden');
+    else ov.classList.add('hidden');
+  }
+}
+
+// Exam Lockdown Event Listeners
+window.addEventListener('fullscreenchange', checkLockdownState);
+window.addEventListener('webkitfullscreenchange', checkLockdownState);
+window.addEventListener('mozfullscreenchange', checkLockdownState);
+window.addEventListener('MSFullscreenChange', checkLockdownState);
+
+window.addEventListener('blur', () => {
+  if(G.inExam){
+    const ov = document.getElementById('lockdown-overlay');
+    if(ov) ov.classList.remove('hidden');
+  }
+});
+
+window.addEventListener('popstate', (e) => {
+  if(G.inExam){
+    try { history.pushState({ inExam: true }, '', window.location.href); } catch(err) {}
+    const ov = document.getElementById('lockdown-overlay');
+    if(ov) ov.classList.remove('hidden');
+  }
+});
+
+window.addEventListener('beforeunload', (e) => {
+  if(G.inExam){
+    e.preventDefault();
+    e.returnValue = 'Science Exam in progress! You must complete all 15 questions before leaving.';
+    return e.returnValue;
+  }
+});
+
 function startExam(){
   if(G.camps.length < 5){
     flash('🔒');
     alert(`Complete all 5 Discovery Labs first! (${G.camps.length}/5 completed)
-Heading to Einstein's Discovery Labs now... 🧪`);
+Heading to Professor Pip's Discovery Labs now... 🧪`);
     goTrain();
     return;
   }
@@ -3450,6 +3374,7 @@ Heading to Einstein's Discovery Labs now... 🧪`);
 
   show('sc-exam');
   renderEQ();
+  enterExamLockdown();
 }
 
 function renderEQ(){
@@ -3513,6 +3438,9 @@ function eAudio(){
 /* ============================================================ RESULTS & CERTIFICATE */
 function finishExam(){
   G.inExam = false;
+  const ov = document.getElementById('lockdown-overlay');
+  if(ov) ov.classList.add('hidden');
+
   show('sc-res');
   const s = G.score;
   document.getElementById('r-score').textContent = `${s} / 15`;
@@ -3541,18 +3469,24 @@ function finishExam(){
     document.getElementById('btn-awaken').onclick = retryMissed;
     setTimeout(() => ART.draw('cv-cert', G.name, s, G.catScores), 150);
   }else{
-    tp.className = 'tpill tb'; tp.textContent = '🥉 Keep Practicing!';
-    msg.textContent = `Every great scientist learns by doing experiments! Let's train in the Science Labs!`;
+    tp.className = 'tpill tb'; tp.textContent = '🥉 Science Training Required';
+    msg.textContent = `Scores below 11 need more laboratory experimentation! Returning to Discovery Labs to retrain.`;
     bc.classList.remove('hidden');
+    // Bronze Reset Invariant: Clear stamps and force retraining
+    G.camps = [];
+    localStorage.removeItem('ssq_camps');
+    refreshPassport();
   }
 }
 
 function retryMissed(){
   if(!G.missed.length){ startExam(); return; }
+  G.inExam = true;
   G.qs = G.missed.map(idx => G.qs[idx]);
   G.qi = 0; G.missed = [];
   show('sc-exam');
   renderEQ();
+  enterExamLockdown();
 }
 
 function toggleSilverCert(showCert){
