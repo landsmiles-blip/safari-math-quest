@@ -1,0 +1,1458 @@
+/* ==========================================================================
+   MEP Primary 3 Science Quest: Cute Electric Science Lab Theme
+   File: styles.css
+   Designed for: Desktop, iPad/Chromebook tablets, and mobile devices
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap');
+
+/* --------------------------------------------------------------------------
+   1. CSS VARIABLES & DESIGN TOKENS
+   -------------------------------------------------------------------------- */
+:root {
+  /* Obsidian Space Navy Backgrounds */
+  --bg-deep: #070d18;
+  --bg-obsidian: #0b1120;
+  --bg-surface: #0f172a;
+  --bg-card: rgba(15, 23, 42, 0.82);
+  --bg-card-hover: rgba(30, 41, 59, 0.90);
+  --bg-glass-subtle: rgba(255, 255, 255, 0.05);
+
+  /* Electric Neon Accents */
+  --hyper-cyan: #00f5d4;
+  --hyper-cyan-glow: rgba(0, 245, 212, 0.45);
+  --solar-amber: #ffb703;
+  --solar-amber-glow: rgba(255, 183, 3, 0.45);
+  --radioactive-lime: #39ff14;
+  --radioactive-lime-glow: rgba(57, 255, 20, 0.45);
+  --plasma-magenta: #f72585;
+  --plasma-magenta-glow: rgba(247, 37, 133, 0.45);
+  --electric-blue: #3a86ff;
+  --electric-blue-glow: rgba(58, 134, 255, 0.45);
+  --danger-crimson: #ef4444;
+
+  /* Typography */
+  --font-display: 'Fredoka', 'Nunito', sans-serif;
+  --font-body: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Text Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-highlight: #ffffff;
+
+  /* Borders & Glass */
+  --border-glass: rgba(0, 245, 212, 0.22);
+  --border-glass-bright: rgba(0, 245, 212, 0.65);
+  --border-radius-sm: 8px;
+  --border-radius-md: 16px;
+  --border-radius-lg: 24px;
+  --border-radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 12px 36px -8px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-neon-cyan: 0 0 20px rgba(0, 245, 212, 0.35);
+  --shadow-neon-amber: 0 0 20px rgba(255, 183, 3, 0.35);
+  --shadow-neon-lime: 0 0 20px rgba(57, 255, 20, 0.35);
+  --shadow-neon-magenta: 0 0 20px rgba(247, 37, 133, 0.35);
+
+  /* Touch sizing */
+  --touch-min: 48px;
+}
+
+/* --------------------------------------------------------------------------
+   2. GLOBAL RESET & BASE STYLES
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-family: var(--font-body);
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.5;
+  overflow-x: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Electric Animated Background Stardust & Grid */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(0, 245, 212, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(247, 37, 133, 0.10) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(58, 134, 255, 0.10) 0%, transparent 50%),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-obsidian) 100%);
+  pointer-events: none;
+}
+
+/* Cybernetic Laboratory Grid Lines */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: 
+    linear-gradient(to right, rgba(0, 245, 212, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 245, 212, 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* App Container Wrapper */
+.science-app {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(12px, 2.5vw, 28px);
+}
+
+/* --------------------------------------------------------------------------
+   3. TYPOGRAPHY & HEADINGS
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #ffffff;
+}
+
+.text-cyan { color: var(--hyper-cyan); }
+.text-amber { color: var(--solar-amber); }
+.text-lime { color: var(--radioactive-lime); }
+.text-magenta { color: var(--plasma-magenta); }
+.text-mono { font-family: var(--font-mono); }
+
+/* Glowing Text Accents */
+.glow-text-cyan {
+  text-shadow: 0 0 12px var(--hyper-cyan-glow);
+}
+.glow-text-amber {
+  text-shadow: 0 0 12px var(--solar-amber-glow);
+}
+.glow-text-lime {
+  text-shadow: 0 0 12px var(--radioactive-lime-glow);
+}
+
+/* --------------------------------------------------------------------------
+   4. GLASSMORPHIC CARDS & PANELS
+   -------------------------------------------------------------------------- */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.glass-panel:hover {
+  border-color: var(--border-glass-bright);
+}
+
+.glass-panel-neon-cyan {
+  border-color: rgba(0, 245, 212, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 245, 212, 0.25);
+}
+
+.glass-panel-neon-amber {
+  border-color: rgba(255, 183, 3, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 15px rgba(255, 183, 3, 0.25);
+}
+
+.glass-panel-neon-lime {
+  border-color: rgba(57, 255, 20, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 15px rgba(57, 255, 20, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   5. BUTTONS & INTERACTIVE CONTROLS
+   -------------------------------------------------------------------------- */
+button, .btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+  padding: 12px 24px;
+  min-height: var(--touch-min);
+  border-radius: var(--border-radius-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: transform 0.16s ease, filter 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+}
+
+button:hover, .btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+button:active, .btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Primary Electric Cyan Button */
+.btn-cyan {
+  background: linear-gradient(135deg, #00f5d4 0%, #00b4d8 100%);
+  color: #04151f;
+  box-shadow: 0 4px 18px rgba(0, 245, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border: 1px solid #00f5d4;
+}
+
+.btn-cyan:hover {
+  box-shadow: 0 6px 24px rgba(0, 245, 212, 0.6);
+}
+
+/* Solar Amber Button */
+.btn-amber {
+  background: linear-gradient(135deg, #ffb703 0%, #fb8500 100%);
+  color: #1a0f00;
+  box-shadow: 0 4px 18px rgba(255, 183, 3, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border: 1px solid #ffb703;
+}
+
+/* Radioactive Lime Button */
+.btn-lime {
+  background: linear-gradient(135deg, #39ff14 0%, #10b981 100%);
+  color: #032009;
+  box-shadow: 0 4px 18px rgba(57, 255, 20, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border: 1px solid #39ff14;
+}
+
+/* Plasma Magenta Button */
+.btn-magenta {
+  background: linear-gradient(135deg, #f72585 0%, #7209b7 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(247, 37, 133, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border: 1px solid #f72585;
+}
+
+/* Glass Outline Secondary Button */
+.btn-glass {
+  background: rgba(15, 23, 42, 0.7);
+  color: var(--text-primary);
+  border: 1px solid var(--border-glass-bright);
+  backdrop-filter: blur(10px);
+}
+
+.btn-glass:hover {
+  background: rgba(30, 41, 59, 0.85);
+  border-color: var(--hyper-cyan);
+  box-shadow: 0 0 14px rgba(0, 245, 212, 0.3);
+}
+
+/* Small icon button */
+.btn-icon {
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 1.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   6. TOP NAVIGATION & STATUS BAR
+   -------------------------------------------------------------------------- */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 20px;
+  margin-bottom: 24px;
+  border-radius: var(--border-radius-md);
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(14px);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.lab-logo-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+  font-weight: 700;
+  color: var(--hyper-cyan);
+}
+
+.lab-logo-badge .beaker-icon {
+  font-size: 1.6rem;
+  filter: drop-shadow(0 0 8px var(--hyper-cyan));
+}
+
+.player-id-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 245, 212, 0.1);
+  border: 1px solid rgba(0, 245, 212, 0.3);
+  padding: 4px 12px;
+  border-radius: var(--border-radius-pill);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--hyper-cyan);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.star-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 183, 3, 0.15);
+  border: 1px solid rgba(255, 183, 3, 0.4);
+  padding: 4px 14px;
+  border-radius: var(--border-radius-pill);
+  color: var(--solar-amber);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* --------------------------------------------------------------------------
+   7. SCREEN 1: START SCREEN
+   -------------------------------------------------------------------------- */
+#screen-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 75vh;
+  text-align: center;
+  gap: 28px;
+}
+
+.hero-science-badge {
+  display: inline-block;
+  font-size: clamp(3rem, 7vw, 4.5rem);
+  filter: drop-shadow(0 0 25px rgba(0, 245, 212, 0.6));
+  animation: floatBeaker 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatBeaker {
+  0% { transform: translateY(0) rotate(-2deg); }
+  100% { transform: translateY(-12px) rotate(3deg); }
+}
+
+.start-title {
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  line-height: 1.15;
+  background: linear-gradient(135deg, #ffffff 0%, var(--hyper-cyan) 60%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 16px rgba(0, 245, 212, 0.35));
+}
+
+.start-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* Mascot Stage Showcase */
+.mascot-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 4vw, 36px);
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.mascot-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-glass);
+  padding: 16px 24px;
+  border-radius: var(--border-radius-lg);
+  backdrop-filter: blur(12px);
+  transition: transform 0.2s ease;
+}
+
+.mascot-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--hyper-cyan);
+}
+
+.mascot-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.mascot-role {
+  font-size: 0.8rem;
+  color: var(--hyper-cyan);
+  font-weight: 600;
+}
+
+/* Terminal Security Badge Input */
+.terminal-card {
+  width: 100%;
+  max-width: 480px;
+  padding: clamp(20px, 4vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--hyper-cyan);
+}
+
+.name-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.name-input-group label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.lab-input {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 18px;
+  background: rgba(3, 7, 18, 0.7);
+  border: 2px solid var(--border-glass);
+  border-radius: var(--border-radius-md);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.lab-input:focus {
+  border-color: var(--hyper-cyan);
+  box-shadow: 0 0 16px rgba(0, 245, 212, 0.4);
+}
+
+.lab-input::placeholder {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   8. SCREEN 2: HUB SCREEN (5 LABS + 5 BADGES + EXAM LAUNCH)
+   -------------------------------------------------------------------------- */
+#screen-hub {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.hub-hero {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hub-hero h2 {
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+}
+
+.hub-hero p {
+  color: var(--text-secondary);
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+}
+
+/* 5 Discovery Lab Stations Grid */
+.labs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(16px, 2.5vw, 24px);
+}
+
+.lab-station-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.lab-station-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--hyper-cyan);
+  box-shadow: 0 14px 40px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 245, 212, 0.25);
+}
+
+.lab-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.lab-station-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background: rgba(0, 245, 212, 0.12);
+  border: 1px solid rgba(0, 245, 212, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 245, 212, 0.2);
+}
+
+.lab-status-badge {
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--border-radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-ready {
+  background: rgba(0, 245, 212, 0.15);
+  color: var(--hyper-cyan);
+  border: 1px solid rgba(0, 245, 212, 0.35);
+}
+
+.status-complete {
+  background: rgba(57, 255, 20, 0.18);
+  color: var(--radioactive-lime);
+  border: 1px solid rgba(57, 255, 20, 0.4);
+}
+
+.lab-station-info h3 {
+  font-size: 1.35rem;
+  margin-bottom: 6px;
+}
+
+.lab-station-info p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+/* Dual Coding Concept Pills */
+.concept-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.concept-pill {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: var(--border-radius-pill);
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* 5 Badge Vault Section */
+.badge-vault-section {
+  padding: 24px;
+  border-radius: var(--border-radius-lg);
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid var(--border-glass);
+}
+
+.badge-vault-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge-slots-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
+}
+
+.badge-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  padding: 16px 10px;
+  border-radius: var(--border-radius-md);
+  background: rgba(3, 7, 18, 0.6);
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  transition: all 0.25s ease;
+}
+
+.badge-slot.unlocked {
+  background: rgba(0, 245, 212, 0.08);
+  border: 1px solid var(--hyper-cyan);
+  box-shadow: 0 0 16px rgba(0, 245, 212, 0.2);
+}
+
+.badge-slot.unlocked .badge-ring {
+  filter: drop-shadow(0 0 8px var(--hyper-cyan));
+  animation: pulseBadge 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes pulseBadge {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+.badge-slot-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.badge-slot-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.badge-slot.unlocked .badge-slot-label {
+  color: #ffffff;
+}
+
+/* Exam Launchpad Banner */
+.exam-launch-banner {
+  padding: 24px clamp(20px, 3vw, 36px);
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  transition: all 0.3s ease;
+}
+
+.exam-launch-banner.locked {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 183, 3, 0.35);
+}
+
+.exam-launch-banner.unlocked {
+  background: linear-gradient(135deg, rgba(57, 255, 20, 0.12) 0%, rgba(0, 245, 212, 0.15) 100%);
+  border: 2px solid var(--radioactive-lime);
+  box-shadow: 0 0 25px rgba(57, 255, 20, 0.3);
+}
+
+.exam-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.exam-banner-icon {
+  font-size: clamp(2.2rem, 5vw, 3rem);
+}
+
+.exam-banner-text h3 {
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  margin-bottom: 4px;
+}
+
+.exam-banner-text p {
+  color: var(--text-secondary);
+  font-size: clamp(0.85rem, 2vw, 1rem);
+}
+
+/* --------------------------------------------------------------------------
+   9. SCREEN 3: LAB STAGE SCREEN (MICRO-LABS WORKBENCH)
+   -------------------------------------------------------------------------- */
+#screen-lab {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.lab-stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.lab-title-group h2 {
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+}
+
+/* Pip's Guidance Speech Bubble */
+.pip-dialogue-bubble {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-glass-bright);
+  padding: 14px 20px;
+  border-radius: var(--border-radius-lg);
+  backdrop-filter: blur(14px);
+}
+
+.pip-dialogue-bubble .pip-avatar {
+  flex-shrink: 0;
+}
+
+.pip-bubble-content {
+  flex: 1;
+}
+
+.pip-bubble-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--hyper-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pip-bubble-text {
+  font-size: clamp(0.92rem, 2vw, 1.05rem);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Workbench Stage Container */
+.lab-workbench {
+  min-height: 480px;
+  padding: clamp(18px, 3vw, 32px);
+  border-radius: var(--border-radius-lg);
+  background: rgba(11, 17, 32, 0.9);
+  border: 2px solid var(--border-glass);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8), 0 10px 30px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+}
+
+/* Instrument Gauges & Readouts (JetBrains Mono) */
+.instrument-gauge-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.instrument-gauge {
+  background: #030712;
+  border: 1px solid rgba(0, 245, 212, 0.35);
+  border-radius: var(--border-radius-sm);
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-mono);
+}
+
+.instrument-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.instrument-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--hyper-cyan);
+  text-shadow: 0 0 10px var(--hyper-cyan-glow);
+}
+
+/* Apparatus Interactive Stage Area */
+.apparatus-stage-canvas {
+  width: 100%;
+  min-height: 280px;
+  border-radius: var(--border-radius-md);
+  background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0b1120 85%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Laboratory Control Dials & Sliders */
+.lab-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Slider Controls */
+.lab-slider-track {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lab-slider-track input[type="range"] {
+  -webkit-appearance: none;
+  width: clamp(140px, 20vw, 220px);
+  height: 8px;
+  border-radius: 4px;
+  background: #1e293b;
+  outline: none;
+  border: 1px solid var(--border-glass);
+}
+
+.lab-slider-track input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--hyper-cyan);
+  box-shadow: 0 0 10px var(--hyper-cyan);
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   10. SCREEN 4: EXAM CHALLENGE SCREEN
+   -------------------------------------------------------------------------- */
+#screen-exam {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.exam-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--border-radius-pill);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.level-1 { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid #38bdf8; }
+.level-2 { background: rgba(0, 245, 212, 0.2); color: var(--hyper-cyan); border: 1px solid var(--hyper-cyan); }
+.level-3 { background: rgba(255, 183, 3, 0.2); color: var(--solar-amber); border: 1px solid var(--solar-amber); }
+.level-4 { background: rgba(247, 37, 133, 0.2); color: var(--plasma-magenta); border: 1px solid var(--plasma-magenta); }
+.level-5 { background: rgba(57, 255, 20, 0.25); color: var(--radioactive-lime); border: 1px solid var(--radioactive-lime); }
+
+/* Animated Exam Progress Beaker */
+.exam-beaker-progress-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.7);
+  padding: 10px 18px;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--border-glass);
+}
+
+.beaker-meter {
+  position: relative;
+  width: 48px;
+  height: 64px;
+  border: 2px solid var(--border-glass-bright);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  background: rgba(3, 7, 18, 0.6);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.beaker-meter::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 6px;
+  border: 2px solid var(--border-glass-bright);
+  border-radius: 4px;
+}
+
+.beaker-liquid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  background: linear-gradient(180deg, rgba(0, 245, 212, 0.85) 0%, rgba(6, 182, 212, 0.95) 100%);
+  box-shadow: 0 0 12px var(--hyper-cyan-glow);
+  transition: height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.beaker-liquid::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+}
+
+.progress-bar-track {
+  flex: 1;
+  height: 12px;
+  background: #1e293b;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--hyper-cyan) 0%, var(--radioactive-lime) 100%);
+  box-shadow: 0 0 10px var(--hyper-cyan-glow);
+  transition: width 0.35s ease-out;
+}
+
+.question-counter-text {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--hyper-cyan);
+  white-space: nowrap;
+}
+
+/* Exam Scenario & Question Card */
+.scenario-card {
+  padding: clamp(20px, 3.5vw, 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.scenario-title {
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  color: var(--solar-amber);
+}
+
+.scenario-narrative {
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+  line-height: 1.6;
+  color: #e2e8f0;
+}
+
+.exam-diagram-container {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  min-height: 180px;
+  background: rgba(3, 7, 18, 0.6);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.subquestion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.subquestion-prompt-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.subquestion-prompt {
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.45;
+}
+
+/* 4 Options Buttons Grid */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.option-btn {
+  width: 100%;
+  min-height: 60px;
+  padding: 14px 18px;
+  border-radius: var(--border-radius-md);
+  background: rgba(15, 23, 42, 0.75);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  justify-content: flex-start;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  font-family: var(--font-body);
+}
+
+.option-btn:hover {
+  border-color: var(--hyper-cyan);
+  background: rgba(30, 41, 59, 0.85);
+  box-shadow: 0 0 16px rgba(0, 245, 212, 0.25);
+  transform: translateY(-2px);
+}
+
+.option-letter {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--hyper-cyan);
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 245, 212, 0.3);
+}
+
+.option-text {
+  font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+  font-weight: 700;
+  color: #ffffff;
+  flex: 1;
+}
+
+/* Option Feedback States */
+.option-btn.correct {
+  background: rgba(57, 255, 20, 0.2) !important;
+  border-color: var(--radioactive-lime) !important;
+  box-shadow: 0 0 20px rgba(57, 255, 20, 0.45) !important;
+}
+
+.option-btn.correct .option-letter {
+  background: var(--radioactive-lime);
+  color: #032009;
+}
+
+.option-btn.incorrect {
+  background: rgba(239, 68, 68, 0.2) !important;
+  border-color: var(--danger-crimson) !important;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.35) !important;
+  animation: wobbleWrong 0.35s ease;
+}
+
+@keyframes wobbleWrong {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* Instant Explanation Rationale Box */
+.explanation-box {
+  padding: 16px 20px;
+  border-radius: var(--border-radius-md);
+  background: rgba(15, 23, 42, 0.9);
+  border-left: 4px solid var(--hyper-cyan);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: fadeIn 0.25s ease;
+}
+
+.explanation-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--hyper-cyan);
+  text-transform: uppercase;
+}
+
+.explanation-text {
+  font-size: 0.95rem;
+  color: #f1f5f9;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   11. SCREEN 5: REMEDIATION SCREEN ("BRONZE IS NOT ACCEPTABLE!")
+   -------------------------------------------------------------------------- */
+#screen-remediation {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.bronze-alert-banner {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(247, 37, 133, 0.25) 100%);
+  border: 2px solid var(--plasma-magenta);
+  border-radius: var(--border-radius-lg);
+  padding: clamp(20px, 4vw, 32px);
+  text-align: center;
+  box-shadow: 0 0 30px rgba(247, 37, 133, 0.35);
+  animation: pulseAlert 2s infinite alternate ease-in-out;
+}
+
+@keyframes pulseAlert {
+  0% { box-shadow: 0 0 20px rgba(247, 37, 133, 0.3); }
+  100% { box-shadow: 0 0 35px rgba(247, 37, 133, 0.6); }
+}
+
+.bronze-alert-banner h2 {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  color: #ffffff;
+  text-shadow: 0 0 16px var(--plasma-magenta);
+  margin-bottom: 8px;
+}
+
+.bronze-alert-banner p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: #fed7aa;
+  font-weight: 700;
+}
+
+/* Mascot Diagnostic Dialogue */
+.diagnostic-mascot-box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.85);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-glass-bright);
+}
+
+.diagnostic-text h3 {
+  color: var(--solar-amber);
+  margin-bottom: 6px;
+}
+
+.diagnostic-text p {
+  color: #e2e8f0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+/* Domain Meters Breakdown */
+.domain-breakdown-card {
+  padding: 24px;
+}
+
+.domain-breakdown-card h3 {
+  margin-bottom: 16px;
+}
+
+.domain-meter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.domain-meter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 14px;
+  border-radius: var(--border-radius-md);
+  background: rgba(3, 7, 18, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.domain-meter-row.weakest {
+  border-color: var(--plasma-magenta);
+  background: rgba(247, 37, 133, 0.12);
+  box-shadow: 0 0 14px rgba(247, 37, 133, 0.25);
+}
+
+.domain-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  min-width: 180px;
+}
+
+.domain-score-bar {
+  flex: 1;
+  height: 10px;
+  background: #1e293b;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.domain-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  background: var(--hyper-cyan);
+}
+
+.domain-meter-row.weakest .domain-bar-fill {
+  background: var(--plasma-magenta);
+}
+
+.domain-ratio {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #ffffff;
+  min-width: 45px;
+  text-align: right;
+}
+
+/* Retrain Action Bar */
+.remediation-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   12. SCREEN 6: CERTIFICATE SCREEN
+   -------------------------------------------------------------------------- */
+#screen-certificate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.cert-showcase-container {
+  width: 100%;
+  max-width: 1020px;
+  position: relative;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 245, 212, 0.2);
+  border: 2px solid var(--border-glass-bright);
+}
+
+#certificate-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 848;
+  background: #030a16;
+}
+
+.cert-action-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   13. KINETIC PARTICLES & ANIMATIONS
+   -------------------------------------------------------------------------- */
+.kinetic-spark {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  animation: sparkFly 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes sparkFly {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   14. PRINT STYLES FOR BORDERLESS A4 CERTIFICATE
+   -------------------------------------------------------------------------- */
+@page {
+  size: A4 landscape;
+  margin: 0;
+}
+
+@media print {
+  body, html {
+    background: #030a16 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body::before, body::after {
+    display: none !important;
+  }
+
+  .science-app {
+    padding: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Hide everything except certificate */
+  .app-header,
+  .cert-action-toolbar,
+  #screen-start,
+  #screen-hub,
+  #screen-lab,
+  #screen-exam,
+  #screen-remediation,
+  .kinetic-spark {
+    display: none !important;
+  }
+
+  #screen-certificate {
+    display: flex !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .cert-showcase-container {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  #certificate-canvas {
+    width: 100vw !important;
+    height: 100vh !important;
+    object-fit: fill !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   15. TOUCH & RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .science-app {
+    padding: 10px;
+  }
+
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .header-left, .header-right {
+    justify-content: space-between;
+  }
+
+  .labs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pip-dialogue-bubble {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .domain-meter-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .domain-score-bar {
+    width: 100%;
+  }
+}

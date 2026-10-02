@@ -1,0 +1,4902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>🔬 Safari Science Quest Academy • MEP Primary 3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+/* ==========================================================================
+   MEP Primary 3 Science Quest: Cute Electric Science Lab Theme
+   File: styles.css
+   Designed for: Desktop, iPad/Chromebook tablets, and mobile devices
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap');
+
+/* --------------------------------------------------------------------------
+   1. CSS VARIABLES & DESIGN TOKENS
+   -------------------------------------------------------------------------- */
+:root {
+  /* Obsidian Space Navy Backgrounds */
+  --bg-deep: #070d18;
+  --bg-obsidian: #0b1120;
+  --bg-surface: #0f172a;
+  --bg-card: rgba(15, 23, 42, 0.82);
+  --bg-card-hover: rgba(30, 41, 59, 0.90);
+  --bg-glass-subtle: rgba(255, 255, 255, 0.05);
+
+  /* Electric Neon Accents */
+  --hyper-cyan: #00f5d4;
+  --hyper-cyan-glow: rgba(0, 245, 212, 0.45);
+  --solar-amber: #ffb703;
+  --solar-amber-glow: rgba(255, 183, 3, 0.45);
+  --radioactive-lime: #39ff14;
+  --radioactive-lime-glow: rgba(57, 255, 20, 0.45);
+  --plasma-magenta: #f72585;
+  --plasma-magenta-glow: rgba(247, 37, 133, 0.45);
+  --electric-blue: #3a86ff;
+  --electric-blue-glow: rgba(58, 134, 255, 0.45);
+  --danger-crimson: #ef4444;
+
+  /* Typography */
+  --font-display: 'Fredoka', 'Nunito', sans-serif;
+  --font-body: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Text Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-highlight: #ffffff;
+
+  /* Borders & Glass */
+  --border-glass: rgba(0, 245, 212, 0.22);
+  --border-glass-bright: rgba(0, 245, 212, 0.65);
+  --border-radius-sm: 8px;
+  --border-radius-md: 16px;
+  --border-radius-lg: 24px;
+  --border-radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 12px 36px -8px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-neon-cyan: 0 0 20px rgba(0, 245, 212, 0.35);
+  --shadow-neon-amber: 0 0 20px rgba(255, 183, 3, 0.35);
+  --shadow-neon-lime: 0 0 20px rgba(57, 255, 20, 0.35);
+  --shadow-neon-magenta: 0 0 20px rgba(247, 37, 133, 0.35);
+
+  /* Touch sizing */
+  --touch-min: 48px;
+}
+
+/* --------------------------------------------------------------------------
+   2. GLOBAL RESET & BASE STYLES
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-family: var(--font-body);
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.5;
+  overflow-x: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Electric Animated Background Stardust & Grid */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(0, 245, 212, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(247, 37, 133, 0.10) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(58, 134, 255, 0.10) 0%, transparent 50%),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-obsidian) 100%);
+  pointer-events: none;
+}
+
+/* Cybernetic Laboratory Grid Lines */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: 
+    linear-gradient(to right, rgba(0, 245, 212, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 245, 212, 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* App Container Wrapper */
+.science-app {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(12px, 2.5vw, 28px);
+}
+
+/* --------------------------------------------------------------------------
+   3. TYPOGRAPHY & HEADINGS
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #ffffff;
+}
+
+.text-cyan { color: var(--hyper-cyan); }
+.text-amber { color: var(--solar-amber); }
+.text-lime { color: var(--radioactive-lime); }
+.text-magenta { color: var(--plasma-magenta); }
+.text-mono { font-family: var(--font-mono); }
+
+/* Glowing Text Accents */
+.glow-text-cyan {
+  text-shadow: 0 0 12px var(--hyper-cyan-glow);
+}
+.glow-text-amber {
+  text-shadow: 0 0 12px var(--solar-amber-glow);
+}
+.glow-text-lime {
+  text-shadow: 0 0 12px var(--radioactive-lime-glow);
+}
+
+/* --------------------------------------------------------------------------
+   4. GLASSMORPHIC CARDS & PANELS
+   -------------------------------------------------------------------------- */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.glass-panel:hover {
+  border-color: var(--border-glass-bright);
+}
+
+.glass-panel-neon-cyan {
+  border-color: rgba(0, 245, 212, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 245, 212, 0.25);
+}
+
+.glass-panel-neon-amber {
+  border-color: rgba(255, 183, 3, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 15px rgba(255, 183, 3, 0.25);
+}
+
+.glass-panel-neon-lime {
+  border-color: rgba(57, 255, 20, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 15px rgba(57, 255, 20, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   5. BUTTONS & INTERACTIVE CONTROLS
+   -------------------------------------------------------------------------- */
+button, .btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+  padding: 12px 24px;
+  min-height: var(--touch-min);
+  border-radius: var(--border-radius-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: transform 0.16s ease, filter 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+}
+
+button:hover, .btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+button:active, .btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Primary Electric Cyan Button */
+.btn-cyan {
+  background: linear-gradient(135deg, #00f5d4 0%, #00b4d8 100%);
+  color: #04151f;
+  box-shadow: 0 4px 18px rgba(0, 245, 212, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border: 1px solid #00f5d4;
+}
+
+.btn-cyan:hover {
+  box-shadow: 0 6px 24px rgba(0, 245, 212, 0.6);
+}
+
+/* Solar Amber Button */
+.btn-amber {
+  background: linear-gradient(135deg, #ffb703 0%, #fb8500 100%);
+  color: #1a0f00;
+  box-shadow: 0 4px 18px rgba(255, 183, 3, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border: 1px solid #ffb703;
+}
+
+/* Radioactive Lime Button */
+.btn-lime {
+  background: linear-gradient(135deg, #39ff14 0%, #10b981 100%);
+  color: #032009;
+  box-shadow: 0 4px 18px rgba(57, 255, 20, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border: 1px solid #39ff14;
+}
+
+/* Plasma Magenta Button */
+.btn-magenta {
+  background: linear-gradient(135deg, #f72585 0%, #7209b7 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(247, 37, 133, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border: 1px solid #f72585;
+}
+
+/* Glass Outline Secondary Button */
+.btn-glass {
+  background: rgba(15, 23, 42, 0.7);
+  color: var(--text-primary);
+  border: 1px solid var(--border-glass-bright);
+  backdrop-filter: blur(10px);
+}
+
+.btn-glass:hover {
+  background: rgba(30, 41, 59, 0.85);
+  border-color: var(--hyper-cyan);
+  box-shadow: 0 0 14px rgba(0, 245, 212, 0.3);
+}
+
+/* Small icon button */
+.btn-icon {
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 1.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   6. TOP NAVIGATION & STATUS BAR
+   -------------------------------------------------------------------------- */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 20px;
+  margin-bottom: 24px;
+  border-radius: var(--border-radius-md);
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(14px);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.lab-logo-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+  font-weight: 700;
+  color: var(--hyper-cyan);
+}
+
+.lab-logo-badge .beaker-icon {
+  font-size: 1.6rem;
+  filter: drop-shadow(0 0 8px var(--hyper-cyan));
+}
+
+.player-id-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 245, 212, 0.1);
+  border: 1px solid rgba(0, 245, 212, 0.3);
+  padding: 4px 12px;
+  border-radius: var(--border-radius-pill);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--hyper-cyan);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.star-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 183, 3, 0.15);
+  border: 1px solid rgba(255, 183, 3, 0.4);
+  padding: 4px 14px;
+  border-radius: var(--border-radius-pill);
+  color: var(--solar-amber);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* --------------------------------------------------------------------------
+   7. SCREEN 1: START SCREEN
+   -------------------------------------------------------------------------- */
+#screen-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 75vh;
+  text-align: center;
+  gap: 28px;
+}
+
+.hero-science-badge {
+  display: inline-block;
+  font-size: clamp(3rem, 7vw, 4.5rem);
+  filter: drop-shadow(0 0 25px rgba(0, 245, 212, 0.6));
+  animation: floatBeaker 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatBeaker {
+  0% { transform: translateY(0) rotate(-2deg); }
+  100% { transform: translateY(-12px) rotate(3deg); }
+}
+
+.start-title {
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  line-height: 1.15;
+  background: linear-gradient(135deg, #ffffff 0%, var(--hyper-cyan) 60%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 16px rgba(0, 245, 212, 0.35));
+}
+
+.start-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* Mascot Stage Showcase */
+.mascot-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 4vw, 36px);
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.mascot-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-glass);
+  padding: 16px 24px;
+  border-radius: var(--border-radius-lg);
+  backdrop-filter: blur(12px);
+  transition: transform 0.2s ease;
+}
+
+.mascot-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--hyper-cyan);
+}
+
+.mascot-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.mascot-role {
+  font-size: 0.8rem;
+  color: var(--hyper-cyan);
+  font-weight: 600;
+}
+
+/* Terminal Security Badge Input */
+.terminal-card {
+  width: 100%;
+  max-width: 480px;
+  padding: clamp(20px, 4vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--hyper-cyan);
+}
+
+.name-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.name-input-group label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.lab-input {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 18px;
+  background: rgba(3, 7, 18, 0.7);
+  border: 2px solid var(--border-glass);
+  border-radius: var(--border-radius-md);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.lab-input:focus {
+  border-color: var(--hyper-cyan);
+  box-shadow: 0 0 16px rgba(0, 245, 212, 0.4);
+}
+
+.lab-input::placeholder {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   8. SCREEN 2: HUB SCREEN (5 LABS + 5 BADGES + EXAM LAUNCH)
+   -------------------------------------------------------------------------- */
+#screen-hub {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.hub-hero {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hub-hero h2 {
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+}
+
+.hub-hero p {
+  color: var(--text-secondary);
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+}
+
+/* 5 Discovery Lab Stations Grid */
+.labs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(16px, 2.5vw, 24px);
+}
+
+.lab-station-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.lab-station-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--hyper-cyan);
+  box-shadow: 0 14px 40px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 245, 212, 0.25);
+}
+
+.lab-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.lab-station-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background: rgba(0, 245, 212, 0.12);
+  border: 1px solid rgba(0, 245, 212, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 245, 212, 0.2);
+}
+
+.lab-status-badge {
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--border-radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-ready {
+  background: rgba(0, 245, 212, 0.15);
+  color: var(--hyper-cyan);
+  border: 1px solid rgba(0, 245, 212, 0.35);
+}
+
+.status-complete {
+  background: rgba(57, 255, 20, 0.18);
+  color: var(--radioactive-lime);
+  border: 1px solid rgba(57, 255, 20, 0.4);
+}
+
+.lab-station-info h3 {
+  font-size: 1.35rem;
+  margin-bottom: 6px;
+}
+
+.lab-station-info p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+/* Dual Coding Concept Pills */
+.concept-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.concept-pill {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: var(--border-radius-pill);
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* 5 Badge Vault Section */
+.badge-vault-section {
+  padding: 24px;
+  border-radius: var(--border-radius-lg);
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid var(--border-glass);
+}
+
+.badge-vault-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge-slots-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
+}
+
+.badge-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  padding: 16px 10px;
+  border-radius: var(--border-radius-md);
+  background: rgba(3, 7, 18, 0.6);
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  transition: all 0.25s ease;
+}
+
+.badge-slot.unlocked {
+  background: rgba(0, 245, 212, 0.08);
+  border: 1px solid var(--hyper-cyan);
+  box-shadow: 0 0 16px rgba(0, 245, 212, 0.2);
+}
+
+.badge-slot.unlocked .badge-ring {
+  filter: drop-shadow(0 0 8px var(--hyper-cyan));
+  animation: pulseBadge 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes pulseBadge {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+.badge-slot-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.badge-slot-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.badge-slot.unlocked .badge-slot-label {
+  color: #ffffff;
+}
+
+/* Exam Launchpad Banner */
+.exam-launch-banner {
+  padding: 24px clamp(20px, 3vw, 36px);
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  transition: all 0.3s ease;
+}
+
+.exam-launch-banner.locked {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 183, 3, 0.35);
+}
+
+.exam-launch-banner.unlocked {
+  background: linear-gradient(135deg, rgba(57, 255, 20, 0.12) 0%, rgba(0, 245, 212, 0.15) 100%);
+  border: 2px solid var(--radioactive-lime);
+  box-shadow: 0 0 25px rgba(57, 255, 20, 0.3);
+}
+
+.exam-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.exam-banner-icon {
+  font-size: clamp(2.2rem, 5vw, 3rem);
+}
+
+.exam-banner-text h3 {
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  margin-bottom: 4px;
+}
+
+.exam-banner-text p {
+  color: var(--text-secondary);
+  font-size: clamp(0.85rem, 2vw, 1rem);
+}
+
+/* --------------------------------------------------------------------------
+   9. SCREEN 3: LAB STAGE SCREEN (MICRO-LABS WORKBENCH)
+   -------------------------------------------------------------------------- */
+#screen-lab {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.lab-stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.lab-title-group h2 {
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+}
+
+/* Pip's Guidance Speech Bubble */
+.pip-dialogue-bubble {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-glass-bright);
+  padding: 14px 20px;
+  border-radius: var(--border-radius-lg);
+  backdrop-filter: blur(14px);
+}
+
+.pip-dialogue-bubble .pip-avatar {
+  flex-shrink: 0;
+}
+
+.pip-bubble-content {
+  flex: 1;
+}
+
+.pip-bubble-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--hyper-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pip-bubble-text {
+  font-size: clamp(0.92rem, 2vw, 1.05rem);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Workbench Stage Container */
+.lab-workbench {
+  min-height: 480px;
+  padding: clamp(18px, 3vw, 32px);
+  border-radius: var(--border-radius-lg);
+  background: rgba(11, 17, 32, 0.9);
+  border: 2px solid var(--border-glass);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8), 0 10px 30px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+}
+
+/* Instrument Gauges & Readouts (JetBrains Mono) */
+.instrument-gauge-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.instrument-gauge {
+  background: #030712;
+  border: 1px solid rgba(0, 245, 212, 0.35);
+  border-radius: var(--border-radius-sm);
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-mono);
+}
+
+.instrument-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.instrument-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--hyper-cyan);
+  text-shadow: 0 0 10px var(--hyper-cyan-glow);
+}
+
+/* Apparatus Interactive Stage Area */
+.apparatus-stage-canvas {
+  width: 100%;
+  min-height: 280px;
+  border-radius: var(--border-radius-md);
+  background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0b1120 85%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Laboratory Control Dials & Sliders */
+.lab-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Slider Controls */
+.lab-slider-track {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lab-slider-track input[type="range"] {
+  -webkit-appearance: none;
+  width: clamp(140px, 20vw, 220px);
+  height: 8px;
+  border-radius: 4px;
+  background: #1e293b;
+  outline: none;
+  border: 1px solid var(--border-glass);
+}
+
+.lab-slider-track input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--hyper-cyan);
+  box-shadow: 0 0 10px var(--hyper-cyan);
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   10. SCREEN 4: EXAM CHALLENGE SCREEN
+   -------------------------------------------------------------------------- */
+#screen-exam {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.exam-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--border-radius-pill);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.level-1 { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid #38bdf8; }
+.level-2 { background: rgba(0, 245, 212, 0.2); color: var(--hyper-cyan); border: 1px solid var(--hyper-cyan); }
+.level-3 { background: rgba(255, 183, 3, 0.2); color: var(--solar-amber); border: 1px solid var(--solar-amber); }
+.level-4 { background: rgba(247, 37, 133, 0.2); color: var(--plasma-magenta); border: 1px solid var(--plasma-magenta); }
+.level-5 { background: rgba(57, 255, 20, 0.25); color: var(--radioactive-lime); border: 1px solid var(--radioactive-lime); }
+
+/* Animated Exam Progress Beaker */
+.exam-beaker-progress-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.7);
+  padding: 10px 18px;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--border-glass);
+}
+
+.beaker-meter {
+  position: relative;
+  width: 48px;
+  height: 64px;
+  border: 2px solid var(--border-glass-bright);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  background: rgba(3, 7, 18, 0.6);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.beaker-meter::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 6px;
+  border: 2px solid var(--border-glass-bright);
+  border-radius: 4px;
+}
+
+.beaker-liquid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  background: linear-gradient(180deg, rgba(0, 245, 212, 0.85) 0%, rgba(6, 182, 212, 0.95) 100%);
+  box-shadow: 0 0 12px var(--hyper-cyan-glow);
+  transition: height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.beaker-liquid::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+}
+
+.progress-bar-track {
+  flex: 1;
+  height: 12px;
+  background: #1e293b;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--hyper-cyan) 0%, var(--radioactive-lime) 100%);
+  box-shadow: 0 0 10px var(--hyper-cyan-glow);
+  transition: width 0.35s ease-out;
+}
+
+.question-counter-text {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--hyper-cyan);
+  white-space: nowrap;
+}
+
+/* Exam Scenario & Question Card */
+.scenario-card {
+  padding: clamp(20px, 3.5vw, 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.scenario-title {
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  color: var(--solar-amber);
+}
+
+.scenario-narrative {
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+  line-height: 1.6;
+  color: #e2e8f0;
+}
+
+.exam-diagram-container {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  min-height: 180px;
+  background: rgba(3, 7, 18, 0.6);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.subquestion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.subquestion-prompt-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.subquestion-prompt {
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.45;
+}
+
+/* 4 Options Buttons Grid */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.option-btn {
+  width: 100%;
+  min-height: 60px;
+  padding: 14px 18px;
+  border-radius: var(--border-radius-md);
+  background: rgba(15, 23, 42, 0.75);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  justify-content: flex-start;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  font-family: var(--font-body);
+}
+
+.option-btn:hover {
+  border-color: var(--hyper-cyan);
+  background: rgba(30, 41, 59, 0.85);
+  box-shadow: 0 0 16px rgba(0, 245, 212, 0.25);
+  transform: translateY(-2px);
+}
+
+.option-letter {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--hyper-cyan);
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 245, 212, 0.3);
+}
+
+.option-text {
+  font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+  font-weight: 700;
+  color: #ffffff;
+  flex: 1;
+}
+
+/* Option Feedback States */
+.option-btn.correct {
+  background: rgba(57, 255, 20, 0.2) !important;
+  border-color: var(--radioactive-lime) !important;
+  box-shadow: 0 0 20px rgba(57, 255, 20, 0.45) !important;
+}
+
+.option-btn.correct .option-letter {
+  background: var(--radioactive-lime);
+  color: #032009;
+}
+
+.option-btn.incorrect {
+  background: rgba(239, 68, 68, 0.2) !important;
+  border-color: var(--danger-crimson) !important;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.35) !important;
+  animation: wobbleWrong 0.35s ease;
+}
+
+@keyframes wobbleWrong {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* Instant Explanation Rationale Box */
+.explanation-box {
+  padding: 16px 20px;
+  border-radius: var(--border-radius-md);
+  background: rgba(15, 23, 42, 0.9);
+  border-left: 4px solid var(--hyper-cyan);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: fadeIn 0.25s ease;
+}
+
+.explanation-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--hyper-cyan);
+  text-transform: uppercase;
+}
+
+.explanation-text {
+  font-size: 0.95rem;
+  color: #f1f5f9;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   11. SCREEN 5: REMEDIATION SCREEN ("BRONZE IS NOT ACCEPTABLE!")
+   -------------------------------------------------------------------------- */
+#screen-remediation {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.bronze-alert-banner {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(247, 37, 133, 0.25) 100%);
+  border: 2px solid var(--plasma-magenta);
+  border-radius: var(--border-radius-lg);
+  padding: clamp(20px, 4vw, 32px);
+  text-align: center;
+  box-shadow: 0 0 30px rgba(247, 37, 133, 0.35);
+  animation: pulseAlert 2s infinite alternate ease-in-out;
+}
+
+@keyframes pulseAlert {
+  0% { box-shadow: 0 0 20px rgba(247, 37, 133, 0.3); }
+  100% { box-shadow: 0 0 35px rgba(247, 37, 133, 0.6); }
+}
+
+.bronze-alert-banner h2 {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  color: #ffffff;
+  text-shadow: 0 0 16px var(--plasma-magenta);
+  margin-bottom: 8px;
+}
+
+.bronze-alert-banner p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: #fed7aa;
+  font-weight: 700;
+}
+
+/* Mascot Diagnostic Dialogue */
+.diagnostic-mascot-box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.85);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-glass-bright);
+}
+
+.diagnostic-text h3 {
+  color: var(--solar-amber);
+  margin-bottom: 6px;
+}
+
+.diagnostic-text p {
+  color: #e2e8f0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+/* Domain Meters Breakdown */
+.domain-breakdown-card {
+  padding: 24px;
+}
+
+.domain-breakdown-card h3 {
+  margin-bottom: 16px;
+}
+
+.domain-meter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.domain-meter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 14px;
+  border-radius: var(--border-radius-md);
+  background: rgba(3, 7, 18, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.domain-meter-row.weakest {
+  border-color: var(--plasma-magenta);
+  background: rgba(247, 37, 133, 0.12);
+  box-shadow: 0 0 14px rgba(247, 37, 133, 0.25);
+}
+
+.domain-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  min-width: 180px;
+}
+
+.domain-score-bar {
+  flex: 1;
+  height: 10px;
+  background: #1e293b;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.domain-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  background: var(--hyper-cyan);
+}
+
+.domain-meter-row.weakest .domain-bar-fill {
+  background: var(--plasma-magenta);
+}
+
+.domain-ratio {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #ffffff;
+  min-width: 45px;
+  text-align: right;
+}
+
+/* Retrain Action Bar */
+.remediation-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   12. SCREEN 6: CERTIFICATE SCREEN
+   -------------------------------------------------------------------------- */
+#screen-certificate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.cert-showcase-container {
+  width: 100%;
+  max-width: 1020px;
+  position: relative;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 245, 212, 0.2);
+  border: 2px solid var(--border-glass-bright);
+}
+
+#certificate-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 848;
+  background: #030a16;
+}
+
+.cert-action-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   13. KINETIC PARTICLES & ANIMATIONS
+   -------------------------------------------------------------------------- */
+.kinetic-spark {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  animation: sparkFly 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes sparkFly {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   14. PRINT STYLES FOR BORDERLESS A4 CERTIFICATE
+   -------------------------------------------------------------------------- */
+@page {
+  size: A4 landscape;
+  margin: 0;
+}
+
+@media print {
+  body, html {
+    background: #030a16 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body::before, body::after {
+    display: none !important;
+  }
+
+  .science-app {
+    padding: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Hide everything except certificate */
+  .app-header,
+  .cert-action-toolbar,
+  #screen-start,
+  #screen-hub,
+  #screen-lab,
+  #screen-exam,
+  #screen-remediation,
+  .kinetic-spark {
+    display: none !important;
+  }
+
+  #screen-certificate {
+    display: flex !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .cert-showcase-container {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  #certificate-canvas {
+    width: 100vw !important;
+    height: 100vh !important;
+    object-fit: fill !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   15. TOUCH & RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .science-app {
+    padding: 10px;
+  }
+
+  .app-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .header-left, .header-right {
+    justify-content: space-between;
+  }
+
+  .labs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pip-dialogue-bubble {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .domain-meter-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .domain-score-bar {
+    width: 100%;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Cybernetic Grid & Particle Canvas Background -->
+  <div id="bg-canvas"></div>
+
+  <!-- Persistent Top Header / Status Bar -->
+  <header class="app-header" id="main-header" style="display: none;">
+    <div class="header-left">
+      <div class="lab-logo-badge">
+        <span class="beaker-icon">🧪</span>
+        <span>Safari Science Academy</span>
+      </div>
+      <span class="player-id-chip">
+        <span>👨‍🔬</span>
+        <span id="header-player-name">Junior Explorer</span>
+      </span>
+    </div>
+    <div class="header-right">
+      <span class="star-counter" id="header-stars">0 / 5 Badges</span>
+      <button class="btn btn-icon btn-glass" id="btn-toggle-audio" title="Toggle Sound & Speech">🔊</button>
+      <button class="btn btn-glass btn-back-to-hub" title="Return to Discovery Hub">🏠 Hub</button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="app-container">
+
+    <!-- SCREEN 1: START SCREEN -->
+    <section id="screen-start">
+      <div class="hero-science-badge">🔬⚡</div>
+      <h1 class="start-title">Safari Science Quest</h1>
+      <p class="start-subtitle">
+        Mini English Program • Primary 3 Interactive Discovery Lab & Examination Challenge
+      </p>
+
+      <!-- Mascots Showcase -->
+      <div class="mascot-stage">
+        <div class="mascot-card">
+          <div id="mascot-leo-container"></div>
+          <span class="mascot-name">Professor Leo</span>
+          <span class="mascot-role">Chief Scientist</span>
+        </div>
+        <div class="mascot-card">
+          <div id="mascot-pip-container"></div>
+          <span class="mascot-name">Pip</span>
+          <span class="mascot-role">Robotic Lab Assistant</span>
+        </div>
+      </div>
+
+      <!-- Terminal Name Input -->
+      <div class="glass-card terminal-card">
+        <div class="terminal-header">
+          <span>// LAB_SECURITY_GATE: AUTH_REQUIRED</span>
+          <span>ONLINE 🟢</span>
+        </div>
+        <div class="name-input-group">
+          <label for="player-name-input">STUDENT CADET IDENTIFIER:</label>
+          <input type="text" id="player-name-input" class="lab-input" placeholder="Enter Your Name..." autocomplete="off">
+        </div>
+        <button class="btn btn-cyan" id="btn-enter-lab" style="width: 100%;">
+          Enter Science Academy 🚀
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: HUB SCREEN (5 LABS + 5 BADGES + EXAM LAUNCH) -->
+    <section id="screen-hub" style="display: none;">
+      <div class="hub-hero">
+        <h2>🔬 The Discovery Laboratory</h2>
+        <p>Explore all 5 hands-on experimental stations, conduct live tests, and collect your 5 Lab Badges!</p>
+      </div>
+
+      <!-- 5 Discovery Lab Cards -->
+      <div class="labs-grid">
+        <!-- Lab 1: Magnets -->
+        <div class="glass-card lab-station-card" data-lab="magnet">
+          <div class="lab-card-top">
+            <div class="lab-station-icon">🧲</div>
+            <span class="lab-status-badge status-ready">Open Lab 🔬</span>
+          </div>
+          <div class="lab-station-info">
+            <h3>1. Magnetic Physics & Sorting</h3>
+            <p>Test bar magnet poles (N-S attract, N-N repel) and sweep a horseshoe magnet to sort ferrous metals from non-magnetic materials!</p>
+            <div class="concept-pills">
+              <span class="concept-pill">Poles N & S</span>
+              <span class="concept-pill">Attract / Repel</span>
+              <span class="concept-pill">Iron & Steel</span>
+            </div>
+          </div>
+          <button class="btn btn-cyan" style="width: 100%;">Enter Magnet Lab ⚡</button>
+        </div>
+
+        <!-- Lab 2: Friction -->
+        <div class="glass-card lab-station-card" data-lab="friction">
+          <div class="lab-card-top">
+            <div class="lab-station-icon">🏎️</div>
+            <span class="lab-status-badge status-ready">Open Lab 🔬</span>
+          </div>
+          <div class="lab-station-info">
+            <h3>2. Pip's Ramp & Friction Runway</h3>
+            <p>Tilt the ramp angle (15°, 30°, 45°) and launch Pip's toy car across Ice, Tile, Wood, Carpet, and Sandpaper to measure friction!</p>
+            <div class="concept-pills">
+              <span class="concept-pill">Gravity Force</span>
+              <span class="concept-pill">Ramp Slope</span>
+              <span class="concept-pill">Stopping Distance</span>
+            </div>
+          </div>
+          <button class="btn btn-amber" style="width: 100%;">Enter Friction Runway 🏁</button>
+        </div>
+
+        <!-- Lab 3: Thermal -->
+        <div class="glass-card lab-station-card" data-lab="thermal">
+          <div class="lab-card-top">
+            <div class="lab-station-icon">🌡️</div>
+            <span class="lab-status-badge status-ready">Open Lab 🔬</span>
+          </div>
+          <div class="lab-station-info">
+            <h3>3. Thermal Transformation Station</h3>
+            <p>Slide the heat/cool pad to melt chocolate and ice, freeze water, and fry an egg to discover reversible vs irreversible changes!</p>
+            <div class="concept-pills">
+              <span class="concept-pill">Solid / Liquid / Gas</span>
+              <span class="concept-pill">Melting & Freezing</span>
+              <span class="concept-pill">Reversible Changes</span>
+            </div>
+          </div>
+          <button class="btn btn-magenta" style="width: 100%;">Enter Thermal Station 🔥</button>
+        </div>
+
+        <!-- Lab 4: Nutrition -->
+        <div class="glass-card lab-station-card" data-lab="nutrition">
+          <div class="lab-card-top">
+            <div class="lab-station-icon">🥗</div>
+            <span class="lab-status-badge status-ready">Open Lab 🔬</span>
+          </div>
+          <div class="lab-station-info">
+            <h3>4. Bio-Nutrition & Animal Feeder</h3>
+            <p>Sort foods into Carbohydrates (Energy), Proteins (Growth), and Vitamins (Health), then feed our Herbivore, Carnivore, and Omnivore guests!</p>
+            <div class="concept-pills">
+              <span class="concept-pill">Carbs / Protein / Vit</span>
+              <span class="concept-pill">Herbivore / Carnivore</span>
+              <span class="concept-pill">Basic Needs</span>
+            </div>
+          </div>
+          <button class="btn btn-lime" style="width: 100%;">Enter Nutrition Pods 🥦</button>
+        </div>
+
+        <!-- Lab 5: Life Cycles -->
+        <div class="glass-card lab-station-card" data-lab="lifecycle">
+          <div class="lab-card-top">
+            <div class="lab-station-icon">🔄</div>
+            <span class="lab-status-badge status-ready">Open Lab 🔬</span>
+          </div>
+          <div class="lab-station-info">
+            <h3>5. Life Cycle Astrolabe Wheel</h3>
+            <p>Sequence the circular metamorphic stages for Butterfly, Frog, and Chicken. Lock all 4 sockets to trigger the metamorphosis animation!</p>
+            <div class="concept-pills">
+              <span class="concept-pill">Butterfly Metamorphosis</span>
+              <span class="concept-pill">Tadpole & Froglet</span>
+              <span class="concept-pill">Protect Habitats</span>
+            </div>
+          </div>
+          <button class="btn btn-cyan" style="width: 100%;">Enter Astrolabe Wheel 🦋</button>
+        </div>
+      </div>
+
+      <!-- 5 Badge Vault Section -->
+      <div class="badge-vault-section">
+        <div class="badge-vault-header">
+          <h3>🏅 Junior Scientist Badge Vault</h3>
+          <span style="color: var(--text-secondary); font-size: 0.9rem;">
+            Earn all 5 badges to unlock the National Science Examination!
+          </span>
+        </div>
+        <div class="badge-slots-row">
+          <div class="badge-slot" data-badge="magnet">
+            <div class="badge-ring">
+              <span class="badge-slot-icon">🧲</span>
+            </div>
+            <span class="badge-slot-label">Magnetism</span>
+            <span class="badge-status-text" style="font-size:0.75rem; color:var(--text-muted);">Locked 🔒</span>
+          </div>
+          <div class="badge-slot" data-badge="friction">
+            <div class="badge-ring">
+              <span class="badge-slot-icon">🏎️</span>
+            </div>
+            <span class="badge-slot-label">Friction</span>
+            <span class="badge-status-text" style="font-size:0.75rem; color:var(--text-muted);">Locked 🔒</span>
+          </div>
+          <div class="badge-slot" data-badge="thermal">
+            <div class="badge-ring">
+              <span class="badge-slot-icon">🌡️</span>
+            </div>
+            <span class="badge-slot-label">Thermal</span>
+            <span class="badge-status-text" style="font-size:0.75rem; color:var(--text-muted);">Locked 🔒</span>
+          </div>
+          <div class="badge-slot" data-badge="nutrition">
+            <div class="badge-ring">
+              <span class="badge-slot-icon">🥗</span>
+            </div>
+            <span class="badge-slot-label">Nutrition</span>
+            <span class="badge-status-text" style="font-size:0.75rem; color:var(--text-muted);">Locked 🔒</span>
+          </div>
+          <div class="badge-slot" data-badge="lifecycle">
+            <div class="badge-ring">
+              <span class="badge-slot-icon">🔄</span>
+            </div>
+            <span class="badge-slot-label">Life Cycles</span>
+            <span class="badge-status-text" style="font-size:0.75rem; color:var(--text-muted);">Locked 🔒</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exam Launch Banner -->
+      <div class="exam-launch-banner locked" id="exam-launch-banner">
+        <div class="exam-banner-left">
+          <span class="exam-banner-icon">🏆</span>
+          <div class="exam-banner-text">
+            <h3>Mode 2: The 15-Mark National Science Exam</h3>
+            <p id="exam-banner-subtitle">
+              First-Time Prerequisite: Complete all 5 Discovery Labs to unlock the Exam!
+            </p>
+          </div>
+        </div>
+        <button class="btn btn-glass" id="btn-launch-exam" disabled>
+          Exam Locked 🔒
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: LAB STAGE SCREEN (MICRO-LAB WORKBENCH) -->
+    <section id="screen-lab" style="display: none;">
+      <div class="lab-stage-header">
+        <button class="btn btn-glass btn-back-to-hub">← Back to Hub</button>
+        <div class="lab-title-group">
+          <h2 id="lab-title-text">Lab Station</h2>
+        </div>
+        <span class="badge-pill" id="lab-badge-indicator">Badge In Progress 🧪</span>
+      </div>
+
+      <!-- Pip's Dialogue & Guidance Bubble -->
+      <div class="pip-dialogue-bubble">
+        <div class="pip-avatar" id="pip-hint-avatar"></div>
+        <div class="pip-bubble-content">
+          <div class="pip-bubble-title">PIP'S EXPERIMENT LAB BRIEFING</div>
+          <div class="pip-bubble-text" id="pip-hint-text">
+            Experiment with the apparatus below!
+          </div>
+        </div>
+      </div>
+
+      <!-- Workbench Mount Point for InteractiveLabs -->
+      <div id="lab-mount-point" class="lab-workbench"></div>
+    </section>
+
+    <!-- SCREEN 4: EXAM SCREEN -->
+    <section id="screen-exam" style="display: none;">
+      <div class="exam-header-bar">
+        <span class="level-badge level-1" id="exam-level-badge">Level 1 • Needs</span>
+        <button class="btn btn-glass btn-back-to-hub">Exit Exam ✕</button>
+      </div>
+
+      <!-- Liquid Beaker Progress Bar -->
+      <div class="exam-beaker-progress-container">
+        <div class="beaker-meter">
+          <div class="beaker-liquid" id="beaker-fill"></div>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="exam-progress-bar"></div>
+        </div>
+        <span class="question-counter-text" id="exam-q-counter">Question 1 of 15</span>
+      </div>
+
+      <!-- Scenario Card & Diagram -->
+      <div class="glass-card scenario-card" id="scenario-card">
+        <h3 class="scenario-title" id="scenario-title">Question Title</h3>
+        <p class="scenario-narrative" id="scenario-narrative" style="display: none;"></p>
+        <div class="exam-diagram-container" id="scenario-diagram" style="display: none;"></div>
+
+        <!-- Subquestion Prompt -->
+        <div class="subquestion-container">
+          <div class="subquestion-prompt-row">
+            <span class="subquestion-prompt" id="subq-prompt">Prompt text...</span>
+          </div>
+
+          <!-- 4 Options Grid -->
+          <div class="options-grid" id="exam-options-grid"></div>
+
+          <!-- Explanation Box -->
+          <div class="explanation-box" id="explanation-box" style="display: none;">
+            <span class="explanation-title">Scientific Rationale:</span>
+            <span class="explanation-text" id="explanation-text">Explanation...</span>
+            <button class="btn btn-cyan" id="btn-next-question" style="align-self: flex-end; margin-top: 10px;">
+              Next Question 🚀
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 5: REMEDIATION SCREEN ("BRONZE IS NOT ACCEPTABLE!") -->
+    <section id="screen-remediation" style="display: none;">
+      <div class="bronze-alert-banner">
+        <h2>⚠️ BRONZE IS NOT ACCEPTABLE!</h2>
+        <p id="bronze-score-text">You scored 9 / 15 Marks</p>
+      </div>
+
+      <div class="diagnostic-mascot-box">
+        <div id="diagnostic-mascot-avatar"></div>
+        <div class="diagnostic-text">
+          <h3>PROFESSOR LEO'S DIAGNOSTIC REPORT:</h3>
+          <p id="diagnostic-message">
+            Bronze is not acceptable for an MEP Junior Scientist! You need to review your poorest domain before retrying the exam.
+          </p>
+        </div>
+      </div>
+
+      <div class="glass-card domain-breakdown-card">
+        <h3>📊 Domain Score Breakdown:</h3>
+        <div class="domain-meter-list" id="remediation-domain-meters"></div>
+      </div>
+
+      <div class="remediation-actions">
+        <button class="btn btn-magenta" id="btn-remediation-retrain">
+          🔬 Retrain at Weakest Lab Now
+        </button>
+        <button class="btn btn-glass btn-back-to-hub">
+          Return to Hub 🏠
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN 6: CERTIFICATE SCREEN -->
+    <section id="screen-certificate" style="display: none;">
+      <div>
+        <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 6px;">
+          🎉 NATIONAL DIPLOMA OF SCIENTIFIC EXCELLENCE
+        </h2>
+        <p style="color: var(--hyper-cyan); font-weight: 700; font-size: 1.1rem;">
+          Official Royal Thai MEP Primary 3 Junior Scientist Credential
+        </p>
+      </div>
+
+      <!-- High-Res Wallpaper Canvas -->
+      <div class="cert-showcase-container">
+        <canvas id="certificate-canvas" width="2400" height="1696"></canvas>
+      </div>
+
+      <!-- Action Toolbar -->
+      <div class="cert-action-toolbar">
+        <button class="btn btn-amber" id="btn-download-wallpaper">
+          📥 Download HD Wallpaper (.png)
+        </button>
+        <button class="btn btn-cyan" id="btn-print-cert">
+          🖨️ Print Certificate (A4)
+        </button>
+        <button class="btn btn-lime" id="btn-retake-exam">
+          🔄 Retake Exam
+        </button>
+        <button class="btn btn-glass btn-back-to-hub">
+          Return to Hub 🏠
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JAVASCRIPT MODULES INLINED FOR 100% OFFLINE / STANDALONE FUNCTIONALITY -->
+  <script>
+/**
+ * MEP Primary 3 Science Quest: Audio Engine & Procedural SFX Synthesizer
+ * File: science_audio_ui.js
+ * 
+ * Provides:
+ * 1. Zero-dependency procedural Web Audio API sound synthesis:
+ *    - bubble: Organic chemistry beaker bubbling
+ *    - magnetClack: Sharp metallic magnetic snap
+ *    - repelPulse: Deep sci-fi magnetic repulsion forcefield pulse
+ *    - carZoom: Toy car friction rolling & skidding
+ *    - heatFlame: Bunsen burner thermal ignition surge & hiss
+ *    - freezeChime: Crystalline icy shimmer chime
+ *    - correct: Cheerful celebratory double chime
+ *    - wrong: Soft friendly buzzy wobble (not harsh)
+ *    - fanfare: Grand triumphant brass exam completion fanfare
+ * 2. Speech Synthesis Engine:
+ *    - Primary 3 student-tailored soft female voice (pitch 1.05, rate 0.92)
+ *    - Auto-voice resolution (Google US English female, Microsoft Zira / Jenny, Apple Samantha)
+ * 3. Mascot & UI Particle Visual Helpers:
+ *    - Professor Leo & Pip the Gear Bot animated SVGs
+ *    - Kinetic electric sparks & bubbling beakers
+ */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define([], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    module.exports = factory();
+  } else {
+    root.ScienceAudioUI = factory();
+    // Expose convenient globals for easy access across all modules
+    root.playSound = root.ScienceAudioUI.playSound.bind(root.ScienceAudioUI);
+    root.speakText = root.ScienceAudioUI.speakText.bind(root.ScienceAudioUI);
+  }
+})(typeof window !== 'undefined' ? window : this, function () {
+  'use strict';
+
+  // Audio Context management (lazy initialization on user gesture)
+  let audioCtx = null;
+  let isAudioMuted = false;
+  let masterVolume = 0.85;
+  let speechDebounceTimer = null;
+  let cachedVoices = [];
+  let preferredVoice = null;
+  let isSpeaking = false;
+
+  /**
+   * Initializes or resumes the AudioContext on user interaction.
+   * Required for modern browser autoplay policies.
+   */
+  function getAudioContext() {
+    if (!audioCtx) {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioContextClass) {
+        audioCtx = new AudioContextClass();
+      }
+    }
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(() => {});
+    }
+    return audioCtx;
+  }
+
+  // Auto-unlock on first document interaction
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    const unlockAudio = () => {
+      const ctx = getAudioContext();
+      if (ctx && ctx.state === 'running') {
+        document.removeEventListener('pointerdown', unlockAudio);
+        document.removeEventListener('keydown', unlockAudio);
+      }
+    };
+    document.addEventListener('pointerdown', unlockAudio, { passive: true });
+    document.addEventListener('keydown', unlockAudio, { passive: true });
+  }
+
+  /* -------------------------------------------------------------
+     SPEECH SYNTHESIS ENGINE
+  ------------------------------------------------------------- */
+  const FEMALE_VOICE_NAMES = [
+    'zira', 'jenny', 'aria', 'samantha', 'victoria', 'karen',
+    'fiona', 'moira', 'tessa', 'veena', 'female', 'woman',
+    'catherine', 'susan', 'linda', 'hazel', 'stephanie', 'ava',
+    'allison', 'serena', 'sangeeta', 'google us english female', 'google us english'
+  ];
+
+  const MALE_VOICE_NAMES = [
+    'david', 'mark', 'guy', 'george', 'james', 'male', 'richard',
+    'sean', 'stefan', 'paul', 'brian', 'daniel', 'alex'
+  ];
+
+  function refreshVoices() {
+    if (!('speechSynthesis' in window)) return;
+    try {
+      const list = window.speechSynthesis.getVoices();
+      if (!list || !list.length) return;
+      cachedVoices = list;
+
+      // Filter for English voices first
+      const enPool = list.filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+      const candidates = enPool.length > 0 ? enPool : list;
+
+      // 1. Look for known soft friendly female voices
+      let chosen = candidates.find(v => {
+        const nm = v.name.toLowerCase();
+        return FEMALE_VOICE_NAMES.some(fn => nm.includes(fn));
+      });
+
+      // 2. If not found, exclude strictly male names
+      if (!chosen) {
+        chosen = candidates.find(v => {
+          const nm = v.name.toLowerCase();
+          return !MALE_VOICE_NAMES.some(mn => nm.includes(mn));
+        });
+      }
+
+      preferredVoice = chosen || candidates[0];
+    } catch (e) {
+      console.warn('ScienceAudioUI: Error refreshing voices', e);
+    }
+  }
+
+  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    refreshVoices();
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = refreshVoices;
+    }
+  }
+
+  /**
+   * Reads text aloud with warm, friendly female voice tuned for Primary 3 learners.
+   * @param {string} text - Text to speak
+   * @param {object} [options] - Optional { immediate, pitch, rate, onEnd }
+   */
+  function speakText(text, options = {}) {
+    if (!('speechSynthesis' in window) || !text || isAudioMuted) return;
+
+    const {
+      immediate = false,
+      pitch = 1.05,
+      rate = 0.92,
+      onEnd = null
+    } = options;
+
+    if (speechDebounceTimer) {
+      clearTimeout(speechDebounceTimer);
+      speechDebounceTimer = null;
+    }
+
+    try {
+      if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+      window.speechSynthesis.cancel();
+    } catch (e) {}
+
+    const executeSpeak = () => {
+      try {
+        if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+        const utterance = new SpeechSynthesisUtterance(text.trim());
+        utterance.rate = rate;
+        utterance.pitch = pitch;
+        utterance.lang = 'en-US';
+
+        if (!preferredVoice && cachedVoices.length === 0) {
+          refreshVoices();
+        }
+        if (preferredVoice) {
+          utterance.voice = preferredVoice;
+        }
+
+        utterance.onstart = () => { isSpeaking = true; };
+        utterance.onend = () => {
+          isSpeaking = false;
+          if (typeof onEnd === 'function') onEnd();
+        };
+        utterance.onerror = () => {
+          isSpeaking = false;
+        };
+
+        window.speechSynthesis.speak(utterance);
+      } catch (e) {
+        isSpeaking = false;
+        console.warn('ScienceAudioUI: Speech synthesis failed', e);
+      }
+    };
+
+    if (immediate) {
+      executeSpeak();
+    } else {
+      speechDebounceTimer = setTimeout(executeSpeak, 180);
+    }
+  }
+
+  function stopSpeech() {
+    if (!('speechSynthesis' in window)) return;
+    try {
+      if (speechDebounceTimer) {
+        clearTimeout(speechDebounceTimer);
+        speechDebounceTimer = null;
+      }
+      window.speechSynthesis.cancel();
+      isSpeaking = false;
+    } catch (e) {}
+  }
+
+  /* -------------------------------------------------------------
+     PROCEDURAL WEB AUDIO SYNTHESIZER
+  ------------------------------------------------------------- */
+
+  // Helper to generate a buffer of white noise
+  function createNoiseBuffer(ctx, duration = 1) {
+    const bufferSize = ctx.sampleRate * duration;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+    return buffer;
+  }
+
+  // Helper for simple tone envelope
+  function playTone(freq, delay, duration, type = 'sine', vol = 0.2, pitchRamp = null) {
+    const ctx = getAudioContext();
+    if (!ctx || isAudioMuted) return;
+    const now = ctx.currentTime + delay;
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, now);
+    if (pitchRamp) {
+      osc.frequency.exponentialRampToValueAtTime(pitchRamp, now + duration);
+    }
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.linearRampToValueAtTime(vol * masterVolume, now + 0.015);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + duration + 0.05);
+  }
+
+  /**
+   * Sound 1: Beaker Bubbling ('bubble')
+   * Generates multiple asynchronous organic liquid pops
+   */
+  function soundBubble() {
+    const ctx = getAudioContext();
+    if (!ctx || isAudioMuted) return;
+
+    const bubbleCount = 4 + Math.floor(Math.random() * 3);
+    for (let i = 0; i < bubbleCount; i++) {
+      const delay = i * 0.055 + Math.random() * 0.04;
+      const startF = 380 + Math.random() * 260;
+      const endF = startF * (1.8 + Math.random() * 0.8);
+      const dur = 0.06 + Math.random() * 0.04;
+      const now = ctx.currentTime + delay;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(startF * 1.2, now);
+      filter.Q.value = 6;
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(startF, now);
+      osc.frequency.exponentialRampToValueAtTime(endF, now + dur);
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime(0.18 * masterVolume, now + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + dur + 0.02);
+    }
+  }
+
+  /**
+   * Sound 2: Magnet Snap Clack ('magnetClack')
+   * Sharp transient attack with metallic resonance ping
+   */
+  function soundMagnetClack() {
+    const ctx = getAudioContext();
+    if (!ctx || isAudioMuted) return;
+    const now = ctx.currentTime;
+
+    // 1. Sharp impulse transient
+    const noiseBuffer = createNoiseBuffer(ctx, 0.05);
+    const noiseSource = ctx.createBufferSource();
+    noiseSource.buffer = noiseBuffer;
+    const noiseFilter = ctx.createBiquadFilter();
+    noiseFilter.type = 'highpass';
+    noiseFilter.frequency.setValueAtTime(2200, now);
+    const noiseGain = ctx.createGain();
+    noiseGain.gain.setValueAtTime(0.4 * masterVolume, now);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+
+    noiseSource.connect(noiseFilter);
+    noiseFilter.connect(noiseGain);
+    noiseGain.connect(ctx.destination);
+    noiseSource.start(now);
+
+    // 2. Metallic clack body (dual square/triangle mix)
+    [1200, 1850, 2400].forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = idx === 0 ? 'triangle' : 'sine';
+      osc.frequency.setValueAtTime(freq, now);
+      osc.frequency.exponentialRampToValueAtTime(freq * 0.45, now + 0.08);
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime((0.25 / (idx + 1)) * masterVolume, now + 0.003);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.14);
+    });
+
+    // 3. Metallic ring decay
+    playTone(940, 0.01, 0.18, 'triangle', 0.12);
+  }
+
+  /**
+   * Sound 3: Magnetic Repulsion Pulse ('repelPulse')
+   * Deep sci-fi forcefield pulse with tremolo resistance
+   */
+  function soundRepelPulse() {
+    const ctx = getAudioContext();
+    if (!ctx || isAudioMuted) return;
+    const now = ctx.currentTime;
+    const dur = 0.55;
+
+    // Bass forcefield pitch swoop
+    const osc = ctx.createOscillator();
+    const lfo = ctx.createOscillator();
+    const lfoGain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+    const gain = ctx.createGain();
+
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(140, now);
+    osc.frequency.exponentialRampToValueAtTime(52, now + dur);
+
+    // 16Hz tremolo wobble for magnetic resistance
+    lfo.type = 'sine';
+    lfo.frequency.setValueAtTime(16, now);
+    lfoGain.gain.setValueAtTime(0.5, now);
+    lfo.connect(gain.gain);
+
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(320, now);
+    filter.frequency.exponentialRampToValueAtTime(160, now + dur);
+    filter.Q.value = 4.5;
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.linearRampToValueAtTime(0.32 * masterVolume, now + 0.04);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    lfo.start(now);
+    osc.stop(now + dur + 0.05);
+    lfo.stop(now + dur + 0.05);
+
+    // Sub-bass thump
+    playTone(60, 0, dur * 0.8, 'sine', 0.28, 38);
+  }
+
+  /**
+   * Sound 4: Toy Car Zoom & Friction ('carZoom')
+   * Rolling wheels on texture ramping speed, then skidding stop
+   */
+  function soundCarZoom() {
+    const ctx = getAudioContext();
+    if (!ctx || isAudioMuted) return;
+    const now = ctx.currentTime;
+    const dur = 0.75;
+
+    // 1. Friction rolling noise
+    const noiseBuffer = createNoiseBuffer(ctx, dur);
+    const noise = ctx.createBufferSource();
+    noise.buffer = noiseBuffer;
+
+    const bpf = ctx.createBiquadFilter();
+    bpf.type = 'bandpass';
+    bpf.Q.value = 3.5;
+    bpf.frequency.setValueAtTime(320, now);
+    bpf.frequency.linearRampToValueAtTime(1100, now + dur * 0.45);
+    bpf.frequency.exponentialRampToValueAtTime(450, now + dur);
+
+    const noiseGain = ctx.createGain();
+    noiseGain.gain.setValueAtTime(0.001, now);
+    noiseGain.gain.linearRampToValueAtTime(0.24 * masterVolume, now + 0.1);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+
+    noise.connect(bpf);
+    bpf.connect(noiseGain);
+    noiseGain.connect(ctx.destination);
+    noise.start(now);
+
+    // 2. Whirring motor gearbox pitch sweep
+    const motor = ctx.createOscillator();
+    const motorGain = ctx.createGain();
+    motor.type = 'triangle';
+    motor.frequency.setValueAtTime(180, now);
+    motor.frequency.exponentialRampToValueAtTime(540, now + dur * 0.4);
+    motor.frequency.exponentialRampToValueAtTime(220, now + dur);
+
+    motorGain.gain.setValueAtTime(0.001, now);
+    motorGain.gain.linearRampToValueAtTime(0.14 * masterVolume, now + 0.08);
+    motorGain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+
+    motor.connect(motorGain);
+    motorGain.connect(ctx.destination);
+    motor.start(now);
+    motor.stop(now + dur + 0.02);
+  }
+
+  /**
+   * Sound 5: Thermal Burner Surge & Hiss ('heatFlame')
+   * Bunsen burner ignition surge followed by hot gas roar
+   */
+  function soundHeatFlame() {
+    const ctx = getAudioContext();
+    if (!ctx || isAudioMuted) return;
+    const now = ctx.currentTime;
+    const dur = 0.85;
+
+    // 1. Gas flame turbulence noise
+    const noiseBuffer = createNoiseBuffer(ctx, dur);
+    const noise = ctx.createBufferSource();
+    noise.buffer = noiseBuffer;
+
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.Q.value = 2.0;
+    filter.frequency.setValueAtTime(250, now);
+    filter.frequency.linearRampToValueAtTime(1400, now + 0.25);
+    filter.frequency.exponentialRampToValueAtTime(650, now + dur);
+
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.linearRampToValueAtTime(0.35 * masterVolume, now + 0.08);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+    noise.start(now);
+
+    // 2. Low-frequency combustion rumble
+    playTone(75, 0, dur * 0.9, 'sine', 0.22, 50);
+  }
+
+  /**
+   * Sound 6: Delicate Icy Crystal Chime ('freezeChime')
+   * Shimmering high crystalline bell harmonics
+   */
+  function soundFreezeChime() {
+    const ctx = getAudioContext();
+    if (!ctx || isAudioMuted) return;
+    const now = ctx.currentTime;
+
+    // Pentatonic icy bell ladder (E6, B6, D7, G7, B7)
+    const pitches = [1318.5, 1975.5, 2349.3, 3136.0, 3951.1];
+    pitches.forEach((freq, idx) => {
+      const delay = idx * 0.042;
+      const dur = 0.65 + idx * 0.08;
+      const noteTime = now + delay;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, noteTime);
+
+      gain.gain.setValueAtTime(0.0001, noteTime);
+      gain.gain.linearRampToValueAtTime((0.15 / (idx * 0.3 + 1)) * masterVolume, noteTime + 0.008);
+      gain.gain.exponentialRampToValueAtTime(0.0001, noteTime + dur);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(noteTime);
+      osc.stop(noteTime + dur + 0.02);
+    });
+  }
+
+  /**
+   * Sound 7: Cheerful Double High Chime ('correct')
+   * Encouraging major triad reward chime
+   */
+  function soundCorrect() {
+    const ctx = getAudioContext();
+    if (!ctx || isAudioMuted) return;
+
+    // G5 (784Hz) -> C6 (1046.5Hz) -> E6 (1318.5Hz) sparkle
+    playTone(784.0, 0.0, 0.25, 'triangle', 0.22);
+    playTone(1046.5, 0.09, 0.55, 'sine', 0.25);
+    playTone(1318.5, 0.18, 0.65, 'sine', 0.20);
+    playTone(2093.0, 0.24, 0.75, 'sine', 0.12);
+  }
+
+  /**
+   * Sound 8: Soft Buzzy Wobble ('wrong')
+   * Gentle, kid-friendly "boing-wobble" error prompt
+   */
+  function soundWrong() {
+    const ctx = getAudioContext();
+    if (!ctx || isAudioMuted) return;
+    const now = ctx.currentTime;
+    const dur = 0.42;
+
+    const osc = ctx.createOscillator();
+    const lfo = ctx.createOscillator();
+    const lfoGain = ctx.createGain();
+    const gain = ctx.createGain();
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(240, now);
+    osc.frequency.exponentialRampToValueAtTime(160, now + dur);
+
+    // 7.5Hz vibrato wobble
+    lfo.type = 'sine';
+    lfo.frequency.setValueAtTime(7.5, now);
+    lfoGain.gain.setValueAtTime(22, now);
+    lfo.connect(osc.frequency);
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.linearRampToValueAtTime(0.24 * masterVolume, now + 0.03);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    lfo.start(now);
+    osc.stop(now + dur + 0.05);
+    lfo.stop(now + dur + 0.05);
+  }
+
+  /**
+   * Sound 9: Grand Brass Celebratory Fanfare ('fanfare')
+   * Triumphant brass sequence with overtone shimmer for exam completion
+   */
+  function soundFanfare() {
+    const ctx = getAudioContext();
+    if (!ctx || isAudioMuted) return;
+    const now = ctx.currentTime;
+
+    // Brass notes sequence: C5, E5, G5, C6 (chord hold + shimmer)
+    const melody = [
+      { f: 523.25, d: 0.00, dur: 0.16 }, // C5
+      { f: 659.25, d: 0.14, dur: 0.16 }, // E5
+      { f: 783.99, d: 0.28, dur: 0.18 }, // G5
+      { f: 1046.5, d: 0.44, dur: 0.85 }  // C6
+    ];
+
+    melody.forEach(note => {
+      const noteTime = now + note.d;
+      // Dual oscillator for brassy fullness
+      ['sawtooth', 'triangle'].forEach((type, tIdx) => {
+        const osc = ctx.createOscillator();
+        const filter = ctx.createBiquadFilter();
+        const gain = ctx.createGain();
+
+        osc.type = type;
+        osc.frequency.setValueAtTime(note.f, noteTime);
+
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(600, noteTime);
+        filter.frequency.linearRampToValueAtTime(2200, noteTime + 0.04);
+        filter.frequency.exponentialRampToValueAtTime(800, noteTime + note.dur);
+
+        gain.gain.setValueAtTime(0.0001, noteTime);
+        gain.gain.linearRampToValueAtTime((tIdx === 0 ? 0.16 : 0.22) * masterVolume, noteTime + 0.025);
+        gain.gain.exponentialRampToValueAtTime(0.0001, noteTime + note.dur);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(noteTime);
+        osc.stop(noteTime + note.dur + 0.05);
+      });
+    });
+
+    // Final grand harmony sustain chord: C4, G4, E5, G5, C6 + chime sparkles
+    const chordTime = now + 0.44;
+    const chordPitches = [261.63, 392.00, 659.25, 783.99, 1046.5, 1318.5];
+    chordPitches.forEach((freq, idx) => {
+      playTone(freq, 0.44 + idx * 0.02, 1.25, 'triangle', 0.14);
+    });
+
+    // Sparkle chimes cascading at the peak
+    [2093, 2637, 3136, 4186].forEach((f, idx) => {
+      playTone(f, 0.72 + idx * 0.08, 0.7, 'sine', 0.1);
+    });
+  }
+
+  // Extra Tactile SFX for sleek lab interaction
+  function soundClick() {
+    playTone(1200, 0, 0.03, 'sine', 0.15, 600);
+  }
+
+  function soundLaserScan() {
+    const ctx = getAudioContext();
+    if (!ctx || isAudioMuted) return;
+    playTone(1800, 0, 0.18, 'sawtooth', 0.14, 280);
+  }
+
+  function soundBadgeUnlock() {
+    playTone(523.25, 0, 0.25, 'triangle', 0.18);
+    playTone(659.25, 0.08, 0.3, 'triangle', 0.2);
+    playTone(1046.5, 0.16, 0.6, 'sine', 0.25);
+    playTone(1567.98, 0.26, 0.8, 'sine', 0.18);
+  }
+
+  function soundDialTick() {
+    playTone(1600, 0, 0.025, 'square', 0.08, 1100);
+  }
+
+  /**
+   * Main dispatch method for all procedural sound effects.
+   * @param {string} soundName
+   * @param {object} [options]
+   */
+  function playSound(soundName, options = {}) {
+    try {
+      getAudioContext();
+      switch (soundName) {
+        case 'bubble':
+          soundBubble();
+          break;
+        case 'magnetClack':
+          soundMagnetClack();
+          break;
+        case 'repelPulse':
+          soundRepelPulse();
+          break;
+        case 'carZoom':
+          soundCarZoom();
+          break;
+        case 'heatFlame':
+          soundHeatFlame();
+          break;
+        case 'freezeChime':
+          soundFreezeChime();
+          break;
+        case 'correct':
+          soundCorrect();
+          break;
+        case 'wrong':
+          soundWrong();
+          break;
+        case 'fanfare':
+          soundFanfare();
+          break;
+        // Helpful aliases & extras
+        case 'click':
+        case 'tap':
+          soundClick();
+          break;
+        case 'laser':
+        case 'scan':
+          soundLaserScan();
+          break;
+        case 'badge':
+        case 'unlock':
+          soundBadgeUnlock();
+          break;
+        case 'dial':
+          soundDialTick();
+          break;
+        default:
+          console.warn(`ScienceAudioUI: Unknown sound key "${soundName}"`);
+      }
+    } catch (e) {
+      console.warn('ScienceAudioUI: Error playing sound', e);
+    }
+  }
+
+  /* -------------------------------------------------------------
+     MASCOT & VISUAL SPARK GENERATORS
+  ------------------------------------------------------------- */
+
+  /**
+   * Generates Professor Leo SVG markup.
+   * Professor Leo: Wise lion scientist in lab coat and electric cyan goggles.
+   * @param {string} [mood='happy'] - 'happy' | 'talking' | 'thinking' | 'remediate'
+   * @param {number} [size=96]
+   * @returns {string} SVG HTML string
+   */
+  function renderMascotLeo(mood = 'happy', size = 96) {
+    const isWorry = mood === 'remediate';
+    const mouthPath = isWorry
+      ? 'M42,66 Q50,60 58,66'
+      : 'M40,62 Q50,72 60,62';
+
+    return `
+    <svg class="mascot-svg mascot-leo mood-${mood}" viewBox="0 0 100 100" width="${size}" height="${size}" aria-label="Professor Leo">
+      <defs>
+        <radialGradient id="leoMane" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#f59e0b"/>
+          <stop offset="85%" stop-color="#b45309"/>
+          <stop offset="100%" stop-color="#78350f"/>
+        </radialGradient>
+        <radialGradient id="leoFace" cx="50%" cy="40%" r="50%">
+          <stop offset="0%" stop-color="#fed7aa"/>
+          <stop offset="100%" stop-color="#fba863"/>
+        </radialGradient>
+        <linearGradient id="coatGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#f8fafc"/>
+          <stop offset="100%" stop-color="#cbd5e1"/>
+        </linearGradient>
+        <linearGradient id="goggleGlass" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(0, 245, 212, 0.85)"/>
+          <stop offset="100%" stop-color="rgba(6, 182, 212, 0.45)"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Fluffy Scientist Lion Mane -->
+      <circle cx="50" cy="46" r="38" fill="url(#leoMane)" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.4))"/>
+      
+      <!-- Ears -->
+      <circle cx="20" cy="22" r="10" fill="#b45309"/>
+      <circle cx="20" cy="22" r="6" fill="#fba863"/>
+      <circle cx="80" cy="22" r="10" fill="#b45309"/>
+      <circle cx="80" cy="22" r="6" fill="#fba863"/>
+
+      <!-- Lion Head Face -->
+      <circle cx="50" cy="48" r="28" fill="url(#leoFace)"/>
+
+      <!-- Whiskers -->
+      <path d="M26,56 L10,54 M26,60 L12,62 M74,56 L90,54 M74,60 L88,62" stroke="#78350f" stroke-width="1.8" stroke-linecap="round"/>
+
+      <!-- Eyes & Expressive Eyebrows -->
+      <ellipse cx="38" cy="44" rx="4" ry="5" fill="#1e293b"/>
+      <ellipse cx="62" cy="44" rx="4" ry="5" fill="#1e293b"/>
+      <circle cx="39.5" cy="42.5" r="1.5" fill="#ffffff"/>
+      <circle cx="63.5" cy="42.5" r="1.5" fill="#ffffff"/>
+
+      <!-- White Lab Coat with Gold Badge -->
+      <path d="M28,78 C30,70 40,68 50,68 C60,68 70,70 72,78 L78,100 L22,100 Z" fill="url(#coatGrad)"/>
+      <path d="M44,68 L50,84 L56,68" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+      <circle cx="62" cy="80" r="3.5" fill="#ffb703" stroke="#b45309" stroke-width="0.8"/>
+
+      <!-- Safety Goggles resting on forehead or eyes -->
+      <g class="goggles-group">
+        <rect x="25" y="32" width="22" height="15" rx="5" fill="url(#goggleGlass)" stroke="#00f5d4" stroke-width="2"/>
+        <rect x="53" y="32" width="22" height="15" rx="5" fill="url(#goggleGlass)" stroke="#00f5d4" stroke-width="2"/>
+        <line x1="47" y1="39" x2="53" y2="39" stroke="#00f5d4" stroke-width="2.5"/>
+        <path d="M12,40 L25,40 M75,40 L88,40" stroke="#00f5d4" stroke-width="2"/>
+        <!-- Goggle shine -->
+        <line x1="28" y1="36" x2="34" y2="36" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="56" y1="36" x2="62" y2="36" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+      </g>
+
+      <!-- Snout & Mouth -->
+      <ellipse cx="50" cy="56" rx="9" ry="6" fill="#fed7aa"/>
+      <polygon points="50,52 46,48 54,48" fill="#78350f"/>
+      <path d="${mouthPath}" fill="none" stroke="#78350f" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    `.trim();
+  }
+
+  /**
+   * Generates Pip the Gear Bot SVG markup.
+   * Pip: Floating magnetic gear bot with neon hyper-cyan eyes and rotating gear teeth.
+   * @param {string} [mood='happy']
+   * @param {number} [size=96]
+   * @returns {string} SVG HTML string
+   */
+  function renderMascotPip(mood = 'happy', size = 96) {
+    return `
+    <svg class="mascot-svg mascot-pip mood-${mood}" viewBox="0 0 100 100" width="${size}" height="${size}" aria-label="Pip the Gear Bot">
+      <defs>
+        <radialGradient id="pipBody" cx="40%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#38bdf8"/>
+          <stop offset="60%" stop-color="#0284c7"/>
+          <stop offset="100%" stop-color="#0f172a"/>
+        </radialGradient>
+        <filter id="neonPipCyan" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Floating Thrust Ring -->
+      <ellipse cx="50" cy="85" rx="16" ry="5" fill="none" stroke="#00f5d4" stroke-width="2.5" opacity="0.75"/>
+      <polygon points="44,82 56,82 50,94" fill="#00f5d4" opacity="0.65"/>
+
+      <!-- Pip's Magnetic Antenna with glowing LED sphere -->
+      <line x1="50" y1="24" x2="50" y2="10" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="50" cy="9" r="5" fill="#ffb703" filter="url(#neonPipCyan)"/>
+
+      <!-- Pip Gear Ring Chassis -->
+      <g class="gear-ring">
+        <circle cx="50" cy="50" r="32" fill="url(#pipBody)" stroke="#38bdf8" stroke-width="2.5"/>
+        <!-- Outer Gear Cogs -->
+        <rect x="46" y="14" width="8" height="6" rx="2" fill="#0284c7"/>
+        <rect x="46" y="80" width="8" height="6" rx="2" fill="#0284c7"/>
+        <rect x="14" y="46" width="6" height="8" rx="2" fill="#0284c7"/>
+        <rect x="80" y="46" width="6" height="8" rx="2" fill="#0284c7"/>
+        <rect x="23" y="23" width="7" height="7" rx="2" transform="rotate(45 26.5 26.5)" fill="#0284c7"/>
+        <rect x="70" y="23" width="7" height="7" rx="2" transform="rotate(45 73.5 26.5)" fill="#0284c7"/>
+        <rect x="23" y="70" width="7" height="7" rx="2" transform="rotate(45 26.5 73.5)" fill="#0284c7"/>
+        <rect x="70" y="70" width="7" height="7" rx="2" transform="rotate(45 73.5 73.5)" fill="#0284c7"/>
+      </g>
+
+      <!-- Gloss Visor Screen -->
+      <rect x="24" y="34" width="52" height="28" rx="14" fill="#0b1120" stroke="#00f5d4" stroke-width="2"/>
+
+      <!-- Expressive Neon LED Eyes -->
+      <ellipse cx="38" cy="48" rx="6" ry="8" fill="#00f5d4" filter="url(#neonPipCyan)"/>
+      <ellipse cx="62" cy="48" rx="6" ry="8" fill="#00f5d4" filter="url(#neonPipCyan)"/>
+      <circle cx="40" cy="45" r="2" fill="#ffffff"/>
+      <circle cx="64" cy="45" r="2" fill="#ffffff"/>
+
+      <!-- Magnetic Side Flappers / Hands -->
+      <path d="M16,50 Q10,40 18,34" fill="none" stroke="#f72585" stroke-width="3" stroke-linecap="round"/>
+      <path d="M84,50 Q90,40 82,34" fill="none" stroke="#f72585" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    `.trim();
+  }
+
+  /**
+   * Spawns kinetic particle sparks at a click / target coordinate.
+   * @param {number} x
+   * @param {number} y
+   * @param {string} [color='#00f5d4']
+   */
+  function spawnSparks(x, y, color = '#00f5d4') {
+    if (typeof document === 'undefined') return;
+    const container = document.body;
+    const sparkCount = 8;
+
+    for (let i = 0; i < sparkCount; i++) {
+      const spark = document.createElement('div');
+      spark.className = 'kinetic-spark';
+      spark.style.left = `${x}px`;
+      spark.style.top = `${y}px`;
+      spark.style.backgroundColor = color;
+      spark.style.boxShadow = `0 0 10px ${color}`;
+
+      const angle = (i / sparkCount) * 2 * Math.PI + (Math.random() - 0.5);
+      const distance = 30 + Math.random() * 45;
+      const dx = Math.cos(angle) * distance;
+      const dy = Math.sin(angle) * distance;
+
+      spark.style.setProperty('--dx', `${dx}px`);
+      spark.style.setProperty('--dy', `${dy}px`);
+
+      container.appendChild(spark);
+      setTimeout(() => {
+        if (spark.parentNode) spark.parentNode.removeChild(spark);
+      }, 650);
+    }
+  }
+
+  /* -------------------------------------------------------------
+     SETTINGS & VOLUME HELPERS
+  ------------------------------------------------------------- */
+  function toggleMute() {
+    isAudioMuted = !isAudioMuted;
+    if (isAudioMuted) {
+      stopSpeech();
+    }
+    return isAudioMuted;
+  }
+
+  function setMuted(state) {
+    isAudioMuted = Boolean(state);
+    if (isAudioMuted) {
+      stopSpeech();
+    }
+  }
+
+  function isMuted() {
+    return isAudioMuted;
+  }
+
+  function setVolume(v) {
+    masterVolume = Math.max(0, Math.min(1, v));
+  }
+
+  function getVolume() {
+    return masterVolume;
+  }
+
+  return {
+    // Audio synthesizer
+    playSound,
+    getAudioContext,
+    initAudio: getAudioContext,
+
+    // Speech engine
+    speakText,
+    stopSpeech,
+    isSpeaking: () => isSpeaking,
+
+    // Controls
+    toggleMute,
+    setMuted,
+    isMuted,
+    setVolume,
+    getVolume,
+
+    // Mascots & Visual helpers
+    renderMascotLeo,
+    renderMascotPip,
+    spawnSparks
+  };
+});
+
+  </script>
+  <script>
+const ScienceCurriculum = (function() {
+    let currentQuestions = [];
+
+    function randomItem(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function shuffle(arr) {
+        return [...arr].sort(() => Math.random() - 0.5);
+    }
+
+    function createQ(id, level, domain, title, type, scenarioText, diag, subQData) {
+        const subQuestions = subQData.map(sq => {
+            const opts = sq.options;
+            const correctOpt = opts[0];
+            const shuffled = shuffle(opts);
+            return {
+                part: sq.part,
+                prompt: sq.prompt,
+                options: shuffled,
+                correctIndex: shuffled.indexOf(correctOpt),
+                hint: sq.hint,
+                explanation: sq.explanation
+            };
+        });
+        return { id, level, domain, type, title, scenarioText, diagramSvg: diag, subQuestions };
+    }
+
+    function generateExam() {
+        const qs = [];
+        
+        // Level 1: Needs & Food Groups
+        const foods = ["Rice", "Bread", "Noodles"];
+        const proteins = ["Meat", "Fish", "Eggs"];
+        const vitamins = ["Fruits", "Vegetables", "Salad"];
+
+        qs.push(createQ(1, 1, 'needs', "Basic Needs", 'single', null, null, [{
+            part: "", prompt: "What are the four basic needs for humans and animals to survive?",
+            options: ["Food, Water, Air, Habitat", "Food, Juice, Clothes, Car", "Water, Sun, Toys, House", "Air, Meat, Sleep, Dirt"],
+            hint: "We need these to breathe, drink, eat, and live safely.",
+            explanation: "Food, Water, Air, and a Habitat (shelter) are essential for life."
+        }]));
+        qs.push(createQ(2, 1, 'needs', "Energy Foods", 'single', null, null, [{
+            part: "", prompt: `Which food gives us carbohydrates for energy?`,
+            options: [randomItem(foods), randomItem(proteins), randomItem(vitamins), "Water"],
+            hint: "This food group includes grains.",
+            explanation: "Carbohydrates like rice, bread, and noodles give us energy."
+        }]));
+        qs.push(createQ(3, 1, 'needs', "Growth and Protection", 'single', null, null, [{
+            part: "", prompt: `Which food group helps our body grow strong?`,
+            options: ["Proteins (like " + randomItem(proteins) + ")", "Vitamins (like " + randomItem(vitamins) + ")", "Carbohydrates (like " + randomItem(foods) + ")", "Fats and Sugars"],
+            hint: "Muscles need this to grow.",
+            explanation: "Proteins help our body grow and repair itself."
+        }]));
+        
+        // Level 2: Animal Diets & Care
+        const herb = randomItem(["Cow", "Sheep", "Horse", "Rabbit"]);
+        const carn = randomItem(["Tiger", "Lion", "Shark", "Eagle"]);
+        
+        qs.push(createQ(4, 2, 'animals', "Animal Diets: Herbivores", 'single', null, null, [{
+            part: "", prompt: `A ${herb} eats only plants. What do we call this type of animal?`,
+            options: ["Herbivore", "Carnivore", "Omnivore", "Insectivore"],
+            hint: "The word starts with 'Herb' which means plant.",
+            explanation: "Herbivores are animals that eat only plants."
+        }]));
+        qs.push(createQ(5, 2, 'animals', "Animal Diets: Carnivores", 'single', null, null, [{
+            part: "", prompt: `A ${carn} eats only other animals. What do we call this type of animal?`,
+            options: ["Carnivore", "Herbivore", "Omnivore", "Frugivore"],
+            hint: "The word starts with 'Carni' which relates to flesh/meat.",
+            explanation: "Carnivores eat meat from other animals."
+        }]));
+        qs.push(createQ(6, 2, 'animals', "Animal Care", 'single', null, null, [{
+            part: "", prompt: `What is the best way to care for a pet animal?`,
+            options: ["Provide fresh water, correct food, and a clean home", "Give it only water and keep it in a small box", "Feed it human junk food and ignore it", "Let it find its own food every day"],
+            hint: "Pets rely on us for their basic needs.",
+            explanation: "Animals need a balanced diet, clean water, and a safe habitat."
+        }]));
+
+        // Level 3: Life Cycles
+        qs.push(createQ(7, 3, 'cycles', "Butterfly Life Cycle", 'single', null, null, [{
+            part: "", prompt: `What is the correct order of a butterfly's life cycle?`,
+            options: ["Egg -> Caterpillar -> Chrysalis -> Adult", "Egg -> Chrysalis -> Caterpillar -> Adult", "Caterpillar -> Egg -> Adult -> Chrysalis", "Adult -> Caterpillar -> Egg -> Chrysalis"],
+            hint: "It hatches, crawls, wraps itself, and then flies.",
+            explanation: "A butterfly starts as an egg, becomes a caterpillar, transforms in a chrysalis, and emerges as an adult."
+        }]));
+        qs.push(createQ(8, 3, 'cycles', "Frog Life Cycle", 'single', null, null, [{
+            part: "", prompt: `What comes after the egg stage in a frog's life cycle?`,
+            options: ["Tadpole (with gills)", "Froglet (with small legs)", "Adult Frog (with lungs)", "Chrysalis"],
+            hint: "It swims like a fish before growing legs.",
+            explanation: "A tadpole hatches from the egg and breathes with gills."
+        }]));
+        qs.push(createQ(9, 3, 'cycles', "Protecting Life Cycles", 'single', null, null, [{
+            part: "", prompt: `How can we help protect animal life cycles?`,
+            options: ["By not destroying their breeding habitats", "By taking wild eggs home", "By removing plants they eat", "By polluting the water they live in"],
+            hint: "Animals need safe places to lay eggs and raise their young.",
+            explanation: "Protecting habitats ensures animals can safely breed and grow."
+        }]));
+
+        // Level 4: Thermal & States of Matter
+        qs.push(createQ(10, 4, 'thermal', "States of Matter", 'single', null, null, [{
+            part: "", prompt: `What are the three states of matter?`,
+            options: ["Solid, Liquid, Gas", "Ice, Water, Steam", "Hard, Soft, Bouncy", "Hot, Cold, Warm"],
+            hint: "One keeps its shape, one flows, one fills the air.",
+            explanation: "Matter exists as Solid, Liquid, or Gas."
+        }]));
+        qs.push(createQ(11, 4, 'thermal', "Thermal Changes", 'single', null, null, [{
+            part: "", prompt: `What happens to chocolate or ice when we heat it?`,
+            options: ["It melts into a liquid", "It freezes into a solid", "It disappears", "It becomes harder"],
+            hint: "Heat adds energy and makes it flow.",
+            explanation: "Heating causes solid chocolate or ice to melt into a liquid."
+        }]));
+        qs.push(createQ(12, 4, 'thermal', "Reversible and Irreversible Changes", 'single', null, null, [{
+            part: "", prompt: `Which of these is an irreversible change (cannot be changed back)?`,
+            options: ["Cooking an egg or burning wood", "Melting ice into water", "Freezing water into ice", "Melting chocolate"],
+            hint: "Once it's done, you can't get the original back.",
+            explanation: "Cooking an egg changes it permanently; it cannot become a raw egg again."
+        }]));
+
+        // Level 5: Forces, Friction & Magnets (Scenarios)
+        const angles = shuffle([15, 45]);
+        qs.push(createQ(13, 5, 'forces', "Pip's Ramp & Gravity", 'scenario', `Pip is testing a toy car on two ramps. Ramp A is at ${angles[0]} degrees, and Ramp B is at ${angles[1]} degrees.`, `<svg width="200" height="100"><polygon points="10,90 190,90 10,20" fill="#ccc"/></svg>`, [
+            { part: "a", prompt: "Which force pulls the car down the ramp?", options: ["Gravity", "Friction", "Magnetism", "Wind"], hint: "It's the force that pulls things towards the Earth.", explanation: "Gravity pulls objects downward." },
+            { part: "b", prompt: "Which ramp will make the car roll faster?", options: [`The ${Math.max(angles[0], angles[1])} degree ramp`, `The ${Math.min(angles[0], angles[1])} degree ramp`, "Both will be the same", "Neither"], hint: "Steeper ramps make things go faster.", explanation: "A steeper angle (higher degrees) allows gravity to accelerate the car more." }
+        ]));
+
+        const surfaces = shuffle(["Tile", "Sandpaper"]);
+        qs.push(createQ(14, 5, 'forces', "Surface Friction Investigation", 'scenario', `We push a toy car with the same force on a ${surfaces[0]} floor and a ${surfaces[1]} track.`, `<svg width="200" height="50"><rect x="10" y="20" width="180" height="10" fill="#a8a8a8"/></svg>`, [
+            { part: "a", prompt: "On which surface will the car stop first (shortest distance)?", options: ["Sandpaper", "Tile", "Ice", "Glass"], hint: "Rough surfaces grip the wheels more.", explanation: "Sandpaper has high friction, which slows the car down quickly." },
+            { part: "b", prompt: "What do we call the force that slows the car down on the surface?", options: ["Friction", "Gravity", "Magnetism", "Push"], hint: "It happens when two surfaces rub together.", explanation: "Friction opposes motion when surfaces are in contact." }
+        ]));
+
+        const items = shuffle(["iron nail", "plastic ruler", "steel paperclip", "wooden pencil"]);
+        qs.push(createQ(15, 5, 'forces', "Magnet Workshop", 'scenario', `We are testing materials with a bar magnet. We have an ${items[0]}, a ${items[1]}, a ${items[2]}, and a ${items[3]}.`, `<svg width="200" height="80"><rect x="50" y="30" width="100" height="20" fill="red"/><rect x="100" y="30" width="50" height="20" fill="blue"/></svg>`, [
+            { part: "a", prompt: "Which items will be attracted to the magnet?", options: ["iron nail and steel paperclip", "plastic ruler and wooden pencil", "iron nail and wooden pencil", "steel paperclip and plastic ruler"], hint: "Magnets attract ferrous metals.", explanation: "Iron and steel are magnetic metals." },
+            { part: "b", prompt: "What happens if we put the North pole of two magnets together?", options: ["They repel (push away)", "They attract (pull together)", "They stick and don't move", "They melt"], hint: "Like poles push apart.", explanation: "Two North poles (or two South poles) will repel each other." }
+        ]));
+
+        currentQuestions = qs;
+        return qs;
+    }
+
+    function evaluateExam(userAnswers, optionalQuestions = null) {
+        const questions = optionalQuestions || currentQuestions;
+        
+        const domainScores = {
+            needs: { correct: 0, total: 3, label: "Needs & Food Groups", labId: "nutrition" },
+            animals: { correct: 0, total: 3, label: "Animal Diets & Care", labId: "nutrition" },
+            cycles: { correct: 0, total: 3, label: "Life Cycles", labId: "lifecycle" },
+            thermal: { correct: 0, total: 3, label: "States of Matter & Heat", labId: "thermal" },
+            forces: { correct: 0, total: 3, label: "Forces, Friction & Magnets", labId: "friction" }
+        };
+        
+        let totalScore = 0;
+
+        userAnswers.forEach(ua => {
+            const q = questions.find(question => question.id === ua.qIndex) || questions[ua.qIndex - 1];
+            if (!q) return;
+
+            let points = 0;
+            if (Array.isArray(ua.answer)) {
+                let correctParts = 0;
+                ua.answer.forEach((ans, idx) => {
+                    if (q.subQuestions[idx] && ans === q.subQuestions[idx].correctIndex) {
+                        correctParts++;
+                    }
+                });
+                
+                // Award 1 point if all parts are correct
+                if (correctParts === q.subQuestions.length) {
+                    points = 1;
+                }
+            } else {
+                if (q.subQuestions[0] && ua.answer === q.subQuestions[0].correctIndex) {
+                    points = 1;
+                }
+            }
+            
+            ua.isCorrect = points > 0;
+            ua.pointsEarned = points;
+            
+            domainScores[q.domain].correct += points;
+            totalScore += points;
+        });
+
+        let weakestDomain = null;
+        let lowestPercentage = 1.0; // max possible is 1.0
+        
+        for (const [key, data] of Object.entries(domainScores)) {
+            const percentage = data.correct / data.total;
+            if (percentage < lowestPercentage) {
+                lowestPercentage = percentage;
+                weakestDomain = key;
+            }
+        }
+        
+        // If everything is perfect, no weakest domain
+        if (totalScore === 15) {
+            weakestDomain = null;
+        }
+
+        return {
+            totalScore,
+            domainScores,
+            weakestDomain
+        };
+    }
+
+    return {
+        generateExam,
+        evaluateExam
+    };
+})();
+
+if (typeof window !== 'undefined') {
+    window.ScienceCurriculum = ScienceCurriculum;
+}
+
+  </script>
+  <script>
+window.InteractiveLabs = (function() {
+  
+  function triggerCompletion(labId) {
+    if (window.ScienceApp && window.ScienceApp.onLabCompleted) {
+      window.ScienceApp.onLabCompleted(labId);
+    }
+  }
+  
+  function createResetButton(container, mountFn) {
+    const btn = document.createElement('button');
+    btn.innerText = 'Reset Lab';
+    btn.style.cssText = 'position: absolute; top: 10px; right: 10px; padding: 8px 16px; background: #ff4757; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; z-index: 100;';
+    btn.onclick = () => mountFn(container);
+    return btn;
+  }
+
+  function mountMagnetLab(container) {
+    container.innerHTML = '';
+    container.style.position = 'relative';
+    container.style.width = '100%';
+    container.style.height = '100%';
+    container.style.minHeight = '400px';
+    container.style.background = '#f1f2f6';
+    container.style.overflow = 'hidden';
+    container.appendChild(createResetButton(container, mountMagnetLab));
+
+    const html = `
+      <div style="padding: 20px; font-family: sans-serif;">
+        <h2 style="margin-top:0;">Magnetic Physics & Sorting Workshop</h2>
+        <div style="display: flex; gap: 20px;">
+          <!-- Bar Magnets Track -->
+          <div style="flex: 1; border: 2px dashed #ccc; padding: 20px; position: relative; height: 150px; background: white; border-radius: 10px;">
+            <h4>Dual Bar Magnets Track</h4>
+            <div id="magnet1" style="width: 100px; height: 40px; background: linear-gradient(to right, red 50%, blue 50%); position: absolute; top: 80px; left: 50px; cursor: grab; display: flex; color: white; font-weight: bold; align-items: center; justify-content: space-between; padding: 0 10px; box-sizing: border-box; user-select: none;">
+              <span>N</span><span>S</span>
+            </div>
+            <div id="magnet2" style="width: 100px; height: 40px; background: linear-gradient(to right, red 50%, blue 50%); position: absolute; top: 80px; left: 300px; cursor: grab; display: flex; color: white; font-weight: bold; align-items: center; justify-content: space-between; padding: 0 10px; box-sizing: border-box; user-select: none;">
+              <span>N</span><span>S</span>
+            </div>
+            <div id="magnetic-field" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none;"></div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 20px; display: flex; gap: 20px;">
+          <!-- Magnetic Specimen Tray -->
+          <div style="flex: 2; border: 2px solid #ccc; padding: 20px; background: white; border-radius: 10px; position: relative; height: 200px;">
+            <h4>Magnetic Test Tray (Drag Horseshoe over items)</h4>
+            <div id="horseshoe" style="width: 60px; height: 60px; background: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path d=%22M 20,80 L 20,40 A 30,30 0 0,1 80,40 L 80,80 L 60,80 L 60,40 A 10,10 0 0,0 40,40 L 40,80 Z%22 fill=%22red%22 stroke=%22silver%22 stroke-width=%224%22/><rect x=%2220%22 y=%2280%22 width=%2220%22 height=%2210%22 fill=%22silver%22/><rect x=%2260%22 y=%2280%22 width=%2220%22 height=%2210%22 fill=%22silver%22/></svg>') no-repeat center; background-size: contain; position: absolute; top: 20px; right: 20px; cursor: grab; z-index: 10;"></div>
+            
+            <div id="items-tray" style="display: flex; gap: 15px; margin-top: 50px; flex-wrap: wrap;">
+              <div class="test-item" data-magnetic="true" style="width: 40px; height: 40px; background: gray; border-radius: 5px; text-align: center; line-height: 40px; font-size: 10px; user-select:none;">Nail</div>
+              <div class="test-item" data-magnetic="true" style="width: 40px; height: 40px; background: silver; border-radius: 5px; text-align: center; line-height: 40px; font-size: 10px; user-select:none;">Clip</div>
+              <div class="test-item" data-magnetic="true" style="width: 40px; height: 40px; background: #aaa; border-radius: 50%; text-align: center; line-height: 40px; font-size: 10px; user-select:none;">Washer</div>
+              <div class="test-item" data-magnetic="true" style="width: 40px; height: 40px; background: gold; border-radius: 5px; text-align: center; line-height: 40px; font-size: 10px; user-select:none;">Key</div>
+              <div class="test-item" data-magnetic="false" style="width: 40px; height: 40px; background: #eccc68; border-radius: 5px; text-align: center; line-height: 40px; font-size: 10px; user-select:none;">Pencil</div>
+              <div class="test-item" data-magnetic="false" style="width: 40px; height: 40px; background: rgba(255,255,255,0.8); border: 1px solid #ccc; text-align: center; line-height: 40px; font-size: 10px; user-select:none;">Ruler</div>
+              <div class="test-item" data-magnetic="false" style="width: 40px; height: 40px; background: pink; border-radius: 5px; text-align: center; line-height: 40px; font-size: 10px; user-select:none;">Eraser</div>
+              <div class="test-item" data-magnetic="false" style="width: 40px; height: 40px; background: lightblue; border-radius: 50%; text-align: center; line-height: 40px; font-size: 10px; user-select:none;">Marble</div>
+            </div>
+          </div>
+          <!-- Bins -->
+          <div style="flex: 1; border: 2px dashed #2ed573; padding: 20px; background: #e8f8f5; border-radius: 10px; text-align: center;" id="ferrous-bin">
+            <h4>Ferrous Bin</h4>
+            <div id="ferrous-count" style="font-size: 24px; font-weight: bold; color: #2ed573;">0 / 4</div>
+          </div>
+        </div>
+      </div>
+    `;
+    container.insertAdjacentHTML('beforeend', html);
+
+    let ferrousCount = 0;
+    let trackTested = false;
+
+    // Track logic (simplified drag & attract/repel)
+    const m1 = container.querySelector('#magnet1');
+    const m2 = container.querySelector('#magnet2');
+    
+    function makeDraggable(el, onDrag) {
+      let isDragging = false;
+      let startX, startY, initialX, initialY;
+      el.addEventListener('mousedown', e => {
+        isDragging = true;
+        startX = e.clientX; startY = e.clientY;
+        initialX = el.offsetLeft; initialY = el.offsetTop;
+        el.style.zIndex = 100;
+      });
+      document.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        el.style.left = initialX + dx + 'px';
+        el.style.top = initialY + dy + 'px';
+        if (onDrag) onDrag();
+      });
+      document.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          el.style.zIndex = '';
+          if (onDrag) onDrag();
+        }
+      });
+    }
+
+    makeDraggable(m1, checkMagnets);
+    makeDraggable(m2, checkMagnets);
+
+    function checkMagnets() {
+      const rect1 = m1.getBoundingClientRect();
+      const rect2 = m2.getBoundingClientRect();
+      const dist = Math.abs(rect1.left - rect2.left);
+      if (dist < 120 && dist > 0) {
+        trackTested = true;
+        if (rect1.left < rect2.left) {
+          // m1 is left of m2
+          // S of m1 attracts N of m2
+          m1.style.left = (m2.offsetLeft - 100) + 'px';
+        } else {
+          // m2 is left of m1
+          m2.style.left = (m1.offsetLeft - 100) + 'px';
+        }
+        checkWin();
+      }
+    }
+
+    // Horseshoe logic
+    const horseshoe = container.querySelector('#horseshoe');
+    const items = container.querySelectorAll('.test-item');
+    const bin = container.querySelector('#ferrous-bin');
+
+    makeDraggable(horseshoe, () => {
+      const hRect = horseshoe.getBoundingClientRect();
+      items.forEach(item => {
+        if (item.style.display === 'none') return;
+        const iRect = item.getBoundingClientRect();
+        const dist = Math.hypot(hRect.left - iRect.left, hRect.top - iRect.top);
+        
+        if (dist < 50) {
+          if (item.dataset.magnetic === 'true') {
+            item.style.display = 'none';
+            ferrousCount++;
+            container.querySelector('#ferrous-count').innerText = ferrousCount + ' / 4';
+            checkWin();
+          } else {
+            item.style.transform = 'translateY(10px)';
+            setTimeout(() => item.style.transform = 'translateY(0)', 200);
+          }
+        }
+      });
+    });
+
+    function checkWin() {
+      if (trackTested && ferrousCount >= 4) {
+        setTimeout(() => triggerCompletion('magnet'), 500);
+      }
+    }
+  }
+
+  function mountFrictionLab(container) {
+    container.innerHTML = '';
+    container.style.position = 'relative';
+    container.style.width = '100%';
+    container.style.height = '100%';
+    container.style.minHeight = '400px';
+    container.style.background = '#f1f2f6';
+    container.style.overflow = 'hidden';
+    container.appendChild(createResetButton(container, mountFrictionLab));
+
+    const html = `
+      <div style="padding: 20px; font-family: sans-serif;">
+        <h2 style="margin-top:0;">Pip's Ramp & Friction Runway</h2>
+        
+        <div style="margin-bottom: 10px;">
+          <label><strong>Incline:</strong></label>
+          <select id="incline-select">
+            <option value="15">15° Low</option>
+            <option value="30">30° Medium</option>
+            <option value="45">45° Steep</option>
+          </select>
+          
+          <label style="margin-left: 20px;"><strong>Surface:</strong></label>
+          <select id="surface-select">
+            <option value="ice">Ice Sheet</option>
+            <option value="tile">Polished Tile</option>
+            <option value="wood">Smooth Wood</option>
+            <option value="carpet">Felt Carpet</option>
+            <option value="sandpaper">Rough Sandpaper</option>
+          </select>
+          
+          <button id="launch-btn" style="margin-left: 20px; padding: 5px 15px; background: #1e90ff; color: white; border: none; border-radius: 5px; cursor: pointer;">Launch Car</button>
+        </div>
+
+        <div style="position: relative; height: 300px; background: white; border-radius: 10px; border: 1px solid #ccc; overflow: hidden; margin-top: 20px;">
+          <!-- Speedometer -->
+          <div id="speedometer" style="position: absolute; top: 10px; right: 20px; font-size: 24px; font-weight: bold; color: #ff4757;">0 km/h</div>
+          
+          <!-- Ramp -->
+          <div id="ramp" style="position: absolute; left: 0; bottom: 50px; width: 150px; height: 5px; background: #57606f; transform-origin: left bottom; transform: rotate(15deg);"></div>
+          
+          <!-- Runway -->
+          <div id="runway" style="position: absolute; left: 145px; bottom: 50px; width: calc(100% - 145px); height: 5px; background: #7bed9f;"></div>
+          
+          <!-- Car -->
+          <div id="car" style="position: absolute; left: 130px; bottom: 55px; width: 40px; height: 20px; background: #ff4757; border-radius: 10px 10px 0 0; z-index: 10; transition: left 2s cubic-bezier(0.25, 1, 0.5, 1);"></div>
+          
+          <!-- Ghost Car -->
+          <div id="ghost-car" style="position: absolute; left: 130px; bottom: 55px; width: 40px; height: 20px; background: rgba(255, 71, 87, 0.3); border-radius: 10px 10px 0 0; z-index: 5; display: none;"></div>
+          
+          <!-- Flag -->
+          <div id="flag" style="position: absolute; bottom: 55px; left: 130px; font-size: 24px; display: none; transition: left 0.5s;">🚩</div>
+        </div>
+      </div>
+    `;
+    container.insertAdjacentHTML('beforeend', html);
+
+    const inclineSelect = container.querySelector('#incline-select');
+    const surfaceSelect = container.querySelector('#surface-select');
+    const launchBtn = container.querySelector('#launch-btn');
+    const ramp = container.querySelector('#ramp');
+    const runway = container.querySelector('#runway');
+    const car = container.querySelector('#car');
+    const ghostCar = container.querySelector('#ghost-car');
+    const flag = container.querySelector('#flag');
+    const speedometer = container.querySelector('#speedometer');
+    
+    let testedSurfaces = new Set();
+    let lastDist = 0;
+    let isRunning = false;
+
+    const surfaceFriction = {
+      ice: 0.1,
+      tile: 0.3,
+      wood: 0.5,
+      carpet: 0.7,
+      sandpaper: 0.9
+    };
+
+    const surfaceColors = {
+      ice: '#c7ecee',
+      tile: '#f5f6fa',
+      wood: '#d1ccc0',
+      carpet: '#eb4d4b',
+      sandpaper: '#535c68'
+    };
+
+    inclineSelect.addEventListener('change', (e) => {
+      ramp.style.transform = `rotate(${e.target.value}deg)`;
+      resetPositions();
+    });
+
+    surfaceSelect.addEventListener('change', (e) => {
+      runway.style.background = surfaceColors[e.target.value];
+      resetPositions();
+    });
+    
+    function resetPositions() {
+      if(isRunning) return;
+      car.style.transition = 'none';
+      car.style.left = '130px';
+      car.style.bottom = '55px'; // Adjust based on ramp later if needed
+      speedometer.innerText = '0 km/h';
+      flag.style.display = 'none';
+    }
+
+    launchBtn.addEventListener('click', () => {
+      if (isRunning) return;
+      isRunning = true;
+      
+      const surface = surfaceSelect.value;
+      const angle = parseInt(inclineSelect.value);
+      
+      testedSurfaces.add(surface);
+      
+      if (lastDist > 0) {
+        ghostCar.style.display = 'block';
+        ghostCar.style.left = lastDist + 'px';
+      }
+
+      // Calculate distance based on angle and friction
+      const baseDist = angle * 10; 
+      const friction = surfaceFriction[surface];
+      const dist = 130 + (baseDist / friction) * 0.5; // arbitrary formula for visual
+      
+      car.style.transition = 'left 2s cubic-bezier(0.25, 1, 0.5, 1)';
+      car.style.left = Math.min(dist, container.offsetWidth - 50) + 'px';
+      
+      let speed = angle * 2;
+      let interval = setInterval(() => {
+        if(speed > 0) speed -= (friction * 5);
+        if(speed < 0) speed = 0;
+        speedometer.innerText = Math.round(speed) + ' km/h';
+      }, 100);
+
+      setTimeout(() => {
+        clearInterval(interval);
+        speedometer.innerText = '0 km/h';
+        lastDist = parseFloat(car.style.left);
+        flag.style.display = 'block';
+        flag.style.left = (lastDist + 10) + 'px';
+        isRunning = false;
+        
+        if (testedSurfaces.size >= 2) {
+          triggerCompletion('friction');
+        }
+      }, 2000);
+    });
+    
+    // Init styles
+    runway.style.background = surfaceColors[surfaceSelect.value];
+  }
+
+  function mountThermalLab(container) {
+    container.innerHTML = '';
+    container.style.position = 'relative';
+    container.style.width = '100%';
+    container.style.height = '100%';
+    container.style.minHeight = '400px';
+    container.style.background = '#f1f2f6';
+    container.style.overflow = 'hidden';
+    container.appendChild(createResetButton(container, mountThermalLab));
+
+    const html = `
+      <div style="padding: 20px; font-family: sans-serif;">
+        <h2 style="margin-top:0;">Thermal Transformation Station</h2>
+        
+        <div style="display: flex; gap: 40px; margin-top: 30px;">
+          <!-- Thermometer & Controls -->
+          <div style="flex: 1; text-align: center; max-width: 200px;">
+            <div style="height: 200px; width: 40px; border: 2px solid #ccc; border-radius: 20px; margin: 0 auto; position: relative; background: white; overflow: hidden;">
+              <div id="thermo-liquid" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: red; transition: height 0.5s, background 0.5s;"></div>
+            </div>
+            <div style="margin-top: 20px;">
+              <input type="range" id="temp-slider" min="-10" max="110" value="20" style="width: 100%;">
+              <div id="temp-display" style="font-size: 24px; font-weight: bold; margin-top: 10px;">20°C</div>
+            </div>
+          </div>
+          
+          <!-- Test Pad -->
+          <div style="flex: 2;">
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+              <button class="substance-btn" data-type="ice" style="padding: 10px; cursor: pointer;">Ice Cube</button>
+              <button class="substance-btn" data-type="chocolate" style="padding: 10px; cursor: pointer;">Chocolate</button>
+              <button class="substance-btn" data-type="wax" style="padding: 10px; cursor: pointer;">Wax</button>
+              <button class="substance-btn" data-type="egg" style="padding: 10px; cursor: pointer;">Raw Egg</button>
+            </div>
+            
+            <div id="test-pad" style="width: 200px; height: 200px; border: 4px solid #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; background: #fff; transition: background 0.5s, box-shadow 0.5s;">
+              <div id="substance-view" style="font-size: 64px; transition: all 0.5s;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    container.insertAdjacentHTML('beforeend', html);
+
+    const slider = container.querySelector('#temp-slider');
+    const display = container.querySelector('#temp-display');
+    const thermoLiquid = container.querySelector('#thermo-liquid');
+    const testPad = container.querySelector('#test-pad');
+    const substanceView = container.querySelector('#substance-view');
+    const btns = container.querySelectorAll('.substance-btn');
+    
+    let currentTemp = 20;
+    let currentSubstance = null;
+    let eggCooked = false;
+    let meltCount = 0;
+    let cookedEgg = false;
+
+    const substanceStates = {
+      ice: { name: 'Ice', iconSolid: '🧊', iconLiquid: '💧', meltPoint: 0 },
+      chocolate: { name: 'Chocolate', iconSolid: '🍫', iconLiquid: '🟤', meltPoint: 35 },
+      wax: { name: 'Wax', iconSolid: '🕯️', iconLiquid: '🟡', meltPoint: 50 },
+      egg: { name: 'Raw Egg', iconSolid: '🥚', iconLiquid: '🍳', meltPoint: 70 } // Treat liquid as cooked
+    };
+
+    function updateView() {
+      // Thermometer
+      const percent = ((currentTemp + 10) / 120) * 100;
+      thermoLiquid.style.height = percent + '%';
+      
+      if(currentTemp > 60) {
+        thermoLiquid.style.background = '#ff4757';
+        testPad.style.background = '#ff6b81';
+        testPad.style.boxShadow = '0 0 20px #ff4757';
+      } else if (currentTemp < 10) {
+        thermoLiquid.style.background = '#70a1ff';
+        testPad.style.background = '#eccc68'; // mild
+        testPad.style.boxShadow = '0 0 20px #70a1ff';
+      } else {
+        thermoLiquid.style.background = '#2ed573';
+        testPad.style.background = '#fff';
+        testPad.style.boxShadow = 'none';
+      }
+
+      display.innerText = currentTemp + '°C';
+
+      // Substance
+      if(currentSubstance) {
+        const sub = substanceStates[currentSubstance];
+        if(currentSubstance === 'egg') {
+          if(currentTemp >= sub.meltPoint && !eggCooked) {
+            eggCooked = true;
+            cookedEgg = true;
+            substanceView.innerHTML = sub.iconLiquid;
+            alert("The heat permanently changed the protein! Irreversible change.");
+            checkWin();
+          }
+          if(eggCooked) substanceView.innerHTML = sub.iconLiquid;
+          else substanceView.innerHTML = sub.iconSolid;
+        } else {
+          if(currentTemp >= sub.meltPoint) {
+            substanceView.innerHTML = sub.iconLiquid;
+            substanceView.style.transform = 'scale(1.2) translateY(20px)';
+            if(currentSubstance === 'chocolate' || currentSubstance === 'ice') {
+                meltCount++;
+                checkWin();
+            }
+          } else {
+            substanceView.innerHTML = sub.iconSolid;
+            substanceView.style.transform = 'scale(1) translateY(0)';
+          }
+        }
+      }
+    }
+
+    slider.addEventListener('input', (e) => {
+      currentTemp = parseInt(e.target.value);
+      updateView();
+    });
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        currentSubstance = e.target.dataset.type;
+        if(currentSubstance !== 'egg') eggCooked = false; // reset for non-egg
+        updateView();
+      });
+    });
+    
+    function checkWin() {
+        if(meltCount > 0 && cookedEgg) {
+            setTimeout(() => triggerCompletion('thermal'), 1000);
+        }
+    }
+
+    updateView();
+  }
+
+  function mountNutritionLab(container) {
+    container.innerHTML = '';
+    container.style.position = 'relative';
+    container.style.width = '100%';
+    container.style.height = '100%';
+    container.style.minHeight = '400px';
+    container.style.background = '#f1f2f6';
+    container.style.overflow = 'hidden';
+    container.appendChild(createResetButton(container, mountNutritionLab));
+
+    const html = `
+      <div style="padding: 20px; font-family: sans-serif;">
+        <h2 style="margin-top:0;">Bio-Nutrition & Animal Feeder</h2>
+        
+        <div style="display: flex; gap: 20px;">
+          <!-- Pods -->
+          <div style="flex: 1; border: 2px solid #ccc; padding: 10px; border-radius: 10px; background: white;">
+            <h4>Holographic Pods</h4>
+            <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+              <div class="pod" data-type="carbs" style="width: 80px; height: 100px; border: 2px dashed #feca57; border-radius: 40px 40px 10px 10px; position: relative; text-align: center;">
+                <div style="position: absolute; bottom: -25px; width: 100%; font-size: 12px; font-weight:bold;">Carbs (Energy)</div>
+                <div class="pod-content" style="position: absolute; bottom:0; left:0; width:100%; height:0%; background: rgba(254, 202, 87, 0.5); border-radius: 0 0 10px 10px; transition: height 0.5s;"></div>
+              </div>
+              <div class="pod" data-type="protein" style="width: 80px; height: 100px; border: 2px dashed #ff6b6b; border-radius: 40px 40px 10px 10px; position: relative; text-align: center;">
+                <div style="position: absolute; bottom: -25px; width: 100%; font-size: 12px; font-weight:bold;">Protein (Growth)</div>
+                <div class="pod-content" style="position: absolute; bottom:0; left:0; width:100%; height:0%; background: rgba(255, 107, 107, 0.5); border-radius: 0 0 10px 10px; transition: height 0.5s;"></div>
+              </div>
+              <div class="pod" data-type="vitamins" style="width: 80px; height: 100px; border: 2px dashed #1dd1a1; border-radius: 40px 40px 10px 10px; position: relative; text-align: center;">
+                <div style="position: absolute; bottom: -25px; width: 100%; font-size: 12px; font-weight:bold;">Vitamins</div>
+                <div class="pod-content" style="position: absolute; bottom:0; left:0; width:100%; height:0%; background: rgba(29, 209, 161, 0.5); border-radius: 0 0 10px 10px; transition: height 0.5s;"></div>
+              </div>
+            </div>
+            
+            <div id="food-tray" style="display: flex; gap: 10px; justify-content: center; margin-top: 50px;">
+              <div class="food-item" data-type="carbs" style="font-size: 32px; cursor: grab; user-select: none;">🍚</div>
+              <div class="food-item" data-type="carbs" style="font-size: 32px; cursor: grab; user-select: none;">🍞</div>
+              <div class="food-item" data-type="protein" style="font-size: 32px; cursor: grab; user-select: none;">🐟</div>
+              <div class="food-item" data-type="protein" style="font-size: 32px; cursor: grab; user-select: none;">🍗</div>
+              <div class="food-item" data-type="vitamins" style="font-size: 32px; cursor: grab; user-select: none;">🥦</div>
+              <div class="food-item" data-type="vitamins" style="font-size: 32px; cursor: grab; user-select: none;">🥕</div>
+            </div>
+          </div>
+          
+          <!-- Diner -->
+          <div style="flex: 1; border: 2px solid #ccc; padding: 10px; border-radius: 10px; background: white;">
+            <h4>Animal Diner</h4>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+              <div class="animal" data-diet="herbivore" style="display: flex; align-items: center; gap: 10px; border: 1px solid #eee; padding: 10px; border-radius: 8px;">
+                <div style="font-size: 40px;">🐰</div>
+                <div>Herbivore (Plants)</div>
+                <div class="plate" style="margin-left: auto; width: 50px; height: 50px; border: 2px dashed #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center;"></div>
+              </div>
+              <div class="animal" data-diet="carnivore" style="display: flex; align-items: center; gap: 10px; border: 1px solid #eee; padding: 10px; border-radius: 8px;">
+                <div style="font-size: 40px;">🐯</div>
+                <div>Carnivore (Meat)</div>
+                <div class="plate" style="margin-left: auto; width: 50px; height: 50px; border: 2px dashed #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center;"></div>
+              </div>
+              <div class="animal" data-diet="omnivore" style="display: flex; align-items: center; gap: 10px; border: 1px solid #eee; padding: 10px; border-radius: 8px;">
+                <div style="font-size: 40px;">🐻</div>
+                <div>Omnivore (Both)</div>
+                <div class="plate" style="margin-left: auto; width: 50px; height: 50px; border: 2px dashed #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    container.insertAdjacentHTML('beforeend', html);
+
+    const foods = container.querySelectorAll('.food-item');
+    const pods = container.querySelectorAll('.pod');
+    const plates = container.querySelectorAll('.plate');
+    
+    let podsFilled = 0;
+    let animalsFed = 0;
+
+    let podCounts = { carbs: 0, protein: 0, vitamins: 0 };
+
+    foods.forEach(food => {
+      let isDragging = false;
+      let startX, startY, initialX, initialY;
+      
+      food.addEventListener('mousedown', e => {
+        isDragging = true;
+        startX = e.clientX; startY = e.clientY;
+        const rect = food.getBoundingClientRect();
+        food.style.position = 'absolute';
+        food.style.zIndex = 1000;
+        food.style.left = rect.left + 'px';
+        food.style.top = rect.top + 'px';
+        initialX = rect.left;
+        initialY = rect.top;
+      });
+
+      document.addEventListener('mousemove', e => {
+        if(!isDragging) return;
+        food.style.left = initialX + (e.clientX - startX) + 'px';
+        food.style.top = initialY + (e.clientY - startY) + 'px';
+      });
+
+      document.addEventListener('mouseup', e => {
+        if(!isDragging) return;
+        isDragging = false;
+        food.style.zIndex = '';
+        
+        let dropped = false;
+
+        // Check Pods
+        pods.forEach(pod => {
+          const pRect = pod.getBoundingClientRect();
+          const fRect = food.getBoundingClientRect();
+          if(fRect.left > pRect.left && fRect.right < pRect.right && fRect.top > pRect.top && fRect.bottom < pRect.bottom) {
+            if(food.dataset.type === pod.dataset.type) {
+              food.style.display = 'none';
+              dropped = true;
+              podCounts[food.dataset.type]++;
+              const pct = Math.min(100, podCounts[food.dataset.type] * 50);
+              pod.querySelector('.pod-content').style.height = pct + '%';
+              if(pct === 100) podsFilled++;
+              checkWin();
+            }
+          }
+        });
+
+        // Check Plates
+        plates.forEach(plate => {
+          const pRect = plate.getBoundingClientRect();
+          const fRect = food.getBoundingClientRect();
+          if(fRect.left > pRect.left - 20 && fRect.right < pRect.right + 20 && fRect.top > pRect.top - 20 && fRect.bottom < pRect.bottom + 20) {
+            const diet = plate.parentElement.dataset.diet;
+            const fType = food.dataset.type;
+            const fIcon = food.innerText;
+            
+            let canEat = false;
+            if(diet === 'herbivore' && fType === 'vitamins') canEat = true;
+            if(diet === 'carnivore' && fType === 'protein') canEat = true;
+            if(diet === 'omnivore') canEat = true; // simplifying
+            
+            if(canEat) {
+              food.style.display = 'none';
+              plate.innerText = fIcon;
+              plate.style.borderColor = '#2ed573';
+              dropped = true;
+              animalsFed++;
+              checkWin();
+            } else {
+              alert("This animal doesn't eat that!");
+            }
+          }
+        });
+
+        if(!dropped) {
+          food.style.position = 'static';
+        }
+      });
+    });
+
+    function checkWin() {
+      if(podsFilled >= 3 && animalsFed >= 3) {
+        setTimeout(() => triggerCompletion('nutrition'), 500);
+      }
+    }
+  }
+
+  function mountLifecycleLab(container) {
+    container.innerHTML = '';
+    container.style.position = 'relative';
+    container.style.width = '100%';
+    container.style.height = '100%';
+    container.style.minHeight = '500px';
+    container.style.background = '#2f3640';
+    container.style.color = 'white';
+    container.style.overflow = 'hidden';
+    container.appendChild(createResetButton(container, mountLifecycleLab));
+
+    const html = `
+      <div style="padding: 20px; font-family: sans-serif; text-align: center;">
+        <h2 style="margin-top:0; color: #f5f6fa;">Life Cycle Astrolabe Wheel</h2>
+        
+        <div style="margin-bottom: 20px;">
+          <button class="cycle-btn" data-cycle="butterfly" style="padding: 8px 16px; margin: 0 5px; cursor: pointer;">Butterfly</button>
+          <button class="cycle-btn" data-cycle="frog" style="padding: 8px 16px; margin: 0 5px; cursor: pointer;">Frog</button>
+          <button class="cycle-btn" data-cycle="chicken" style="padding: 8px 16px; margin: 0 5px; cursor: pointer;">Chicken</button>
+        </div>
+        
+        <div style="position: relative; width: 400px; height: 400px; margin: 0 auto; border-radius: 50%; border: 4px solid #e1b12c; background: rgba(0,0,0,0.5);">
+          <!-- Sockets -->
+          <div class="socket" data-index="0" style="position: absolute; top: 10px; left: 160px; width: 80px; height: 80px; border: 2px dashed #e1b12c; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px;">1</div>
+          <div class="socket" data-index="1" style="position: absolute; top: 160px; right: 10px; width: 80px; height: 80px; border: 2px dashed #e1b12c; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px;">2</div>
+          <div class="socket" data-index="2" style="position: absolute; bottom: 10px; left: 160px; width: 80px; height: 80px; border: 2px dashed #e1b12c; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px;">3</div>
+          <div class="socket" data-index="3" style="position: absolute; top: 160px; left: 10px; width: 80px; height: 80px; border: 2px dashed #e1b12c; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px;">4</div>
+          
+          <!-- Arrows -->
+          <div style="position: absolute; top: 50px; right: 50px; font-size: 24px; transform: rotate(45deg);">➔</div>
+          <div style="position: absolute; bottom: 50px; right: 50px; font-size: 24px; transform: rotate(135deg);">➔</div>
+          <div style="position: absolute; bottom: 50px; left: 50px; font-size: 24px; transform: rotate(225deg);">➔</div>
+          <div style="position: absolute; top: 50px; left: 50px; font-size: 24px; transform: rotate(315deg);">➔</div>
+          
+          <!-- Center Animation -->
+          <div id="center-anim" style="position: absolute; top: 150px; left: 150px; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 64px; transition: transform 2s;"></div>
+        </div>
+        
+        <div id="stages-tray" style="display: flex; gap: 15px; justify-content: center; margin-top: 20px; min-height: 80px;"></div>
+      </div>
+    `;
+    container.insertAdjacentHTML('beforeend', html);
+
+    const cycles = {
+      butterfly: [ { id: 0, icon: '🥚', name: 'Egg' }, { id: 1, icon: '🐛', name: 'Caterpillar' }, { id: 2, icon: '🦋', name: 'Chrysalis' }, { id: 3, icon: '🦋', name: 'Adult' } ],
+      frog: [ { id: 0, icon: '🥚', name: 'Egg' }, { id: 1, icon: '🐸', name: 'Tadpole' }, { id: 2, icon: '🐸', name: 'Froglet' }, { id: 3, icon: '🐸', name: 'Adult' } ],
+      chicken: [ { id: 0, icon: '🥚', name: 'Egg' }, { id: 1, icon: '🐣', name: 'Hatching' }, { id: 2, icon: '🐥', name: 'Chick' }, { id: 3, icon: '🐔', name: 'Adult' } ]
+    };
+
+    const tray = container.querySelector('#stages-tray');
+    const sockets = container.querySelectorAll('.socket');
+    const btns = container.querySelectorAll('.cycle-btn');
+    const centerAnim = container.querySelector('#center-anim');
+
+    let currentSequence = [];
+    let placedCount = 0;
+
+    function loadCycle(cycleName) {
+      tray.innerHTML = '';
+      centerAnim.innerHTML = '';
+      centerAnim.style.transform = 'rotate(0deg)';
+      placedCount = 0;
+      
+      sockets.forEach(s => {
+        s.innerHTML = s.dataset.index;
+        s.style.borderColor = '#e1b12c';
+      });
+
+      const stages = [...cycles[cycleName]].sort(() => Math.random() - 0.5);
+      
+      stages.forEach(stage => {
+        const el = document.createElement('div');
+        el.className = 'stage-item';
+        el.innerText = stage.icon;
+        el.dataset.id = stage.id;
+        el.style.cssText = 'width: 60px; height: 60px; background: white; color: black; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; cursor: grab; user-select: none;';
+        
+        makeDraggableStage(el);
+        tray.appendChild(el);
+      });
+    }
+
+    function makeDraggableStage(el) {
+      let isDragging = false;
+      let startX, startY, initialX, initialY;
+      
+      el.addEventListener('mousedown', e => {
+        isDragging = true;
+        startX = e.clientX; startY = e.clientY;
+        const rect = el.getBoundingClientRect();
+        el.style.position = 'absolute';
+        el.style.zIndex = 1000;
+        el.style.left = rect.left + 'px';
+        el.style.top = rect.top + 'px';
+        initialX = rect.left;
+        initialY = rect.top;
+      });
+
+      document.addEventListener('mousemove', e => {
+        if(!isDragging) return;
+        el.style.left = initialX + (e.clientX - startX) + 'px';
+        el.style.top = initialY + (e.clientY - startY) + 'px';
+      });
+
+      document.addEventListener('mouseup', e => {
+        if(!isDragging) return;
+        isDragging = false;
+        el.style.zIndex = '';
+        
+        let dropped = false;
+        sockets.forEach(socket => {
+          const sRect = socket.getBoundingClientRect();
+          const eRect = el.getBoundingClientRect();
+          
+          if(eRect.left > sRect.left - 30 && eRect.right < sRect.right + 30 && eRect.top > sRect.top - 30 && eRect.bottom < sRect.bottom + 30) {
+            if(socket.dataset.index === el.dataset.id) {
+              socket.innerHTML = el.innerText;
+              socket.style.borderColor = '#2ed573';
+              el.style.display = 'none';
+              dropped = true;
+              placedCount++;
+              checkWin();
+            } else {
+              el.style.position = 'static';
+            }
+          }
+        });
+
+        if(!dropped) {
+          el.style.position = 'static';
+        }
+      });
+    }
+
+    function checkWin() {
+      if(placedCount === 4) {
+        centerAnim.innerHTML = '✨';
+        centerAnim.style.transform = 'rotate(720deg) scale(1.5)';
+        setTimeout(() => triggerCompletion('lifecycle'), 2000);
+      }
+    }
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', e => {
+        loadCycle(e.target.dataset.cycle);
+      });
+    });
+
+    // Load default
+    loadCycle('butterfly');
+  }
+
+  return {
+    mountLab: function(containerId, labId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      
+      switch(labId) {
+        case 'magnet': mountMagnetLab(container); break;
+        case 'friction': mountFrictionLab(container); break;
+        case 'thermal': mountThermalLab(container); break;
+        case 'nutrition': mountNutritionLab(container); break;
+        case 'lifecycle': mountLifecycleLab(container); break;
+        default: container.innerHTML = 'Lab not found.';
+      }
+    },
+    mountMagnetLab,
+    mountFrictionLab,
+    mountThermalLab,
+    mountNutritionLab,
+    mountLifecycleLab
+  };
+})();
+
+  </script>
+  <script>
+window.WallpaperCertificate = (function() {
+    function renderCertificate(canvas, data) {
+        const { studentName, score, domainScores, date } = data || {};
+        canvas.width = 2400;
+        canvas.height = 1696;
+        const ctx = canvas.getContext('2d');
+        const w = canvas.width;
+        const h = canvas.height;
+
+        // 1. Deep Space Stardust Nebula Background
+        const bgGrad = ctx.createLinearGradient(0, 0, w, h);
+        bgGrad.addColorStop(0, '#030a16');
+        bgGrad.addColorStop(0.5, '#081d32');
+        bgGrad.addColorStop(1, '#041518');
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, w, h);
+
+        // Subtle molecular carbon hexagonal rings
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+        ctx.lineWidth = 2;
+        for (let i = 0; i < 20; i++) {
+            drawHexagon(ctx, Math.random() * w, Math.random() * h, 50 + Math.random() * 150);
+        }
+
+        // Bohr atom electron orbital ellipses
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+        for (let i = 0; i < 10; i++) {
+            ctx.beginPath();
+            ctx.ellipse(Math.random() * w, Math.random() * h, 200 + Math.random() * 300, 50 + Math.random() * 100, Math.random() * Math.PI, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+
+        // 280 twinkling stardust particles
+        for (let i = 0; i < 280; i++) {
+            ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.8 + 0.2})`;
+            ctx.beginPath();
+            ctx.arc(Math.random() * w, Math.random() * h, Math.random() * 2.5 + 0.5, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // 2. Holographic Double Guilloché Gold Border
+        const margin = 120;
+        drawGuillocheBorder(ctx, margin, margin, w - margin * 2, h - margin * 2);
+
+        // Beaded perimeter pearls
+        drawPearls(ctx, margin - 20, margin - 20, w - (margin - 20) * 2, h - (margin - 20) * 2);
+
+        // 4 corner celestial rosettes
+        drawRosette(ctx, margin, margin, 60);
+        drawRosette(ctx, w - margin, margin, 60);
+        drawRosette(ctx, margin, h - margin, 60);
+        drawRosette(ctx, w - margin, h - margin, 60);
+
+        // 3. Official Credential Text
+        ctx.textAlign = 'center';
+        
+        // Title
+        ctx.fillStyle = '#FFD700';
+        ctx.font = 'bold 50px "Times New Roman", serif';
+        ctx.fillText('ROYAL THAI MEP SCIENCE ACADEMY & RESEARCH GUILD', w / 2, margin + 150);
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 80px "Georgia", serif';
+        ctx.fillText('OFFICIAL JUNIOR SCIENTIST DIPLOMA', w / 2, margin + 280);
+
+        ctx.fillStyle = '#A0C0FF';
+        ctx.font = 'italic 40px "Georgia", serif';
+        ctx.fillText('Thai Rath Witthaya 75 · Mini English Program', w / 2, margin + 350);
+        
+        // This certifies that
+        ctx.fillStyle = '#DDDDDD';
+        ctx.font = '40px "Georgia", serif';
+        ctx.fillText('This certifies that', w / 2, margin + 480);
+
+        // 4. 3D Extruded Luminous Gold Student Name
+        draw3DText(ctx, studentName || "Junior Explorer", w / 2, margin + 650);
+
+        // Final marks and rank
+        ctx.fillStyle = '#DDDDDD';
+        ctx.font = '40px "Georgia", serif';
+        ctx.fillText(`Has successfully completed the Science Quest with a score of ${score !== undefined ? score : 15} / 15`, w / 2, margin + 780);
+        
+        ctx.fillStyle = '#FFD700';
+        ctx.font = 'bold 60px "Georgia", serif';
+        ctx.fillText(`Rank: ${getRank(score !== undefined ? score : 15)}`, w / 2, margin + 880);
+
+        // 5. 15-Star Dynamic Constellation Matrix
+        const capsules = [
+            { label: "Magnetic Forces", key: "forces" },
+            { label: "Motion & Friction", key: "friction" }, // Fallback logic for keys in constellation
+            { label: "Thermal Changes", key: "thermal" },
+            { label: "Animal Needs", key: "needs" },
+            { label: "Life Cycles", key: "cycles" }
+        ];
+        drawConstellationMatrix(ctx, w / 2, margin + 1050, capsules, domainScores);
+
+        // 6. Official 32-Point Gold Embossed Academy Seal (Lower Right)
+        drawSeal(ctx, w - margin - 250, h - margin - 250, 150);
+
+        // 7. Procedural Security QR Code & Examiner Signature (Lower Left)
+        drawQRCode(ctx, margin + 200, h - margin - 300, 150);
+        
+        ctx.fillStyle = '#DDDDDD';
+        ctx.font = '24px monospace';
+        ctx.textAlign = 'left';
+        const hashStr = (studentName || '') + (score || '') + (date || '');
+        ctx.fillText(`HASH: ${generateHash(hashStr)}`, margin + 120, h - margin - 100);
+        ctx.fillText(`DATE: ${date || new Date().toISOString().split('T')[0]}`, margin + 120, h - margin - 60);
+
+        // Signature
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(margin + 500, h - margin - 180);
+        ctx.quadraticCurveTo(margin + 550, h - margin - 220, margin + 600, h - margin - 150);
+        ctx.quadraticCurveTo(margin + 650, h - margin - 100, margin + 700, h - margin - 200);
+        ctx.quadraticCurveTo(margin + 750, h - margin - 250, margin + 800, h - margin - 180);
+        ctx.stroke();
+
+        ctx.fillStyle = '#DDDDDD';
+        ctx.font = 'italic 30px "Times New Roman", serif';
+        ctx.fillText('Prof. Oliver Newton, Ph.D.', margin + 520, h - margin - 120);
+        ctx.font = '24px "Times New Roman", serif';
+        ctx.fillText('Chief Examiner', margin + 580, h - margin - 80);
+    }
+
+    function getRank(score) {
+        if (score === 15) return "Grand Master Junior Scientist";
+        if (score >= 12) return "Master Junior Scientist";
+        if (score >= 8) return "Advanced Junior Scientist";
+        return "Junior Scientist";
+    }
+
+    function drawHexagon(ctx, x, y, size) {
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+            const angle = i * Math.PI / 3;
+            const px = x + size * Math.cos(angle);
+            const py = y + size * Math.sin(angle);
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.stroke();
+    }
+
+    function drawGuillocheBorder(ctx, x, y, w, h) {
+        ctx.strokeStyle = '#FFD700';
+        ctx.lineWidth = 1;
+        
+        ctx.strokeRect(x, y, w, h);
+        ctx.strokeRect(x + 15, y + 15, w - 30, h - 30);
+        ctx.strokeRect(x + 30, y + 30, w - 60, h - 60);
+
+        ctx.beginPath();
+        for(let i = x; i <= x + w; i += 15) {
+            ctx.arc(i, y + 15, 15, 0, Math.PI);
+            ctx.arc(i, y + h - 15, 15, Math.PI, Math.PI * 2);
+        }
+        for(let j = y; j <= y + h; j += 15) {
+            ctx.arc(x + 15, j, 15, Math.PI * 0.5, Math.PI * 1.5);
+            ctx.arc(x + w - 15, j, 15, Math.PI * 1.5, Math.PI * 2.5);
+        }
+        ctx.stroke();
+    }
+
+    function drawPearls(ctx, x, y, w, h) {
+        ctx.fillStyle = '#FFFFFF';
+        const spacing = 40;
+        const radius = 6;
+        for (let i = x; i <= x + w; i += spacing) {
+            drawPearl(ctx, i, y, radius);
+            drawPearl(ctx, i, y + h, radius);
+        }
+        for (let j = y; j <= y + h; j += spacing) {
+            drawPearl(ctx, x, j, radius);
+            drawPearl(ctx, x + w, j, radius);
+        }
+    }
+
+    function drawPearl(ctx, x, y, r) {
+        const grad = ctx.createRadialGradient(x - r*0.3, y - r*0.3, r*0.1, x, y, r);
+        grad.addColorStop(0, '#FFFFFF');
+        grad.addColorStop(0.5, '#E0E0E0');
+        grad.addColorStop(1, '#888888');
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+        ctx.strokeStyle = '#555555';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+    }
+
+    function drawRosette(ctx, x, y, r) {
+        ctx.fillStyle = '#081d32';
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#FFD700';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.beginPath();
+        for (let i = 0; i < 12; i++) {
+            const angle = i * Math.PI / 6;
+            ctx.ellipse(x, y, r * 0.8, r * 0.2, angle, 0, Math.PI * 2);
+        }
+        ctx.stroke();
+
+        ctx.fillStyle = '#FFD700';
+        ctx.beginPath();
+        ctx.arc(x, y, r * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    function draw3DText(ctx, text, x, y) {
+        ctx.font = 'bold 120px "Georgia", serif';
+        ctx.textAlign = 'center';
+        
+        const depth = 8;
+        for (let i = depth; i > 0; i--) {
+            ctx.fillStyle = `rgb(${150 - i*10}, ${100 - i*8}, 0)`;
+            ctx.fillText(text, x + i, y + i);
+        }
+        
+        const grad = ctx.createLinearGradient(x, y - 100, x, y);
+        grad.addColorStop(0, '#FFFBE0');
+        grad.addColorStop(0.5, '#FFD700');
+        grad.addColorStop(1, '#B8860B');
+        ctx.fillStyle = grad;
+        ctx.fillText(text, x, y);
+
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.strokeText(text, x, y);
+
+        const textWidth = ctx.measureText(text).width;
+        drawSparkle(ctx, x - textWidth/2 - 20, y - 80);
+        drawSparkle(ctx, x + textWidth/2 + 20, y - 20);
+    }
+
+    function drawSparkle(ctx, x, y) {
+        ctx.fillStyle = '#FFFFFF';
+        ctx.beginPath();
+        ctx.moveTo(x, y - 15);
+        ctx.quadraticCurveTo(x, y, x + 15, y);
+        ctx.quadraticCurveTo(x, y, x, y + 15);
+        ctx.quadraticCurveTo(x, y, x - 15, y);
+        ctx.quadraticCurveTo(x, y, x, y - 15);
+        ctx.fill();
+    }
+
+    function drawConstellationMatrix(ctx, cx, cy, capsules, domainScores = {}) {
+        const totalWidth = 1800;
+        const spacing = totalWidth / 5;
+        const startX = cx - totalWidth / 2 + spacing / 2;
+
+        capsules.forEach((cap, i) => {
+            const x = startX + i * spacing;
+            const y = cy;
+
+            ctx.fillStyle = 'rgba(4, 21, 24, 0.8)';
+            ctx.strokeStyle = '#FFD700';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            const rx = x - 140, ry = y - 50, rw = 280, rh = 160, r = 20;
+            ctx.moveTo(rx + r, ry);
+            ctx.lineTo(rx + rw - r, ry);
+            ctx.quadraticCurveTo(rx + rw, ry, rx + rw, ry + r);
+            ctx.lineTo(rx + rw, ry + rh - r);
+            ctx.quadraticCurveTo(rx + rw, ry + rh, rx + rw - r, ry + rh);
+            ctx.lineTo(rx + r, ry + rh);
+            ctx.quadraticCurveTo(rx, ry + rh, rx, ry + rh - r);
+            ctx.lineTo(rx, ry + r);
+            ctx.quadraticCurveTo(rx, ry, rx + r, ry);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#A0C0FF';
+            ctx.font = 'bold 24px "Arial", sans-serif';
+            ctx.fillText(cap.label, x, y - 10);
+
+            // Default to 3 stars if score not found or provided for visuals
+            let correct = 3;
+            if (domainScores && domainScores[cap.key]) {
+                correct = domainScores[cap.key].correct;
+            } else if (domainScores && domainScores['forces'] && cap.key === 'friction') {
+                // Handle naming edge cases if state just has 'forces'
+                correct = domainScores['forces'].correct;
+            }
+
+            for (let j = 0; j < 3; j++) {
+                const sx = x - 60 + j * 60;
+                const sy = y + 50;
+                const earned = j < correct;
+                drawStar(ctx, sx, sy, 5, 20, 10, earned);
+            }
+        });
+    }
+
+    function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius, earned) {
+        let rot = Math.PI / 2 * 3;
+        let x = cx;
+        let y = cy;
+        let step = Math.PI / spikes;
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - outerRadius);
+        for (let i = 0; i < spikes; i++) {
+            x = cx + Math.cos(rot) * outerRadius;
+            y = cy + Math.sin(rot) * outerRadius;
+            ctx.lineTo(x, y);
+            rot += step;
+
+            x = cx + Math.cos(rot) * innerRadius;
+            y = cy + Math.sin(rot) * innerRadius;
+            ctx.lineTo(x, y);
+            rot += step;
+        }
+        ctx.lineTo(cx, cy - outerRadius);
+        ctx.closePath();
+        
+        if (earned) {
+            const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, outerRadius);
+            grad.addColorStop(0, '#FFFFFF');
+            grad.addColorStop(0.3, '#FFD700');
+            grad.addColorStop(1, '#B8860B');
+            ctx.fillStyle = grad;
+            ctx.fill();
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        } else {
+            ctx.fillStyle = 'rgba(255, 215, 0, 0.1)';
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(255, 215, 0, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+    }
+
+    function drawSeal(ctx, x, y, r) {
+        ctx.fillStyle = '#B8860B';
+        ctx.beginPath();
+        ctx.moveTo(x - 40, y + r - 20);
+        ctx.lineTo(x - 80, y + r + 120);
+        ctx.lineTo(x - 30, y + r + 90);
+        ctx.lineTo(x + 20, y + r + 120);
+        ctx.lineTo(x + 40, y + r - 20);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#FFD700';
+        ctx.beginPath();
+        const spikes = 32;
+        const outer = r;
+        const inner = r * 0.9;
+        for (let i = 0; i < spikes * 2; i++) {
+            const radius = i % 2 === 0 ? outer : inner;
+            const angle = i * Math.PI / spikes;
+            ctx.lineTo(x + Math.cos(angle) * radius, y + Math.sin(angle) * radius);
+        }
+        ctx.closePath();
+        
+        const grad = ctx.createRadialGradient(x - r*0.2, y - r*0.2, r*0.1, x, y, r);
+        grad.addColorStop(0, '#FFFBE0');
+        grad.addColorStop(0.5, '#FFD700');
+        grad.addColorStop(1, '#8B6508');
+        ctx.fillStyle = grad;
+        ctx.fill();
+        ctx.strokeStyle = '#553300';
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(x, y, r * 0.8, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(x, y, r * 0.75, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.fillStyle = '#553300';
+        ctx.font = 'bold 16px "Georgia", serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        const text = 'MEP SCIENCE EXCELLENCE · PRIMARY 3 · ';
+        drawTextAlongArc(ctx, text, x, y, r * 0.62, 0);
+        
+        ctx.fillStyle = '#553300';
+        ctx.font = 'bold 45px "Georgia", serif';
+        ctx.fillText('🔬', x - 20, y - 10);
+        ctx.fillText('⚛️', x + 20, y + 15);
+    }
+
+    function drawTextAlongArc(ctx, str, cx, cy, radius, angle) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(angle);
+        for (let i = 0; i < str.length; i++) {
+            ctx.save();
+            ctx.rotate(i * (Math.PI * 2 / str.length) - Math.PI / 2);
+            ctx.translate(0, -radius);
+            ctx.fillText(str[i], 0, 0);
+            ctx.restore();
+        }
+        ctx.restore();
+    }
+
+    function drawQRCode(ctx, x, y, size) {
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(x, y, size, size);
+        
+        ctx.fillStyle = '#000000';
+        const cells = 21;
+        const cellSize = size / cells;
+        
+        for(let r=0; r<cells; r++) {
+            for(let c=0; c<cells; c++) {
+                if ((r<7 && c<7) || (r<7 && c>=cells-7) || (r>=cells-7 && c<7)) {
+                    if (r===0||r===6||c===0||c===6 || (r>1&&r<5&&c>1&&c<5)) {
+                        ctx.fillRect(x + c*cellSize, y + r*cellSize, cellSize, cellSize);
+                    }
+                    continue;
+                }
+                if (Math.random() > 0.5) {
+                    ctx.fillRect(x + c*cellSize, y + r*cellSize, cellSize, cellSize);
+                }
+            }
+        }
+    }
+
+    function generateHash(input) {
+        let hash = 0;
+        if (!input) return "00000000";
+        for (let i = 0; i < input.length; i++) {
+            const char = input.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash;
+        }
+        return Math.abs(hash).toString(16).toUpperCase().padStart(8, '0');
+    }
+
+    function downloadWallpaper(canvas, filename = 'Science_Certificate.png') {
+        const link = document.createElement('a');
+        link.download = filename;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }
+
+    function printCertificate(canvas) {
+        const imgData = canvas.toDataURL('image/png');
+        const printWindow = window.open('', '_blank');
+        if (!printWindow) return;
+        printWindow.document.write(`
+            <html>
+                <head>
+                    <title>Print Certificate</title>
+                    <style>
+                        @media print {
+                            @page { size: A4 landscape; margin: 0; }
+                            body { margin: 0; padding: 0; }
+                            img { width: 100%; height: 100%; object-fit: cover; }
+                        }
+                        body { margin: 0; text-align: center; background: #333; }
+                        img { max-width: 100%; height: auto; display: block; }
+                    </style>
+                </head>
+                <body>
+                    <img src="${imgData}" onload="window.print(); window.close();" />
+                </body>
+            </html>
+        `);
+        printWindow.document.close();
+    }
+
+    return {
+        renderCertificate,
+        downloadWallpaper,
+        printCertificate
+    };
+})();
+
+  </script>
+  <script>
+
+/* ==========================================================================
+   MASTER APPLICATION CONTROLLER: ScienceApp
+   Coordinates State, Screen Transitions, Lab Completion, Exam Engine,
+   Speech Narration, Remediation Loop, and Wallpaper Certificate.
+   ========================================================================== */
+
+window.ScienceApp = (function() {
+  'use strict';
+
+  const STORAGE_KEYS = {
+    PLAYER: 'safari_sci_player',
+    BADGES: 'safari_sci_badges',
+    FIRST_PLAY: 'safari_sci_first_play_done',
+    MUTED: 'safari_sci_muted'
+  };
+
+  const LAB_DATA = {
+    magnet: {
+      title: "Magnetic Physics & Sorting Workshop",
+      icon: "🧲",
+      concepts: ["Magnetic Poles", "Attract & Repel", "Ferrous Metals"],
+      pipHint: "Welcome to the Magnet Lab! Drag opposite poles together to see attraction, and like poles to see repulsion. Then use the horseshoe magnet to collect all magnetic items!"
+    },
+    friction: {
+      title: "Pip's Ramp & Friction Runway",
+      icon: "🏎️",
+      concepts: ["Gravity", "Incline Angle", "Surface Friction"],
+      pipHint: "Adjust the ramp incline and choose different track surfaces like Ice or Sandpaper! Launch the car and observe how friction slows down the wheels."
+    },
+    thermal: {
+      title: "Thermal Transformation Station",
+      icon: "🌡️",
+      concepts: ["States of Matter", "Melting & Freezing", "Reversible vs Irreversible"],
+      pipHint: "Slide the thermal pad to heat or freeze items! Observe reversible phase changes with chocolate and ice, and permanent chemical change when frying an egg."
+    },
+    nutrition: {
+      title: "Bio-Nutrition & Animal Feeder",
+      icon: "🥗",
+      concepts: ["Carbohydrates", "Proteins", "Vitamins & Diets"],
+      pipHint: "Sort healthy foods into their correct pods: Carbs for energy, Protein for growth, and Vitamins for immunity! Then feed our herbivore, carnivore, and omnivore guests."
+    },
+    lifecycle: {
+      title: "Life Cycle Astrolabe Wheel",
+      icon: "🔄",
+      concepts: ["Metamorphosis", "Egg & Larva", "Animal Conservation"],
+      pipHint: "Arrange the developmental stages in clockwise order for Butterfly, Frog, and Chicken! Complete the circle to watch the living transformation cycle."
+    }
+  };
+
+  const state = {
+    playerName: localStorage.getItem(STORAGE_KEYS.PLAYER) || "Junior Explorer",
+    currentScreen: "start",
+    currentLabId: null,
+    badges: {
+      magnet: false,
+      friction: false,
+      thermal: false,
+      nutrition: false,
+      lifecycle: false
+    },
+    firstPlayCompleted: false,
+    exam: {
+      questions: [],
+      currentQIndex: 0,
+      currentSubIndex: 0,
+      currentAnswers: [],
+      userAnswers: [],
+      totalScore: 0,
+      domainScores: {},
+      weakestDomain: null
+    }
+  };
+
+  function loadSavedState() {
+    try {
+      const savedBadges = localStorage.getItem(STORAGE_KEYS.BADGES);
+      if (savedBadges) {
+        state.badges = Object.assign(state.badges, JSON.parse(savedBadges));
+      }
+      state.firstPlayCompleted = localStorage.getItem(STORAGE_KEYS.FIRST_PLAY) === 'true';
+      const savedMute = localStorage.getItem(STORAGE_KEYS.MUTED) === 'true';
+      if (window.ScienceAudioUI) {
+        window.ScienceAudioUI.setMuted(savedMute);
+      }
+    } catch (e) {
+      console.warn("Could not load localStorage state", e);
+    }
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEYS.PLAYER, state.playerName);
+      localStorage.setItem(STORAGE_KEYS.BADGES, JSON.stringify(state.badges));
+      localStorage.setItem(STORAGE_KEYS.FIRST_PLAY, state.firstPlayCompleted ? 'true' : 'false');
+      if (window.ScienceAudioUI) {
+        localStorage.setItem(STORAGE_KEYS.MUTED, window.ScienceAudioUI.isMuted() ? 'true' : 'false');
+      }
+    } catch (e) {}
+  }
+
+  function getBadgeCount() {
+    return Object.values(state.badges).filter(Boolean).length;
+  }
+
+  function showScreen(screenId) {
+    state.currentScreen = screenId;
+    const screens = ['start', 'hub', 'lab', 'exam', 'remediation', 'certificate'];
+    screens.forEach(id => {
+      const el = document.getElementById('screen-' + id);
+      if (el) {
+        if (id === screenId) {
+          el.style.display = (id === 'start' || id === 'hub' || id === 'lab' || id === 'exam' || id === 'remediation' || id === 'certificate') ? 'flex' : 'block';
+        } else {
+          el.style.display = 'none';
+        }
+      }
+    });
+
+    // Update Header
+    const header = document.getElementById('main-header');
+    if (header) {
+      header.style.display = (screenId === 'start') ? 'none' : 'flex';
+      const nameChip = document.getElementById('header-player-name');
+      if (nameChip) nameChip.textContent = state.playerName;
+      const starCounter = document.getElementById('header-stars');
+      if (starCounter) starCounter.textContent = `${getBadgeCount()} / 5 Badges`;
+    }
+
+    if (screenId === 'hub') {
+      renderHub();
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renderHub() {
+    // Render 5 badge slots
+    const badgeSlots = document.querySelectorAll('.badge-slot');
+    badgeSlots.forEach(slot => {
+      const bKey = slot.getAttribute('data-badge');
+      if (state.badges[bKey]) {
+        slot.classList.add('unlocked');
+        const statusText = slot.querySelector('.badge-status-text');
+        if (statusText) statusText.textContent = "Earned 🏅";
+      } else {
+        slot.classList.remove('unlocked');
+        const statusText = slot.querySelector('.badge-status-text');
+        if (statusText) statusText.textContent = "Locked 🔒";
+      }
+    });
+
+    // Render 5 lab station cards
+    const labCards = document.querySelectorAll('.lab-station-card');
+    labCards.forEach(card => {
+      const lKey = card.getAttribute('data-lab');
+      const badgeElem = card.querySelector('.lab-status-badge');
+      if (badgeElem) {
+        if (state.badges[lKey]) {
+          badgeElem.className = 'lab-status-badge status-complete';
+          badgeElem.textContent = "Mastered 🌟";
+        } else {
+          badgeElem.className = 'lab-status-badge status-ready';
+          badgeElem.textContent = "Open Lab 🔬";
+        }
+      }
+    });
+
+    // Render Exam Launch Banner
+    const examBanner = document.getElementById('exam-launch-banner');
+    const examBtn = document.getElementById('btn-launch-exam');
+    const examSubtitle = document.getElementById('exam-banner-subtitle');
+    const allBadgesCollected = getBadgeCount() === 5;
+    const isExamReady = allBadgesCollected || state.firstPlayCompleted;
+
+    if (isExamReady) {
+      if (examBanner) {
+        examBanner.classList.remove('locked');
+        examBanner.classList.add('unlocked');
+      }
+      if (examSubtitle) examSubtitle.textContent = "All 5 Discovery Labs Mastered! Step into the Exam Hall to earn your 15-Star National Diploma!";
+      if (examBtn) {
+        examBtn.disabled = false;
+        examBtn.className = "btn btn-lime";
+        examBtn.innerHTML = "Take 15-Mark National Exam 🏆";
+      }
+    } else {
+      if (examBanner) {
+        examBanner.classList.add('locked');
+        examBanner.classList.remove('unlocked');
+      }
+      if (examSubtitle) examSubtitle.textContent = `First-Time Prerequisite: Complete all 5 Discovery Labs to unlock the Exam! (${getBadgeCount()}/5 Completed)`;
+      if (examBtn) {
+        examBtn.disabled = true;
+        examBtn.className = "btn btn-glass";
+        examBtn.innerHTML = `Exam Locked 🔒 (${getBadgeCount()}/5 Labs)`;
+      }
+    }
+  }
+
+  function openLab(labId) {
+    if (!LAB_DATA[labId]) return;
+    state.currentLabId = labId;
+    const info = LAB_DATA[labId];
+
+    const titleElem = document.getElementById('lab-title-text');
+    if (titleElem) titleElem.textContent = `${info.icon} ${info.title}`;
+
+    const hintElem = document.getElementById('pip-hint-text');
+    if (hintElem) hintElem.textContent = info.pipHint;
+
+    const badgeElem = document.getElementById('lab-badge-indicator');
+    if (badgeElem) {
+      badgeElem.textContent = state.badges[labId] ? "Badge Earned ⭐" : "Badge In Progress 🧪";
+      badgeElem.className = state.badges[labId] ? "badge-pill earned" : "badge-pill";
+    }
+
+    showScreen('lab');
+
+    // Mount interactive simulation
+    if (window.InteractiveLabs) {
+      window.InteractiveLabs.mountLab('lab-mount-point', labId);
+    }
+
+    if (window.playSound) window.playSound('bubble');
+    if (window.speakText) {
+      window.speakText(info.pipHint);
+    }
+  }
+
+  function onLabCompleted(labId) {
+    if (!state.badges[labId]) {
+      state.badges[labId] = true;
+      saveState();
+
+      if (window.playSound) window.playSound('badge');
+      if (window.ScienceAudioUI && window.ScienceAudioUI.spawnSparks) {
+        window.ScienceAudioUI.spawnSparks(window.innerWidth / 2, window.innerHeight / 2, '#39ff14');
+      }
+
+      const badgeElem = document.getElementById('lab-badge-indicator');
+      if (badgeElem) {
+        badgeElem.textContent = "Badge Earned ⭐";
+        badgeElem.className = "badge-pill earned";
+      }
+
+      const allEarned = getBadgeCount() === 5;
+      if (allEarned && !state.firstPlayCompleted) {
+        state.firstPlayCompleted = true;
+        saveState();
+        setTimeout(() => {
+          alert("🎉 OUTSTANDING! You have mastered all 5 Discovery Labs!
+The Grade 3 National Science Exam is now UNLOCKED!");
+          if (window.speakText) {
+            window.speakText("Outstanding work! You have mastered all five discovery labs. The Grade 3 National Science Exam is now unlocked!");
+          }
+          showScreen('hub');
+        }, 1200);
+      } else {
+        setTimeout(() => {
+          alert(`🌟 Congratulations! You earned the ${LAB_DATA[labId] ? LAB_DATA[labId].title : 'Lab'} Badge!`);
+        }, 600);
+      }
+    }
+  }
+
+  // EXAM CONTROLLER
+  function startExam() {
+    if (getBadgeCount() < 5 && !state.firstPlayCompleted) {
+      alert("Please complete all 5 Discovery Labs first before attempting the Exam!");
+      return;
+    }
+
+    if (!window.ScienceCurriculum) {
+      alert("Science Curriculum Engine is loading. Please wait a moment.");
+      return;
+    }
+
+    state.exam.questions = window.ScienceCurriculum.generateExam();
+    state.exam.currentQIndex = 0;
+    state.exam.currentSubIndex = 0;
+    state.exam.currentAnswers = [];
+    state.exam.userAnswers = [];
+    state.exam.totalScore = 0;
+
+    showScreen('exam');
+    if (window.playSound) window.playSound('heatFlame');
+    renderCurrentQuestion();
+  }
+
+  function renderCurrentQuestion() {
+    const q = state.exam.questions[state.exam.currentQIndex];
+    if (!q) {
+      finishExam();
+      return;
+    }
+
+    // Update beaker liquid and progress bar
+    const progressPct = ((state.exam.currentQIndex) / 15) * 100;
+    const beakerFill = document.getElementById('beaker-fill');
+    if (beakerFill) beakerFill.style.height = `${Math.max(15, progressPct)}%`;
+    const progBar = document.getElementById('exam-progress-bar');
+    if (progBar) progBar.style.width = `${progressPct}%`;
+    const counterText = document.getElementById('exam-q-counter');
+    if (counterText) counterText.textContent = `Question ${state.exam.currentQIndex + 1} of 15`;
+
+    // Level Badge
+    const levelBadge = document.getElementById('exam-level-badge');
+    if (levelBadge) {
+      levelBadge.className = `level-badge level-${q.level}`;
+      levelBadge.textContent = `Level ${q.level} • ${q.domain.toUpperCase()}`;
+    }
+
+    // Scenario title & narrative
+    const scenarioCard = document.getElementById('scenario-card');
+    const titleElem = document.getElementById('scenario-title');
+    const narrElem = document.getElementById('scenario-narrative');
+    const diagElem = document.getElementById('scenario-diagram');
+
+    if (titleElem) titleElem.textContent = q.title;
+
+    if (q.type === 'scenario' && q.scenarioText) {
+      if (narrElem) {
+        narrElem.textContent = q.scenarioText;
+        narrElem.style.display = 'block';
+      }
+    } else {
+      if (narrElem) narrElem.style.display = 'none';
+    }
+
+    if (q.diagramSvg && q.diagramSvg.trim()) {
+      if (diagElem) {
+        diagElem.innerHTML = q.diagramSvg;
+        diagElem.style.display = 'flex';
+      }
+    } else {
+      if (diagElem) diagElem.style.display = 'none';
+    }
+
+    // Sub-question prompt
+    const subQ = q.subQuestions[state.exam.currentSubIndex];
+    const promptElem = document.getElementById('subq-prompt');
+    const partTag = subQ.part ? `[Part ${subQ.part.toUpperCase()}] ` : "";
+    if (promptElem) promptElem.textContent = `${partTag}${subQ.prompt}`;
+
+    // Read question with soft female voice
+    if (window.speakText) {
+      const readText = (q.type === 'scenario' && state.exam.currentSubIndex === 0 && q.scenarioText) 
+        ? `${q.scenarioText}. ${subQ.prompt}` 
+        : subQ.prompt;
+      window.speakText(readText);
+    }
+
+    // Render 4 Options
+    const optionsGrid = document.getElementById('exam-options-grid');
+    if (optionsGrid) {
+      optionsGrid.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+      subQ.options.forEach((optText, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerHTML = `
+          <span class="option-letter">${letters[idx]}</span>
+          <span class="option-text">${optText}</span>
+        `;
+        btn.onclick = () => handleOptionClick(btn, idx, subQ, q);
+        optionsGrid.appendChild(btn);
+      });
+    }
+
+    // Hide explanation box
+    const expBox = document.getElementById('explanation-box');
+    if (expBox) expBox.style.display = 'none';
+  }
+
+  function handleOptionClick(clickedBtn, chosenIndex, subQ, q) {
+    // Disable all options
+    const allBtns = document.querySelectorAll('.option-btn');
+    allBtns.forEach(b => b.disabled = true);
+
+    const isCorrect = (chosenIndex === subQ.correctIndex);
+
+    if (isCorrect) {
+      clickedBtn.classList.add('correct');
+      if (window.playSound) window.playSound('correct');
+      if (window.ScienceAudioUI && window.ScienceAudioUI.spawnSparks) {
+        const rect = clickedBtn.getBoundingClientRect();
+        window.ScienceAudioUI.spawnSparks(rect.left + rect.width / 2, rect.top + rect.height / 2, '#39ff14');
+      }
+    } else {
+      clickedBtn.classList.add('incorrect');
+      if (window.playSound) window.playSound('wrong');
+      // Highlight the correct one
+      allBtns.forEach((b, idx) => {
+        if (idx === subQ.correctIndex) {
+          b.classList.add('correct');
+        }
+      });
+    }
+
+    // Save sub-answer
+    state.exam.currentAnswers.push(chosenIndex);
+
+    // Show Explanation Box
+    const expBox = document.getElementById('explanation-box');
+    const expText = document.getElementById('explanation-text');
+    const nextBtn = document.getElementById('btn-next-question');
+
+    if (expText) {
+      expText.innerHTML = `<strong>${isCorrect ? "Correct! 🌟" : "Good Try! 💡"}</strong> ${subQ.explanation}`;
+    }
+    if (expBox) expBox.style.display = 'flex';
+
+    if (nextBtn) {
+      const hasMoreSubQ = (state.exam.currentSubIndex < q.subQuestions.length - 1);
+      nextBtn.textContent = hasMoreSubQ ? "Next Part ➡️" : "Next Question 🚀";
+      nextBtn.onclick = () => {
+        if (hasMoreSubQ) {
+          state.exam.currentSubIndex++;
+          renderCurrentQuestion();
+        } else {
+          // Record full answer for this question
+          state.exam.userAnswers.push({
+            qIndex: q.id,
+            answer: (q.subQuestions.length > 1) ? [...state.exam.currentAnswers] : state.exam.currentAnswers[0]
+          });
+          state.exam.currentAnswers = [];
+          state.exam.currentSubIndex = 0;
+          state.exam.currentQIndex++;
+          renderCurrentQuestion();
+        }
+      };
+    }
+  }
+
+  function finishExam() {
+    const evaluation = window.ScienceCurriculum.evaluateExam(state.exam.userAnswers, state.exam.questions);
+    state.exam.totalScore = evaluation.totalScore;
+    state.exam.domainScores = evaluation.domainScores;
+    state.exam.weakestDomain = evaluation.weakestDomain;
+
+    if (evaluation.totalScore >= 12) {
+      // SUCCESS: GOLD / SILVER CERTIFICATE!
+      showScreen('certificate');
+      if (window.playSound) window.playSound('fanfare');
+      if (window.speakText) {
+        window.speakText(`Sensational achievement, ${state.playerName}! You scored ${evaluation.totalScore} out of 15 marks. Your Official Junior Scientist Diploma is ready!`);
+      }
+      renderCertificateScreen(evaluation);
+    } else {
+      // BRONZE: "BRONZE IS NOT ACCEPTABLE!" REMEDIATION LOOP
+      showScreen('remediation');
+      if (window.playSound) window.playSound('wrong');
+      renderRemediationScreen(evaluation);
+    }
+  }
+
+  function renderRemediationScreen(evaluation) {
+    const scoreText = document.getElementById('bronze-score-text');
+    if (scoreText) scoreText.textContent = `You scored ${evaluation.totalScore} / 15 Marks`;
+
+    const weakestKey = evaluation.weakestDomain || 'forces';
+    const weakestData = evaluation.domainScores[weakestKey] || { label: "Forces, Friction & Magnets", labId: "friction" };
+
+    const diagText = document.getElementById('diagnostic-message');
+    if (diagText) {
+      diagText.textContent = `For an MEP Junior Scientist, Bronze is not acceptable! You did very well in other areas, but you made errors in ${weakestData.label}. Return to the laboratory now to review the principles and sharpen your score!`;
+    }
+
+    if (window.speakText) {
+      window.speakText(`Bronze is not acceptable for an MEP Junior Scientist! You scored ${evaluation.totalScore} marks. Head back to the ${weakestData.label} lab now to master this concept!`);
+    }
+
+    // Render domain breakdown bars
+    const meterList = document.getElementById('remediation-domain-meters');
+    if (meterList) {
+      meterList.innerHTML = '';
+      for (const [key, d] of Object.entries(evaluation.domainScores)) {
+        const row = document.createElement('div');
+        const isWeakest = (key === weakestKey);
+        row.className = isWeakest ? 'domain-meter-row weakest' : 'domain-meter-row';
+        const pct = Math.round((d.correct / d.total) * 100);
+        row.innerHTML = `
+          <span class="domain-label">${d.label}</span>
+          <div class="domain-score-bar">
+            <div class="domain-bar-fill" style="width: ${pct}%"></div>
+          </div>
+          <span class="domain-ratio">${d.correct} / ${d.total}</span>
+        `;
+        meterList.appendChild(row);
+      }
+    }
+
+    // Retrain button
+    const retrainBtn = document.getElementById('btn-remediation-retrain');
+    if (retrainBtn) {
+      retrainBtn.innerHTML = `🔬 Practice at ${weakestData.label} Lab`;
+      retrainBtn.onclick = () => {
+        openLab(weakestData.labId || 'friction');
+      };
+    }
+  }
+
+  function renderCertificateScreen(evaluation) {
+    const canvas = document.getElementById('certificate-canvas');
+    if (!canvas || !window.WallpaperCertificate) return;
+
+    const today = new Date();
+    const dateStr = today.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    window.WallpaperCertificate.renderCertificate(canvas, {
+      studentName: state.playerName,
+      score: evaluation.totalScore,
+      domainScores: evaluation.domainScores,
+      date: dateStr
+    });
+
+    const downloadBtn = document.getElementById('btn-download-wallpaper');
+    if (downloadBtn) {
+      downloadBtn.onclick = () => {
+        if (window.playSound) window.playSound('bubble');
+        const filename = `Junior_Scientist_${state.playerName.replace(/\s+/g, '_')}_A4_Wallpaper.png`;
+        window.WallpaperCertificate.downloadWallpaper(canvas, filename);
+      };
+    }
+
+    const printBtn = document.getElementById('btn-print-cert');
+    if (printBtn) {
+      printBtn.onclick = () => {
+        if (window.playSound) window.playSound('bubble');
+        window.WallpaperCertificate.printCertificate(canvas);
+      };
+    }
+  }
+
+  function init() {
+    loadSavedState();
+
+    // Start Screen Enter Button
+    const enterBtn = document.getElementById('btn-enter-lab');
+    const nameInput = document.getElementById('player-name-input');
+    if (nameInput) {
+      nameInput.value = state.playerName;
+      nameInput.addEventListener('input', (e) => {
+        state.playerName = e.target.value.trim() || "Junior Explorer";
+        saveState();
+      });
+    }
+
+    if (enterBtn) {
+      enterBtn.addEventListener('click', () => {
+        if (window.ScienceAudioUI) window.ScienceAudioUI.initAudio();
+        if (window.playSound) window.playSound('bubble');
+        showScreen('hub');
+      });
+    }
+
+    // Audio Mute Toggle Button
+    const muteBtn = document.getElementById('btn-toggle-audio');
+    if (muteBtn) {
+      muteBtn.addEventListener('click', () => {
+        if (window.ScienceAudioUI) {
+          const isMuted = window.ScienceAudioUI.toggleMute();
+          muteBtn.textContent = isMuted ? "🔇" : "🔊";
+          saveState();
+        }
+      });
+    }
+
+    // Lab Station click listeners
+    const labCards = document.querySelectorAll('.lab-station-card');
+    labCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const labId = card.getAttribute('data-lab');
+        openLab(labId);
+      });
+    });
+
+    // Back to Hub Buttons
+    const backBtns = document.querySelectorAll('.btn-back-to-hub');
+    backBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (window.playSound) window.playSound('bubble');
+        showScreen('hub');
+      });
+    });
+
+    // Launch Exam Button
+    const launchExamBtn = document.getElementById('btn-launch-exam');
+    if (launchExamBtn) {
+      launchExamBtn.addEventListener('click', () => {
+        startExam();
+      });
+    }
+
+    // Retake Exam Button
+    const retakeBtn = document.getElementById('btn-retake-exam');
+    if (retakeBtn) {
+      retakeBtn.addEventListener('click', () => {
+        startExam();
+      });
+    }
+
+    // Render Mascots on Start Screen
+    if (window.ScienceAudioUI) {
+      const leoContainer = document.getElementById('mascot-leo-container');
+      if (leoContainer) leoContainer.innerHTML = window.ScienceAudioUI.renderMascotLeo('happy', 90);
+      const pipContainer = document.getElementById('mascot-pip-container');
+      if (pipContainer) pipContainer.innerHTML = window.ScienceAudioUI.renderMascotPip('float', 90);
+
+      const pipHintAvatar = document.getElementById('pip-hint-avatar');
+      if (pipHintAvatar) pipHintAvatar.innerHTML = window.ScienceAudioUI.renderMascotPip('happy', 60);
+
+      const diagMascot = document.getElementById('diagnostic-mascot-avatar');
+      if (diagMascot) diagMascot.innerHTML = window.ScienceAudioUI.renderMascotLeo('shocked', 90);
+    }
+
+    // Start on start screen
+    showScreen('start');
+  }
+
+  return {
+    init,
+    showScreen,
+    openLab,
+    onLabCompleted,
+    startExam,
+    state
+  };
+})();
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.ScienceApp.init();
+});
+
+  </script>
+</body>
+</html>
