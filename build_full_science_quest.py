@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+# -*- coding: utf-8 -*-
+"""
+MEP Primary 3 Safari Science Quest Generator
+Builds the complete standalone HTML game safari_science_quest.html and mirrors to science/index.html.
+"""
+import os
+import shutil
+import json
+
+def build_game():
+    html = '''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1830,8 +1840,7 @@ function tAudio(){
 function startExam(){
   if(G.camps.length < 5){
     flash('🔒');
-    alert(`Complete all 5 Science Labs first! (${G.camps.length}/5 completed)
-Heading to the Discovery Labs now... 🧪`);
+    alert(`Complete all 5 Science Labs first! (${G.camps.length}/5 completed)\nHeading to the Discovery Labs now... 🧪`);
     goTrain();
     return;
   }
@@ -1968,7 +1977,7 @@ function dlCert(){
   const cv = document.getElementById('cv-cert');
   if(!cv) return;
   const a = document.createElement('a');
-  a.download = `Safari_Science_Certificate_${(G.name || 'Champion').replace(/\s+/g, '_')}.png`;
+  a.download = `Safari_Science_Certificate_${(G.name || 'Champion').replace(/\\s+/g, '_')}.png`;
   a.href = cv.toDataURL('image/png');
   a.click();
 }
@@ -1994,4 +2003,21 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 </body>
-</html>
+</html>'''
+
+    # Write root file
+    root_path = r'c:\GridLock\The safari Quest\safari_science_quest.html'
+    with open(root_path, 'w', encoding='utf-8') as f:
+        f.write(html)
+    print(f"Generated {root_path} (Size: {os.path.getsize(root_path)} bytes)")
+
+    # Mirror to science/index.html
+    sci_dir = r'c:\GridLock\The safari Quest\science'
+    os.makedirs(sci_dir, exist_ok=True)
+    sci_index = os.path.join(sci_dir, 'index.html')
+    with open(sci_index, 'w', encoding='utf-8') as f:
+        f.write(html)
+    print(f"Mirrored to {sci_index} (Size: {os.path.getsize(sci_index)} bytes)")
+
+if __name__ == '__main__':
+    build_game()
