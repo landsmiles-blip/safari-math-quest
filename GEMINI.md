@@ -18,6 +18,20 @@
    - **Remediation Invariant**: "Bronze is not acceptable" — any score below 12 marks triggers a targeted remediation card that identifies the student's weakest camp and provides a 1-tap direct retrain button.
    - **Certificate Invariant**: High-definition A4 landscape Canvas certificate (`1200 x 848` at 300 DPI) with golden guilloché border, corner rosettes, smiling royal lion crest, official 32-point gold embossed seal, 15 dynamic domain stars, 3D extruded gold student name, 1-click PNG download, and borderless print CSS.
 
+
 3. **Audio & Narration Invariant**:
    - Audio must use the zero-dependency Web Audio API synthesizer for positive chimes, error buzzes, and fanfare.
    - Voice narration must use natural soft female English speech synthesis (`CA.spk`).
+
+4. **Science Subject Expansion & Laboratory Invariants**:
+   - **Mode 1 Name & Identity**: Designated as **Professor Pip's Einstein Discovery Lab** (or Discovery Labs), themed as an energetic, euphoric science lab with Professor Pip in scientist goggles/lab coat, bubbling flasks, and neon accents.
+   - **Linear Lab Progression**: Each completed lab must offer a direct 1-tap "Next Lab ➔" button to guide the student sequentially from Lab 1 to 5.
+   - **First-Play Lock**: Exam Mode is strictly locked until all 5 Discovery Labs are completed.
+   - **Dynamic Examples**: Mode 1 labs must rotate dynamic, varied real-world examples across multiple plays.
+   - **Accurate Life Cycles**:
+     - Chicken: Egg ➔ Hatchling ➔ Chick ➔ Chicken
+     - Butterfly: Egg ➔ Caterpillar (larva) ➔ Pupa ➔ Butterfly
+     - Frog: Egg ➔ Tadpole (gills) ➔ Froglet ➔ Adult Frog (lungs)
+     - Human: Baby (Infant) ➔ Child ➔ Adolescent ➔ Adult ➔ Old Person
+     - Plant: Seed ➔ Sprout ➔ Seedling ➔ Adult Plant
+   - **Card & Diagram Layout**: Dual-card structure with generous breathing room, distinct concept pills, dual-item representation (e.g., both bread and a rice bowl), and non-clipping background elements.

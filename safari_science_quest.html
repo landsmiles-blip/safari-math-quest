@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>🔬 Safari Science Quest · Primary 3 Lab & Exam</title>
+<title>🔬 Safari Science Quest · Professor Pip's Einstein Discovery Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
@@ -16,90 +16,97 @@
   --gold-glow:rgba(255,214,10,0.8);
   --cyan:#00f5d4;
   --blue:#00b4d8;
-  --deep:#023e8a;
-  --mint:#52b788;
-  --forest:#1b4332;
+  --neon-lime:#10b981;
+  --neon-purple:#a855f7;
+  --deep-bg:#090a21;
   --r:clamp(14px,3vw,24px);
 }
-html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);background:#0096c7;color:#fff}
+html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);background:var(--deep-bg);color:#fff}
 
-/* ── TROPICAL SAFARI + SCIENTIFIC BACKDROP ── */
+/* ── EUPHORIC NEON SCIENTIFIC SAFARI BACKDROP ── */
 #bg{position:fixed;inset:0;z-index:0;
-  background:linear-gradient(180deg,#023e8a 0%,#0077b6 18%,#0096c7 35%,#48cae4 52%,#74c69d 72%,#52b788 84%,#2d6a4f 93%,#1b4332 100%);
+  background:linear-gradient(180deg,#090a21 0%,#0d1b3e 18%,#034078 38%,#0077b6 55%,#0096c7 68%,#059669 82%,#065f46 92%,#022c22 100%);
   overflow:hidden}
 
-/* Cheerful smiling tropical sun */
+/* Scientist Sun with golden spectacles */
 .sun-wrap{position:absolute;top:2%;right:clamp(16px,5vw,70px);
-  width:clamp(85px,14vw,125px);height:clamp(85px,14vw,125px);z-index:1;
-  filter:drop-shadow(0 0 32px rgba(255,214,10,.85))}
+  width:clamp(85px,14vw,125px);height:clamp(85px,14vw,125px);z-index:1;pointer-events:none;
+  filter:drop-shadow(0 0 34px rgba(0,245,212,.75))}
 .sun-svg{width:100%;height:100%;display:block;animation:bob 4s infinite ease-in-out alternate}
 
-/* Clouds */
-.cloud{position:absolute;background:rgba(255,255,255,.84);border-radius:60px;
-  filter:drop-shadow(0 6px 14px rgba(0,70,120,.14));pointer-events:none;z-index:0}
-.cloud::before{content:'';position:absolute;background:rgba(255,255,255,.9);
+/* Fluffy clouds with faint neon aura */
+.cloud{position:absolute;background:rgba(255,255,255,.86);border-radius:60px;
+  filter:drop-shadow(0 6px 16px rgba(0,245,212,.2));pointer-events:none;z-index:0}
+.cloud::before{content:'';position:absolute;background:rgba(255,255,255,.92);
   border-radius:50%;width:58%;height:180%;top:-44%;left:16%}
-.cloud::after{content:'';position:absolute;background:rgba(255,255,255,.84);
+.cloud::after{content:'';position:absolute;background:rgba(255,255,255,.86);
   border-radius:50%;width:44%;height:140%;top:-28%;right:10%}
 
 /* Animated science floating bubbles */
 .sci-bubble{position:absolute;border-radius:50%;pointer-events:none;z-index:1;
-  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.7),rgba(0,245,212,0.2) 60%,rgba(0,180,216,0.3) 100%);
-  border:1.5px solid rgba(255,255,255,0.6);
-  box-shadow:0 0 12px rgba(0,245,212,0.4);
+  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.8),rgba(0,245,212,0.3) 60%,rgba(168,85,247,0.35) 100%);
+  border:1.5px solid rgba(255,255,255,0.7);
+  box-shadow:0 0 14px rgba(0,245,212,0.45);
   animation:floatBubble var(--dur,6s) var(--del,0s) infinite ease-in-out alternate}
 @keyframes floatBubble{
   0%{transform:translate(0,0) scale(0.9);opacity:0.4}
-  50%{transform:translate(15px,-25px) scale(1.1);opacity:0.85}
-  100%{transform:translate(-10px,-50px) scale(1);opacity:0.3}
+  50%{transform:translate(18px,-28px) scale(1.15);opacity:0.85}
+  100%{transform:translate(-12px,-55px) scale(0.95);opacity:0.3}
 }
 
-/* Twinkling stars */
-.star{position:absolute;background:#ffd60a;border-radius:50%;animation:twk var(--d,3s) var(--dl,0s) infinite alternate ease-in-out}
-@keyframes twk{0%{opacity:.2;transform:scale(.7)}100%{opacity:1;transform:scale(1.4)}}
+/* Glowing Chalkboard Science Doodles in sky */
+.chalk-doodle{position:absolute;font-family:var(--fd);font-size:clamp(.8rem,2vw,1.1rem);
+  color:rgba(0,245,212,0.38);pointer-events:none;z-index:1;user-select:none;
+  text-shadow:0 0 8px rgba(0,245,212,0.5)}
 
-/* Ground & Palm trees */
-.ground{position:absolute;bottom:0;left:0;right:0;height:20%;
-  background:linear-gradient(180deg,#52b788 0%,#2d6a4f 55%,#1b4332 100%);z-index:2}
-.tree{position:absolute;bottom:0}
+/* Stars */
+.star{position:absolute;background:#ffd60a;border-radius:50%;pointer-events:none;z-index:1;
+  animation:twk var(--d,3s) var(--dl,0s) infinite alternate ease-in-out}
+@keyframes twk{0%{opacity:.25;transform:scale(.7)}100%{opacity:1;transform:scale(1.4)}}
 
-/* Animals & Science floating motifs */
-.animal{position:absolute;z-index:3;user-select:none;font-size:clamp(1.8rem,4.5vw,3rem);
-  animation:bob var(--d,4s) infinite ease-in-out alternate;filter:drop-shadow(0 4px 10px rgba(0,0,0,.3))}
+/* Ground & Palms */
+.ground{position:absolute;bottom:0;left:0;right:0;height:18%;
+  background:linear-gradient(180deg,#059669 0%,#065f46 55%,#022c22 100%);z-index:2;pointer-events:none}
+.tree{position:absolute;bottom:0;pointer-events:none;z-index:2}
+
+/* Animals & Science Motifs — strictly background, non-blocking */
+.bg-motif{position:absolute;z-index:2;user-select:none;font-size:clamp(1.8rem,4.5vw,2.8rem);
+  pointer-events:none;animation:bob var(--d,4s) infinite ease-in-out alternate;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.3))}
 @keyframes bob{0%{transform:translateY(0) rotate(-3deg)}100%{transform:translateY(-12px) rotate(3deg)}}
 
 /* ── NAME MODAL ── */
-#name-modal{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;
-  background:rgba(2,30,55,.88);backdrop-filter:blur(18px);padding:16px}
+#name-modal{position:fixed;inset:0;z-index:3000;display:flex;align-items:center;justify-content:center;
+  background:rgba(4,10,25,.9);backdrop-filter:blur(20px);padding:16px}
 #name-modal.hide{display:none}
-.nm-card{background:linear-gradient(135deg,rgba(10,45,55,.96),rgba(20,65,60,.94));
-  border:2.5px solid rgba(0,245,212,.6);border-radius:var(--r);padding:clamp(22px,4vw,38px);
+.nm-card{background:linear-gradient(135deg,rgba(10,25,50,.96),rgba(20,50,60,.94));
+  border:2.5px solid rgba(0,245,212,.7);border-radius:var(--r);padding:clamp(22px,4vw,38px);
   text-align:center;width:100%;max-width:440px;
-  box-shadow:0 24px 64px rgba(0,0,0,.5),0 0 60px rgba(0,245,212,.3)}
+  box-shadow:0 24px 64px rgba(0,0,0,.6),0 0 60px rgba(0,245,212,.35)}
 .nm-lion{font-size:clamp(3.8rem,11vw,5.5rem);display:block;animation:bob 2.5s infinite ease-in-out alternate;margin-bottom:8px}
 .nm-card h2{font-family:var(--fd);color:var(--gold);font-size:clamp(1.4rem,5vw,2rem);margin-bottom:6px;text-shadow:0 0 20px rgba(251,191,36,.6)}
-.nm-card p{color:rgba(255,255,255,.88);font-size:clamp(.85rem,2.5vw,1rem);font-weight:700;margin-bottom:18px}
+.nm-card p{color:rgba(255,255,255,.9);font-size:clamp(.85rem,2.5vw,1rem);font-weight:700;margin-bottom:18px}
 #nm-input{width:100%;padding:clamp(12px,3vw,16px) 20px;border-radius:100px;
-  border:3px solid rgba(0,245,212,.6);background:rgba(255,255,255,.14);
+  border:3px solid rgba(0,245,212,.7);background:rgba(255,255,255,.14);
   color:#fff;font-family:var(--fd);font-size:clamp(1.1rem,4vw,1.45rem);text-align:center;
   outline:none;transition:border-color .2s;margin-bottom:16px}
 #nm-input::placeholder{color:rgba(255,255,255,.5);font-family:var(--fb)}
-#nm-input:focus{border-color:var(--gold);box-shadow:0 0 16px rgba(255,214,10,.6)}
+#nm-input:focus{border-color:var(--gold);box-shadow:0 0 18px rgba(255,214,10,.7)}
 
 /* ── BUTTONS ── */
 .btn{font-family:var(--fd);letter-spacing:.3px;border:none;border-radius:100px;
   cursor:pointer;position:relative;top:0;
   transition:top .1s,box-shadow .1s,filter .1s,transform .1s;
-  text-shadow:0 2px 4px rgba(0,0,0,.3);font-size:clamp(.92rem,2.8vw,1.15rem);
-  padding:clamp(10px,2.2vw,14px) clamp(16px,4vw,26px);color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+  text-shadow:0 2px 4px rgba(0,0,0,.35);font-size:clamp(.92rem,2.8vw,1.15rem);
+  padding:clamp(10px,2.2vw,14px) clamp(16px,4vw,26px);color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:6px;z-index:20}
 .btn:active{top:4px;filter:brightness(.92)}
 .btn.full{width:100%;display:flex}
-.bg{background:#10b981;box-shadow:0 5px 0 #047857,0 8px 18px rgba(16,185,129,.35)}
-.by{background:#ffd166;box-shadow:0 5px 0 #f48c06,0 8px 18px rgba(255,209,102,.35);color:#78350f}
-.bb{background:#00b4d8;box-shadow:0 5px 0 #0077b6,0 8px 18px rgba(0,180,216,.35);color:#fff}
-.bpk{background:#ff70a6;box-shadow:0 5px 0 #c9184a,0 8px 18px rgba(255,112,166,.35)}
-.bpu{background:#8b5cf6;box-shadow:0 5px 0 #6d28d9,0 8px 18px rgba(139,92,246,.35)}
-.bo{background:#ff9f1c;box-shadow:0 5px 0 #e85d04,0 8px 18px rgba(255,159,28,.35)}
+.bg{background:#10b981;box-shadow:0 5px 0 #047857,0 8px 18px rgba(16,185,129,.4)}
+.by{background:#ffd166;box-shadow:0 5px 0 #f48c06,0 8px 18px rgba(255,209,102,.4);color:#78350f}
+.bb{background:#00b4d8;box-shadow:0 5px 0 #0077b6,0 8px 18px rgba(0,180,216,.4);color:#fff}
+.bpk{background:#ff70a6;box-shadow:0 5px 0 #c9184a,0 8px 18px rgba(255,112,166,.4)}
+.bpu{background:#8b5cf6;box-shadow:0 5px 0 #6d28d9,0 8px 18px rgba(139,92,246,.4)}
+.bo{background:#ff9f1c;box-shadow:0 5px 0 #e85d04,0 8px 18px rgba(255,159,28,.4)}
 .btn-gold{background:linear-gradient(135deg,#ffd166,#ff9f1c);box-shadow:0 5px 0 #d97706,0 0 0 0 rgba(255,209,102,.6);
   color:#78350f;animation:gp 1.4s infinite;font-size:clamp(.95rem,3.2vw,1.25rem)}
 @keyframes gp{0%,100%{box-shadow:0 5px 0 #d97706,0 0 0 0 rgba(255,209,102,.6)}50%{box-shadow:0 5px 0 #d97706,0 0 0 14px rgba(255,209,102,0)}}
@@ -111,10 +118,10 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
 
 /* ── TOPBAR ── */
 #topbar{width:100%;max-width:880px;display:flex;align-items:center;justify-content:space-between;
-  padding:6px 14px;background:rgba(8,38,48,.78);backdrop-filter:blur(16px);
-  border-radius:100px;border:1.8px solid rgba(0,245,212,.4);flex-shrink:0}
+  padding:6px 14px;background:rgba(6,20,40,.82);backdrop-filter:blur(16px);
+  border-radius:100px;border:1.8px solid rgba(0,245,212,.45);flex-shrink:0;z-index:25}
 .brand{display:flex;align-items:center;gap:8px}
-.brand .li{font-size:1.55rem;animation:bob 3s infinite ease-in-out alternate}
+.brand .li{font-size:1.6rem;animation:bob 3s infinite ease-in-out alternate}
 .brand h1{font-family:var(--fd);color:var(--gold);font-size:clamp(.92rem,3vw,1.25rem);
   text-shadow:0 0 14px rgba(255,214,10,.6)}
 .topright{display:flex;align-items:center;gap:8px}
@@ -130,7 +137,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
 .ppill .pnm{color:var(--gold);max-width:96px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* ── MAIN ── */
-#main{width:100%;max-width:880px;flex:1;min-height:0;display:flex;flex-direction:column}
+#main{width:100%;max-width:880px;flex:1;min-height:0;display:flex;flex-direction:column;position:relative;z-index:15}
 .screen{display:none;flex-direction:column;height:100%}
 .screen.active{display:flex}
 
@@ -138,9 +145,9 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
 .glass{background:rgba(255,255,255,.14);backdrop-filter:blur(18px);
   border:1.5px solid rgba(255,255,255,.28);border-radius:var(--r);
   box-shadow:0 8px 32px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.2)}
-.card{background:rgba(10,45,55,.86);backdrop-filter:blur(20px);
-  border:1.8px solid rgba(0,245,212,.45);border-radius:var(--r);
-  box-shadow:0 10px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.18)}
+.card{background:rgba(8,30,55,.88);backdrop-filter:blur(20px);
+  border:1.8px solid rgba(0,245,212,.48);border-radius:var(--r);
+  box-shadow:0 10px 32px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.18)}
 
 /* ── SCREEN: START ── */
 #sc-start{flex:1;align-items:center;justify-content:center;gap:clamp(10px,2vw,18px)}
@@ -156,15 +163,15 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
 .mcard .md{color:rgba(255,255,255,.86);font-size:clamp(.78rem,2vw,.96rem);font-weight:700;line-height:1.35}
 .mcard .ml{font-size:clamp(.72rem,1.8vw,.84rem);color:rgba(255,255,255,.65);font-weight:800;margin-top:2px}
 
-/* ── SCREEN: TRAINING / LABS ── */
+/* ── SCREEN: TRAINING / DISCOVERY LABS ── */
 #sc-train{flex:1;gap:clamp(8px,2vw,12px)}
 .tbar{display:flex;align-items:center;gap:10px;flex-shrink:0;
-  background:rgba(8,38,48,.78);backdrop-filter:blur(14px);
-  border-radius:100px;border:1.8px solid rgba(0,245,212,.4);
+  background:rgba(6,20,40,.82);backdrop-filter:blur(14px);
+  border-radius:100px;border:1.8px solid rgba(0,245,212,.45);
   padding:5px 14px;width:100%}
 .bk{background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.3);
   border-radius:100px;padding:5px 14px;color:#fff;font-weight:800;font-size:.85rem;
-  cursor:pointer;transition:background .2s}
+  cursor:pointer;transition:background .2s;z-index:20}
 .bk:hover{background:rgba(255,255,255,.28)}
 .tbar-title{font-family:var(--fd);color:var(--gold);font-size:clamp(.9rem,2.6vw,1.18rem);
   text-shadow:0 0 10px rgba(251,191,36,.5)}
@@ -173,7 +180,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
 .camp{display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;gap:6px;padding:clamp(12px,2.5vw,20px);cursor:pointer;
   transition:transform .2s,box-shadow .2s;border-radius:20px}
-.camp:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,245,212,.3)}
+.camp:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,245,212,.35)}
 .camp:active{transform:scale(.97)}
 .camp .ci{font-size:clamp(1.8rem,4.5vw,2.5rem);filter:drop-shadow(0 2px 6px rgba(0,0,0,.3))}
 .camp .cn{font-family:var(--fd);color:var(--gold);font-size:clamp(.84rem,2.3vw,1.02rem)}
@@ -184,44 +191,53 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
 #t-prac{flex:1;min-height:0;display:none;flex-direction:column;gap:clamp(8px,2vw,12px)}
 #t-prac.visible{display:flex}
 
-/* ── INTERACTIVE DISCOVERY LAB DISPLAY ── */
-#lab-card{padding:clamp(10px,2vw,18px);display:flex;flex-direction:column;
+/* ── DUAL-CARD REDESIGNED SCIENCE DISPLAY ── */
+#lab-card, #qcard{padding:clamp(10px,2vw,16px);display:flex;flex-direction:column;
   align-items:center;justify-content:flex-start;text-align:center;
-  gap:clamp(6px,1.4vw,10px);flex:1;min-height:0}
-.lab-badge{font-family:var(--fd);font-size:clamp(.72rem,1.8vw,.88rem);
-  padding:4px 14px;border-radius:100px;background:rgba(0,245,212,.18);
-  border:1px solid rgba(0,245,212,.4);color:var(--cyan);letter-spacing:.5px;flex-shrink:0}
-#lab-prompt{font-size:clamp(.92rem,2.5vw,1.18rem);color:#fff;
+  gap:clamp(6px,1.2vw,9px);flex:1;min-height:0;position:relative;z-index:15}
+.lab-badge, .zbadge{font-family:var(--fd);font-size:clamp(.72rem,1.8vw,.86rem);
+  padding:3px 14px;border-radius:100px;background:rgba(0,245,212,.18);
+  border:1px solid rgba(0,245,212,.45);color:var(--cyan);letter-spacing:.5px;flex-shrink:0}
+#lab-prompt, #q-prompt{font-size:clamp(.92rem,2.5vw,1.16rem);color:#fff;
   font-weight:800;flex-shrink:0;max-width:100%}
-#lab-disp{width:100%;background:rgba(0,18,30,.4);border:1.8px solid rgba(0,245,212,.3);
-  border-radius:clamp(12px,2.5vw,18px);
-  display:flex;align-items:center;justify-content:center;
-  padding:clamp(8px,2vw,14px);
-  overflow:visible;text-align:center;flex:1;min-height:min(24vh,140px);max-height:min(36vh,210px);position:relative}
 
-/* Interactive discovery choice buttons */
-.lab-choices{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;width:100%;flex-shrink:0}
+/* The Main Visual Spotlight Box (Generous Margins & Dual-Card Separation) */
+#lab-disp, #q-disp{width:100%;background:rgba(4,14,32,.5);border:1.8px solid rgba(0,245,212,.35);
+  border-radius:clamp(14px,2.5vw,20px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:clamp(6px,1.5vw,12px);
+  overflow:visible;text-align:center;flex:1;min-height:min(24vh,135px);max-height:min(34vh,195px);position:relative}
+
+/* Inner graphic spotlight container */
+.disp-spotlight{display:flex;align-items:center;justify-content:center;gap:16px;width:100%;flex:1}
+/* Concept label pill (generously spaced beneath graphics, never squished) */
+.disp-pill{margin-top:6px;font-family:var(--fd);font-size:clamp(.74rem,1.9vw,.92rem);
+  letter-spacing:.4px;padding:3px 14px;border-radius:100px;background:rgba(0,0,0,.45);
+  border:1.5px solid rgba(0,245,212,.5);color:var(--gold);text-shadow:0 0 10px rgba(255,214,10,.6);flex-shrink:0}
+
+/* Choices Row */
+.lab-choices{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;width:100%;flex-shrink:0;z-index:20}
 .lab-choice-btn{font-family:var(--fd);font-size:clamp(.88rem,2.4vw,1.08rem);
   padding:clamp(10px,2.2vw,14px) clamp(16px,3.5vw,24px);border-radius:100px;border:none;cursor:pointer;
   color:#fff;background:linear-gradient(135deg,#0284c7,#0369a1);
   box-shadow:0 4px 0 #075985,0 6px 16px rgba(2,132,199,.35);
-  transition:transform .12s,filter .12s;display:inline-flex;align-items:center;gap:8px}
+  transition:transform .12s,filter .12s;display:inline-flex;align-items:center;gap:8px;z-index:20}
 .lab-choice-btn:hover{filter:brightness(1.1);transform:scale(1.02)}
 .lab-choice-btn:active{transform:scale(.97)}
 
 /* Discovery Success Banner */
-.lab-success-banner{background:linear-gradient(135deg,rgba(16,185,129,.92),rgba(5,150,105,.95));
+.lab-success-banner{background:linear-gradient(135deg,rgba(16,185,129,.94),rgba(5,150,105,.96));
   border:2px solid #34d399;border-radius:16px;padding:clamp(8px,1.8vw,12px) 16px;
   width:100%;display:none;align-items:center;justify-content:space-between;gap:10px;
-  box-shadow:0 6px 20px rgba(16,185,129,.35);animation:fadeIn .3s}
+  box-shadow:0 6px 20px rgba(16,185,129,.35);animation:fadeIn .3s;z-index:20}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .lab-success-txt{font-size:clamp(.82rem,2.2vw,.98rem);font-weight:800;color:#fff;text-align:left;line-height:1.35}
 
 /* ── SCREEN: EXAM ── */
 #sc-exam{gap:clamp(7px,1.8vw,12px);flex:1}
 .prow{display:flex;align-items:center;gap:10px;flex-shrink:0;
-  background:rgba(8,38,48,.78);backdrop-filter:blur(14px);
-  border-radius:100px;border:1.8px solid rgba(0,245,212,.4);
+  background:rgba(6,20,40,.82);backdrop-filter:blur(14px);
+  border-radius:100px;border:1.8px solid rgba(0,245,212,.45);
   padding:5px 14px;width:100%}
 .qlbl{font-family:var(--fd);color:var(--gold);font-size:clamp(.84rem,2.3vw,1.08rem);
   white-space:nowrap;text-shadow:0 0 12px rgba(251,191,36,.7)}
@@ -231,44 +247,29 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
   transition:width .4s ease;box-shadow:0 0 10px rgba(0,245,212,.7)}
 .slbl{font-family:var(--fd);color:var(--gold);font-size:clamp(.84rem,2.3vw,1.08rem);white-space:nowrap}
 
-/* Question card */
-#qcard{padding:clamp(10px,2vw,18px);display:flex;flex-direction:column;
-  align-items:center;justify-content:flex-start;text-align:center;
-  gap:clamp(6px,1.4vw,10px);flex:1;min-height:0;overflow:visible}
-.zbadge{font-family:var(--fd);font-size:clamp(.7rem,1.8vw,.86rem);
-  padding:4px 14px;border-radius:100px;background:rgba(0,245,212,.18);
-  border:1px solid rgba(0,245,212,.4);color:var(--gold);letter-spacing:.5px;flex-shrink:0}
-#q-prompt{font-size:clamp(.92rem,2.5vw,1.18rem);color:#fff;
-  font-weight:800;flex-shrink:0;max-width:100%}
-#q-disp{width:100%;background:rgba(0,18,30,.4);border:1.8px solid rgba(0,245,212,.3);
-  border-radius:clamp(12px,2.5vw,18px);
-  display:flex;align-items:center;justify-content:center;
-  padding:clamp(8px,2vw,14px);
-  overflow:visible;text-align:center;flex:1;min-height:min(22vh,125px);max-height:min(34vh,190px)}
-
 /* Answers Grid */
-#answers{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1.8vw,12px);width:100%;flex-shrink:0}
+#answers{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1.8vw,12px);width:100%;flex-shrink:0;position:relative;z-index:25}
 .abtn{font-family:var(--fd);font-size:clamp(.92rem,2.4vw,1.15rem);
   padding:clamp(10px,2vw,15px) clamp(12px,2.5vw,18px);
-  border-radius:clamp(12px,2vw,18px);border:2px solid rgba(255,255,255,.25);
-  background:rgba(255,255,255,.14);color:#fff;cursor:pointer;
+  border-radius:clamp(12px,2vw,18px);border:2px solid rgba(255,255,255,.28);
+  background:rgba(10,35,65,.85);color:#fff;cursor:pointer;
   transition:all .15s;text-align:center;word-break:break-word;
-  box-shadow:0 4px 12px rgba(0,0,0,.2)}
-.abtn:hover{background:rgba(255,255,255,.25);border-color:var(--gold);transform:scale(1.02)}
+  box-shadow:0 4px 14px rgba(0,0,0,.3);position:relative;z-index:25}
+.abtn:hover{background:rgba(20,55,95,.95);border-color:var(--gold);transform:scale(1.02);box-shadow:0 0 16px rgba(0,245,212,.4)}
 .abtn:active{transform:scale(.97)}
-.abtn.ok{background:rgba(16,185,129,.85)!important;border-color:#34d399!important;box-shadow:0 0 16px #10b981}
-.abtn.no{background:rgba(239,68,68,.85)!important;border-color:#f87171!important}
+.abtn.ok{background:rgba(16,185,129,.9)!important;border-color:#34d399!important;box-shadow:0 0 18px #10b981}
+.abtn.no{background:rgba(239,68,68,.9)!important;border-color:#f87171!important}
 
 /* Bottom tools row */
-.ebar{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;flex-shrink:0}
+.ebar{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;flex-shrink:0;position:relative;z-index:25}
 .tbtn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.28);
   border-radius:100px;padding:6px 16px;color:#fff;font-family:var(--fb);
   font-weight:800;font-size:clamp(.78rem,2vw,.9rem);cursor:pointer;
-  transition:background .2s;display:inline-flex;align-items:center;gap:6px}
+  transition:background .2s;display:inline-flex;align-items:center;gap:6px;z-index:25}
 .tbtn:hover{background:rgba(255,255,255,.26)}
 
 /* ── SCREEN: RESULTS ── */
-#sc-res{flex:1;min-height:0;overflow-y:auto;padding-bottom:16px;gap:clamp(10px,2.2vw,16px)}
+#sc-res{flex:1;min-height:0;overflow-y:auto;padding-bottom:16px;gap:clamp(10px,2.2vw,16px);position:relative;z-index:20}
 .res-card{padding:clamp(16px,3vw,26px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
 .trophy{font-size:clamp(3.5rem,10vw,5rem);animation:bob 2s infinite ease-in-out alternate}
 .rscore{font-family:var(--fd);font-size:clamp(2rem,6vw,3.2rem);color:var(--gold);
@@ -319,25 +320,39 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
         <polygon points="83,17 76,30 70,24"/>
         <polygon points="17,83 24,70 30,76"/>
       </g>
-      <circle cx="40" cy="46" r="4.2" fill="#1e293b"/>
-      <circle cx="60" cy="46" r="4.2" fill="#1e293b"/>
-      <circle cx="42" cy="44" r="1.4" fill="#fff"/>
-      <circle cx="62" cy="44" r="1.4" fill="#fff"/>
-      <circle cx="34" cy="53" r="5" fill="#fb7185" opacity="0.6"/>
-      <circle cx="66" cy="53" r="5" fill="#fb7185" opacity="0.6"/>
-      <path d="M 40 55 Q 50 65 60 55" stroke="#1e293b" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <!-- Scientist Round Spectacles -->
+      <circle cx="40" cy="46" r="10" fill="rgba(0,245,212,0.25)" stroke="#1e293b" stroke-width="2"/>
+      <circle cx="60" cy="46" r="10" fill="rgba(0,245,212,0.25)" stroke="#1e293b" stroke-width="2"/>
+      <line x1="50" y1="46" x2="50" y2="46" stroke="#1e293b" stroke-width="2"/>
+      <!-- Eyes inside glasses -->
+      <circle cx="40" cy="46" r="3.5" fill="#1e293b"/>
+      <circle cx="60" cy="46" r="3.5" fill="#1e293b"/>
+      <circle cx="41.5" cy="44.5" r="1.2" fill="#fff"/>
+      <circle cx="61.5" cy="44.5" r="1.2" fill="#fff"/>
+      <!-- Rosy cheeks -->
+      <circle cx="31" cy="55" r="4.5" fill="#fb7185" opacity="0.6"/>
+      <circle cx="69" cy="55" r="4.5" fill="#fb7185" opacity="0.6"/>
+      <!-- Cheerful smile -->
+      <path d="M 42 56 Q 50 64 58 56" stroke="#1e293b" stroke-width="2.6" fill="none" stroke-linecap="round"/>
     </svg>
   </div>
+
+  <!-- Chalkboard scientific doodles in the sky -->
+  <div class="chalk-doodle" style="top:9%;left:12%">E = mc² 💡</div>
+  <div class="chalk-doodle" style="top:16%;right:26%">F = m · a ⚡</div>
+  <div class="chalk-doodle" style="top:26%;left:5%">H₂O 💧</div>
+  <div class="chalk-doodle" style="top:32%;right:10%">N 🧲 S</div>
+
   <!-- Floating felt clouds -->
   <div class="cloud" style="width:160px;height:42px;top:8%;left:6%"></div>
   <div class="cloud" style="width:220px;height:54px;top:15%;right:24%"></div>
   <div class="cloud" style="width:140px;height:38px;top:28%;left:2%"></div>
   
-  <!-- Floating animated science bubbles -->
-  <div class="sci-bubble" style="width:36px;height:36px;top:22%;left:18%;--dur:5s;--del:0s"></div>
-  <div class="sci-bubble" style="width:26px;height:26px;top:35%;right:15%;--dur:6.5s;--del:1.2s"></div>
-  <div class="sci-bubble" style="width:44px;height:44px;top:48%;left:8%;--dur:7s;--del:2s"></div>
-  <div class="sci-bubble" style="width:30px;height:30px;top:60%;right:8%;--dur:5.5s;--del:0.8s"></div>
+  <!-- Floating animated science bubbles with neon liquid -->
+  <div class="sci-bubble" style="width:36px;height:36px;top:20%;left:22%;--dur:5s;--del:0s"></div>
+  <div class="sci-bubble" style="width:28px;height:28px;top:32%;right:18%;--dur:6.5s;--del:1.2s"></div>
+  <div class="sci-bubble" style="width:42px;height:42px;top:46%;left:8%;--dur:7s;--del:2s"></div>
+  <div class="sci-bubble" style="width:32px;height:32px;top:58%;right:12%;--dur:5.5s;--del:0.8s"></div>
 
   <!-- Stars -->
   <div class="star" style="width:6px;height:6px;top:10%;left:32%;--d:3.2s;--dl:0.5s"></div>
@@ -360,10 +375,10 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
     <ellipse cx="50" cy="35" rx="38" ry="15" fill="#34d399"/>
   </svg>
 
-  <!-- Friendly Safari Animals & Science Emojis -->
-  <div class="animal" style="bottom:12%;left:3%;--d:4.2s">🐘</div>
-  <div class="animal" style="bottom:15%;right:4%;--d:3.8s">🦋</div>
-  <div class="animal" style="bottom:6%;left:45%;--d:4.5s;font-size:2rem">🌸</div>
+  <!-- Background motifs (positioned safely away from answer buttons, pointer-events none) -->
+  <div class="bg-motif" style="bottom:12%;left:3%;--d:4.2s">🐘</div>
+  <div class="bg-motif" style="bottom:16%;right:4%;--d:3.8s">🦋</div>
+  <div class="bg-motif" style="bottom:3%;left:48%;--d:4.5s;font-size:1.6rem;opacity:0.6">🌸</div>
 </div>
 
 <!-- ── APP CONTAINER ── -->
@@ -385,21 +400,21 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
 
   <div id="main">
 
-    <!-- SCREEN 1: START -->
+    <!-- SCREEN 1: START SCREEN -->
     <section class="screen active" id="sc-start">
       <div class="hero">
         <span class="crown">👑🧪</span>
         <h2>Safari Science Quest</h2>
-        <p>MEP Prathomsuksa 3 · 15 Science Lab & Exam Challenges</p>
+        <p>MEP Prathomsuksa 3 · Professor Pip's Einstein Discovery Lab & Exam</p>
       </div>
       <div class="mode-grid">
-        <!-- Mode 1: Training Grounds (Discovery Labs) -->
+        <!-- Mode 1: Professor Pip's Discovery Labs -->
         <div class="glass card mcard">
-          <div class="mi">🏕️🔬</div>
-          <div class="mt">Training Grounds</div>
-          <div class="md">5 interactive science discovery labs · fun classroom games & experiments</div>
-          <button class="btn bpu full" style="margin-top:6px;font-size:clamp(1.02rem,3vw,1.25rem);padding:clamp(12px,2.5vw,16px) 20px" onclick="goTrain()">Enter Science Labs 🧪</button>
-          <div class="ml">Complete 5 labs → unlock Exam Mode</div>
+          <div class="mi">🔬💡</div>
+          <div class="mt">Discovery Labs</div>
+          <div class="md">5 interactive classroom labs · hands-on experiments & discovery games</div>
+          <button class="btn bpu full" style="margin-top:6px;font-size:clamp(1.02rem,3vw,1.25rem);padding:clamp(12px,2.5vw,16px) 20px" onclick="goTrain()">Enter Einstein's Lab 🧪</button>
+          <div class="ml">Complete all 5 labs → unlock Exam Mode</div>
         </div>
 
         <!-- Mode 2: Exam Challenge -->
@@ -408,48 +423,48 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
           <div class="mt">Exam Challenge</div>
           <div class="md">15 graded questions covering curriculum · earn your Gold Certificate!</div>
           <button class="btn bg full" style="margin-top:6px;font-size:clamp(1.02rem,3vw,1.25rem);padding:clamp(12px,2.5vw,16px) 20px" id="btn-exam" onclick="startExam()">Start Science Exam 🏆</button>
-          <div class="ml" id="exam-lock">🔒 Complete all 5 Science Labs first</div>
+          <div class="ml" id="exam-lock">🔒 Complete all 5 Discovery Labs first</div>
         </div>
       </div>
     </section>
 
-    <!-- SCREEN 2: TRAINING GROUNDS (DISCOVERY LABS) -->
+    <!-- SCREEN 2: PROFESSOR PIP'S EINSTEIN DISCOVERY LABS (MODE 1) -->
     <section class="screen" id="sc-train">
       <!-- Hub of 5 Labs -->
       <div id="camp-hub" style="display:flex;flex-direction:column;flex:1;min-height:0;gap:clamp(8px,2vw,12px)">
         <div class="tbar">
           <button class="bk" onclick="goHome()">← Home</button>
-          <span class="tbar-title">🏕️ Science Discovery Labs</span>
+          <span class="tbar-title">🧪 Professor Pip's Discovery Labs</span>
         </div>
         <div class="camps" id="camp-grid">
           <div class="glass card camp" onclick="startCamp(0)">
             <div class="ci">🥗</div>
             <div class="cn">Living Needs</div>
-            <div class="cd">Food groups: Energy, Growth & Health</div>
+            <div class="cd">Carbs for energy, Protein for growth, Vitamins for health</div>
             <div class="cs" id="cs0">⬜</div>
           </div>
           <div class="glass card camp" onclick="startCamp(1)">
             <div class="ci">🐯</div>
             <div class="cn">Animal Diets</div>
-            <div class="cd">Herbivore, Carnivore & Omnivore</div>
+            <div class="cd">Herbivore, Carnivore & Omnivore lunch</div>
             <div class="cs" id="cs1">⬜</div>
           </div>
           <div class="glass card camp" onclick="startCamp(2)">
             <div class="ci">🦋</div>
-            <div class="cn">Life Cycles</div>
-            <div class="cd">Butterfly, Frog & Chicken stages</div>
+            <div class="cn">Life Cycle Studio</div>
+            <div class="cd">Chicken, Butterfly, Frog & Human stages</div>
             <div class="cs" id="cs2">⬜</div>
           </div>
           <div class="glass card camp" onclick="startCamp(3)">
             <div class="ci">🍫</div>
-            <div class="cn">Thermal Lab</div>
-            <div class="cd">Melting chocolate, freezing & irreversible</div>
+            <div class="cn">The Thermal Lab</div>
+            <div class="cd">Melting chocolate in pan, freezing & irreversible egg</div>
             <div class="cs" id="cs3">⬜</div>
           </div>
           <div class="glass card camp" onclick="startCamp(4)">
             <div class="ci">🧲</div>
             <div class="cn">Forces & Magnets</div>
-            <div class="cd">Push/Pull, Ramp Friction & Magnets</div>
+            <div class="cd">Push/Pull, Ramp Friction & Magnets Attract/Repel</div>
             <div class="cs" id="cs4">⬜</div>
           </div>
         </div>
@@ -464,8 +479,10 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
         </div>
 
         <div class="glass card" id="lab-card">
-          <div class="lab-badge" id="lab-badge">DISCOVERY ACTIVITY</div>
+          <div class="lab-badge" id="lab-badge">EXPERIMENT 1</div>
           <div id="lab-prompt"></div>
+          
+          <!-- Spotlight display container with generous breathing room -->
           <div id="lab-disp"></div>
           
           <!-- Choices Row -->
@@ -485,20 +502,23 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
         </div>
       </div>
 
-      <!-- Camp Completed Card -->
+      <!-- Camp Completed Card (With Linear Progression to Next Lab) -->
       <div id="t-done" class="glass card hidden" style="padding:clamp(16px,3vw,28px);flex:1;align-items:center;justify-content:center;text-align:center;gap:12px">
-        <div style="font-size:clamp(3rem,8vw,4.5rem)">🎉🧪</div>
+        <div style="font-size:clamp(3.2rem,8vw,4.8rem)">🎉🧪</div>
         <h2 style="font-family:var(--fd);color:var(--gold);font-size:clamp(1.5rem,4vw,2.2rem)">Lab Experiment Complete!</h2>
         <p id="t-done-score" style="font-size:clamp(.9rem,2.5vw,1.1rem);font-weight:700"></p>
         <p style="color:#6ee7b7;font-size:clamp(.85rem,2.2vw,1rem);font-weight:800">🎫 Lab Passport Stamped with a Gold Star!</p>
+        
+        <!-- Action buttons with Next Lab flow -->
         <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;justify-content:center">
-          <button class="btn bb" onclick="backCamps()">Back to Labs 🏕️</button>
-          <button class="btn bg" id="t-done-exam-btn" onclick="startExam()">Start Science Exam 🏆</button>
+          <button class="btn bg" id="btn-next-lab" onclick="goNextLab()">Next Lab ➔</button>
+          <button class="btn bb" onclick="backCamps()">All Labs 🏕️</button>
+          <button class="btn btn-gold" id="t-done-exam-btn" onclick="startExam()">Start Science Exam 🏆</button>
         </div>
       </div>
     </section>
 
-    <!-- SCREEN 3: EXAM CHALLENGE -->
+    <!-- SCREEN 3: EXAM CHALLENGE (MODE 2) -->
     <section class="screen" id="sc-exam">
       <div class="prow">
         <span class="qlbl" id="q-lbl">Q 1 / 15</span>
@@ -565,7 +585,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--fb);backgroun
   <div class="nm-card">
     <span class="nm-lion">🦁🥽</span>
     <h2>Young Scientist!</h2>
-    <p>Welcome to the Safari Science Quest! Enter your name to customize your official diploma:</p>
+    <p>Welcome to Professor Pip's Einstein Discovery Lab! Enter your name to customize your official diploma:</p>
     <input type="text" id="nm-input" maxlength="24" placeholder="Your Name" autocomplete="off" autocorrect="off">
     <button class="btn btn-gold full" onclick="submitName()">Start Scientific Adventure 🚀</button>
   </div>
@@ -682,462 +702,617 @@ const SE = (function(){
   const ri = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
   const sh = a => [...a].sort(() => Math.random() - 0.5);
 
-  /* SVG DIAGRAM GENERATORS FOR VIBRANT SCIENCE VISUALS */
+  /* SVG DIAGRAM GENERATORS (DUAL-CARD VISUALS WITH GENEROUS BREATHING ROOM) */
   const SVG = {
-    // Chocolate melting in pan over flame (Exact match to school exam Q3!)
-    chocolatePan: (isMelted = false) => `
-      <svg width="260" height="110" viewBox="0 0 260 110">
-        <!-- Pan Handle & Pan Body -->
-        <line x1="190" y1="55" x2="250" y2="40" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
-        <ellipse cx="120" cy="55" rx="70" ry="25" fill="#334155" stroke="#64748b" stroke-width="3"/>
-        <ellipse cx="120" cy="52" rx="64" ry="21" fill="#1e293b"/>
-        
-        <!-- Chocolate Inside Pan -->
-        ${isMelted ? `
-          <!-- Liquid Melted Chocolate -->
-          <ellipse cx="120" cy="54" rx="55" ry="16" fill="#78350f"/>
-          <ellipse cx="115" cy="52" rx="45" ry="12" fill="#92400e"/>
-          <path d="M 95 48 Q 120 42 145 48 Q 120 54 95 48" fill="#b45309" opacity="0.6"/>
-          <!-- Steam curls -->
-          <path d="M 100 35 Q 95 20 102 10" stroke="rgba(255,255,255,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <path d="M 120 32 Q 125 18 118 8" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <path d="M 140 35 Q 145 22 138 10" stroke="rgba(255,255,255,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <text x="120" y="96" font-size="12" font-weight="900" fill="#fde047" text-anchor="middle">MELTED INTO LIQUID 🍫💧</text>
-        ` : `
-          <!-- Solid Chocolate Bar with Grid -->
-          <rect x="90" y="42" width="60" height="24" rx="4" fill="#78350f" stroke="#451a03" stroke-width="1.5"/>
-          <line x1="110" y1="42" x2="110" y2="66" stroke="#451a03" stroke-width="1"/>
-          <line x1="130" y1="42" x2="130" y2="66" stroke="#451a03" stroke-width="1"/>
-          <line x1="90" y1="54" x2="150" y2="54" stroke="#451a03" stroke-width="1"/>
-          <text x="120" y="96" font-size="12" font-weight="900" fill="#93c5fd" text-anchor="middle">SOLID CHOCOLATE BAR 🍫</text>
-        `}
+    // Both Bread AND Rice clearly shown together (Image 3 fix!)
+    carbsBreadAndRice: () => `
+      <div class="disp-spotlight">
+        <svg width="280" height="85" viewBox="0 0 280 85">
+          <!-- Fresh Bread Loaf with Slices -->
+          <g transform="translate(45, 12)">
+            <ellipse cx="38" cy="30" rx="34" ry="24" fill="#d97706" stroke="#92400e" stroke-width="2"/>
+            <path d="M 12 30 Q 38 12 64 30 Q 38 46 12 30" fill="#fef3c7"/>
+            <line x1="28" y1="20" x2="28" y2="38" stroke="#b45309" stroke-width="2" stroke-linecap="round"/>
+            <line x1="42" y1="18" x2="42" y2="40" stroke="#b45309" stroke-width="2" stroke-linecap="round"/>
+            <line x1="54" y1="22" x2="54" y2="38" stroke="#b45309" stroke-width="2" stroke-linecap="round"/>
+            <text x="38" y="65" font-size="12" font-weight="900" fill="#fde68a" text-anchor="middle">BREAD 🍞</text>
+          </g>
 
-        <!-- Flame under pan -->
-        <g transform="translate(100, 75)">
-          <path d="M 10 10 Q 20 -8 20 10 Q 30 -5 30 10" stroke="#f97316" stroke-width="4" fill="#ef4444"/>
-          <path d="M 15 10 Q 20 -2 20 10 Q 25 0 25 10" stroke="#fbbf24" stroke-width="2" fill="#ffd166"/>
-        </g>
-      </svg>
-    `,
+          <text x="140" y="44" font-size="20" font-weight="bold" fill="#ffd60a" text-anchor="middle">+</text>
 
-    // Butterfly Life Cycle 4-stages (metamorphosis)
-    butterflyCycle: (activeStage = 4) => `
-      <svg width="280" height="95" viewBox="0 0 280 95">
-        <!-- Stage 1: Egg -->
-        <g opacity="${activeStage>=1 ? 1 : 0.35}">
-          <circle cx="35" cy="40" r="22" fill="rgba(52,211,153,0.18)" stroke="#10b981" stroke-width="2"/>
-          <text x="35" y="47" font-size="22" text-anchor="middle">🥚</text>
-          <text x="35" y="75" font-size="11" font-weight="bold" fill="#6ee7b7" text-anchor="middle">1. Egg</text>
-        </g>
-        <text x="70" y="44" font-size="16" fill="#ffd60a" text-anchor="middle">➔</text>
-
-        <!-- Stage 2: Caterpillar -->
-        <g opacity="${activeStage>=2 ? 1 : 0.35}">
-          <circle cx="105" cy="40" r="22" fill="rgba(52,211,153,0.18)" stroke="#10b981" stroke-width="2"/>
-          <text x="105" y="47" font-size="22" text-anchor="middle">🐛</text>
-          <text x="105" y="75" font-size="11" font-weight="bold" fill="#6ee7b7" text-anchor="middle">2. Caterpillar</text>
-        </g>
-        <text x="140" y="44" font-size="16" fill="#ffd60a" text-anchor="middle">➔</text>
-
-        <!-- Stage 3: Chrysalis -->
-        <g opacity="${activeStage>=3 ? 1 : 0.35}">
-          <circle cx="175" cy="40" r="22" fill="rgba(52,211,153,0.18)" stroke="#10b981" stroke-width="2"/>
-          <text x="175" y="47" font-size="20" text-anchor="middle">🥥</text>
-          <text x="175" y="75" font-size="11" font-weight="bold" fill="#6ee7b7" text-anchor="middle">3. Chrysalis</text>
-        </g>
-        <text x="210" y="44" font-size="16" fill="#ffd60a" text-anchor="middle">➔</text>
-
-        <!-- Stage 4: Butterfly -->
-        <g opacity="${activeStage>=4 ? 1 : 0.35}">
-          <circle cx="245" cy="40" r="22" fill="rgba(244,114,182,0.22)" stroke="#ec4899" stroke-width="2"/>
-          <text x="245" y="47" font-size="24" text-anchor="middle">🦋</text>
-          <text x="245" y="75" font-size="11" font-weight="bold" fill="#f472b6" text-anchor="middle">4. Butterfly</text>
-        </g>
-      </svg>
-    `,
-
-    // Frog Life Cycle (Egg -> Tadpole gills -> Froglet -> Adult Frog)
-    frogCycle: (activeStage = 4) => `
-      <svg width="280" height="95" viewBox="0 0 280 95">
-        <g opacity="${activeStage>=1 ? 1 : 0.35}">
-          <circle cx="35" cy="40" r="22" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-width="2"/>
-          <text x="35" y="47" font-size="20" text-anchor="middle">🥚</text>
-          <text x="35" y="75" font-size="11" font-weight="bold" fill="#7dd3fc" text-anchor="middle">1. Egg</text>
-        </g>
-        <text x="70" y="44" font-size="16" fill="#ffd60a" text-anchor="middle">➔</text>
-
-        <g opacity="${activeStage>=2 ? 1 : 0.35}">
-          <circle cx="105" cy="40" r="22" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-width="2"/>
-          <text x="105" y="47" font-size="22" text-anchor="middle">🐟</text>
-          <text x="105" y="75" font-size="11" font-weight="bold" fill="#7dd3fc" text-anchor="middle">2. Tadpole</text>
-          <text x="105" y="88" font-size="8" fill="#cbd5e1" text-anchor="middle">(gills)</text>
-        </g>
-        <text x="140" y="44" font-size="16" fill="#ffd60a" text-anchor="middle">➔</text>
-
-        <g opacity="${activeStage>=3 ? 1 : 0.35}">
-          <circle cx="175" cy="40" r="22" fill="rgba(56,189,248,0.18)" stroke="#38bdf8" stroke-width="2"/>
-          <text x="175" y="47" font-size="22" text-anchor="middle">🐸</text>
-          <text x="175" y="75" font-size="11" font-weight="bold" fill="#7dd3fc" text-anchor="middle">3. Froglet</text>
-        </g>
-        <text x="210" y="44" font-size="16" fill="#ffd60a" text-anchor="middle">➔</text>
-
-        <g opacity="${activeStage>=4 ? 1 : 0.35}">
-          <circle cx="245" cy="40" r="22" fill="rgba(52,211,153,0.22)" stroke="#10b981" stroke-width="2"/>
-          <text x="245" y="47" font-size="24" text-anchor="middle">🐸</text>
-          <text x="245" y="75" font-size="11" font-weight="bold" fill="#6ee7b7" text-anchor="middle">4. Frog</text>
-          <text x="245" y="88" font-size="8" fill="#cbd5e1" text-anchor="middle">(lungs)</text>
-        </g>
-      </svg>
-    `,
-
-    // Chicken Life Cycle (Egg -> Chick hatching -> Adult Chicken)
-    chickenCycle: () => `
-      <svg width="260" height="90" viewBox="0 0 260 90">
-        <circle cx="45" cy="40" r="22" fill="rgba(255,214,10,0.18)" stroke="#fbbf24" stroke-width="2"/>
-        <text x="45" y="47" font-size="22" text-anchor="middle">🥚</text>
-        <text x="45" y="75" font-size="11" font-weight="bold" fill="#fde68a" text-anchor="middle">1. Egg</text>
-        
-        <text x="90" y="44" font-size="18" fill="#ffd60a" text-anchor="middle">➔</text>
-
-        <circle cx="130" cy="40" r="22" fill="rgba(255,214,10,0.18)" stroke="#fbbf24" stroke-width="2"/>
-        <text x="130" y="47" font-size="22" text-anchor="middle">🐣</text>
-        <text x="130" y="75" font-size="11" font-weight="bold" fill="#fde68a" text-anchor="middle">2. Chick</text>
-
-        <text x="175" y="44" font-size="18" fill="#ffd60a" text-anchor="middle">➔</text>
-
-        <circle cx="215" cy="40" r="22" fill="rgba(255,214,10,0.18)" stroke="#fbbf24" stroke-width="2"/>
-        <text x="215" y="47" font-size="24" text-anchor="middle">🐓</text>
-        <text x="215" y="75" font-size="11" font-weight="bold" fill="#fde68a" text-anchor="middle">3. Chicken</text>
-      </svg>
-    `,
-
-    // Food Groups: Carbohydrate (Energy), Protein (Growth), Vitamins (Health)
-    foodGroup: (type) => {
-      let icon = "🍞", label = "CARBOHYDRATE", role = "GIVES ENERGY ⚡", color = "#fbbf24";
-      if(type === 'protein'){ icon = "🥩"; label = "PROTEIN"; role = "BODY GROWTH 💪"; color = "#f87171"; }
-      else if(type === 'vitamins'){ icon = "🍎"; label = "VITAMINS"; role = "GOOD HEALTH 🛡️"; color = "#34d399"; }
-      return `
-        <svg width="240" height="95" viewBox="0 0 240 95">
-          <circle cx="120" cy="40" r="32" fill="rgba(255,255,255,0.15)" stroke="${color}" stroke-width="2.5"/>
-          <text x="120" y="48" font-size="32" text-anchor="middle">${icon}</text>
-          <text x="120" y="80" font-size="11" font-weight="900" fill="${color}" text-anchor="middle">${label}</text>
-          <text x="120" y="93" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle">${role}</text>
+          <!-- Steaming Bowl of Rice -->
+          <g transform="translate(160, 12)">
+            <!-- Steam curls -->
+            <path d="M 28 8 Q 24 0 28 -6" stroke="rgba(255,255,255,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M 38 6 Q 42 -2 38 -8" stroke="rgba(255,255,255,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M 48 8 Q 44 0 48 -6" stroke="rgba(255,255,255,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <!-- Rice mound -->
+            <ellipse cx="38" cy="24" rx="28" ry="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+            <!-- Ceramic bowl -->
+            <path d="M 10 24 Q 38 56 66 24 Z" fill="#0284c7" stroke="#0369a1" stroke-width="2"/>
+            <text x="38" y="65" font-size="12" font-weight="900" fill="#fde68a" text-anchor="middle">RICE 🍚</text>
+          </g>
         </svg>
-      `;
-    },
-
-    // Pip's Ramp with Gravity and Friction (Exact match to school exam Q13, 14, 15)
-    rampFriction: (hasRoughTowel = false) => `
-      <svg width="270" height="100" viewBox="0 0 270 100">
-        <!-- Incline Ramp -->
-        <polygon points="20,80 160,80 160,20" fill="rgba(255,255,255,0.12)" stroke="#38bdf8" stroke-width="2.5"/>
-        <line x1="20" y1="80" x2="160" y2="20" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round"/>
-        
-        <!-- Toy Car on Ramp -->
-        <g transform="translate(95, 40) rotate(-24)">
-          <rect x="-14" y="-8" width="28" height="14" rx="4" fill="#ef4444" stroke="#fff" stroke-width="1.5"/>
-          <circle cx="-8" cy="8" r="4" fill="#0f172a" stroke="#fff" stroke-width="1"/>
-          <circle cx="8" cy="8" r="4" fill="#0f172a" stroke="#fff" stroke-width="1"/>
-        </g>
-        <text x="110" y="24" font-size="9" font-weight="bold" fill="#ffd60a">Gravity pulls down ⬇️</text>
-
-        <!-- Floor Track -->
-        <line x1="160" y1="80" x2="260" y2="80" stroke="#94a3b8" stroke-width="3"/>
-        ${hasRoughTowel ? `
-          <!-- Rough Towel -->
-          <rect x="170" y="74" width="80" height="7" rx="2" fill="#d97706" stroke="#fbbf24" stroke-width="1"/>
-          <text x="210" y="94" font-size="10" font-weight="900" fill="#f59e0b" text-anchor="middle">ROUGH TOWEL = SLOWER 🛑</text>
-        ` : `
-          <text x="210" y="94" font-size="10" font-weight="900" fill="#38bdf8" text-anchor="middle">SMOOTH TILE = FASTER 💨</text>
-        `}
-      </svg>
+      </div>
+      <div class="disp-pill">⚡ CARBOHYDRATE · GIVES BODY ENERGY</div>
     `,
 
-    // Magnets Interaction (Exact match to school exam Q8, Q12)
-    magnets: (isAttract = true) => `
-      <svg width="270" height="90" viewBox="0 0 270 90">
-        <!-- Magnet 1: North [N] Facing Magnet 2 -->
-        <g transform="translate(60, 45)">
-          <rect x="-40" y="-14" width="40" height="28" rx="4" fill="#ef4444"/>
-          <text x="-20" y="4" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">S</text>
-          <rect x="0" y="-14" width="40" height="28" rx="4" fill="#3b82f6"/>
-          <text x="20" y="4" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">N</text>
-        </g>
-
-        <!-- Force Arrows -->
-        ${isAttract ? `
-          <text x="135" y="44" font-size="20" fill="#34d399" text-anchor="middle">➔ 💥 ⬅️</text>
-          <text x="135" y="74" font-size="11" font-weight="900" fill="#34d399" text-anchor="middle">ATTRACT (Pull Together)</text>
-          <!-- Magnet 2: South [S] Facing Magnet 1 -->
-          <g transform="translate(210, 45)">
-            <rect x="-40" y="-14" width="40" height="28" rx="4" fill="#ef4444"/>
-            <text x="-20" y="4" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">S</text>
-            <rect x="0" y="-14" width="40" height="28" rx="4" fill="#3b82f6"/>
-            <text x="20" y="4" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">N</text>
+    // Protein foods (Fish & Meat / Eggs)
+    proteinFoods: () => `
+      <div class="disp-spotlight">
+        <svg width="280" height="85" viewBox="0 0 280 85">
+          <!-- Juicy steak/meat -->
+          <g transform="translate(50, 15)">
+            <ellipse cx="35" cy="24" rx="30" ry="18" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+            <circle cx="28" cy="20" r="6" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="35" y="58" font-size="12" font-weight="900" fill="#fca5a5" text-anchor="middle">MEAT 🥩</text>
           </g>
-        ` : `
-          <text x="135" y="44" font-size="20" fill="#ef4444" text-anchor="middle">⬅️ 🚫 ➔</text>
-          <text x="135" y="74" font-size="11" font-weight="900" fill="#f87171" text-anchor="middle">REPEL (Push Away)</text>
-          <!-- Magnet 2: North [N] Facing Magnet 1 -->
-          <g transform="translate(210, 45)">
-            <rect x="-40" y="-14" width="40" height="28" rx="4" fill="#3b82f6"/>
-            <text x="-20" y="4" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">N</text>
-            <rect x="0" y="-14" width="40" height="28" rx="4" fill="#ef4444"/>
-            <text x="20" y="4" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">S</text>
+          <text x="140" y="42" font-size="20" font-weight="bold" fill="#ffd60a" text-anchor="middle">+</text>
+          <!-- Fresh fish -->
+          <g transform="translate(160, 15)">
+            <ellipse cx="35" cy="24" rx="28" ry="14" fill="#38bdf8" stroke="#0284c7" stroke-width="2"/>
+            <polygon points="60,24 74,14 74,34" fill="#0284c7"/>
+            <circle cx="22" cy="21" r="2.5" fill="#0f172a"/>
+            <text x="35" y="58" font-size="12" font-weight="900" fill="#7dd3fc" text-anchor="middle">FISH 🐟</text>
           </g>
-        `}
-      </svg>
+        </svg>
+      </div>
+      <div class="disp-pill">💪 PROTEIN · HELPS BODY GROW & BUILDS MUSCLES</div>
     `,
 
-    // States of matter
-    statesOfMatter: () => `
-      <svg width="270" height="90" viewBox="0 0 270 90">
-        <rect x="15" y="15" width="70" height="58" rx="10" fill="rgba(255,255,255,0.14)" stroke="#38bdf8" stroke-width="2"/>
-        <text x="50" y="43" font-size="20" text-anchor="middle">🧊</text>
-        <text x="50" y="64" font-size="11" font-weight="bold" fill="#38bdf8" text-anchor="middle">SOLID</text>
+    // Vitamins (Fruits & Veggies)
+    vitaminFoods: () => `
+      <div class="disp-spotlight">
+        <svg width="280" height="85" viewBox="0 0 280 85">
+          <g transform="translate(60, 14)">
+            <circle cx="30" cy="22" r="20" fill="#ef4444" stroke="#991b1b" stroke-width="2"/>
+            <path d="M 30 2 Q 36 -6 40 -2" stroke="#15803d" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <text x="30" y="58" font-size="12" font-weight="900" fill="#86efac" text-anchor="middle">APPLE 🍎</text>
+          </g>
+          <text x="140" y="40" font-size="20" font-weight="bold" fill="#ffd60a" text-anchor="middle">+</text>
+          <g transform="translate(160, 14)">
+            <ellipse cx="30" cy="24" rx="16" ry="20" fill="#f97316" stroke="#c2410c" stroke-width="2"/>
+            <path d="M 30 4 Q 30 -6 32 -6" stroke="#15803d" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <text x="30" y="58" font-size="12" font-weight="900" fill="#86efac" text-anchor="middle">CARROT 🥕</text>
+          </g>
+        </svg>
+      </div>
+      <div class="disp-pill">🛡️ VITAMINS · KEEPS BODY HEALTHY</div>
+    `,
 
-        <rect x="100" y="15" width="70" height="58" rx="10" fill="rgba(255,255,255,0.14)" stroke="#60a5fa" stroke-width="2"/>
-        <text x="135" y="43" font-size="20" text-anchor="middle">🥛</text>
-        <text x="135" y="64" font-size="11" font-weight="bold" fill="#60a5fa" text-anchor="middle">LIQUID</text>
+    // Lion eating meat (Image 4 fix! Spacious and clear)
+    lionEatingMeat: () => `
+      <div class="disp-spotlight">
+        <svg width="280" height="85" viewBox="0 0 280 85">
+          <!-- Lion face -->
+          <g transform="translate(70, 12)">
+            <circle cx="30" cy="28" r="26" fill="#f59e0b" stroke="#b45309" stroke-width="2"/>
+            <circle cx="30" cy="28" r="18" fill="#fde047"/>
+            <circle cx="24" cy="25" r="2.5" fill="#1e293b"/>
+            <circle cx="36" cy="25" r="2.5" fill="#1e293b"/>
+            <path d="M 26 33 Q 30 38 34 33" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <text x="30" y="65" font-size="11" font-weight="bold" fill="#fde047" text-anchor="middle">LION 🦁</text>
+          </g>
+          <!-- Juicy meat -->
+          <g transform="translate(150, 15)">
+            <ellipse cx="35" cy="24" rx="30" ry="18" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+            <circle cx="28" cy="20" r="5" fill="#fff"/>
+            <text x="35" y="62" font-size="11" font-weight="bold" fill="#fca5a5" text-anchor="middle">MEAT 🥩</text>
+          </g>
+        </svg>
+      </div>
+      <div class="disp-pill">🦁 CARNIVORE · MEAT-EATING ANIMAL</div>
+    `,
 
-        <rect x="185" y="15" width="70" height="58" rx="10" fill="rgba(255,255,255,0.14)" stroke="#c084fc" stroke-width="2"/>
-        <text x="220" y="43" font-size="20" text-anchor="middle">💨</text>
-        <text x="220" y="64" font-size="11" font-weight="bold" fill="#c084fc" text-anchor="middle">GAS</text>
-      </svg>
+    // Cow eating grass
+    cowEatingGrass: () => `
+      <div class="disp-spotlight">
+        <svg width="280" height="85" viewBox="0 0 280 85">
+          <g transform="translate(70, 12)">
+            <circle cx="30" cy="28" r="24" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+            <ellipse cx="30" cy="36" rx="15" ry="10" fill="#fbcfe8"/>
+            <circle cx="23" cy="24" r="2.5" fill="#0f172a"/>
+            <circle cx="37" cy="24" r="2.5" fill="#0f172a"/>
+            <text x="30" y="65" font-size="11" font-weight="bold" fill="#6ee7b7" text-anchor="middle">COW 🐮</text>
+          </g>
+          <g transform="translate(155, 18)">
+            <path d="M 20 30 Q 15 10 20 0 M 26 30 Q 30 8 38 4 M 32 30 Q 42 12 46 6" stroke="#22c55e" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <text x="32" y="58" font-size="11" font-weight="bold" fill="#86efac" text-anchor="middle">GRASS 🌿</text>
+          </g>
+        </svg>
+      </div>
+      <div class="disp-pill">🐮 HERBIVORE · PLANT-EATING ANIMAL</div>
+    `,
+
+    // Magnets with clear poles and field sparks (Image 5 fix!)
+    magnetsAttract: () => `
+      <div class="disp-spotlight">
+        <svg width="290" height="85" viewBox="0 0 290 85">
+          <!-- Magnet 1: South [Red] - North [Blue] -->
+          <g transform="translate(30, 22)">
+            <rect x="0" y="0" width="36" height="28" rx="4" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5"/>
+            <text x="18" y="19" font-size="13" font-weight="900" fill="#fff" text-anchor="middle">S</text>
+            <rect x="36" y="0" width="36" height="28" rx="4" fill="#0284c7" stroke="#0369a1" stroke-width="1.5"/>
+            <text x="54" y="19" font-size="13" font-weight="900" fill="#fff" text-anchor="middle">N</text>
+          </g>
+
+          <!-- Magnetic Attraction Sparks -->
+          <g transform="translate(112, 18)">
+            <text x="32" y="24" font-size="20" fill="#34d399" text-anchor="middle">➔ 💥 ⬅️</text>
+          </g>
+
+          <!-- Magnet 2: South [Red] facing Magnet 1's North -->
+          <g transform="translate(185, 22)">
+            <rect x="0" y="0" width="36" height="28" rx="4" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5"/>
+            <text x="18" y="19" font-size="13" font-weight="900" fill="#fff" text-anchor="middle">S</text>
+            <rect x="36" y="0" width="36" height="28" rx="4" fill="#0284c7" stroke="#0369a1" stroke-width="1.5"/>
+            <text x="54" y="19" font-size="13" font-weight="900" fill="#fff" text-anchor="middle">N</text>
+          </g>
+        </svg>
+      </div>
+      <div class="disp-pill">🧲 OPPOSITE POLES (N & S) ATTRACT (PULL TOGETHER)</div>
+    `,
+
+    magnetsRepel: () => `
+      <div class="disp-spotlight">
+        <svg width="290" height="85" viewBox="0 0 290 85">
+          <!-- Magnet 1: South [Red] - North [Blue] -->
+          <g transform="translate(30, 22)">
+            <rect x="0" y="0" width="36" height="28" rx="4" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5"/>
+            <text x="18" y="19" font-size="13" font-weight="900" fill="#fff" text-anchor="middle">S</text>
+            <rect x="36" y="0" width="36" height="28" rx="4" fill="#0284c7" stroke="#0369a1" stroke-width="1.5"/>
+            <text x="54" y="19" font-size="13" font-weight="900" fill="#fff" text-anchor="middle">N</text>
+          </g>
+
+          <!-- Repel Arrows -->
+          <g transform="translate(112, 18)">
+            <text x="32" y="24" font-size="20" fill="#ef4444" text-anchor="middle">⬅️ 🚫 ➔</text>
+          </g>
+
+          <!-- Magnet 2: North [Blue] facing Magnet 1's North -->
+          <g transform="translate(185, 22)">
+            <rect x="0" y="0" width="36" height="28" rx="4" fill="#0284c7" stroke="#0369a1" stroke-width="1.5"/>
+            <text x="18" y="19" font-size="13" font-weight="900" fill="#fff" text-anchor="middle">N</text>
+            <rect x="36" y="0" width="36" height="28" rx="4" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5"/>
+            <text x="54" y="19" font-size="13" font-weight="900" fill="#fff" text-anchor="middle">S</text>
+          </g>
+        </svg>
+      </div>
+      <div class="disp-pill">🧲 LIKE POLES (N & N) REPEL (PUSH AWAY)</div>
+    `,
+
+    // Chicken Life Cycle (4 Stages: Egg ➔ Hatchling ➔ Chick ➔ Chicken)
+    chickenCycle4: () => `
+      <div class="disp-spotlight">
+        <svg width="295" height="85" viewBox="0 0 295 85">
+          <g transform="translate(20, 16)">
+            <ellipse cx="18" cy="20" rx="14" ry="18" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+            <text x="18" y="52" font-size="10" font-weight="bold" fill="#fde68a" text-anchor="middle">1. Egg</text>
+          </g>
+          <text x="58" y="38" font-size="14" fill="#ffd60a" text-anchor="middle">➔</text>
+
+          <g transform="translate(76, 16)">
+            <text x="18" y="26" font-size="22" text-anchor="middle">🐣</text>
+            <text x="18" y="52" font-size="10" font-weight="bold" fill="#fde68a" text-anchor="middle">2. Hatchling</text>
+          </g>
+          <text x="124" y="38" font-size="14" fill="#ffd60a" text-anchor="middle">➔</text>
+
+          <g transform="translate(142, 16)">
+            <text x="18" y="26" font-size="22" text-anchor="middle">🐥</text>
+            <text x="18" y="52" font-size="10" font-weight="bold" fill="#fde68a" text-anchor="middle">3. Chick</text>
+          </g>
+          <text x="190" y="38" font-size="14" fill="#ffd60a" text-anchor="middle">➔</text>
+
+          <g transform="translate(208, 16)">
+            <text x="18" y="26" font-size="24" text-anchor="middle">🐓</text>
+            <text x="18" y="52" font-size="10" font-weight="bold" fill="#fde68a" text-anchor="middle">4. Chicken</text>
+          </g>
+        </svg>
+      </div>
+      <div class="disp-pill">🐓 CHICKEN 4-STAGE LIFE CYCLE</div>
+    `,
+
+    // Butterfly Life Cycle (4 Stages: Egg ➔ Caterpillar ➔ Pupa ➔ Butterfly)
+    butterflyCycle4: () => `
+      <div class="disp-spotlight">
+        <svg width="295" height="85" viewBox="0 0 295 85">
+          <g transform="translate(20, 16)">
+            <text x="18" y="26" font-size="20" text-anchor="middle">🥚</text>
+            <text x="18" y="52" font-size="10" font-weight="bold" fill="#6ee7b7" text-anchor="middle">1. Egg</text>
+          </g>
+          <text x="58" y="38" font-size="14" fill="#ffd60a" text-anchor="middle">➔</text>
+
+          <g transform="translate(76, 16)">
+            <text x="18" y="26" font-size="22" text-anchor="middle">🐛</text>
+            <text x="18" y="52" font-size="10" font-weight="bold" fill="#6ee7b7" text-anchor="middle">2. Caterpillar</text>
+          </g>
+          <text x="124" y="38" font-size="14" fill="#ffd60a" text-anchor="middle">➔</text>
+
+          <g transform="translate(142, 16)">
+            <text x="18" y="26" font-size="20" text-anchor="middle">🥥</text>
+            <text x="18" y="52" font-size="10" font-weight="bold" fill="#6ee7b7" text-anchor="middle">3. Pupa</text>
+          </g>
+          <text x="190" y="38" font-size="14" fill="#ffd60a" text-anchor="middle">➔</text>
+
+          <g transform="translate(208, 16)">
+            <text x="18" y="26" font-size="24" text-anchor="middle">🦋</text>
+            <text x="18" y="52" font-size="10" font-weight="bold" fill="#f472b6" text-anchor="middle">4. Butterfly</text>
+          </g>
+        </svg>
+      </div>
+      <div class="disp-pill">🦋 BUTTERFLY 4-STAGE METAMORPHOSIS</div>
+    `,
+
+    // Frog Life Cycle (4 Stages: Egg ➔ Tadpole ➔ Froglet ➔ Frog)
+    frogCycle4: () => `
+      <div class="disp-spotlight">
+        <svg width="295" height="85" viewBox="0 0 295 85">
+          <g transform="translate(20, 16)">
+            <text x="18" y="26" font-size="20" text-anchor="middle">🥚</text>
+            <text x="18" y="52" font-size="10" font-weight="bold" fill="#7dd3fc" text-anchor="middle">1. Egg</text>
+          </g>
+          <text x="58" y="38" font-size="14" fill="#ffd60a" text-anchor="middle">➔</text>
+
+          <g transform="translate(76, 16)">
+            <text x="18" y="26" font-size="22" text-anchor="middle">🐟</text>
+            <text x="18" y="52" font-size="9" font-weight="bold" fill="#7dd3fc" text-anchor="middle">2. Tadpole (gills)</text>
+          </g>
+          <text x="124" y="38" font-size="14" fill="#ffd60a" text-anchor="middle">➔</text>
+
+          <g transform="translate(142, 16)">
+            <text x="18" y="26" font-size="22" text-anchor="middle">🐸</text>
+            <text x="18" y="52" font-size="10" font-weight="bold" fill="#7dd3fc" text-anchor="middle">3. Froglet</text>
+          </g>
+          <text x="190" y="38" font-size="14" fill="#ffd60a" text-anchor="middle">➔</text>
+
+          <g transform="translate(208, 16)">
+            <text x="18" y="26" font-size="24" text-anchor="middle">🐸</text>
+            <text x="18" y="52" font-size="9" font-weight="bold" fill="#6ee7b7" text-anchor="middle">4. Frog (lungs)</text>
+          </g>
+        </svg>
+      </div>
+      <div class="disp-pill">🐸 FROG 4-STAGE LIFE CYCLE</div>
+    `,
+
+    // Human Life Cycle (5 Stages: Baby ➔ Child ➔ Adolescent ➔ Adult ➔ Old Person)
+    humanCycle5: () => `
+      <div class="disp-spotlight">
+        <svg width="295" height="85" viewBox="0 0 295 85">
+          <g transform="translate(10, 16)">
+            <text x="15" y="26" font-size="20" text-anchor="middle">👶</text>
+            <text x="15" y="52" font-size="9" font-weight="bold" fill="#fde68a" text-anchor="middle">1. Baby</text>
+          </g>
+          <text x="42" y="36" font-size="11" fill="#ffd60a" text-anchor="middle">➔</text>
+
+          <g transform="translate(52, 16)">
+            <text x="15" y="26" font-size="20" text-anchor="middle">🧒</text>
+            <text x="15" y="52" font-size="9" font-weight="bold" fill="#fde68a" text-anchor="middle">2. Child</text>
+          </g>
+          <text x="86" y="36" font-size="11" fill="#ffd60a" text-anchor="middle">➔</text>
+
+          <g transform="translate(98, 16)">
+            <text x="15" y="26" font-size="20" text-anchor="middle">🧑</text>
+            <text x="15" y="52" font-size="8.5" font-weight="bold" fill="#fde68a" text-anchor="middle">3. Teen</text>
+          </g>
+          <text x="134" y="36" font-size="11" fill="#ffd60a" text-anchor="middle">➔</text>
+
+          <g transform="translate(148, 16)">
+            <text x="15" y="26" font-size="20" text-anchor="middle">👨‍🦱</text>
+            <text x="15" y="52" font-size="9" font-weight="bold" fill="#fde68a" text-anchor="middle">4. Adult</text>
+          </g>
+          <text x="186" y="36" font-size="11" fill="#ffd60a" text-anchor="middle">➔</text>
+
+          <g transform="translate(200, 16)">
+            <text x="15" y="26" font-size="20" text-anchor="middle">👴</text>
+            <text x="15" y="52" font-size="8.5" font-weight="bold" fill="#fde68a" text-anchor="middle">5. Senior</text>
+          </g>
+        </svg>
+      </div>
+      <div class="disp-pill">🧑 HUMAN LIFE STAGES</div>
+    `,
+
+    // Chocolate melting in pan over flame (Exact match to school exam Q3!)
+    chocolatePan: (isMelted = true) => `
+      <div class="disp-spotlight">
+        <svg width="270" height="90" viewBox="0 0 270 90">
+          <line x1="190" y1="46" x2="245" y2="34" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+          <ellipse cx="120" cy="46" rx="66" ry="24" fill="#334155" stroke="#64748b" stroke-width="2.5"/>
+          <ellipse cx="120" cy="44" rx="60" ry="20" fill="#1e293b"/>
+          
+          ${isMelted ? `
+            <ellipse cx="120" cy="45" rx="52" ry="15" fill="#78350f"/>
+            <ellipse cx="115" cy="43" rx="42" ry="11" fill="#92400e"/>
+            <!-- Steam curls -->
+            <path d="M 100 28 Q 95 16 102 8" stroke="rgba(255,255,255,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M 120 25 Q 125 14 118 6" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M 140 28 Q 145 18 138 8" stroke="rgba(255,255,255,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <text x="120" y="80" font-size="11" font-weight="900" fill="#fde047" text-anchor="middle">MELTED LIQUID CHOCOLATE 🍫💧</text>
+          ` : `
+            <rect x="92" y="34" width="56" height="22" rx="4" fill="#78350f" stroke="#451a03" stroke-width="1.5"/>
+            <text x="120" y="80" font-size="11" font-weight="900" fill="#93c5fd" text-anchor="middle">SOLID CHOCOLATE BAR 🍫</text>
+          `}
+
+          <!-- Flame under pan -->
+          <g transform="translate(100, 64)">
+            <path d="M 10 10 Q 20 -8 20 10 Q 30 -5 30 10" stroke="#f97316" stroke-width="4" fill="#ef4444"/>
+            <path d="M 15 10 Q 20 -2 20 10 Q 25 0 25 10" stroke="#fbbf24" stroke-width="2" fill="#ffd166"/>
+          </g>
+        </svg>
+      </div>
+      <div class="disp-pill">🔥 HEAT CAUSES MELTING (SOLID ➔ LIQUID)</div>
     `,
 
     // Frying Egg (Irreversible change from exam Q11)
     friedEgg: () => `
-      <svg width="240" height="90" viewBox="0 0 240 90">
-        <ellipse cx="120" cy="45" rx="55" ry="25" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
-        <circle cx="120" cy="45" r="14" fill="#fbbf24" stroke="#f59e0b" stroke-width="1.5"/>
-        <text x="120" y="82" font-size="11" font-weight="900" fill="#f87171" text-anchor="middle">PERMANENT (CANNOT UNDO) 🍳</text>
-      </svg>
+      <div class="disp-spotlight">
+        <svg width="240" height="85" viewBox="0 0 240 85">
+          <ellipse cx="120" cy="40" rx="52" ry="24" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+          <circle cx="120" cy="40" r="13" fill="#fbbf24" stroke="#f59e0b" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="disp-pill">🍳 COOKING AN EGG · PERMANENT (CANNOT UNDO)</div>
+    `,
+
+    // Pip's Ramp with Gravity & Friction
+    rampFriction: (hasRoughTowel = true) => `
+      <div class="disp-spotlight">
+        <svg width="270" height="88" viewBox="0 0 270 88">
+          <polygon points="20,70 150,70 150,18" fill="rgba(255,255,255,0.12)" stroke="#38bdf8" stroke-width="2.5"/>
+          <line x1="20" y1="70" x2="150" y2="18" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round"/>
+          
+          <g transform="translate(90, 36) rotate(-24)">
+            <rect x="-14" y="-8" width="28" height="14" rx="4" fill="#ef4444" stroke="#fff" stroke-width="1.5"/>
+            <circle cx="-8" cy="8" r="4" fill="#0f172a" stroke="#fff" stroke-width="1"/>
+            <circle cx="8" cy="8" r="4" fill="#0f172a" stroke="#fff" stroke-width="1"/>
+          </g>
+          <text x="105" y="18" font-size="9" font-weight="bold" fill="#ffd60a">Gravity ⬇️</text>
+
+          <line x1="150" y1="70" x2="250" y2="70" stroke="#94a3b8" stroke-width="3"/>
+          ${hasRoughTowel ? `
+            <rect x="160" y="65" width="80" height="6" rx="2" fill="#d97706" stroke="#fbbf24" stroke-width="1"/>
+            <text x="200" y="82" font-size="10" font-weight="900" fill="#f59e0b" text-anchor="middle">ROUGH TOWEL = SLOWER 🛑</text>
+          ` : `
+            <text x="200" y="82" font-size="10" font-weight="900" fill="#38bdf8" text-anchor="middle">SMOOTH TILE = FASTER 💨</text>
+          `}
+        </svg>
+      </div>
+      <div class="disp-pill">🚗 FRICTION RUBS WHEELS AND OPPOSES MOTION</div>
     `
   };
 
-  /* 5 DISCOVERY LABS (TRAINING GROUNDS - FUN & GAMES CLASSROOM) */
-  const LABS = [
-    {
-      name: "Living Needs Lab 🥗",
-      steps: [
-        {
-          prompt: "Pip needs energy to run! Tap the food that gives energy:",
-          audio: "Pip needs energy to run! Which food group gives our body energy?",
-          disp: SVG.foodGroup('carbs'),
-          choices: [
+  /* DYNAMIC POOLS FOR PROFESSOR PIP'S 5 DISCOVERY LABS */
+  function getLabRound(labIdx, stepIdx){
+    if(labIdx === 0){ // Living Needs Lab
+      if(stepIdx === 0){
+        return {
+          prompt: "Pip needs energy to run! Tap the food group that gives energy:",
+          audio: "Pip needs energy to run! Which food gives our body energy?",
+          disp: SVG.carbsBreadAndRice(),
+          choices: sh([
             { text: "🍞 Bread & Rice (Carbohydrate)", correct: true },
-            { text: "🥩 Fish & Meat (Protein)", correct: false },
+            { text: "🥩 Meat & Fish (Protein)", correct: false },
             { text: "🍎 Apple & Orange (Vitamins)", correct: false }
-          ],
-          success: "Awesome! Bread and rice give our body energy to play and study!"
-        },
-        {
-          prompt: "Pip wants to grow big and strong! Tap the food for body growth:",
-          audio: "Pip wants to grow big and strong! Which food group helps our body grow?",
-          disp: SVG.foodGroup('protein'),
-          choices: [
+          ]),
+          success: "Awesome! Bread and rice provide carbohydrates for physical energy!"
+        };
+      }else if(stepIdx === 1){
+        return {
+          prompt: "Pip wants to grow tall and strong! Tap the food for body growth:",
+          audio: "Pip wants to grow tall and strong! Which food group helps our body grow?",
+          disp: SVG.proteinFoods(),
+          choices: sh([
             { text: "🥩 Fish, Eggs & Meat (Protein)", correct: true },
             { text: "🍞 Bread & Rice (Carbohydrate)", correct: false },
             { text: "🍬 Candy & Soda", correct: false }
-          ],
-          success: "Great! Fish, eggs, and meat help our body grow strong muscles!"
-        },
-        {
+          ]),
+          success: "Super! Proteins like fish, meat, and eggs build strong muscles!"
+        };
+      }else{
+        return {
           prompt: "Pip wants to stay healthy and fight sickness! Tap the food:",
           audio: "Which food group keeps our body healthy and protects us?",
-          disp: SVG.foodGroup('vitamins'),
-          choices: [
+          disp: SVG.vitaminFoods(),
+          choices: sh([
             { text: "🍎 Fruits & Vegetables (Vitamins)", correct: true },
-            { text: "🍔 French Fries", correct: false },
+            { text: "🍟 French Fries", correct: false },
             { text: "🧊 Ice Cubes", correct: false }
-          ],
-          success: "Super! Fruits and vegetables give vitamins that keep us healthy!"
-        }
-      ]
-    },
-    {
-      name: "Safari Diets Diner 🐯",
-      steps: [
-        {
+          ]),
+          success: "Brilliant! Fruits and vegetables provide vitamins to keep us healthy!"
+        };
+      }
+    }else if(labIdx === 1){ // Safari Diets Diner
+      if(stepIdx === 0){
+        return {
           prompt: "A cow 🐮 is hungry! What does a cow eat?",
           audio: "A cow is hungry! What does a cow eat?",
-          disp: `
-            <svg width="240" height="90" viewBox="0 0 240 90">
-              <circle cx="120" cy="40" r="32" fill="rgba(52,211,153,0.18)" stroke="#10b981" stroke-width="2"/>
-              <text x="120" y="48" font-size="34" text-anchor="middle">🐮</text>
-              <text x="120" y="80" font-size="11" font-weight="900" fill="#6ee7b7" text-anchor="middle">COW · HERBIVORE</text>
-            </svg>
-          `,
-          choices: [
-            { text: "🌿 Fresh Grass & Plants", correct: true },
+          disp: SVG.cowEatingGrass(),
+          choices: sh([
+            { text: "🌿 Fresh Grass (Herbivore)", correct: true },
             { text: "🥩 Meat", correct: false }
-          ],
+          ]),
           success: "Moo! Cows eat grass. A cow is a Herbivore (plant-eating animal)!"
-        },
-        {
-          prompt: "A lion 🦁 hunts for food! What does a lion eat?",
-          audio: "A lion hunts for food! What does a lion eat?",
-          disp: `
-            <svg width="240" height="90" viewBox="0 0 240 90">
-              <circle cx="120" cy="40" r="32" fill="rgba(248,113,113,0.18)" stroke="#ef4444" stroke-width="2"/>
-              <text x="120" y="48" font-size="34" text-anchor="middle">🦁</text>
-              <text x="120" y="80" font-size="11" font-weight="900" fill="#fca5a5" text-anchor="middle">LION · CARNIVORE</text>
-            </svg>
-          `,
-          choices: [
-            { text: "🥩 Meat from other animals", correct: true },
+        };
+      }else if(stepIdx === 1){
+        return {
+          prompt: "A lion 🦁 hunts for lunch! What does a lion eat?",
+          audio: "A lion hunts for lunch! What does a lion eat?",
+          disp: SVG.lionEatingMeat(),
+          choices: sh([
+            { text: "🥩 Meat (Carnivore)", correct: true },
             { text: "🌿 Grass & Leaves", correct: false }
-          ],
+          ]),
           success: "Roar! Lions eat meat. A lion is a Carnivore (meat-eating animal)!"
-        },
-        {
+        };
+      }else{
+        return {
           prompt: "A bear 🐻 eats fish AND berries! What is a bear?",
           audio: "A bear eats fish and berries. What is a bear?",
           disp: `
-            <svg width="240" height="90" viewBox="0 0 240 90">
-              <circle cx="120" cy="40" r="32" fill="rgba(168,85,247,0.18)" stroke="#a855f7" stroke-width="2"/>
-              <text x="120" y="48" font-size="34" text-anchor="middle">🐻</text>
-              <text x="120" y="80" font-size="11" font-weight="900" fill="#d8b4fe" text-anchor="middle">BEAR · OMNIVORE</text>
-            </svg>
+            <div class="disp-spotlight">
+              <svg width="240" height="85" viewBox="0 0 240 85">
+                <circle cx="120" cy="38" r="30" fill="rgba(168,85,247,0.2)" stroke="#a855f7" stroke-width="2"/>
+                <text x="120" y="46" font-size="34" text-anchor="middle">🐻</text>
+              </svg>
+            </div>
+            <div class="disp-pill">🐻 OMNIVORE · EATS BOTH PLANTS & MEAT</div>
           `,
-          choices: [
+          choices: sh([
             { text: "Omnivore (Eats plants AND meat)", correct: true },
             { text: "Carnivore (Only meat)", correct: false }
-          ],
+          ]),
           success: "Yum! Bears eat both plants and meat. A bear is an Omnivore!"
-        }
-      ]
-    },
-    {
-      name: "Life Cycle Studio 🦋",
-      steps: [
-        {
-          prompt: "Step 1: What hatches from a butterfly's egg on a leaf?",
-          audio: "What hatches from a butterfly's egg on a leaf?",
-          disp: SVG.butterflyCycle(2),
-          choices: [
-            { text: "🐛 Caterpillar (Larva)", correct: true },
-            { text: "🐣 Chick", correct: false },
-            { text: "🐸 Frog", correct: false }
-          ],
-          success: "Correct! The egg hatches into a hungry caterpillar that eats leaves!"
-        },
-        {
-          prompt: "Step 2: In a frog's life cycle, what swims in water and breathes with gills?",
-          audio: "In a frog's life cycle, what swims in water and breathes with gills?",
-          disp: SVG.frogCycle(2),
-          choices: [
+        };
+      }
+    }else if(labIdx === 2){ // Life Cycle Studio
+      if(stepIdx === 0){
+        return {
+          prompt: "Step 1: What is the correct 4-stage life cycle of a domestic chicken?",
+          audio: "What is the correct four stage life cycle of a chicken?",
+          disp: SVG.chickenCycle4(),
+          choices: sh([
+            { text: "1. Egg ➔ 2. Hatchling ➔ 3. Chick ➔ 4. Chicken", correct: true },
+            { text: "1. Chick ➔ 2. Egg ➔ 3. Chicken ➔ 4. Hatchling", correct: false },
+            { text: "1. Chicken ➔ 2. Tadpole ➔ 3. Egg ➔ 4. Chick", correct: false }
+          ]),
+          success: "Cluck cluck! Hen lays an egg, hatchling emerges, grows into a chick, then an adult chicken!"
+        };
+      }else if(stepIdx === 1){
+        return {
+          prompt: "Step 2: What is the correct 4-stage life cycle of a butterfly?",
+          audio: "What is the correct life cycle of a butterfly?",
+          disp: SVG.butterflyCycle4(),
+          choices: sh([
+            { text: "1. Egg ➔ 2. Caterpillar ➔ 3. Pupa ➔ 4. Butterfly", correct: true },
+            { text: "1. Egg ➔ 2. Pupa ➔ 3. Caterpillar ➔ 4. Butterfly", correct: false },
+            { text: "1. Caterpillar ➔ 2. Egg ➔ 3. Butterfly ➔ 4. Pupa", correct: false }
+          ]),
+          success: "Splendid! Egg on leaf ➔ caterpillar larva ➔ resting pupa ➔ colorful butterfly!"
+        };
+      }else{
+        return {
+          prompt: "Step 3: In a frog's life cycle, what breathes with gills in the water?",
+          audio: "In a frog's life cycle, what breathes with gills in water?",
+          disp: SVG.frogCycle4(),
+          choices: sh([
             { text: "🐟 Tadpole (with gills & tail)", correct: true },
-            { text: "🦋 Butterfly", correct: false },
-            { text: "🥚 Egg", correct: false }
-          ],
-          success: "Splendid! A tadpole swims with a tail and breathes with gills before growing legs!"
-        },
-        {
-          prompt: "Step 3: What is the correct order of a chicken's life cycle?",
-          audio: "What is the correct order of a chicken's life cycle?",
-          disp: SVG.chickenCycle(),
-          choices: [
-            { text: "🥚 Egg ➔ 🐣 Chick ➔ 🐓 Chicken", correct: true },
-            { text: "🐣 Chick ➔ 🥚 Egg ➔ 🐓 Chicken", correct: false },
-            { text: "🐓 Chicken ➔ 🐟 Tadpole ➔ 🥚 Egg", correct: false }
-          ],
-          success: "Cluck cluck! The hen lays an egg, the chick hatches, and it grows into a chicken!"
-        }
-      ]
-    },
-    {
-      name: "The Chocolate & Thermal Lab 🍫",
-      steps: [
-        {
+            { text: "🐸 Adult Frog (with lungs)", correct: false },
+            { text: "🥚 Frog Egg", correct: false }
+          ]),
+          success: "Ribbit! The tadpole swims with a tail and breathes through gills before growing legs!"
+        };
+      }
+    }else if(labIdx === 3){ // Thermal Lab
+      if(stepIdx === 0){
+        return {
           prompt: "Pip heats a solid chocolate bar in a pan. What happens?",
           audio: "When we add heat to a solid chocolate bar in a pan, what happens?",
           disp: SVG.chocolatePan(true),
-          choices: [
+          choices: sh([
             { text: "Melts into liquid chocolate 🍫", correct: true },
             { text: "Freezes into hard ice 🧊", correct: false },
             { text: "Grows bigger 🎈", correct: false }
-          ],
+          ]),
           success: "Delicious! Adding heat makes solid chocolate melt into liquid!"
-        },
-        {
-          prompt: "If we put melted chocolate in the freezer, what happens?",
-          audio: "If we cool melted chocolate, does it freeze back into a solid?",
-          disp: SVG.statesOfMatter(),
-          choices: [
-            { text: "It freezes back into solid chocolate", correct: true },
-            { text: "It disappears completely", correct: false }
-          ],
-          success: "Yes! Melting and freezing are reversible changes that can be undone!"
-        },
-        {
+        };
+      }else if(stepIdx === 1){
+        return {
+          prompt: "If we cool liquid water in the freezer, what happens?",
+          audio: "If we cool liquid water in the freezer, what happens?",
+          disp: `
+            <div class="disp-spotlight">
+              <svg width="240" height="80" viewBox="0 0 240 80">
+                <text x="80" y="46" font-size="28" text-anchor="middle">💧</text>
+                <text x="120" y="46" font-size="20" fill="#38bdf8" text-anchor="middle">➔ ❄️ ➔</text>
+                <text x="160" y="46" font-size="28" text-anchor="middle">🧊</text>
+              </svg>
+            </div>
+            <div class="disp-pill">❄️ COOLING CAUSES FREEZING (LIQUID ➔ SOLID)</div>
+          `,
+          choices: sh([
+            { text: "It freezes into solid ice (Reversible) 🧊", correct: true },
+            { text: "It turns into fire 🔥", correct: false }
+          ]),
+          success: "Yes! Water freezes into ice, and ice melts back into water. It is reversible!"
+        };
+      }else{
+        return {
           prompt: "Which change is permanent and cannot be changed back?",
           audio: "Which change is permanent and cannot be changed back?",
           disp: SVG.friedEgg(),
-          choices: [
+          choices: sh([
             { text: "Frying an egg 🍳", correct: true },
             { text: "Melting ice into water 💧", correct: false },
             { text: "Melting chocolate 🍫", correct: false }
-          ],
-          success: "Spot on! Once an egg is cooked or fried, it cannot be changed back!"
-        }
-      ]
-    },
-    {
-      name: "Forces & Magnets Lab 🧲",
-      steps: [
-        {
-          prompt: "Look at the boy pushing a shopping cart. Is this a push or a pull?",
-          audio: "Look at the boy pushing a cart forward. What force is he using?",
+          ]),
+          success: "Spot on! Cooking or frying an egg is permanent (irreversible)!"
+        };
+      }
+    }else{ // Forces & Magnets
+      if(stepIdx === 0){
+        return {
+          prompt: "Look at the boy moving a cart forward away from him. What force is this?",
+          audio: "Look at the boy moving a cart forward. What force is he using?",
           disp: `
-            <svg width="240" height="90" viewBox="0 0 240 90">
-              <circle cx="80" cy="45" r="26" fill="rgba(255,255,255,0.18)" stroke="#38bdf8" stroke-width="2"/>
-              <text x="80" y="53" font-size="28" text-anchor="middle">🛒</text>
-              <path d="M 120 45 L 180 45" stroke="#ffd60a" stroke-width="4" stroke-linecap="round"/>
-              <polygon points="190,45 175,37 175,53" fill="#ffd60a"/>
-              <text x="155" y="72" font-size="11" font-weight="900" fill="#ffd60a" text-anchor="middle">FORWARD ➔</text>
-            </svg>
+            <div class="disp-spotlight">
+              <svg width="240" height="85" viewBox="0 0 240 85">
+                <circle cx="80" cy="45" r="26" fill="rgba(255,255,255,0.18)" stroke="#38bdf8" stroke-width="2"/>
+                <text x="80" y="53" font-size="28" text-anchor="middle">🛒</text>
+                <path d="M 120 45 L 180 45" stroke="#ffd60a" stroke-width="4" stroke-linecap="round"/>
+                <polygon points="190,45 175,37 175,53" fill="#ffd60a"/>
+                <text x="155" y="72" font-size="11" font-weight="900" fill="#ffd60a" text-anchor="middle">FORWARD ➔</text>
+              </svg>
+            </div>
+            <div class="disp-pill">👉 PUSH MOVES AN OBJECT AWAY FROM YOU</div>
           `,
-          choices: [
-            { text: "A Push (moves away) 👉", correct: true },
-            { text: "A Pull (moves closer) 👈", correct: false }
-          ],
-          success: "Correct! A push moves an object away from you!"
-        },
-        {
-          prompt: "Pip puts a rough towel on the floor. Will the car move faster or slower?",
+          choices: sh([
+            { text: "A Push force 👉", correct: true },
+            { text: "A Pull force 👈", correct: false }
+          ]),
+          success: "Correct! A push moves an object away from your body!"
+        };
+      }else if(stepIdx === 1){
+        return {
+          prompt: "Pip puts a rough towel on the floor. Will the toy car move faster or slower?",
           audio: "If Pip puts a rough towel on the floor, will the car move faster or slower?",
           disp: SVG.rampFriction(true),
-          choices: [
+          choices: sh([
             { text: "SLOWER (Friction rubs wheels) 🛑", correct: true },
             { text: "FASTER 🚀", correct: false }
-          ],
+          ]),
           success: "Well done! The rough towel creates friction that slows the wheels down!"
-        },
-        {
+        };
+      }else{
+        return {
           prompt: "Opposite poles (North [N] and South [S]) face each other. What do they do?",
           audio: "Opposite poles North and South face each other. Will they attract or repel?",
-          disp: SVG.magnets(true),
-          choices: [
+          disp: SVG.magnetsAttract(),
+          choices: sh([
             { text: "ATTRACT (pull together) 🧲💥", correct: true },
             { text: "REPEL (push away) ⬅️➡️", correct: false }
-          ],
+          ]),
           success: "Brilliant! Opposite poles attract! North pulls South together!"
-        }
-      ]
+        };
+      }
     }
+  }
+
+  const LAB_NAMES = [
+    "Living Needs Lab 🥗",
+    "Safari Diets Diner 🐯",
+    "Life Cycle Studio 🦋",
+    "The Thermal Lab 🍫",
+    "Forces & Magnets Lab 🧲"
   ];
 
-  /* 15 EXAM CHALLENGES (MATCHING THAI RATH WITTHAYA 75 SCHOOL EXAM EXACTLY) */
+  /* 15 EXAM CHALLENGES (EXACT SCHOOL EXAM COMPLIANCE WITH DUAL-CARD GRAPHICS) */
   function examQs(diff = 1){
-    // Cat 0: Living Needs & Food Groups (3 questions)
+    // Cat 0: Living Needs (3 questions)
     const cat0 = [
       {
         cat: "Living Needs 🥗", catIdx: 0,
         prompt: "Which food group gives our body energy? (Bread and Rice)",
         audio: "Which food group gives our body energy? Bread and Rice.",
-        html: SVG.foodGroup('carbs'),
+        html: SVG.carbsBreadAndRice(),
         opts: sh(["Carbohydrate", "Plastic", "Magnet"]),
         ans: "Carbohydrate"
       },
@@ -1145,7 +1320,7 @@ const SE = (function(){
         cat: "Living Needs 🥗", catIdx: 0,
         prompt: "Fish, eggs, and meat help our body grow. They give us ________.",
         audio: "Fish, eggs, and meat help our body grow. They give us what?",
-        html: SVG.foodGroup('protein'),
+        html: SVG.proteinFoods(),
         opts: sh(["Protein", "Vitamins", "Gravity", "Plastic"]),
         ans: "Protein"
       },
@@ -1153,7 +1328,7 @@ const SE = (function(){
         cat: "Living Needs 🥗", catIdx: 0,
         prompt: "Fruits and vegetables keep us healthy. They give us ________.",
         audio: "Fruits and vegetables keep us healthy. They give us what?",
-        html: SVG.foodGroup('vitamins'),
+        html: SVG.vitaminFoods(),
         opts: sh(["Vitamins", "Carbohydrate", "Metal", "Plastic"]),
         ans: "Vitamins"
       }
@@ -1165,13 +1340,7 @@ const SE = (function(){
         cat: "Animal Diets 🐯", catIdx: 1,
         prompt: "A lion hunts and eats meat. A lion is a ________.",
         audio: "Look at the lion eating meat. A lion is a what?",
-        html: `
-          <svg width="240" height="90" viewBox="0 0 240 90">
-            <circle cx="120" cy="40" r="32" fill="rgba(248,113,113,0.18)" stroke="#ef4444" stroke-width="2"/>
-            <text x="120" y="48" font-size="34" text-anchor="middle">🦁</text>
-            <text x="120" y="80" font-size="11" font-weight="900" fill="#fca5a5" text-anchor="middle">LION EATING MEAT</text>
-          </svg>
-        `,
+        html: SVG.lionEatingMeat(),
         opts: sh(["Meat-eating animal", "Plant-eating animal", "Non-living thing"]),
         ans: "Meat-eating animal"
       },
@@ -1179,13 +1348,7 @@ const SE = (function(){
         cat: "Animal Diets 🐯", catIdx: 1,
         prompt: "A cow eats grass. A cow is a plant-eating animal.",
         audio: "A cow eats grass. A cow is a plant-eating animal. Is this true or false?",
-        html: `
-          <svg width="240" height="90" viewBox="0 0 240 90">
-            <circle cx="120" cy="40" r="32" fill="rgba(52,211,153,0.18)" stroke="#10b981" stroke-width="2"/>
-            <text x="120" y="48" font-size="34" text-anchor="middle">🐮</text>
-            <text x="120" y="80" font-size="11" font-weight="900" fill="#6ee7b7" text-anchor="middle">COW EATING GRASS</text>
-          </svg>
-        `,
+        html: SVG.cowEatingGrass(),
         opts: ["TRUE", "FALSE"],
         ans: "TRUE"
       },
@@ -1194,11 +1357,13 @@ const SE = (function(){
         prompt: "Which animal eats both plants and meat? (Omnivore)",
         audio: "Which animal eats both plants and meat?",
         html: `
-          <svg width="240" height="90" viewBox="0 0 240 90">
-            <circle cx="120" cy="40" r="32" fill="rgba(168,85,247,0.18)" stroke="#a855f7" stroke-width="2"/>
-            <text x="120" y="48" font-size="34" text-anchor="middle">🐻</text>
-            <text x="120" y="80" font-size="11" font-weight="900" fill="#d8b4fe" text-anchor="middle">FISH & BERRIES</text>
-          </svg>
+          <div class="disp-spotlight">
+            <svg width="240" height="85" viewBox="0 0 240 85">
+              <circle cx="120" cy="38" r="30" fill="rgba(168,85,247,0.2)" stroke="#a855f7" stroke-width="2"/>
+              <text x="120" y="46" font-size="34" text-anchor="middle">🐻</text>
+            </svg>
+          </div>
+          <div class="disp-pill">🐻 OMNIVORE · EATS BOTH PLANTS & MEAT</div>
         `,
         opts: sh(["Bear", "Cow", "Sheep", "Lion"]),
         ans: "Bear"
@@ -1209,9 +1374,9 @@ const SE = (function(){
     const cat2 = [
       {
         cat: "Life Cycles 🦋", catIdx: 2,
-        prompt: "What hatches from a butterfly's egg?",
+        prompt: "What hatches from a butterfly's egg on a leaf?",
         audio: "What hatches from a butterfly's egg?",
-        html: SVG.butterflyCycle(2),
+        html: SVG.butterflyCycle4(),
         opts: sh(["Caterpillar", "Tadpole", "Chick", "Frog"]),
         ans: "Caterpillar"
       },
@@ -1219,44 +1384,53 @@ const SE = (function(){
         cat: "Life Cycles 🦋", catIdx: 2,
         prompt: "What breathes with gills and swims in water before growing legs?",
         audio: "What breathes with gills and swims in water before growing legs?",
-        html: SVG.frogCycle(2),
+        html: SVG.frogCycle4(),
         opts: sh(["Tadpole", "Adult Frog", "Caterpillar", "Chick"]),
         ans: "Tadpole"
       },
       {
         cat: "Life Cycles 🦋", catIdx: 2,
-        prompt: "Which shows the correct order of a chicken's life cycle?",
-        audio: "Which shows the correct order of a chicken's life cycle?",
-        html: SVG.chickenCycle(),
+        prompt: "Which is the correct 4-stage life cycle of a chicken?",
+        audio: "Which is the correct 4 stage life cycle of a chicken?",
+        html: SVG.chickenCycle4(),
         opts: sh([
-          "Egg ➔ Chick ➔ Chicken",
-          "Chick ➔ Egg ➔ Chicken",
-          "Chicken ➔ Tadpole ➔ Egg"
+          "Egg ➔ Hatchling ➔ Chick ➔ Chicken",
+          "Chick ➔ Egg ➔ Chicken ➔ Hatchling",
+          "Chicken ➔ Tadpole ➔ Egg ➔ Chick"
         ]),
-        ans: "Egg ➔ Chick ➔ Chicken"
+        ans: "Egg ➔ Hatchling ➔ Chick ➔ Chicken"
       }
     ];
 
     // Cat 3: Thermal Changes & States (3 questions)
     const cat3 = [
       {
-        cat: "Thermal Lab 🍫", catIdx: 3,
-        prompt: "When we add heat to a solid chocolate bar, it ________.",
-        audio: "When we add heat to a solid chocolate bar, it melts into liquid, freezes into ice, or grows bigger?",
+        cat: "The Thermal Lab 🍫", catIdx: 3,
+        prompt: "When we add heat to a solid chocolate bar in a pan, it ________.",
+        audio: "When we add heat to a solid chocolate bar in a pan, what happens?",
         html: SVG.chocolatePan(true),
         opts: sh(["Melts into liquid", "Freezes into ice", "Grows bigger"]),
         ans: "Melts into liquid"
       },
       {
-        cat: "Thermal Lab 🍫", catIdx: 3,
+        cat: "The Thermal Lab 🍫", catIdx: 3,
         prompt: "Water turning into ice when cooled is a permanent change that cannot be undone.",
         audio: "Water turning into ice when cooled is a permanent change that cannot be undone. True or False?",
-        html: SVG.statesOfMatter(),
+        html: `
+          <div class="disp-spotlight">
+            <svg width="240" height="80" viewBox="0 0 240 80">
+              <text x="80" y="46" font-size="28" text-anchor="middle">💧</text>
+              <text x="120" y="46" font-size="20" fill="#38bdf8" text-anchor="middle">➔ ❄️ ➔</text>
+              <text x="160" y="46" font-size="28" text-anchor="middle">🧊</text>
+            </svg>
+          </div>
+          <div class="disp-pill">💧 FREEZING WATER INTO ICE IS REVERSIBLE</div>
+        `,
         opts: ["TRUE", "FALSE"],
         ans: "FALSE"
       },
       {
-        cat: "Thermal Lab 🍫", catIdx: 3,
+        cat: "The Thermal Lab 🍫", catIdx: 3,
         prompt: "Which change cannot be changed back to the start? (Irreversible)",
         audio: "Which change cannot be changed back to the start?",
         html: SVG.friedEgg(),
@@ -1272,13 +1446,16 @@ const SE = (function(){
         prompt: "Look at the boy moving the cart forward. What force is he using?",
         audio: "Look at the boy moving the cart forward. What force is he using?",
         html: `
-          <svg width="240" height="90" viewBox="0 0 240 90">
-            <circle cx="80" cy="45" r="26" fill="rgba(255,255,255,0.18)" stroke="#38bdf8" stroke-width="2"/>
-            <text x="80" y="53" font-size="28" text-anchor="middle">🛒</text>
-            <path d="M 120 45 L 180 45" stroke="#ffd60a" stroke-width="4" stroke-linecap="round"/>
-            <polygon points="190,45 175,37 175,53" fill="#ffd60a"/>
-            <text x="155" y="72" font-size="11" font-weight="900" fill="#ffd60a" text-anchor="middle">FORWARD ➔</text>
-          </svg>
+          <div class="disp-spotlight">
+            <svg width="240" height="85" viewBox="0 0 240 85">
+              <circle cx="80" cy="45" r="26" fill="rgba(255,255,255,0.18)" stroke="#38bdf8" stroke-width="2"/>
+              <text x="80" y="53" font-size="28" text-anchor="middle">🛒</text>
+              <path d="M 120 45 L 180 45" stroke="#ffd60a" stroke-width="4" stroke-linecap="round"/>
+              <polygon points="190,45 175,37 175,53" fill="#ffd60a"/>
+              <text x="155" y="72" font-size="11" font-weight="900" fill="#ffd60a" text-anchor="middle">FORWARD ➔</text>
+            </svg>
+          </div>
+          <div class="disp-pill">👉 PUSH MOVES AN OBJECT FORWARD</div>
         `,
         opts: sh(["A Push", "A Pull", "Heat", "Magnetism"]),
         ans: "A Push"
@@ -1288,13 +1465,15 @@ const SE = (function(){
         prompt: "An apple falls down from a tree to the ground because of ________.",
         audio: "An apple falls down from a tree to the ground because of what?",
         html: `
-          <svg width="240" height="90" viewBox="0 0 240 90">
-            <circle cx="120" cy="35" r="24" fill="rgba(239,68,68,0.2)" stroke="#ef4444" stroke-width="2"/>
-            <text x="120" y="42" font-size="28" text-anchor="middle">🍎</text>
-            <path d="M 120 62 L 120 80" stroke="#ffd60a" stroke-width="3" stroke-linecap="round"/>
-            <polygon points="120,86 114,75 126,75" fill="#ffd60a"/>
-            <text x="120" y="20" font-size="10" font-weight="900" fill="#fca5a5" text-anchor="middle">FALLS DOWN ⬇️</text>
-          </svg>
+          <div class="disp-spotlight">
+            <svg width="240" height="85" viewBox="0 0 240 85">
+              <circle cx="120" cy="35" r="24" fill="rgba(239,68,68,0.2)" stroke="#ef4444" stroke-width="2"/>
+              <text x="120" y="42" font-size="28" text-anchor="middle">🍎</text>
+              <path d="M 120 62 L 120 80" stroke="#ffd60a" stroke-width="3" stroke-linecap="round"/>
+              <polygon points="120,86 114,75 126,75" fill="#ffd60a"/>
+            </svg>
+          </div>
+          <div class="disp-pill">⬇️ GRAVITY PULLS OBJECTS DOWNWARD</div>
         `,
         opts: sh(["Gravity", "Magnet", "Protein", "Friction"]),
         ans: "Gravity"
@@ -1303,21 +1482,21 @@ const SE = (function(){
         cat: "Forces & Magnets 🧲", catIdx: 4,
         prompt: "Opposite poles (North [N] and South [S]) face each other. Will they attract or repel?",
         audio: "Opposite poles North and South face each other. Will they attract or repel?",
-        html: SVG.magnets(true),
+        html: SVG.magnetsAttract(),
         opts: sh(["ATTRACT (pull together)", "REPEL (push away)"]),
         ans: "ATTRACT (pull together)"
       }
     ];
 
-    // Combine all 5 domain categories (15 total questions)
     const all = [...cat0, ...cat1, ...cat2, ...cat3, ...cat4];
     return sh(all).map((q, i) => { q.id = i + 1; return q; });
   }
 
   return {
-    LABS,
+    LAB_NAMES,
+    getLabRound,
     examQs,
-    exam: examQs, // Safe alias so SE.exam and SE.examQs both work
+    exam: examQs,
     ok: (q, a) => q.ans === a
   };
 })();
@@ -1326,7 +1505,6 @@ const SE = (function(){
 const ART = {
   draw(id, name, score, catScores){
     const cv = document.getElementById(id); if(!cv) return;
-    // Standard A4 Landscape Proportions: 1200 x 848 (Ratio ~1.415)
     const W = 1200, H = 848, dpr = window.devicePixelRatio || 1;
     cv.width = W * dpr; cv.height = H * dpr;
     cv.style.width = W + 'px'; cv.style.height = H + 'px';
@@ -1352,7 +1530,7 @@ const ART = {
 
     // 1. Cosmic Aurora & Safari Science Twilight Backdrop
     const bg = c.createLinearGradient(0, 0, W, H);
-    bg.addColorStop(0, '#030d1a');
+    bg.addColorStop(0, '#040b17');
     bg.addColorStop(0.25, '#071e36');
     bg.addColorStop(0.5, '#0b2e3a');
     bg.addColorStop(0.78, '#06382c');
@@ -1373,7 +1551,7 @@ const ART = {
     c.strokeStyle = awGrad; c.stroke();
     c.restore();
 
-    // 280 Twinkling Stardust Particles
+    // Stardust
     for(let i = 0; i < 280; i++){
       const sx = (Math.sin(i * 997.3) * 0.5 + 0.5) * W;
       const sy = (Math.cos(i * 733.1) * 0.5 + 0.5) * H;
@@ -1401,7 +1579,7 @@ const ART = {
     sp8(240, 710, 16, '#34d399');
     sp8(W - 240, 700, 16, '#ffd60a');
 
-    // 2. Ornate Golden Guilloché Frame
+    // Ornate Golden Guilloché Frame
     const FR = 22;
     c.strokeStyle = '#ffd60a'; c.lineWidth = 3.5;
     c.beginPath(); c.roundRect(FR, FR, W - FR * 2, H - FR * 2, 20); c.stroke();
@@ -1423,10 +1601,9 @@ const ART = {
     drawCorner(FR + 16, FR + 16); drawCorner(W - FR - 16, FR + 16);
     drawCorner(FR + 16, H - FR - 16); drawCorner(W - FR - 16, H - FR - 16);
 
-    // 3. Royal Lion Mascot Crest with Golden Scientist Goggles
+    // Royal Lion Mascot Crest with Golden Scientist Goggles
     const lx = W / 2, ly = 80;
     c.save();
-    // Sunburst rays behind mascot
     c.save(); c.translate(lx, ly);
     c.fillStyle = 'rgba(0, 245, 212, 0.18)';
     for(let i = 0; i < 16; i++){ c.rotate(Math.PI / 8); c.fillRect(-2.5, -52, 5, 104); }
@@ -1460,11 +1637,11 @@ const ART = {
     c.closePath(); c.fill(); c.stroke();
     c.restore();
 
-    // 4. Academy Title Ribbon
+    // Academy Title Ribbon
     c.textAlign = 'center';
     c.font = '900 17px Nunito,sans-serif';
     c.fillStyle = '#ffd60a';
-    c.fillText('✦  ROYAL SAFARI SCIENCE ACADEMY  ✦', W / 2, 155);
+    c.fillText("✦  PROFESSOR PIP'S EINSTEIN SCIENCE ACADEMY  ✦", W / 2, 155);
 
     c.font = 'bold 27px Fredoka One,cursive';
     c.fillStyle = '#00f5d4';
@@ -1476,7 +1653,7 @@ const ART = {
     c.fillStyle = 'rgba(224,242,254,0.92)';
     c.fillText('This highest royal honors certificate is presented with great pride to:', W / 2, 235);
 
-    // 5. Student's Name in 3D Gold Extrusion
+    // Student's Name in 3D Gold Extrusion
     const studentName = (name || 'Safari Scientist').trim();
     c.textAlign = 'center';
     c.font = '900 66px Fredoka One,cursive';
@@ -1496,7 +1673,7 @@ const ART = {
     c.fillStyle = 'rgba(255,255,255,0.94)';
     c.fillText('for mastering the Prathomsuksa 3 Final Safari Science Examination with outstanding skill!', W / 2, 362);
 
-    // 6. Score Capsule
+    // Score Capsule
     const tierLabel = score === 15 ? 'Grand Champion Master 👑' : score >= 13 ? 'Royal Distinction ⭐' : score >= 11 ? 'Honors Explorer 🌟' : 'Safari Scout 🧭';
     const scTxt = `🏆 Score: ${score} / 15 Marks   ·   ${tierLabel}`;
     c.font = 'bold 22px Fredoka One,cursive';
@@ -1533,7 +1710,7 @@ const ART = {
       c.restore();
     }
 
-    // 7. Five Science Realm Medallions with Category Stars
+    // Five Science Realm Medallions with Category Stars
     const realms = [
       { em: '🥗', name: 'Living Needs', col1: '#064e3b', col2: '#10b981', border: '#34d399' },
       { em: '🐯', name: 'Animal Diets', col1: '#78350f', col2: '#f59e0b', border: '#fde047' },
@@ -1556,7 +1733,6 @@ const ART = {
       c.fillText(`${realm.em} ${realm.name}`, rx + rW / 2, rY + 26);
       c.shadowBlur = 0;
 
-      // Render accurate stars for this category (cs[idx] out of 3)
       const earned = cs[idx] || 0;
       const starCx = rx + rW / 2; const starCy = rY + 55;
       drawVectorStar(starCx - 32, starCy, 11, 5, earned >= 1);
@@ -1564,23 +1740,21 @@ const ART = {
       drawVectorStar(starCx + 32, starCy, 11, 5, earned >= 3);
     });
 
-    // 8. Signatures & Official 32-point Gold Embossed Seal
+    // Official 32-point Gold Embossed Seal
     const sigX = 88, sigY = 630;
     c.textAlign = 'left';
     c.font = '700 15px Nunito,sans-serif'; c.fillStyle = 'rgba(224,242,254,0.85)';
     c.fillText('Head Science Master & Royal Examiner:', sigX, sigY);
     c.font = '900 18px Nunito,sans-serif'; c.fillStyle = '#ffd60a';
-    c.fillText('🦁 Ranger Leo & Safari Guild', sigX, sigY + 36);
+    c.fillText('🦁 Professor Pip & Einstein Guild', sigX, sigY + 36);
 
     const now = new Date();
     const dt = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
     c.font = '700 14px Nunito,sans-serif'; c.fillStyle = 'rgba(224,242,254,0.7)';
     c.fillText(`Conferred on: ${dt}`, sigX, sigY + 62);
 
-    // Official 32-Point Gold Embossed Seal (Lower Right)
     const sealX = W - 140, sealY = 645, sRad = 52;
     c.save();
-    // Seal Ribbons
     c.fillStyle = '#b91c1c';
     c.beginPath(); c.moveTo(sealX - 16, sealY + 20); c.lineTo(sealX - 30, sealY + 85);
     c.lineTo(sealX - 14, sealY + 75); c.lineTo(sealX + 2, sealY + 85); c.lineTo(sealX + 16, sealY + 20); c.fill();
@@ -1588,7 +1762,6 @@ const ART = {
     c.beginPath(); c.moveTo(sealX, sealY + 20); c.lineTo(sealX + 26, sealY + 85);
     c.lineTo(sealX + 12, sealY + 75); c.lineTo(sealX - 4, sealY + 85); c.lineTo(sealX - 18, sealY + 20); c.fill();
 
-    // 32-point gold star seal
     c.save(); c.translate(sealX, sealY);
     c.beginPath();
     for(let i = 0; i < 64; i++){
@@ -1605,7 +1778,6 @@ const ART = {
     c.strokeStyle = '#fef08a'; c.lineWidth = 2; c.stroke();
     c.restore();
 
-    // Inner seal ring
     c.strokeStyle = '#92400e'; c.lineWidth = 2;
     c.beginPath(); c.arc(sealX, sealY, sRad - 12, 0, Math.PI * 2); c.stroke();
     c.fillStyle = '#78350f'; c.textAlign = 'center';
@@ -1619,17 +1791,15 @@ const ART = {
   }
 };
 
-/* ============================================================ GAME STATE & CONTROLLER */
+/* ============================================================ GAME CONTROLLER */
 const G = {
   name: localStorage.getItem('ssq_name') || '',
   camps: JSON.parse(localStorage.getItem('ssq_camps') || '[]'),
   stamped: false,
   inExam: false,
   plays: parseInt(localStorage.getItem('ssq_plays') || '1', 10),
-  // Training state
   curCampIdx: 0,
   curStepIdx: 0,
-  // Exam state
   qs: [],
   qi: 0,
   score: 0,
@@ -1709,7 +1879,7 @@ function refreshPassport(){
   if(st) st.classList.toggle('on', G.stamped);
   const lk = document.getElementById('exam-lock');
   if(lk){
-    lk.textContent = G.stamped ? '✅ All Labs Complete — Ready!' : `🔒 Complete all 5 Science Labs (${done}/5 done)`;
+    lk.textContent = G.stamped ? '✅ All Labs Complete — Ready!' : `🔒 Complete all 5 Discovery Labs (${done}/5 done)`;
   }
   for(let i = 0; i < 5; i++){
     const cs = document.getElementById(`cs${i}`);
@@ -1749,40 +1919,39 @@ function startCamp(idx){
   renderLabStep();
 }
 
+let curStepData = null;
 function renderLabStep(){
-  const lab = SE.LABS[G.curCampIdx];
-  const step = lab.steps[G.curStepIdx];
-  document.getElementById('t-ctitle').textContent = lab.name;
-  document.getElementById('t-prog').textContent = `Step ${G.curStepIdx + 1} / ${lab.steps.length}`;
-  document.getElementById('lab-badge').textContent = `EXPERIMENT ${G.curStepIdx + 1} · ${lab.name.toUpperCase()}`;
-  document.getElementById('lab-prompt').textContent = step.prompt;
-  document.getElementById('lab-disp').innerHTML = step.disp;
+  const labName = SE.LAB_NAMES[G.curCampIdx];
+  curStepData = SE.getLabRound(G.curCampIdx, G.curStepIdx);
+
+  document.getElementById('t-ctitle').textContent = labName;
+  document.getElementById('t-prog').textContent = `Step ${G.curStepIdx + 1} / 3`;
+  document.getElementById('lab-badge').textContent = `EXPERIMENT ${G.curStepIdx + 1} · ${labName.toUpperCase()}`;
+  document.getElementById('lab-prompt').textContent = curStepData.prompt;
+  document.getElementById('lab-disp').innerHTML = curStepData.disp;
   
-  // Hide success banner until correct choice is made
   const sb = document.getElementById('lab-success');
   sb.style.display = 'none';
 
-  // Render choice buttons
   const cb = document.getElementById('lab-choices');
   cb.innerHTML = '';
   cb.style.display = 'flex';
 
-  step.choices.forEach(ch => {
+  curStepData.choices.forEach(ch => {
     const b = document.createElement('button');
     b.className = 'lab-choice-btn';
     b.textContent = ch.text;
-    b.onclick = () => handleLabChoice(ch, b, step);
+    b.onclick = () => handleLabChoice(ch, b, curStepData);
     cb.appendChild(b);
   });
 
-  CA.spk(step.audio);
+  CA.spk(curStepData.audio);
 }
 
 function handleLabChoice(choice, btn, step){
   if(choice.correct){
     CA.ok();
     flash('⭐');
-    // Lock choices and show success
     document.getElementById('lab-choices').style.display = 'none';
     const sb = document.getElementById('lab-success');
     document.getElementById('lab-success-txt').textContent = step.success;
@@ -1798,9 +1967,8 @@ function handleLabChoice(choice, btn, step){
 }
 
 function nextCampStep(){
-  const lab = SE.LABS[G.curCampIdx];
   G.curStepIdx++;
-  if(G.curStepIdx < lab.steps.length){
+  if(G.curStepIdx < 3){
     renderLabStep();
   }else{
     // Camp complete!
@@ -1814,24 +1982,40 @@ function nextCampStep(){
     document.getElementById('t-prac').classList.remove('visible');
     const td = document.getElementById('t-done');
     td.classList.remove('hidden');
-    document.getElementById('t-done-score').textContent = `You finished all 3 experiments in ${lab.name}!`;
+    document.getElementById('t-done-score').textContent = `You finished all 3 experiments in ${SE.LAB_NAMES[G.curCampIdx]}!`;
+    
+    // Linear progression button to next lab
+    const nextLabBtn = document.getElementById('btn-next-lab');
+    if(G.curCampIdx < 4){
+      nextLabBtn.style.display = 'inline-flex';
+      nextLabBtn.textContent = `Next Lab: ${SE.LAB_NAMES[G.curCampIdx + 1]} ➔`;
+    }else{
+      nextLabBtn.style.display = 'none';
+    }
+
     const eb = document.getElementById('t-done-exam-btn');
     if(eb) eb.style.display = G.stamped ? 'inline-flex' : 'none';
   }
 }
 
+function goNextLab(){
+  if(G.curCampIdx < 4){
+    startCamp(G.curCampIdx + 1);
+  }else{
+    backCamps();
+  }
+}
+
 function tAudio(){
-  const lab = SE.LABS[G.curCampIdx];
-  const step = lab.steps[G.curStepIdx];
-  if(step) CA.spk(step.audio, true);
+  if(curStepData) CA.spk(curStepData.audio, true);
 }
 
 /* ============================================================ MODE 2: EXAM CHALLENGE */
 function startExam(){
   if(G.camps.length < 5){
     flash('🔒');
-    alert(`Complete all 5 Science Labs first! (${G.camps.length}/5 completed)
-Heading to the Discovery Labs now... 🧪`);
+    alert(`Complete all 5 Discovery Labs first! (${G.camps.length}/5 completed)
+Heading to Einstein's Discovery Labs now... 🧪`);
     goTrain();
     return;
   }
@@ -1839,7 +2023,6 @@ Heading to the Discovery Labs now... 🧪`);
   if(ac && ac.state === 'suspended') ac.resume();
   G.inExam = true;
 
-  // Generate 15 exam questions (Calling SE.exam / SE.examQs cleanly)
   const diff = Math.min(G.plays || 1, 5);
   G.qs = SE.examQs(diff);
   G.qi = 0;
@@ -1912,7 +2095,7 @@ function eAudio(){
   if(G.cQ) CA.spk(G.cQ.audio, true);
 }
 
-/* ============================================================ RESULTS & REMEDIATION */
+/* ============================================================ RESULTS & CERTIFICATE */
 function finishExam(){
   G.inExam = false;
   show('sc-res');
@@ -1943,7 +2126,6 @@ function finishExam(){
     document.getElementById('btn-awaken').onclick = retryMissed;
     setTimeout(() => ART.draw('cv-cert', G.name, s, G.catScores), 150);
   }else{
-    // Bronze Remediation Loop (< 12 marks: "Bronze is not acceptable")
     tp.className = 'tpill tb'; tp.textContent = '🥉 Keep Practicing!';
     msg.textContent = `Every great scientist learns by doing experiments! Let's train in the Science Labs!`;
     bc.classList.remove('hidden');
