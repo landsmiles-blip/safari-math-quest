@@ -35,3 +35,7 @@
      - Human: Baby (Infant) ➔ Child ➔ Adolescent ➔ Adult ➔ Old Person
      - Plant: Seed ➔ Sprout ➔ Seedling ➔ Adult Plant
    - **Card & Diagram Layout**: Dual-card structure with generous breathing room, distinct concept pills, dual-item representation (e.g., both bread and a rice bowl), and non-clipping background elements.
+   - **Physical Apparatus Accuracy**: Ramp incline experiments must slope downward toward the flat floor, with friction materials (rough towels, rugs, sandpaper) placed flat on the floor at the bottom/exit of the ramp, matching school examination standards.
+   - **Exam Life Cycle Scaffolding**: In exam questions testing chronological life cycles, the visual diagram must NEVER display the stage name text under the icons (as this reveals the answer). Label only with neutral sequence markers (`Stage 1 ➔ Stage 2 ➔ Stage 3 ➔ Stage 4`).
+   - **Large-Scale Scientific Visuals**: Graphics in the spotlight box must utilize abundant card space (60–80% container height) rather than appearing as small dots in an empty void.
+   - **Full Quantum Science Lab Aesthetic**: The science visual theme must feel like a geeky, high-energy research lab featuring a pulsating vibranium nuclear fusion reactor, big glowing glass condensers with coiled spirals, cybernetic grids, and glowing holographic chalkboard equations ($E=mc^2$, $F=ma$, $\Delta Q = mc\Delta T$, $F_g = G\frac{m_1 m_2}{r^2}$).
